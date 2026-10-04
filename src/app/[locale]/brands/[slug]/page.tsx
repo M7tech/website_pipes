@@ -97,6 +97,11 @@ export default async function BrandPage({ params }: PageProps<"/[locale]/brands/
         title={brand.name}
         titleLang="en"
         intro={t("detail.intro", { brand: brand.name })}
+        image={
+          brand.photo
+            ? { src: brand.photo.src, alt: t("photoAlt", { subject: brand.photo.subject ?? brand.name }) }
+            : undefined
+        }
         breadcrumbLabel={common("breadcrumb")}
         crumbs={[
           { label: nav("home"), href: "/" },

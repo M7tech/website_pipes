@@ -13,7 +13,8 @@ export async function ContactBand() {
   ];
 
   return (
-    <section aria-labelledby="contact-title" className="on-dark section-space bg-atlas-navy text-on-dark">
+    <section aria-labelledby="contact-title" className="on-dark section-space relative isolate overflow-hidden bg-atlas-navy text-on-dark">
+      <div aria-hidden="true" className="caustics absolute -inset-[10%] -z-10 mix-blend-screen" />
       <div className="container-page grid gap-12 lg:grid-cols-12 lg:gap-8">
         <div className="grid content-start gap-6 border-t-2 border-on-dark pt-5 lg:col-span-6">
           <p className="eyebrow text-on-dark-muted">{t("eyebrow")}</p>

@@ -24,10 +24,26 @@ export type Brand = {
   note?: "baenningerTerritory";
   /** English technical documents (owner decision 2026-10-04: English files only). */
   documents?: BrandDocument[];
+  /** Manufacturer site photo from the company profile; `subject` names the company shown when it differs. */
+  photo?: { src: string; subject?: string };
   source: Source;
 };
 
-export const brands: Brand[] = [
+/** Profile photos (atlasprofile brand pages), keyed by brand slug. */
+const photos: Record<string, Brand["photo"]> = {
+  polymelt: { src: "/images/brands/polymelt.jpg" },
+  aquapa: { src: "/images/brands/aquapa.jpg", subject: "Formül Plastik" },
+  "saudi-ceramics": { src: "/images/brands/saudi-ceramics.jpg" },
+  pimtas: { src: "/images/brands/pimtas.jpg" },
+  "turan-borfit": { src: "/images/brands/turan-borfit.jpg" },
+  poloplast: { src: "/images/brands/poloplast.jpg" },
+  wisa: { src: "/images/brands/wisa.jpg", subject: "Fluidmaster" },
+  quarterbath: { src: "/images/brands/quarterbath.jpg" },
+  ostendorf: { src: "/images/brands/ostendorf.jpg" },
+  "polo-egypt": { src: "/images/brands/polo-egypt.jpg" },
+};
+
+const brandList: Brand[] = [
   { slug: "georg-fischer", name: "Georg Fischer", logo: "/brands/georg-fischer.svg", country: "CH",
     source: "profile:p7",
     documents: [
@@ -143,6 +159,8 @@ export const brands: Brand[] = [
   },
   { slug: "alvit", name: "Alvit", logo: "/brands/alvit.svg", source: "profile:p4" },
 ];
+
+export const brands: Brand[] = brandList.map((b) => (photos[b.slug] ? { ...b, photo: photos[b.slug] } : b));
 
 export function brandBySlug(slug: string) {
   const brand = brands.find((b) => b.slug === slug);

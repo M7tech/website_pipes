@@ -1,5 +1,5 @@
 import type { Locale } from "@/i18n/routing";
-import { cityNames, company, offices, regionalOffices } from "@/content/company";
+import { mapsHref, cityNames, company, offices, regionalOffices } from "@/content/company";
 import { ORG_ID, SITE_URL, localeUrl } from "@/lib/site";
 
 const logo = `${SITE_URL}/brand/atlasplast.svg`;
@@ -65,6 +65,7 @@ export function officesLd(locale: Locale) {
       image: logo,
       url: localeUrl(locale, "/locations"),
       ...(o.phone ? { telephone: o.phone } : {}),
+      hasMap: mapsHref(o),
       address: { "@type": "PostalAddress", addressLocality: cityNames[o.city][locale], addressCountry: "IQ" },
       parentOrganization: { "@id": ORG_ID },
     })),

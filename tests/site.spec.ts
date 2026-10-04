@@ -87,3 +87,19 @@ test("mobile menu keeps focus inside and returns it on Escape", async ({ page })
   await expect(burger).toBeFocused();
   await expect(page.locator("#main")).not.toHaveAttribute("inert", "");
 });
+
+test("every office opens in Google Maps", async ({ page }) => {
+  await page.goto("/en/locations");
+  const links = page.locator('main a[href^="https://www.google.com/maps/"]');
+  // Six offices in the branch list, six in the presence list and one per office city on the map.
+  expect(await links.count()).toBeGreaterThanOrEqual(12);
+  await expect(links.first()).toHaveAttribute("target", "_blank");
+});
+
+test("Arabic copy uses the owner's trade terms", async ({ page }) => {
+  for (const path of ["/ar", "/ar/solutions/sanitaryware", "/ar/brands/wisa"]) {
+    await page.goto(path);
+    const text = await page.locator("body").innerText();
+    expect(text, path).not.toMatch(/سيفون|الفنيين|فنيين/);
+  }
+});

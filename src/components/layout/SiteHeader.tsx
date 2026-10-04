@@ -1,5 +1,6 @@
 "use client";
 
+import { ScrollWater } from "@/components/water/ScrollWater";
 import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { AnimatePresence, m } from "motion/react";
@@ -140,6 +141,7 @@ export function SiteHeader() {
           </m.div>
         ) : null}
       </AnimatePresence>
+      <ScrollWater />
     </header>
   );
 }

@@ -1,11 +1,13 @@
 "use client";
 
 import { useId, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
+import Image from "next/image";
 import { m, useReducedMotion } from "motion/react";
 import { useDirectionSign } from "@/components/motion/useDirection";
 import { Arrow } from "@/components/ui/Arrow";
 
-export type HeroSlide = { id: string; tab: string; content: ReactNode };
+/** `image` is a decorative backdrop photo under /public. */
+export type HeroSlide = { id: string; tab: string; content: ReactNode; image?: string };
 
 type HeroCarouselProps = {
   slides: HeroSlide[];
@@ -61,6 +63,33 @@ export function HeroCarousel({ slides, labels, interval = 8000 }: HeroCarouselPr
         if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setHeld(false);
       }}
     >
+      {/* Photo backdrops fill the whole hero (its nearest positioned ancestor) and cross-fade with the slides. */}
+      <div aria-hidden="true" className="absolute inset-0 -z-10 overflow-hidden">
+        {slides.map((slide, i) =>
+          slide.image ? (
+            <div
+              key={slide.id}
+              className="absolute inset-0 transition-opacity duration-1000 ease-(--ease-out-expo)"
+              style={{ opacity: i === index ? 1 : 0 }}
+            >
+              <Image
+                key={i === index ? `on-${index}` : "off"}
+                src={slide.image}
+                alt=""
+                fill
+                sizes="100vw"
+                priority={i === 0}
+                className={`object-cover ${i === index ? "ken-burns" : ""}`}
+              />
+            </div>
+          ) : null,
+        )}
+        <div className="absolute inset-0 bg-atlas-navy/45 md:hidden" />
+        <div className="absolute inset-0 bg-linear-to-r from-atlas-navy/95 via-atlas-navy/70 to-atlas-navy/25 rtl:bg-linear-to-l" />
+        <div className="absolute inset-0 bg-linear-to-t from-atlas-navy via-transparent to-atlas-navy/50" />
+        <div className="caustics absolute -inset-[10%] mix-blend-screen" />
+      </div>
+
       <div className="grid" aria-live={running ? "off" : "polite"}>
         {slides.map((slide, i) => {
           const active = i === index;

@@ -1,9 +1,10 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
-import { offices, whatsappHref } from "@/content/company";
+import { mapsHref, offices, whatsappHref } from "@/content/company";
 import { Ltr } from "@/components/ui/Ltr";
+import { PinIcon } from "@/components/ui/PinIcon";
 
-/** Offices with their direct lines (WhatsApp links), as a rule-separated grid. */
+/** Offices with their direct lines (WhatsApp links) and a Google Maps link, as a rule-separated grid. */
 export async function OfficeLines() {
   const locale = (await getLocale()) as Locale;
   const p = await getTranslations("Home.presence");
@@ -30,6 +31,16 @@ export async function OfficeLines() {
               </span>
             </a>
           ) : null}
+          <a
+            href={mapsHref(o)}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={t("openMapFor", { place: o.name[locale] })}
+            className="inline-flex min-h-11 items-center gap-2 justify-self-start text-sm font-medium text-atlas-blue underline decoration-1 underline-offset-[6px] hover:decoration-2"
+          >
+            <PinIcon />
+            {t("openMap")}
+          </a>
         </li>
       ))}
     </ul>

@@ -42,12 +42,21 @@ export type Office = {
   name: Localized;
   hq?: boolean;
   phone?: string;
+  /** Place searched in Google Maps until the owner supplies an exact pin (`mapUrl`). */
+  mapQuery: string;
+  mapUrl?: string;
   source: Source;
 };
+
+/** Google Maps link: opens the Maps app on phones and maps.google.com elsewhere. */
+export function mapsHref(office: Office) {
+  return office.mapUrl ?? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(office.mapQuery)}`;
+}
 
 export const offices: Office[] = [
   {
     id: "camp-sara",
+    mapQuery: "Al-Riyadh Street, Camp Sara, Baghdad, Iraq",
     city: "baghdad",
     hq: true,
     name: { en: "Camp Sara, Baghdad", ar: "كمب سارة، بغداد", ckb: "کەمپ سارە، بەغدا" },
@@ -56,12 +65,14 @@ export const offices: Office[] = [
   },
   {
     id: "al-shaab",
+    mapQuery: "Al-Shaab, Baghdad, Iraq",
     city: "baghdad",
     name: { en: "Al-Shaab, Baghdad", ar: "الشعب، بغداد", ckb: "شەعب، بەغدا" },
     source: "confirmed:2026-10-04",
   },
   {
     id: "najaf",
+    mapQuery: "Al-Madina Street, Najaf, Iraq",
     city: "najaf",
     name: { en: "Najaf", ar: "النجف", ckb: "نەجەف" },
     phone: "+964 783 700 6314",
@@ -69,6 +80,7 @@ export const offices: Office[] = [
   },
   {
     id: "basra",
+    mapQuery: "Al-Watan Street, Basra, Iraq",
     city: "basra",
     name: { en: "Basra", ar: "البصرة", ckb: "بەسرە" },
     phone: "+964 787 116 6601",
@@ -76,6 +88,7 @@ export const offices: Office[] = [
   },
   {
     id: "erbil",
+    mapQuery: "Gulan Street, Shorish, Erbil, Iraq",
     city: "erbil",
     name: { en: "Erbil", ar: "أربيل", ckb: "هەولێر" },
     phone: "+964 787 803 0001",
@@ -83,6 +96,7 @@ export const offices: Office[] = [
   },
   {
     id: "duhok",
+    mapQuery: "Qazi Mohammed Street, Duhok, Iraq",
     city: "duhok",
     name: { en: "Duhok", ar: "دهوك", ckb: "دهۆک" },
     phone: "+964 750 991 0065",

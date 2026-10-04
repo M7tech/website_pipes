@@ -460,7 +460,9 @@
       },
       "download": "Download",
       "opensNewTab": "opens in a new tab"
-    }
+    },
+    "photoAlt": "{subject} production site",
+    "photoStrip": "Our manufacturers"
   },
   "Countries": {
     "CH": "Switzerland",
@@ -489,7 +491,9 @@
     "eyebrow": "Locations",
     "title": "Offices, showrooms and warehouses across Iraq.",
     "intro": "Offices and showrooms in five cities, warehouses in five, and regional offices in Saudi Arabia, Turkey, Syria and Egypt.",
-    "whatsapp": "WhatsApp"
+    "whatsapp": "WhatsApp",
+    "openMap": "Open in Google Maps",
+    "openMapFor": "Open {place} in Google Maps"
   },
   "Contact": {
     "eyebrow": "Contact",

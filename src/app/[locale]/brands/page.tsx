@@ -5,6 +5,7 @@ import { brands } from "@/content/brands";
 import { pageLd, pageMetadata } from "@/lib/site";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { PageHeader } from "@/components/ui/PageHeader";
+import { BrandPhotoStrip } from "@/components/brands/BrandPhotoStrip";
 import { BrandGrid } from "@/components/brands/BrandGrid";
 import { ContactBand } from "@/components/sections/ContactBand";
 
@@ -27,6 +28,7 @@ export default async function BrandsPage({ params }: PageProps<"/[locale]/brands
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("Brands.index");
+  const b = await getTranslations("Brands");
   const nav = await getTranslations("Nav");
   const meta = await getTranslations("Meta");
   const common = await getTranslations("Common");
@@ -53,6 +55,9 @@ export default async function BrandsPage({ params }: PageProps<"/[locale]/brands
         breadcrumbLabel={common("breadcrumb")}
         crumbs={[{ label: nav("home"), href: "/" }, { label: nav("brands") }]}
       />
+      <div className="pt-[var(--section-space)]">
+        <BrandPhotoStrip label={b("photoStrip")} />
+      </div>
       <section aria-label={t("eyebrow")} className="section-space">
         <div className="container-page">
           <BrandGrid detailed />

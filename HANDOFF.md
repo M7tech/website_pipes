@@ -758,3 +758,11 @@ Before making any changes:
 6. Treat the current repository code as the final source of truth.
 7. Reconcile any difference between HANDOFF.md and the code before editing.
 8. Continue from the "Recommended Next Step" unless the user gives a different instruction.
+
+## 21. Photos, maps and water motion (2026-10-04)
+
+- **Photos:** the 10 manufacturer-site photos from the company profile are in `public/images/brands/<slug>.jpg` (`photos` map in `src/content/brands.ts`); the p21 landmark photo is `public/images/hero/landmark.jpg`. They appear as brand page header backdrops, a flowing photo strip on Home and Brands, and hero slide backdrops. No product or project photography exists yet: add files under `public/images/` and reference them from content.
+- **Maps:** every office has `mapQuery` (street and district from the profile) and an optional `mapUrl` for an exact Google Maps pin from the owner. Office lists, branch cards and the Iraq map dots link to Google Maps (opens the app on phones).
+- **Terms (owner, Arabic):** خزانات الدفن / طراد, never سيفونات; حرفيين, never فنيين. A test guards this.
+- **Water motion** (CSS in `globals.css`, all off with reduced motion): wave edge on dark bands (`components/water/Waves.tsx`), caustic light, Ken Burns photos, ripples on map offices, liquid-fill buttons, water progress bar in the header (`ScrollWater.tsx`).
+- `SectionWipe` now observes an unclipped wrapper: Chrome reports a fully clipped element as not intersecting, which had kept the Iraq map hidden.

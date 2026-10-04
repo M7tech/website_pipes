@@ -11,6 +11,7 @@ import { milestones } from "@/content/timeline";
 import { PipeSection } from "./PipeSection";
 import { IraqMap } from "./IraqMap";
 import { HeroCarousel } from "./HeroCarousel";
+import { Waves } from "@/components/water/Waves";
 
 /** Partner marks shown on the brands slide (all with approved artwork). */
 const heroBrands = [
@@ -86,6 +87,7 @@ export async function Hero() {
   const slides = [
     {
       id: "systems",
+      image: "/images/brands/turan-borfit.jpg",
       tab: s("systems.tab"),
       content: (
         <SlideFrame
@@ -110,6 +112,7 @@ export async function Hero() {
     },
     {
       id: "history",
+      image: "/images/brands/ostendorf.jpg",
       tab: s("history.tab"),
       content: (
         <SlideFrame
@@ -131,6 +134,7 @@ export async function Hero() {
     },
     {
       id: "brands",
+      image: "/images/brands/polymelt.jpg",
       tab: s("brands.tab"),
       content: (
         <SlideFrame
@@ -170,6 +174,7 @@ export async function Hero() {
     },
     {
       id: "reach",
+      image: "/images/hero/landmark.jpg",
       tab: s("reach.tab"),
       content: (
         <SlideFrame
@@ -202,7 +207,7 @@ export async function Hero() {
   ];
 
   return (
-    <div className="on-dark relative overflow-hidden bg-atlas-navy text-on-dark">
+    <div className="on-dark relative isolate overflow-hidden bg-atlas-navy pb-10 text-on-dark md:pb-16">
       <div className="container-page pb-4 pt-12 md:pt-20 lg:pt-24">
         <HeroCarousel
           slides={slides}
@@ -232,6 +237,7 @@ export async function Hero() {
           ))}
         </dl>
       </div>
+      <Waves />
     </div>
   );
 }

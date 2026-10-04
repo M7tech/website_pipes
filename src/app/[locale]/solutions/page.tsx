@@ -46,6 +46,7 @@ export default async function SolutionsPage({ params }: PageProps<"/[locale]/sol
         })}
       />
       <PageHeader
+        waveFill="fill-surface"
         eyebrow={t("eyebrow")}
         title={t("title")}
         intro={t("intro")}
