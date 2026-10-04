@@ -120,6 +120,7 @@ export const brands: Brand[] = [
     documents: [
       { kind: "downloads", title: "KAS catalogues", href: "https://kas.com.tr/en/catalog-category/our-catalogs/", source: "manufacturer:2026-10-04" },
       { kind: "catalogue", title: "General Catalog", href: "https://kas.com.tr/wp-content/uploads/2026/04/General-Catalog.pdf", source: "manufacturer:2026-10-04" },
+      { kind: "catalogue", title: "PPR-C Pipe & Fittings", href: "https://kas.com.tr/wp-content/uploads/2023/07/PPR-C-Pipe-Fittings.pdf", source: "manufacturer:2026-10-04" },
       { kind: "catalogue", title: "Brass Valve & Fittings", href: "https://kas.com.tr/wp-content/uploads/2023/07/Brass-Valve-Fittings.pdf", source: "manufacturer:2026-10-04" },
       { kind: "catalogue", title: "Faucet Catalogue", href: "https://kas.com.tr/wp-content/uploads/2018/04/kas-faucet-catalog.pdf", source: "manufacturer:2026-10-04" },
     ],

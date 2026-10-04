@@ -408,6 +408,9 @@
       "guarriChemicals": {
         "name": "Chemical anchors and sealants",
         "text": "Polyester and vinyl ester chemical anchors, pipe sealants and super glue."
+      },
+      "kasPpr": {
+        "text": "PPR-C pipes and fittings for hot and cold water, including aluminium-reinforced and composite pipes."
       }
     }
   },

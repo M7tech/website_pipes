@@ -134,6 +134,17 @@ export const solutions: Solution[] = [
         ],
         source: "profile:p17",
       },
+      {
+        id: "kasPpr",
+        name: "KAS PPR-C",
+        brand: "kas",
+        specs: [
+          { key: "material", value: "PPR-C · PPR-C/AL · PPR-C composite" },
+          { key: "diameter", value: "Ø 20–110 mm" },
+          { key: "pressure", value: "PN 10 · 16 · 20 · 25" },
+        ],
+        source: "confirmed:2026-10-04",
+      },
     ],
   },
   {

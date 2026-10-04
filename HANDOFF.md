@@ -502,8 +502,8 @@ Full SEO pass done 2026-10-04 at the owner's request ("make sure SEO is the best
 
 - Brand pages show a **Technical documents** section when `documents` is set on the brand in `src/content/brands.ts` (component `src/components/brands/BrandDocuments.tsx`).
 - Owner decision 2026-10-04: the files come from the **manufacturers' official websites** and must be **in English**. They are linked, not re-hosted (the sandbox cannot download from those domains). Each has `source: "manufacturer:2026-10-04"`.
-- 14 brands have documents. None were found for WISA (site timed out), Turan Borfit, Guarri, Asçelik, Polo Egypt, Shield and Alvit (Turkish only).
-- Unverified: the Bänninger Range of Products PDF (34 MB, not opened) and the KAS match (assumed to be kas.com.tr, Kayalar Group). Saudi Ceramics links to its catalogue page; the files themselves are on Google Drive and were not opened.
+- 14 brands have documents. KAS = kas.com.tr, confirmed by the owner 2026-10-04; its PP-R line (KAS PPR-C) is in Water supply. None were found for WISA (site timed out), Turan Borfit, Guarri, Asçelik, Polo Egypt, Shield and Alvit (Turkish only).
+- Unverified: the Bänninger Range of Products PDF (34 MB, not opened). Saudi Ceramics links to its catalogue page; the files themselves are on Google Drive and were not opened.
 - To self-host a file instead, put it under `public/docs/<brand>/` and use `href: "/docs/<brand>/<file>.pdf"`.
 
 ## 18. Accessibility
