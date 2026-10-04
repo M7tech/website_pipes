@@ -1,0 +1,120 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
+import { AnimatePresence, m } from "motion/react";
+import { Link, usePathname } from "@/i18n/navigation";
+import { primaryNav, contactHref } from "@/lib/nav";
+import { Logo } from "./Logo";
+import { LanguageSwitcher } from "./LanguageSwitcher";
+import { Arrow } from "@/components/ui/Arrow";
+
+export function SiteHeader() {
+  const t = useTranslations("Nav");
+  const brand = useTranslations("Common")("brandName");
+  const pathname = usePathname();
+  const [open, setOpen] = useState(false);
+
+  // Lock page scroll and allow Escape while the mobile menu is open.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    document.documentElement.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.documentElement.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
+
+  return (
+    <header className="on-dark sticky top-0 z-40 bg-atlas-navy text-on-dark">
+      <div className="container-page flex h-16 items-center justify-between gap-6 md:h-20">
+        <Link href="/" className="shrink-0" aria-label={brand}>
+          <Logo tone="white" label={brand} className="!h-11 !w-auto md:!h-14" />
+        </Link>
+
+        <nav aria-label={t("label")} className="hidden lg:block">
+          <ul className="flex items-center gap-8">
+            {primaryNav.map((item) => (
+              <li key={item.key}>
+                <Link
+                  href={item.href}
+                  aria-current={isActive(item.href) ? "page" : undefined}
+                  className="relative py-2 text-[0.9375rem] text-on-dark/90 transition-colors hover:text-white aria-[current=page]:text-white after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-(--duration-base) hover:after:scale-x-100 aria-[current=page]:after:scale-x-100 rtl:after:origin-right"
+                >
+                  {t(item.key)}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className="hidden items-center gap-4 lg:flex">
+          <LanguageSwitcher />
+          <Link
+            href={contactHref}
+            className="group inline-flex min-h-11 items-center gap-2 border border-on-dark/50 px-4 text-sm hover:border-white hover:bg-white/10"
+          >
+            {t("contact")}
+            <Arrow />
+          </Link>
+        </div>
+
+        <button
+          type="button"
+          className="-me-2 inline-flex size-11 items-center justify-center lg:hidden"
+          aria-expanded={open}
+          aria-controls="mobile-menu"
+          aria-label={open ? t("closeMenu") : t("openMenu")}
+          onClick={() => setOpen((v) => !v)}
+        >
+          <span aria-hidden="true" className="relative block h-3 w-6">
+            <span className={`absolute inset-x-0 top-0 h-px bg-current transition-transform duration-(--duration-base) ${open ? "translate-y-1.5 rotate-45" : ""}`} />
+            <span className={`absolute inset-x-0 bottom-0 h-px bg-current transition-transform duration-(--duration-base) ${open ? "-translate-y-1.5 -rotate-45" : ""}`} />
+          </span>
+        </button>
+      </div>
+
+      <AnimatePresence>
+        {open ? (
+          <m.div
+            id="mobile-menu"
+            className="fixed inset-x-0 bottom-0 top-16 overflow-y-auto bg-atlas-navy md:top-20 lg:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+          >
+            <nav aria-label={t("label")} className="container-page flex min-h-full flex-col py-8">
+              <ul className="border-t border-rule-dark">
+                {[...primaryNav, { key: "contact", href: contactHref } as const].map((item, i) => (
+                  <m.li
+                    key={item.key}
+                    className="border-b border-rule-dark"
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.05 + i * 0.04, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <Link
+                      href={item.href}
+                      onClick={() => setOpen(false)}
+                      aria-current={isActive(item.href) ? "page" : undefined}
+                      className="font-display-latin flex items-center justify-between py-4 text-[1.75rem] font-medium"
+                    >
+                      {t(item.key)}
+                      <Arrow className="text-on-dark-muted" />
+                    </Link>
+                  </m.li>
+                ))}
+              </ul>
+              <LanguageSwitcher className="mt-8 -ms-2.5" onNavigate={() => setOpen(false)} />
+            </nav>
+          </m.div>
+        ) : null}
+      </AnimatePresence>
+    </header>
+  );
+}
