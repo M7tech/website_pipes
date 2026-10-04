@@ -1,0 +1,216 @@
+{
+  "Meta": {
+    "siteName": "AtlasPlast",
+    "homeTitle": "AtlasPlast | Pipe systems and sanitaryware in Iraq since 1975",
+    "homeDescription": "AtlasPlast supplies water supply, drainage, infrastructure piping, sanitaryware and pumps from leading international manufacturers to projects and installers across Iraq, since 1975.",
+    "placeholderDescription": "This section of the new AtlasPlast website is being prepared."
+  },
+  "Common": {
+    "skipToContent": "Skip to content",
+    "since": "Since {year}",
+    "brandName": "AtlasPlast"
+  },
+  "Nav": {
+    "label": "Main navigation",
+    "home": "Home",
+    "products": "Products",
+    "brands": "Brands",
+    "projects": "Projects",
+    "about": "About",
+    "locations": "Locations",
+    "contact": "Contact",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "language": "Language"
+  },
+  "Footer": {
+    "tagline": "Pipe systems, sanitaryware and technical support for Iraq’s buildings and infrastructure.",
+    "explore": "Explore",
+    "offices": "Offices in Iraq",
+    "contact": "Contact",
+    "follow": "Follow",
+    "mainLine": "Main line",
+    "rights": "© {year} Ufuq Al-Atlas Ltd. All rights reserved."
+  },
+  "Home": {
+    "hero": {
+      "eyebrow": "AtlasPlast · Ufuq Al-Atlas Ltd.",
+      "title": "Pipe systems and sanitaryware for Iraq’s buildings and infrastructure.",
+      "lead": "Since 1975, AtlasPlast has supplied water supply, drainage and sanitary systems from leading international manufacturers to contractors, installers and national projects in every governorate.",
+      "primary": "Explore products",
+      "secondary": "Contact sales",
+      "diagramLabel": "Cross-section of a pressure pipe with its dimensions"
+    },
+    "facts": {
+      "label": "AtlasPlast in figures",
+      "agents": "agents and dealers across every governorate",
+      "brands": "international brands represented",
+      "trained": "engineers and plumbers trained",
+      "stock": "months of national demand held in stock"
+    },
+    "statement": {
+      "eyebrow": "Who we are",
+      "title": "A distributor built on stock, reach and technical knowledge.",
+      "body1": "AtlasPlast holds commercial agencies for international manufacturers of piping, drainage, sanitaryware and pumps, many of them exclusive in Iraq. We supply the materials and the technical support behind housing, infrastructure and government developments.",
+      "body2": "Our warehouses in Baghdad, Basra, Erbil, Duhok and Zakho are planned to cover the country’s demand for six months, so contractors and installers are supplied without interruption.",
+      "projects": "Hundreds of projects completed with AtlasPlast products."
+    },
+    "products": {
+      "eyebrow": "Products",
+      "title": "Seven product families, one supplier.",
+      "intro": "Every family is sourced from manufacturers we represent directly, with stock held in Iraq.",
+      "brandsLabel": "Brands",
+      "cta": "All products"
+    },
+    "brands": {
+      "eyebrow": "International partners",
+      "title": "Manufacturers from Europe, Turkey and the Middle East.",
+      "intro": "AtlasPlast represents manufacturers with decades of engineering behind their systems. Each brand is shown with its country of origin.",
+      "cta": "All brands"
+    },
+    "projects": {
+      "eyebrow": "Projects",
+      "title": "Supplied to hundreds of projects, from airports to schools.",
+      "intro": "A selection of projects built with AtlasPlast products, and the contractors who trust us.",
+      "clientsTitle": "Contractors we supply",
+      "more": "And many more",
+      "cta": "All projects"
+    },
+    "timeline": {
+      "eyebrow": "Since 1975",
+      "title": "Five decades of building with Iraq.",
+      "cta": "Our story"
+    },
+    "services": {
+      "eyebrow": "How we work",
+      "title": "More than supply.",
+      "intro": "From the first consultation to after-sales support, our teams stay with the project.",
+      "items": {
+        "distribution": {
+          "title": "Product distribution",
+          "text": "Exclusive and authorised distribution of international brands through 600+ agents nationwide."
+        },
+        "projects": {
+          "title": "Project supply",
+          "text": "Scheduled supply for residential, commercial and government projects."
+        },
+        "technical": {
+          "title": "Technical support",
+          "text": "Pre-sale consultation and on-site assistance from our engineering team."
+        },
+        "afterSales": {
+          "title": "After-sales service",
+          "text": "Warranty handling, maintenance guidance and ongoing customer support."
+        },
+        "training": {
+          "title": "Training",
+          "text": "Courses that raise installation standards for engineers, plumbers and craftsmen."
+        },
+        "privateLabel": {
+          "title": "Private label",
+          "text": "Customised private-label products for partners building their own brands."
+        }
+      },
+      "communityTitle": "In the community",
+      "community": {
+        "sponsorship": "Annual education sponsorships for students",
+        "vocational": "Free plumbing classes for young people",
+        "entrepreneurs": "Support for start-ups and small businesses",
+        "schools": "Free materials and installation for public schools and families in need"
+      }
+    },
+    "presence": {
+      "eyebrow": "Presence",
+      "title": "From Zakho to Basra.",
+      "intro": "Showrooms and offices in five cities, warehouses in five, and regional offices in Saudi Arabia, Turkey, Syria and Egypt.",
+      "offices": "Offices and showrooms",
+      "warehouses": "Warehouses",
+      "regional": "Regional offices",
+      "hq": "Headquarters",
+      "mapLabel": "Map of Iraq showing AtlasPlast offices and warehouses",
+      "legendOffice": "Office",
+      "legendWarehouse": "Warehouse",
+      "cta": "All locations"
+    },
+    "contact": {
+      "eyebrow": "Contact",
+      "title": "Talk to our sales and projects teams.",
+      "mainLine": "Main line",
+      "whatsapp": "WhatsApp",
+      "projects": "Projects division",
+      "email": "Email",
+      "hours": "Saturday to Thursday, 07:00 to 15:00",
+      "cta": "Send an enquiry"
+    }
+  },
+  "Products": {
+    "families": {
+      "waterSupply": {
+        "name": "Water supply systems",
+        "text": "PP-R, PP-RCT and multilayer pipes and fittings for hot and cold water in buildings."
+      },
+      "drainage": {
+        "name": "Drainage and sewage",
+        "text": "Low-noise PP, HT and KG systems for building drainage and underground sewage."
+      },
+      "infrastructure": {
+        "name": "Infrastructure networks",
+        "text": "PE100 and U-PVC pressure pipes, compression and electrofusion fittings for city and project networks."
+      },
+      "sanitaryware": {
+        "name": "Sanitaryware and cisterns",
+        "text": "Vitreous china, bathroom furniture, concealed cisterns, pre-wall frames and water heaters."
+      },
+      "pumps": {
+        "name": "Pumps and pressure",
+        "text": "Circulators, booster sets, self-priming, submersible and drainage pumps."
+      },
+      "faucets": {
+        "name": "Faucets and valves",
+        "text": "Basin, kitchen and shower mixers, brass angle and ball valves."
+      },
+      "tools": {
+        "name": "Installation tools and fixings",
+        "text": "Welding machines for PP-R and PE, pipe clamps, profiles, anchors and sealants."
+      }
+    }
+  },
+  "Projects": {
+    "sectors": {
+      "transport": "Transport",
+      "sport": "Sport",
+      "hospitality": "Hospitality",
+      "healthcare": "Healthcare",
+      "government": "Government",
+      "residential": "Residential",
+      "education": "Education"
+    }
+  },
+  "Brands": {
+    "notes": {
+      "baenningerTerritory": "Exclusive agent, central and southern Iraq"
+    }
+  },
+  "Countries": {
+    "CH": "Switzerland",
+    "DE": "Germany",
+    "AT": "Austria",
+    "NL": "Netherlands",
+    "IT": "Italy",
+    "TR": "Turkey",
+    "SA": "Saudi Arabia",
+    "EG": "Egypt",
+    "CZ": "Czech Republic",
+    "RS": "Serbia"
+  },
+  "Placeholder": {
+    "eyebrow": "In preparation",
+    "body": "This page is being prepared as part of the new AtlasPlast website. In the meantime, our sales team is available on the main line.",
+    "back": "Back to home"
+  },
+  "NotFound": {
+    "title": "Page not found",
+    "body": "The page you are looking for does not exist or has moved.",
+    "back": "Back to home"
+  }
+}
