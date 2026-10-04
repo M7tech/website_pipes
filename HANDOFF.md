@@ -498,6 +498,14 @@ Full SEO pass done 2026-10-04 at the owner's request ("make sure SEO is the best
 
 **Still open:** submit the sitemap in Google Search Console and Bing Webmaster Tools after the domain goes live (this needs the owner's account), and add original photography for richer share images.
 
+### Brand technical documents
+
+- Brand pages show a **Technical documents** section when `documents` is set on the brand in `src/content/brands.ts` (component `src/components/brands/BrandDocuments.tsx`).
+- Owner decision 2026-10-04: the files come from the **manufacturers' official websites** and must be **in English**. They are linked, not re-hosted (the sandbox cannot download from those domains). Each has `source: "manufacturer:2026-10-04"`.
+- 14 brands have documents. None were found for WISA (site timed out), Turan Borfit, Guarri, Asçelik, Polo Egypt, Shield and Alvit (Turkish only).
+- Unverified: the Bänninger Range of Products PDF (34 MB, not opened) and the KAS match (assumed to be kas.com.tr, Kayalar Group). Saudi Ceramics links to its catalogue page; the files themselves are on Google Drive and were not opened.
+- To self-host a file instead, put it under `public/docs/<brand>/` and use `href: "/docs/<brand>/<file>.pdf"`.
+
 ## 18. Accessibility
 
 **In place:**
