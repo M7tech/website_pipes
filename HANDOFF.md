@@ -536,6 +536,12 @@ Full SEO pass done 2026-10-04 at the owner's request ("make sure SEO is the best
 - AVIF/WebP are configured for future photos.
 - **Known problems:** none measured. No Lighthouse run yet.
 
+**Lighthouse 12 (2026-10-04, mobile, simulated slow 4G, standalone server):**
+- `/en`: Performance 87, Accessibility 100, Best Practices 100, SEO 92. LCP 4.0 s, TBT 60 ms, CLS 0.
+- `/ar/brands/polymelt`: Performance 89, Accessibility 100, Best Practices 100, SEO 92. LCP 3.7 s.
+- The SEO 92 is only the `canonical` audit, because the test ran on localhost while canonicals point to `https://atlasplast.iq`. It passes on the real domain.
+- LCP is the hero lead paragraph, delayed by web-font loading (all locales share one layout, so Latin and Arabic fonts are both preloaded). Already applied: mono labels are not preloaded, and the unused Arabic 700 weight was dropped. A further gain would mean splitting the font loading per script.
+
 ## 20. Coolify Deployment
 
 - **Repository:** https://github.com/M7tech/website_pipes
