@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
-import { company } from "@/content/company";
+import { company, whatsappHref } from "@/content/company";
 import { pageMetadata } from "@/lib/site";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Ltr } from "@/components/ui/Ltr";
@@ -29,11 +29,10 @@ export default async function ContactPage({ params }: PageProps<"/[locale]/conta
   const h = await getTranslations("Home.contact");
   const nav = await getTranslations("Nav");
   const common = await getTranslations("Common");
-  const whatsappDigits = company.whatsapp.replace(/\D/g, "");
 
   const lines = [
-    { label: h("whatsapp"), value: company.whatsapp, href: `https://wa.me/${whatsappDigits}`, external: true },
-    { label: h("projects"), value: company.projectsPhone, href: `tel:${company.projectsPhone.replace(/\s/g, "")}` },
+    { label: h("whatsapp"), value: company.whatsapp, href: whatsappHref(company.whatsapp), external: true },
+    { label: h("projects"), value: company.projectsPhone, href: whatsappHref(company.projectsPhone), external: true },
     { label: h("email"), value: company.email, href: `mailto:${company.email}` },
   ];
 

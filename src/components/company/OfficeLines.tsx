@@ -1,9 +1,9 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
-import { offices } from "@/content/company";
+import { offices, whatsappHref } from "@/content/company";
 import { Ltr } from "@/components/ui/Ltr";
 
-/** Offices with their direct phone lines, as a rule-separated grid. */
+/** Offices with their direct lines (WhatsApp links), as a rule-separated grid. */
 export async function OfficeLines() {
   const locale = (await getLocale()) as Locale;
   const p = await getTranslations("Home.presence");
@@ -19,10 +19,12 @@ export async function OfficeLines() {
           </p>
           {o.phone ? (
             <a
-              href={`tel:${o.phone.replace(/\s/g, "")}`}
+              href={whatsappHref(o.phone)}
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-baseline justify-between gap-4 text-steel hover:text-atlas-blue"
             >
-              <span className="text-sm">{t("call")}</span>
+              <span className="text-sm">{t("whatsapp")}</span>
               <span className="font-mono tabular text-ink">
                 <Ltr>{o.phone}</Ltr>
               </span>

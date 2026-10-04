@@ -1,16 +1,15 @@
 import { getTranslations } from "next-intl/server";
-import { company } from "@/content/company";
+import { company, whatsappHref } from "@/content/company";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Ltr } from "@/components/ui/Ltr";
 
 export async function ContactBand() {
   const t = await getTranslations("Home.contact");
-  const whatsappDigits = company.whatsapp.replace(/\D/g, "");
 
   const lines = [
-    { label: t("whatsapp"), value: company.whatsapp, href: `https://wa.me/${whatsappDigits}` },
-    { label: t("projects"), value: company.projectsPhone, href: `tel:${company.projectsPhone.replace(/\s/g, "")}` },
-    { label: t("email"), value: company.email, href: `mailto:${company.email}` },
+    { label: t("whatsapp"), value: company.whatsapp, href: whatsappHref(company.whatsapp), external: true },
+    { label: t("projects"), value: company.projectsPhone, href: whatsappHref(company.projectsPhone), external: true },
+    { label: t("email"), value: company.email, href: `mailto:${company.email}`, external: false },
   ];
 
   return (
@@ -43,7 +42,7 @@ export async function ContactBand() {
             <a
               key={line.label}
               href={line.href}
-              {...(line.href.startsWith("https") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              {...(line.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-t border-rule-dark py-4 hover:text-white"
             >
               <span className="text-on-dark-muted">{line.label}</span>

@@ -18,6 +18,14 @@ export const company = {
   },
 } as const;
 
+/**
+ * WhatsApp chat link for a mobile number. Every mobile line on the site opens
+ * WhatsApp (owner decision 2026-10-04); only the short main line is a phone call.
+ */
+export function whatsappHref(phone: string) {
+  return `https://wa.me/${phone.replace(/\D/g, "")}`;
+}
+
 /** Headline figures. Only figures confirmed consistent across sources are listed. */
 export const facts = [
   { key: "agents", value: "600+", source: "profile:p4,p23,p27" },
