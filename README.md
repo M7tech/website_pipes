@@ -43,7 +43,7 @@ The repository includes a production `Dockerfile` (Next.js `output: "standalone"
 1. In Coolify, create a new application from this GitHub repository and pick the branch to deploy (`main` once PR #1 is merged).
 2. Build pack: **Dockerfile**.
 3. Add `NEXT_PUBLIC_SITE_URL` (e.g. `https://atlasplast.iq`) as a **build-time** variable/build argument, since it is inlined during the build.
-4. Exposed port: `3000`. Health check path: `/en` (the image also has its own `HEALTHCHECK`).
+4. Exposed port: `3000`. Health check (Coolify → Configuration → Healthcheck): scheme `http`, host `127.0.0.1` (not `localhost`), port `3000`, path `/en`, return code `200`. Or leave Coolify's check off; the image has its own `HEALTHCHECK`.
 5. Point the domain at the application and enable HTTPS in Coolify. HSTS is set by Coolify's proxy; the app sends the other security headers itself.
 
 Without Docker (Nixpacks or a plain Node host): `npm ci`, `npm run build`, then `npm run start` (port 3000, honours `PORT`).

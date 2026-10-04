@@ -20,8 +20,10 @@ RUN npm run build
 
 FROM node:22-alpine AS run
 WORKDIR /app
+# The server listens on IPv4 only, so health checks must target 127.0.0.1
+# ("localhost" can resolve to ::1). curl is for Coolify's own health check.
 ENV NODE_ENV=production NEXT_TELEMETRY_DISABLED=1 PORT=3000 HOSTNAME=0.0.0.0
-RUN addgroup -S nodejs && adduser -S nextjs -G nodejs
+RUN apk add --no-cache curl && addgroup -S nodejs && adduser -S nextjs -G nodejs
 COPY --from=build --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=build --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=build --chown=nextjs:nodejs /app/public ./public

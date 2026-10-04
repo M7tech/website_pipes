@@ -549,7 +549,7 @@ Full SEO pass done 2026-10-04 at the owner's request ("make sure SEO is the best
 - **Build method: Dockerfile** (repo root). It is multi-stage on `node:22-alpine`, uses `output: "standalone"`, runs as a non-root user, and has a built-in `HEALTHCHECK` on `/en`. `.dockerignore` keeps tests, `.git` and env files out of the image.
   - The image was **not built in this sandbox** (no Docker daemon). The same standalone server (`node .next/standalone/server.js` with `public` and `.next/static` copied in) was run locally, and all 121 Playwright checks passed against it.
 - **Build argument:** `NEXT_PUBLIC_SITE_URL` must be set as a build-time variable, because it is inlined during the build. It defaults to `https://atlasplast.iq`.
-- **Port:** 3000. **Health check path:** `/en` (`/` returns a 307 redirect).
+- **Port:** 3000. **Health check:** host `127.0.0.1` (the server is IPv4 only and `localhost` may resolve to `::1`), port 3000, path `/en` (`/` returns a 307 redirect), return code 200. The image includes `curl` for Coolify's check.
 - **Headers** (`next.config.ts`):
   - `X-Content-Type-Options`, `Referrer-Policy`, `X-Frame-Options: SAMEORIGIN` and `Permissions-Policy` on every response.
   - A one-week cache on `/brand/*` and `/brands/*` logos.
