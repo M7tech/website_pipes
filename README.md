@@ -38,12 +38,20 @@ Secrets are never committed. Set variables in the hosting environment (Coolify) 
 
 ## Deploying with Coolify
 
-1. Create a new application from this GitHub repository and pick the branch to deploy.
-2. Build pack: Nixpacks (or a Node.js Dockerfile). Node 20.9+.
-3. Install command `npm ci`, build command `npm run build`, start command `npm run start`.
-4. Exposed port: `3000` (`next start` honours the `PORT` variable if Coolify sets a different one).
-5. Add `NEXT_PUBLIC_SITE_URL` as a build-time variable, since it is inlined during the build.
-6. Point the domain at the application and enable HTTPS in Coolify.
+The repository includes a production `Dockerfile` (Next.js `output: "standalone"`, Node 22 Alpine, non-root user, built-in health check).
+
+1. In Coolify, create a new application from this GitHub repository and pick the branch to deploy (`main` once PR #1 is merged).
+2. Build pack: **Dockerfile**.
+3. Add `NEXT_PUBLIC_SITE_URL` (e.g. `https://atlasplast.iq`) as a **build-time** variable/build argument, since it is inlined during the build.
+4. Exposed port: `3000`. Health check path: `/en` (the image also has its own `HEALTHCHECK`).
+5. Point the domain at the application and enable HTTPS in Coolify. HSTS is set by Coolify's proxy; the app sends the other security headers itself.
+
+Without Docker (Nixpacks or a plain Node host): `npm ci`, `npm run build`, then `npm run start` (port 3000, honours `PORT`).
+
+## Quality checks
+
+- `npm run lint` and `npm run typecheck`
+- `npm run test:e2e`: Playwright checks every page template in en/ar/ckb at 375, 768 and 1440 px (overflow, console errors, failed requests, broken images, lang/dir, one h1) plus axe WCAG 2.1 AA and the mobile menu focus. It builds and starts the site itself, or set `BASE_URL` to test a running server. Run `npx playwright install chromium` once on a new machine.
 
 ## Project structure
 

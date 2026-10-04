@@ -1,0 +1,11 @@
+.git
+.next
+node_modules
+test-results
+playwright-report
+tests
+*.md
+!README.md
+.env*
+!.env.example
+tsconfig.tsbuildinfo

@@ -539,16 +539,17 @@ Full SEO pass done 2026-10-04 at the owner's request ("make sure SEO is the best
 ## 20. Coolify Deployment
 
 - **Repository:** https://github.com/M7tech/website_pipes
-- **Production branch:** `main`. It currently holds only the scaffold commit. The Home page is on `feat/home-page`, in **draft PR #1** (https://github.com/M7tech/website_pipes/pull/1), which is not merged. Deploy `main` only after the PR is merged.
-- **Build method:** Nixpacks or a Node Dockerfile, with Node ≥ 20.9.
-- **Commands:**
-  - Install: `npm ci`
-  - Build: `npm run build`
-  - Start: `npm run start` (`next start`)
-- **Port:** 3000. `next start` honours `PORT`.
-- **Environment variable:** `NEXT_PUBLIC_SITE_URL`. Set it as a **build-time** variable because it is inlined at build. It defaults to `https://atlasplast.iq`.
+- **Production branch:** `main`, which holds only the scaffold. The site is on `feat/home-page` in **draft PR #1** (https://github.com/M7tech/website_pipes/pull/1). Deploy `main` only after the PR is merged.
+- **Build method: Dockerfile** (repo root). It is multi-stage on `node:22-alpine`, uses `output: "standalone"`, runs as a non-root user, and has a built-in `HEALTHCHECK` on `/en`. `.dockerignore` keeps tests, `.git` and env files out of the image.
+  - The image was **not built in this sandbox** (no Docker daemon). The same standalone server (`node .next/standalone/server.js` with `public` and `.next/static` copied in) was run locally, and all 121 Playwright checks passed against it.
+- **Build argument:** `NEXT_PUBLIC_SITE_URL` must be set as a build-time variable, because it is inlined during the build. It defaults to `https://atlasplast.iq`.
+- **Port:** 3000. **Health check path:** `/en` (`/` returns a 307 redirect).
+- **Headers** (`next.config.ts`):
+  - `X-Content-Type-Options`, `Referrer-Policy`, `X-Frame-Options: SAMEORIGIN` and `Permissions-Policy` on every response.
+  - A one-week cache on `/brand/*` and `/brands/*` logos.
+  - HSTS is left to Coolify's proxy.
+- **Without Docker:** `npm ci && npm run build && npm run start` still works (`next start` runs fine with standalone output).
 - **Domain:** point it at the Coolify app and enable HTTPS there.
-- **Health check:** none defined. Any 200 on `/en` works; `/` returns 307.
 - No secrets are needed or committed. `.env*` is gitignored, except `.env.example`.
 
 ## 21. Git Status
