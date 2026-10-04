@@ -1,0 +1,153 @@
+@import "tailwindcss";
+
+/*
+ * AtlasPlast design tokens.
+ * Brand colours are sampled from the 2026 vector logo pack.
+ * Layout: editorial 12-column grid, square geometry, hairline rules, no decorative shadows.
+ */
+@theme {
+  /* Brand */
+  --color-atlas-blue: #26549f;
+  --color-atlas-sky: #3c84c2;
+  --color-atlas-grey: #70767b;
+  --color-atlas-navy: #14284a;
+  --color-atlas-navy-deep: #0e1c35;
+
+  /* Neutrals (slight cool bias toward the brand blue) */
+  --color-paper: #f3f4f2;
+  --color-surface: #ffffff;
+  --color-rule: #d3d7d5;
+  --color-rule-strong: #9aa2a8;
+  --color-steel: #59626b;
+  --color-ink: #15181b;
+
+  /* On dark (navy) surfaces */
+  --color-on-dark: #f3f4f2;
+  --color-on-dark-muted: #b9c3d3;
+  --color-rule-dark: #2c4063;
+
+  /* Typography */
+  --font-display: var(--font-archivo), "Helvetica Neue", Arial, sans-serif;
+  --font-sans: var(--font-plex), "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, Menlo, monospace;
+  --font-arabic: var(--font-plex-arabic), "Noto Sans Arabic", Tahoma, sans-serif;
+
+  /* Layout */
+  --container-content: 80rem; /* 1280px */
+  --container-wide: 95rem;    /* 1520px */
+  --container-text: 42rem;
+
+  /* Radius: square by default */
+  --radius-input: 2px;
+
+  /* Motion */
+  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 160ms;
+  --duration-base: 320ms;
+  --duration-reveal: 700ms;
+}
+
+:root {
+  --gutter: clamp(1rem, 3.2vw, 2.5rem);
+  --section-space: clamp(4.5rem, 10vw, 10rem);
+  color-scheme: light;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Arabic script (ar, ckb): one family for display and text, more generous leading,
+   never letter-spaced or uppercased. */
+:lang(ar),
+:lang(ckb) {
+  font-family: var(--font-arabic);
+}
+
+/* Set on the root only so it inherits, and leading utilities can still tighten headings. */
+html:lang(ar) body,
+html:lang(ckb) body {
+  line-height: 1.8;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-atlas-blue);
+  outline-offset: 3px;
+}
+
+.on-dark :focus-visible {
+  outline-color: var(--color-on-dark);
+}
+
+@utility container-page {
+  width: 100%;
+  max-width: var(--container-wide);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+@utility section-space {
+  padding-block: var(--section-space);
+}
+
+/* Display type: Archivo for Latin; Arabic script falls back to Plex Sans Arabic with tighter weight. */
+@utility font-display-latin {
+  font-family: var(--font-display);
+  font-stretch: 112%;
+  letter-spacing: -0.02em;
+}
+
+:lang(ar) .font-display-latin,
+:lang(ckb) .font-display-latin {
+  font-family: var(--font-arabic);
+  font-stretch: normal;
+  letter-spacing: 0;
+}
+
+/* Small uppercase label; letter-spacing applies to Latin only. */
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+:lang(ar) .eyebrow,
+:lang(ckb) .eyebrow {
+  font-family: var(--font-arabic);
+  font-size: 0.875rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
