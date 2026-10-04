@@ -1,6 +1,6 @@
 # ATLASPLAST WEBSITE — PROJECT HANDOFF
 
-Last updated: 2026-10-04. Written from the repository state at commit `c7d9f17` on branch `feat/home-page`. This revision adds the Solutions pages and the four-slide hero.
+Last updated: 2026-10-04. Written from the repository state at commit `85a05c5` on branch `feat/home-page`. This revision adds the Brands, About, Locations, Contact and Projects pages: every section in the navigation is now a real page.
 
 ---
 
@@ -12,7 +12,7 @@ Last updated: 2026-10-04. Written from the repository state at commit `c7d9f17` 
 - **Stage:**
   - The **Home page is built** in three languages and is the approved visual benchmark. Its hero is now a four-slide carousel, as the owner asked on 2026-10-04.
   - **Solutions is built:** an index plus 8 solution pages, in three languages.
-  - Brands, Projects, About, Locations and Contact are still **interim placeholders** (noindex). The owner wants a full multipage site, so these are next (§23).
+  - **Brands** (index plus 21 brand pages), **About**, **Locations**, **Contact** and **Projects** are built. The interim placeholder route has been removed.
 - **Stack:** Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS 4, Motion for React, next-intl 4.
 - **Deployment:** GitHub → Coolify → Linux VPS. No Vercel-specific features or dependencies.
 - **Languages:**
@@ -78,7 +78,9 @@ Installed versions, from `npm ls --depth=0`:
             ├── layout.tsx    <html lang dir>, fonts, providers, header/footer, skip link
             ├── page.tsx      Home page with Organization JSON-LD
             ├── not-found.tsx
-            └── [section]/page.tsx   interim placeholder for products/brands/projects/about/locations/contact
+            ├── solutions/        index + [slug] (8 pages)
+            ├── brands/           index + [slug] (21 pages)
+            └── about/, locations/, contact/, projects/   single pages
 ```
 
 There is no `.claude/` directory in the repo.
@@ -87,8 +89,8 @@ There is no `.claude/` directory in the repo.
 - **Routing:** every route lives under `src/app/[locale]/`. `localePrefix: "always"`, so `/` redirects (307) to `/en` (or to the visitor's preferred locale).
 - **Static generation:**
   - `generateStaticParams` builds every locale.
-  - The placeholder route uses `dynamicParams = false`, so unknown sections return 404.
-  - The build currently produces 25 static pages.
+  - The `[slug]` routes use `dynamicParams = false`, so unknown slugs return 404.
+  - The build currently produces 113 static pages.
 - **Server vs client components:** components are Server Components by default. Only these are client components:
   - `SiteHeader`, because of menu state and the active link.
   - `LanguageSwitcher`.
@@ -101,7 +103,7 @@ There is no `.claude/` directory in the repo.
   - UI copy lives in `messages/*.json`.
   - Brand and product names stay in Latin script, marked `lang="en"` where needed.
 - **Images:** there is no photography yet. Logos are SVG, rendered with `next/image` using `unoptimized`, because SVGs need no optimisation. `next.config` has AVIF/WebP enabled for future raster photos.
-- **Translations:** there is one JSON file per locale, with identical key structure (parity was verified). The namespaces are `Meta`, `Common`, `Nav`, `Footer`, `Home.{hero,facts,statement,products,brands,projects,timeline,services,presence,contact}`, `Solutions`, `Projects.sectors`, `Brands.notes`, `Countries`, `Placeholder` and `NotFound`.
+- **Translations:** there is one JSON file per locale, with identical key structure (parity was verified). The namespaces are `Meta`, `Common`, `Nav`, `Footer`, `Home.{hero,facts,statement,products,brands,projects,timeline,services,presence,contact}`, `Solutions`, `Brands.{notes,index,detail,labels}`, `About`, `Locations`, `Contact`, `ProjectsPage`, `Projects.sectors`, `Countries` and `NotFound`. The `Placeholder` namespace was removed.
 
 ## 4. Current Sitemap
 
@@ -112,15 +114,14 @@ There is no `.claude/` directory in the repo.
 | `/{locale}/solutions` | DONE | index of the 8 solutions |
 | `/{locale}/solutions/{slug}` | DONE | water-supply, drainage, water-heaters, infrastructure, sanitaryware, pumps, faucets-valves, installation-tools |
 | `/{locale}/products` | REMOVED | returns 404; replaced by Solutions |
-| `/{locale}/brands` | PLACEHOLDER | brand index and per-brand pages planned |
-| `/{locale}/projects` | PLACEHOLDER | |
-| `/{locale}/about` | PLACEHOLDER | history, services, values; vision/mission pending owner approval |
-| `/{locale}/locations` | PLACEHOLDER | |
-| `/{locale}/contact` | PLACEHOLDER | |
+| `/{locale}/brands` | DONE | logo grid with country and product-line count per brand |
+| `/{locale}/brands/{slug}` | DONE | 21 brands; product lines grouped by solution, or "range on request" for FV-Plast, Peštan and Alvit |
+| `/{locale}/projects` | DONE | featured projects grouped by sector, plus the contractor list |
+| `/{locale}/about` | DONE | intro, figures, statement, full timeline, services; vision/mission pending owner approval |
+| `/{locale}/locations` | DONE | map, offices, warehouses, regional offices, branch phone lines |
+| `/{locale}/contact` | DONE | main line, WhatsApp, projects line, email, social, branch lines; no form yet |
 | `/{locale}/<unknown>` | DONE | localized 404 (`not-found.tsx`) |
-| `/sitemap.xml`, `/robots.txt`, `/icon.svg` | DONE | sitemap lists Home, Solutions and the 8 solution pages in every locale |
-
-Placeholder pages say "in preparation", show the main line 6779, and are `robots: { index: false }`.
+| `/sitemap.xml`, `/robots.txt`, `/icon.svg` | DONE | sitemap lists all 36 public pages in every locale (108 URLs) |
 
 ## 5. Design System
 
@@ -155,7 +156,7 @@ All tokens are in `src/app/globals.css`, in `@theme` and `:root`.
 **Heading scale:**
 - Hero h1: `clamp(2.4rem, 6.2vw, 5.6rem)`, leading 0.98 (1.28 in ar/ckb).
 - Section h2 via `SectionHead`: `clamp(2rem, 4.4vw, 3.75rem)`, leading 1.02 (1.3 in ar/ckb), max 22ch.
-- Placeholder h1: `clamp(2.5rem, 7vw, 6rem)`.
+- Inner-page h1 (`PageHeader`): `clamp(2.4rem, 6vw, 5.25rem)`.
 - Figures: `clamp(2rem, 4vw, 3.25rem)`. Contact number: `clamp(3.5rem, 9vw, 7rem)`.
 
 **Spacing and layout:**
@@ -236,7 +237,7 @@ The site should feel premium, sophisticated, modern, architectural, industrial, 
 | Home (all 10 namespaces) | complete | complete | complete |
 | Projects.sectors, Brands.notes, Countries | complete | complete | complete |
 | Content data (offices, warehouses, regional offices, timeline, project names) | complete | complete | complete |
-| Placeholder / NotFound | complete | complete | complete |
+| Brands, About, Locations, Contact, Projects, NotFound | complete | complete | complete |
 | Solutions (index, 8 solutions, 41 product lines, spec labels) and hero slides | complete | complete | complete, needs native review |
 | Brands / Projects / About / Locations / Contact pages | **not written** | **not written** | **not written** |
 
@@ -310,9 +311,9 @@ Source files are in the shared project folder (not in the repo):
 1. **Hero carousel**: `sections/Hero.tsx` (server) composes the slides; `sections/HeroCarousel.tsx` (client) runs them.
    - The navy band has four slides:
      1. **Solutions**: the h1 (animated by `LineRise`), the lead, the Explore solutions (`/solutions`) and Contact sales buttons, and the `PipeSection` drawing.
-     2. **History**: "Five decades supplying the builders of Iraq", with a `YearScale` ruler from 1975 to 2025 marking the milestones. The button goes to `/about`, which is a placeholder.
-     3. **Brands**: lists the manufacturer countries, with a 3×3 grid of white-inverted partner logos. The button goes to `/brands`, a placeholder.
-     4. **Reach**: "Six months of national demand, held in stock", with `IraqMap tone="dark"`. The button goes to `/locations`, a placeholder.
+     2. **History**: "Five decades supplying the builders of Iraq", with a `YearScale` ruler from 1975 to 2025 marking the milestones. The button goes to `/about`.
+     3. **Brands**: lists the manufacturer countries, with a 3×3 grid of white-inverted partner logos. The button goes to `/brands`.
+     4. **Reach**: "Six months of national demand, held in stock", with `IraqMap tone="dark"`. The button goes to `/locations`.
    - The tab bar has numbered tabs with labels (only the active label shows on phones), plus prev, next and pause controls.
    - Each slide's visual is hidden below `md` to keep the hero short on phones.
    - Below the carousel is a `dl` of 4 figures.
@@ -477,7 +478,7 @@ Breakpoints are Tailwind defaults (sm 640, md 768, lg 1024, xl 1280). QA viewpor
   - Absolute localized title and description.
   - `alternates.canonical` (`/{locale}`), plus `alternates.languages` for en/ar/ckb and **x-default → /en** (`src/lib/site.ts`).
   - Open Graph: type, siteName, title, description, url and locale.
-- Placeholder pages: localized title, canonical and hreflang, plus `robots: { index: false }`.
+- Inner pages: localized title, description, canonical, hreflang and Open Graph via `pageMetadata()`; solution and brand pages add BreadcrumbList JSON-LD.
 - Solutions pages:
   - Metadata comes from `pageMetadata()` in `src/lib/site.ts`, which sets the title, description, canonical, hreflang and OG.
   - Detail pages also carry `BreadcrumbList` JSON-LD.
@@ -569,7 +570,9 @@ Breakpoints are Tailwind defaults (sm 640, md 768, lg 1024, xl 1280). QA viewpor
 - [x] Footer
 - [x] Home page, all 9 sections
 - [x] Motion primitives with reduced-motion support
-- [x] Interim placeholder pages (noindex) and a localized 404
+- [x] Localized 404
+- [x] Brands index and 21 brand pages
+- [x] About, Locations, Contact and Projects pages
 - [x] SEO: metadata, canonical, hreflang + x-default, OG, sitemap, robots, Organization JSON-LD, favicon
 - [x] README with Coolify notes, plus `.env.example`
 - [x] Lint, typecheck and build pass from a clean clone
@@ -592,16 +595,15 @@ Breakpoints are Tailwind defaults (sm 640, md 768, lg 1024, xl 1280). QA viewpor
 
 **Done** (commit `c7d9f17`): the hero slides, the Solutions index and the 8 solution pages (§10).
 
-**Next: the rest of the multipage site.** Replace the placeholders in this order, one route per commit:
+**Done** (commits `4930069`, `85a05c5`): the rest of the multipage site, built in this order:
 1. **Brands:** `/brands` index (the BrandWall plus country grouping) and `/brands/[slug]`. Each brand page shows its product lines from `solutions.ts` (filter by `line.brand`) and the solutions they belong to. Manufacturer facts such as founding years are the partner's, so use them sparingly (§9).
 2. **About:** history (`timeline.ts`), services and community (the ServiceModel copy). Vision/mission is still pending the owner's approval, so leave it out until then.
 3. **Locations:** offices with phones and addresses (`company.ts`), warehouses, regional offices and the `IraqMap`.
 4. **Contact:** phones, WhatsApp, email, hours and offices. A form needs a backend decision, so use direct links until then.
 5. **Projects:** featured projects and clients (`projects.ts`).
 
-For each new route:
+For any future route:
 - Create `src/app/[locale]/<section>/page.tsx` using `PageHeader` and `pageMetadata()`.
-- Remove the section from `placeholderSections` in `src/lib/nav.ts`.
 - Add it to `paths` in `src/app/sitemap.ts`.
 - Add its copy to all three message files.
 - Run QA.
@@ -614,7 +616,6 @@ For each new route:
 ## 24. Remaining Tasks
 
 **Critical (blocking production)**
-- Build the real pages, replacing the placeholders (Brands, About, Locations, Contact, Projects). See §23.
 - Owner review and merge of PR #1, then point Coolify at `main`.
 - Native-speaker review of the Sorani (and Arabic) copy.
 
@@ -646,15 +647,9 @@ For each new route:
    - Affects: `src/content/company.ts` (`facts`) and the Home hero figures.
    - Cause: Calpeda and Vitra were removed.
    - Needs the owner's answer; do not change the number on a guess.
-3. **Placeholders still linked from Home**
-   - The hero slides and Home sections link to `/about`, `/brands` and `/locations`, which are still placeholders.
-   - These resolve as the pages ship (§23).
-4. **QA tooling not in the repo**
+3. **QA tooling not in the repo**
    - Playwright was run from a global install with scripts in a temp folder.
    - Next step: add the tooling as a devDependency.
-5. **`[section]` catch-all route**
-   - `src/app/[locale]/[section]/page.tsx` serves every placeholder.
-   - When adding real routes such as `src/app/[locale]/brands/page.tsx`, **remove that section from `placeholderSections` in `src/lib/nav.ts`**. Otherwise both routes generate the same path.
 
 No visual or RTL bugs are open from the last QA pass.
 
@@ -685,7 +680,7 @@ No visual or RTL bugs are open from the last QA pass.
 - Do not hard-code secrets; only env var names belong in the repo.
 - Do not change working components for stylistic preference.
 - Do not hide layout bugs with ad-hoc CSS patches. Fix the cause; the Arabic leading bug, for example, was a specificity issue.
-- Do not remove features or routes without checking where they are used (`placeholderSections` drives the placeholder route; `sitemap.ts` lists indexable pages).
+- Do not remove features or routes without checking where they are used (`sitemap.ts` lists indexable pages).
 - Do not do large refactors before understanding dependencies.
 - Do not use `next/link` for internal links (use `@/i18n/navigation`), and do not use `motion.*` (strict LazyMotion requires `m.*`).
 - Do not split headings inside words (it breaks Arabic and Sorani letter joining).
@@ -704,13 +699,12 @@ No visual or RTL bugs are open from the last QA pass.
 | `src/proxy.ts` | locale detection and redirects |
 | `src/i18n/routing.ts` | locales, default, direction helper |
 | `src/i18n/navigation.ts`, `src/i18n/request.ts` | localized links; message loading |
-| `src/lib/nav.ts` | primary nav, contact link, `placeholderSections` (interim pages) |
+| `src/lib/nav.ts` | primary nav, contact link, language names |
 | `src/lib/site.ts` | `SITE_URL`, canonical and hreflang helpers |
 | `src/lib/fonts.ts` | font loading and CSS variables |
 | `src/app/globals.css` | design tokens, Arabic-script rules, utilities |
 | `src/app/[locale]/layout.tsx` | html lang/dir, providers, header/footer, skip link, base metadata |
 | `src/app/[locale]/page.tsx` | Home composition and JSON-LD |
-| `src/app/[locale]/[section]/page.tsx` | placeholder pages |
 | `messages/en.json`, `ar.json`, `ckb.json` | all UI copy |
 | `src/content/company.ts` | phones, email, offices, warehouses, regional offices, figures |
 | `src/content/brands.ts` | brands, logos, countries, product families |
@@ -720,15 +714,19 @@ No visual or RTL bugs are open from the last QA pass.
 | `src/content/solutions.ts` | solutions, product lines, specs, sources |
 | `src/app/[locale]/solutions/` | Solutions index and detail pages; the pattern for new inner pages |
 | `src/components/ui/PageHeader.tsx`, `src/lib/site.ts` (`pageMetadata`) | inner-page header and metadata |
+| `src/app/[locale]/brands/`, `src/components/brands/BrandGrid.tsx` | Brands index and brand pages; shared logo grid |
+| `src/components/solutions/ProductLineRow.tsx`, `EnquiryBand.tsx` | product-line row and sales band shared by solution and brand pages |
+| `src/components/company/OfficeLines.tsx` | branch phone lines (Locations, Contact) |
+| `src/app/[locale]/about/`, `locations/`, `contact/`, `projects/` | the remaining inner pages |
 | `/mnt/project-files/atlas/research/content-audit.md` | source facts and conflicts (outside the repo) |
 
 ## 29. Recommended Next Step
 
-Build the **Brands** pages next:
-- a `/[locale]/brands` index
-- a `/[locale]/brands/[slug]` page per brand, showing its product lines from `src/content/solutions.ts`
+All navigation sections are now real pages. The next task that needs no owner input:
+- Add a focus trap to the mobile menu (§25.1).
+- Add `@playwright/test` as a devDependency and commit the QA script (overflow, console errors, failed requests, broken images, one h1, per locale × width).
 
-Follow the Solutions page pattern (`PageHeader`, `pageMetadata`, sitemap entry, removal from `placeholderSections`). Then test in EN/AR/CKB at 375 and 1440 px.
+Owner inputs still open: the "23 brands" figure, the vision/mission text, a contact form decision, photography, and merging PR #1.
 
 ## 30. New Session Instructions
 
