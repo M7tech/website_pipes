@@ -151,3 +151,13 @@ p {
 .tabular {
   font-variant-numeric: tabular-nums;
 }
+
+/* Hero carousel: the active tab's rule fills over the slide interval; reaching the end advances. */
+@keyframes hero-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}

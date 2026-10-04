@@ -18,3 +18,32 @@ export function languageAlternates(path = "") {
   languages["x-default"] = localeUrl("en", path);
   return languages;
 }
+
+/** Shared metadata for a localized page: title, description, canonical, hreflang and Open Graph. */
+export function pageMetadata({
+  locale,
+  path,
+  title,
+  description,
+  siteName,
+}: {
+  locale: Locale;
+  path: string;
+  title: string;
+  description: string;
+  siteName: string;
+}) {
+  return {
+    title,
+    description,
+    alternates: { canonical: localeUrl(locale, path), languages: languageAlternates(path) },
+    openGraph: {
+      type: "website" as const,
+      siteName,
+      title,
+      description,
+      url: localeUrl(locale, path),
+      locale,
+    },
+  };
+}

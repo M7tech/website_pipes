@@ -1,20 +1,11 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
-import { offices, regionalOffices, warehouses } from "@/content/company";
-import type { Localized } from "@/content/types";
+import { cityNames, offices, regionalOffices, warehouses } from "@/content/company";
 import { SectionHead } from "@/components/ui/SectionHead";
 import { TextLink } from "@/components/ui/TextLink";
 import { SectionWipe } from "@/components/motion/SectionWipe";
 import { IraqMap } from "./IraqMap";
 
-const cityNames = {
-  baghdad: { en: "Baghdad", ar: "بغداد", ckb: "بەغدا" },
-  basra: { en: "Basra", ar: "البصرة", ckb: "بەسرە" },
-  erbil: { en: "Erbil", ar: "أربيل", ckb: "هەولێر" },
-  duhok: { en: "Duhok", ar: "دهوك", ckb: "دهۆک" },
-  zakho: { en: "Zakho", ar: "زاخو", ckb: "زاخۆ" },
-  najaf: { en: "Najaf", ar: "النجف", ckb: "نەجەف" },
-} satisfies Record<string, Localized>;
 
 export async function Presence() {
   const locale = (await getLocale()) as Locale;

@@ -43,14 +43,3 @@ export function brandBySlug(slug: string) {
   if (!brand) throw new Error(`Unknown brand: ${slug}`);
   return brand;
 }
-
-/** Product families; copy lives in messages under Products.families.<key>. */
-export const productFamilies = [
-  { key: "waterSupply", brands: ["polymelt", "aquapa", "baenninger", "georg-fischer", "polo-egypt"], spec: "PP-R · PP-RCT · Ø 20–200" },
-  { key: "drainage", brands: ["poloplast", "ostendorf", "georg-fischer", "aquapa"], spec: "PP · HT · KG · Ø 32–500" },
-  { key: "infrastructure", brands: ["pimtas", "turan-borfit", "georg-fischer", "polo-egypt"], spec: "PE100 · U-PVC · Ø 20–2000" },
-  { key: "sanitaryware", brands: ["saudi-ceramics", "quarterbath", "wisa"], spec: "10–300 L · 3/6 L" },
-  { key: "pumps", brands: ["dab"], spec: "≤ 10 bar · 0–110 °C" },
-  { key: "faucets", brands: ["kas", "shield", "guarri"], spec: "NSF/ANSI 61 · DVGW" },
-  { key: "tools", brands: ["candan", "turan-borfit", "ascelik", "guarri"], spec: "Ø 20–1200" },
-] as const;

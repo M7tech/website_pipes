@@ -3,17 +3,19 @@
     "siteName": "AtlasPlast",
     "homeTitle": "AtlasPlast | Pipe systems and sanitaryware in Iraq since 1975",
     "homeDescription": "AtlasPlast supplies water supply, drainage, infrastructure piping, sanitaryware and pumps from leading international manufacturers to projects and installers across Iraq, since 1975.",
-    "placeholderDescription": "This section of the new AtlasPlast website is being prepared."
+    "placeholderDescription": "This section of the new AtlasPlast website is being prepared.",
+    "solutionsDescription": "AtlasPlast solutions: water supply pipes, drainage and grey water, water heaters, infrastructure networks, sanitaryware, pumps, faucets and installation tools from international manufacturers."
   },
   "Common": {
     "skipToContent": "Skip to content",
     "since": "Since {year}",
-    "brandName": "AtlasPlast"
+    "brandName": "AtlasPlast",
+    "breadcrumb": "Breadcrumb"
   },
   "Nav": {
     "label": "Main navigation",
     "home": "Home",
-    "products": "Products",
+    "solutions": "Solutions",
     "brands": "Brands",
     "projects": "Projects",
     "about": "About",
@@ -34,12 +36,45 @@
   },
   "Home": {
     "hero": {
-      "eyebrow": "AtlasPlast · Ufuq Al-Atlas Ltd.",
-      "title": "Pipe systems and sanitaryware for Iraq’s buildings and infrastructure.",
-      "lead": "Since 1975, AtlasPlast has supplied water supply, drainage and sanitary systems from leading international manufacturers to contractors, installers and national projects in every governorate.",
-      "primary": "Explore products",
-      "secondary": "Contact sales",
-      "diagramLabel": "Cross-section of a pressure pipe with its dimensions"
+      "label": "AtlasPlast highlights",
+      "prev": "Previous slide",
+      "next": "Next slide",
+      "pause": "Pause slideshow",
+      "play": "Play slideshow",
+      "slideOf": "Slide {current} of {total}",
+      "diagramLabel": "Cross-section of a pressure pipe with its dimensions",
+      "slides": {
+        "systems": {
+          "tab": "Solutions",
+          "eyebrow": "AtlasPlast · Ufuq Al-Atlas Ltd.",
+          "title": "Pipe systems and sanitaryware for Iraq’s buildings and infrastructure.",
+          "lead": "Since 1975, AtlasPlast has supplied water supply, drainage and sanitary systems from leading international manufacturers to contractors, installers and national projects in every governorate.",
+          "primary": "Explore solutions",
+          "secondary": "Contact sales"
+        },
+        "history": {
+          "tab": "Our history",
+          "eyebrow": "Since 1975",
+          "title": "Five decades supplying the builders of Iraq.",
+          "lead": "From construction materials in 1975 to the first Atlas showroom in 1990, the first exclusive international agency in 2004 and a regional office in Saudi Arabia in 2025.",
+          "cta": "Our story",
+          "scale": "Milestones"
+        },
+        "brands": {
+          "tab": "Our brands",
+          "eyebrow": "International partners",
+          "title": "The manufacturers behind Iraq’s pipe systems.",
+          "lead": "Exclusive and authorised agencies for manufacturers from Switzerland, Germany, Austria, the Netherlands, Italy, the Czech Republic, Serbia, Turkey, Saudi Arabia and Egypt.",
+          "cta": "All brands"
+        },
+        "reach": {
+          "tab": "Stock and reach",
+          "eyebrow": "Nationwide",
+          "title": "Six months of national demand, held in stock.",
+          "lead": "Warehouses in Baghdad, Basra, Erbil, Duhok and Zakho supply more than 600 agents and dealers across every governorate.",
+          "cta": "Our locations"
+        }
+      }
     },
     "facts": {
       "label": "AtlasPlast in figures",
@@ -55,12 +90,11 @@
       "body2": "Our warehouses in Baghdad, Basra, Erbil, Duhok and Zakho are planned to cover the country’s demand for six months, so contractors and installers are supplied without interruption.",
       "projects": "Hundreds of projects completed with AtlasPlast products."
     },
-    "products": {
-      "eyebrow": "Products",
-      "title": "Seven product families, one supplier.",
-      "intro": "Every family is sourced from manufacturers we represent directly, with stock held in Iraq.",
-      "brandsLabel": "Brands",
-      "cta": "All products"
+    "solutions": {
+      "eyebrow": "Solutions",
+      "title": "Eight solutions, one supplier.",
+      "intro": "Every solution is sourced from manufacturers we represent directly, with stock held in Iraq.",
+      "cta": "All solutions"
     },
     "brands": {
       "eyebrow": "International partners",
@@ -143,35 +177,221 @@
       "cta": "Send an enquiry"
     }
   },
-  "Products": {
-    "families": {
-      "waterSupply": {
-        "name": "Water supply systems",
-        "text": "PP-R, PP-RCT and multilayer pipes and fittings for hot and cold water in buildings."
+  "Solutions": {
+    "index": {
+      "eyebrow": "Solutions",
+      "title": "Complete systems, from the water main to the tap.",
+      "intro": "Our range is organised by what you are building: drinking water, drainage and grey water, water heating, networks, bathrooms, pumping and installation. Every product line comes from a manufacturer AtlasPlast represents, with stock held in Iraq."
+    },
+    "labels": {
+      "lines": "Product lines",
+      "brands": "Brands",
+      "specs": "Specifications",
+      "count": "{count, plural, one {# product line} other {# product lines}}",
+      "enquireTitle": "Need help choosing?",
+      "enquireText": "Our sales and technical teams advise on selection, quantities and delivery for projects of every size.",
+      "enquireCta": "Talk to sales",
+      "others": "Other solutions",
+      "all": "All solutions"
+    },
+    "specs": {
+      "diameter": "Diameter",
+      "length": "Length",
+      "pressure": "Pressure class",
+      "rating": "Pressure rating",
+      "sdr": "Wall series",
+      "stiffness": "Ring stiffness",
+      "material": "Material",
+      "acoustic": "Acoustic performance",
+      "fire": "Fire class",
+      "capacity": "Capacities",
+      "flush": "Flush volume",
+      "head": "Maximum head",
+      "temperature": "Temperature",
+      "weldRange": "Welding range",
+      "power": "Power",
+      "sizes": "Sizes",
+      "standards": "Standards"
+    },
+    "waterSupply": {
+      "name": "Water supply pipes",
+      "text": "PP-R, PP-RCT and multilayer pipes for hot, cold and drinking water, including UV-resistant lines for exposed runs.",
+      "intro": "Pressure pipe systems for hot and cold water inside buildings. The range covers PP-R and PP-RCT pipes and fittings, five-layer ML5 pipes for added strength, and UV-resistant systems for exposed and outdoor installation."
+    },
+    "drainage": {
+      "name": "Drainage and grey water",
+      "text": "PVC-U, low-noise PP and KG systems for basins, showers and kitchens, soil stacks and buried sewers.",
+      "intro": "Drainage for the water that leaves a building: grey water from basins, showers and kitchens, soil stacks and buried sewer lines. Choose from PVC-U pipes, low-noise PP systems rated by sound level, and KG pipes for underground runs."
+    },
+    "waterHeaters": {
+      "name": "Water heaters",
+      "text": "Aquahot electric water heaters from Saudi Ceramics, from 10 to 300 litres.",
+      "intro": "Electric storage water heaters. Aquahot heaters from Saudi Ceramics come in vertical and horizontal models, with enamelled tanks, a two-valve system rated at 8.5 bar and Italian-made electrical components."
+    },
+    "infrastructure": {
+      "name": "Infrastructure networks",
+      "text": "PE100 and U-PVC pressure pipes with compression, electrofusion and fabricated fittings up to Ø 2000 mm.",
+      "intro": "Pressure pipe systems for water mains, city networks and project infrastructure: PE100 pipes in straight lengths and coils, U-PVC pressure pipes up to Ø 400 mm, compression fittings for drinking water and pressurised waste water, and PE fittings up to Ø 2000 mm."
+    },
+    "sanitaryware": {
+      "name": "Sanitaryware and cisterns",
+      "text": "Vitreous china, bathroom furniture, tiles, concealed cisterns and pre-wall frames.",
+      "intro": "Everything visible in a finished bathroom and the frames behind the wall: vitreous china WCs, basins, urinals and bidets, moisture-resistant bathroom furniture, porcelain and ceramic tiles, and concealed cisterns with dual-flush 3/6 litre systems."
+    },
+    "pumps": {
+      "name": "Pumps and pressure",
+      "text": "DAB circulators, booster sets, self-priming, submersible and drainage pumps.",
+      "intro": "Pumping for buildings and water systems from DAB of Italy: circulators, in-line and centrifugal pumps, multistage and self-priming units, submersible, sewage and drainage pumps, lifting stations, pressure units and controls."
+    },
+    "faucetsValves": {
+      "name": "Faucets and valves",
+      "text": "Basin, kitchen, shower and sensor mixers, with brass angle and ball valves.",
+      "intro": "Mixers and valves for bathrooms, kitchens and laundries: basin, kitchen, shower and bidet mixers including sensor series, and brass angle valves, ball valves and faucet sets."
+    },
+    "installationTools": {
+      "name": "Installation tools and fixings",
+      "text": "Welding machines for PP-R and PE, pipe clamps, profiles, chemical anchors and sealants.",
+      "intro": "The equipment that completes an installation: welding machines for PE and PP pipes up to Ø 1200 mm, pipe clamps, profiles and consoles, chemical anchors, pipe sealants and adhesives."
+    },
+    "lines": {
+      "poloPolymutan": {
+        "text": "Hot and cold water pipe system in PP-R 80, resistant to high temperatures and mechanical wear."
       },
-      "drainage": {
-        "name": "Drainage and sewage",
-        "text": "Low-noise PP, HT and KG systems for building drainage and underground sewage."
+      "poloEcosan": {
+        "text": "PP-R system for healthy, corrosion-free drinking water, for drinking-water and industrial applications."
       },
-      "infrastructure": {
-        "name": "Infrastructure networks",
-        "text": "PE100 and U-PVC pressure pipes, compression and electrofusion fittings for city and project networks."
+      "poloUv": {
+        "text": "The first UV-resistant pipe system: POLO-UV ML5 fibre pipes with PP-R fittings, for exposed installations and irrigation."
       },
-      "sanitaryware": {
-        "name": "Sanitaryware and cisterns",
-        "text": "Vitreous china, bathroom furniture, concealed cisterns, pre-wall frames and water heaters."
+      "poloPolymutanMl5": {
+        "text": "Five-layer pipe combining PP-R 80, Poloplast HPCE compound and PP-RCT for added strength."
       },
-      "pumps": {
-        "name": "Pumps and pressure",
-        "text": "Circulators, booster sets, self-priming, submersible and drainage pumps."
+      "polymutan": {
+        "text": "PP-R and PP-RCT pipes and fittings for hot and cold water, in pressure classes PN 10 to PN 25."
       },
-      "faucets": {
-        "name": "Faucets and valves",
-        "text": "Basin, kitchen and shower mixers, brass angle and ball valves."
+      "polymeltUv": {
+        "text": "Pipe with a black UV-resistant outer layer and fibre layers, for installations exposed to sunlight."
       },
-      "tools": {
-        "name": "Installation tools and fixings",
-        "text": "Welding machines for PP-R and PE, pipe clamps, profiles, anchors and sealants."
+      "aquasystem": {
+        "text": "PP-R pipe system for hot and cold water in buildings."
+      },
+      "aquapa": {
+        "text": "PP-R pipes and fittings for hot and cold water."
+      },
+      "baenningerPpr": {
+        "text": "PP-R pipes for hot and cold water. AtlasPlast is the exclusive Bänninger agent for central and southern Iraq."
+      },
+      "poloEgy": {
+        "text": "PP-R pipes for hot and cold water."
+      },
+      "boroug": {
+        "text": "White PVC-U pipes joined with solvent cement, resistant across a pH range of about 2 to 13."
+      },
+      "silentaPremium": {
+        "text": "Sound-insulated drainage pipes and fittings for buildings, supplied with or without sockets."
+      },
+      "silenta3a": {
+        "text": "Socketed low-noise drainage system for building waste water."
+      },
+      "poloKalNg": {
+        "text": "Low-noise drainage with EPDM seals, chemically resistant from pH 2 to 13."
+      },
+      "poloKal3s": {
+        "text": "Sound-insulated drainage with sockets and built-in EPDM seals."
+      },
+      "aquaSilent": {
+        "text": "Socketed low-noise PP drainage for building waste water."
+      },
+      "skolanSafe": {
+        "text": "Mineral-filled PP drainage with high sound insulation, chemically resistant from pH 2 to 12."
+      },
+      "htSafe": {
+        "text": "Mineral-filled PP drainage pipes for waste water inside buildings."
+      },
+      "kgSystem": {
+        "text": "Co-extruded PVC-U sewer pipes for buried drainage, in stiffness classes SN 4, 8 and 10."
+      },
+      "aquahot": {
+        "text": "Electric water heaters in vertical and horizontal models, with enamelled tanks and Italian-made electrical components."
+      },
+      "pimtasPe100": {
+        "name": "PE100 pipe and fittings",
+        "text": "Polyethylene pressure pipes in straight lengths and 100 m coils, with or without sockets."
+      },
+      "pimtasUpvc": {
+        "name": "U-PVC pressure pipe",
+        "text": "Pressure pipes up to Ø 400 mm, with socket, plain-end or O-ring joints."
+      },
+      "pimtasCompression": {
+        "name": "Compression fittings",
+        "text": "For drinking water and pressurised waste water, above ground and underground."
+      },
+      "turanPeFittings": {
+        "name": "PE fittings",
+        "text": "Injection-moulded, electrofusion and fabricated PE fittings and kits up to Ø 2000 mm."
+      },
+      "turanPe100": {
+        "name": "PE100 pipe",
+        "text": "Polyethylene pressure pipe in lengths and 100 m coils."
+      },
+      "gfPe100": {
+        "text": "Polyethylene pressure pipe up to Ø 355 mm in SDR 9 and SDR 11."
+      },
+      "oryx": {
+        "name": "Oryx sanitaryware",
+        "text": "Fully glazed vitreous WCs, basins, urinals and bidets, with rimless, soft-close, anti-bacterial and water-saving designs."
+      },
+      "saudiTiles": {
+        "name": "Porcelain and ceramic tiles",
+        "text": "For walls and floors, indoors and out, in glossy, matt, polished and anti-slip finishes."
+      },
+      "quarterbathSanitary": {
+        "name": "Sanitaryware",
+        "text": "Vitreous WCs, basins, urinals and bidets with matching accessories."
+      },
+      "quarterbathFurniture": {
+        "name": "Bathroom furniture",
+        "text": "Moisture-resistant MDF with fully sealed edges, anti-fungal and anti-bacterial coating and soft-close storage."
+      },
+      "quarterbathCistern": {
+        "name": "Concealed cistern",
+        "text": "Powder-coated steel frame with adjustable height and depth and a sound insulation pad."
+      },
+      "wisaPrewall": {
+        "name": "Pre-wall elements and built-in cisterns",
+        "text": "Pneumatic and mechanical concealed cisterns for wall-hung WCs with quiet fill valves, from WISA, owned by Fluidmaster."
+      },
+      "dab": {
+        "name": "DAB pumps",
+        "text": "Circulators, in-line and centrifugal pumps, multistage and self-priming units, submersible, sewage and drainage pumps, lifting stations and pressure units."
+      },
+      "kas": {
+        "name": "KAS faucets",
+        "text": "Basin, kitchen, wall-mounted, shower, bidet and industrial kitchen mixers, with a sensor series and spare parts available."
+      },
+      "shield": {
+        "name": "Valves and faucets",
+        "text": "Brass angle valves, ball valves, faucet sets and accessories for laundries, bathrooms and kitchens."
+      },
+      "guarriFaucets": {
+        "name": "Guarri faucets",
+        "text": "Brass bathroom and kitchen faucets."
+      },
+      "turanWelding": {
+        "name": "Butt welding machines",
+        "text": "Manual and automatic machines for PE and PP pipes from Ø 20 to 1200 mm."
+      },
+      "candan": {
+        "name": "Welding machines",
+        "text": "Pipe welding machines with adjustable temperature, in several power ratings, with spare parts."
+      },
+      "ascelik": {
+        "name": "Clamps and profiles",
+        "text": "Pipe clamps, profiles and consoles in malleable iron, ductile iron and steel for plumbing, HVAC and industrial piping."
+      },
+      "guarriChemicals": {
+        "name": "Chemical anchors and sealants",
+        "text": "Polyester and vinyl ester chemical anchors, pipe sealants and super glue."
       }
     }
   },

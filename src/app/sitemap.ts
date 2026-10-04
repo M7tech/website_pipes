@@ -1,14 +1,23 @@
 import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
+import { solutions } from "@/content/solutions";
 import { languageAlternates, localeUrl } from "@/lib/site";
 
-/** Home only for now; interim section pages are noindex until they have content. */
+/** Indexable pages only; interim placeholder sections are noindex and stay out. */
+const paths: { path: string; priority: number }[] = [
+  { path: "", priority: 1 },
+  { path: "/solutions", priority: 0.9 },
+  ...solutions.map((s) => ({ path: `/solutions/${s.slug}`, priority: 0.8 })),
+];
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  return routing.locales.map((locale) => ({
-    url: localeUrl(locale),
-    lastModified: new Date(),
-    changeFrequency: "monthly",
-    priority: 1,
-    alternates: { languages: languageAlternates() },
-  }));
+  return paths.flatMap(({ path, priority }) =>
+    routing.locales.map((locale) => ({
+      url: localeUrl(locale, path),
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority,
+      alternates: { languages: languageAlternates(path) },
+    })),
+  );
 }

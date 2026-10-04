@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing, type Locale } from "@/i18n/routing";
-import { pagePaths } from "@/lib/nav";
+import { placeholderSections } from "@/lib/nav";
 import { company } from "@/content/company";
 import { languageAlternates, localeUrl } from "@/lib/site";
 import { ButtonLink } from "@/components/ui/ButtonLink";
@@ -12,8 +12,8 @@ import { Ltr } from "@/components/ui/Ltr";
  * Interim page for sections that will be built after the Home page benchmark.
  * Keeps navigation working in all three languages without inventing content.
  */
-const sections = pagePaths.filter(Boolean).map((p) => p.slice(1));
-type Section = (typeof sections)[number];
+const sections: readonly string[] = placeholderSections;
+type Section = (typeof placeholderSections)[number];
 
 export const dynamicParams = false;
 

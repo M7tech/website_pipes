@@ -96,3 +96,13 @@ export const regionalOffices: Localized[] = [
   { en: "Syria", ar: "سوريا", ckb: "سووریا" },
   { en: "Egypt", ar: "مصر", ckb: "میسر" },
 ];
+
+/** City names for the Iraq map, keyed like CITY_POINTS in iraq-map.ts. */
+export const cityNames = {
+  baghdad: { en: "Baghdad", ar: "بغداد", ckb: "بەغدا" },
+  basra: { en: "Basra", ar: "البصرة", ckb: "بەسرە" },
+  erbil: { en: "Erbil", ar: "أربيل", ckb: "هەولێر" },
+  duhok: { en: "Duhok", ar: "دهوك", ckb: "دهۆک" },
+  zakho: { en: "Zakho", ar: "زاخو", ckb: "زاخۆ" },
+  najaf: { en: "Najaf", ar: "النجف", ckb: "نەجەف" },
+} satisfies Record<string, Localized>;

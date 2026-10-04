@@ -5,7 +5,7 @@ import { company, offices } from "@/content/company";
 import { SITE_URL, languageAlternates, localeUrl } from "@/lib/site";
 import { Hero } from "@/components/sections/Hero";
 import { Statement } from "@/components/sections/Statement";
-import { ProductIndex } from "@/components/sections/ProductIndex";
+import { SolutionIndex } from "@/components/sections/SolutionIndex";
 import { BrandWall } from "@/components/sections/BrandWall";
 import { ProjectIndex } from "@/components/sections/ProjectIndex";
 import { Timeline } from "@/components/sections/Timeline";
@@ -63,7 +63,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       />
       <Hero />
       <Statement />
-      <ProductIndex />
+      <SolutionIndex />
       <BrandWall />
       <ProjectIndex />
       <Timeline />

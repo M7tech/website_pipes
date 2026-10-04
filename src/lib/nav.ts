@@ -1,6 +1,6 @@
 /** Primary navigation. Labels live in messages under Nav.<key>. */
 export const primaryNav = [
-  { key: "products", href: "/products" },
+  { key: "solutions", href: "/solutions" },
   { key: "brands", href: "/brands" },
   { key: "projects", href: "/projects" },
   { key: "about", href: "/about" },
@@ -9,7 +9,10 @@ export const primaryNav = [
 
 export const contactHref = "/contact";
 
-/** Pages that exist as routes; used by the sitemap and the placeholder route. */
-export const pagePaths = ["", "/products", "/brands", "/projects", "/about", "/locations", "/contact"] as const;
+/**
+ * Sections still served by the interim placeholder route (noindex).
+ * Remove a section from this list when its real route lands under src/app/[locale]/.
+ */
+export const placeholderSections = ["brands", "projects", "about", "locations", "contact"] as const;
 
 export const languageNames = { en: "English", ar: "العربية", ckb: "کوردی" } as const;
