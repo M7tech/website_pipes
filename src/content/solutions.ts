@@ -1,4 +1,5 @@
 import type { Source } from "./types";
+import type { IconName } from "@/components/ui/Icon";
 
 /**
  * Solutions: AtlasPlast's range organised by what the customer is building.
@@ -42,8 +43,18 @@ export type ProductLine = {
   source: Source;
 };
 
+export type SolutionPhoto = {
+  src: string;
+  /** Brand slug when the photo shows that brand's products (atlasprofile brand page). */
+  brand?: string;
+};
+
 export type Solution = {
   slug: string;
+  /** Line icon naming the family (components/ui/Icon). */
+  icon: IconName;
+  /** Product photos from the company profile, shown in the solution header slider. */
+  photos: SolutionPhoto[];
   /** Wall ratio for the SectionGlyph marker. */
   wall: number;
   /** One-line technical summary for indexes. */
@@ -54,6 +65,14 @@ export type Solution = {
 export const solutions: Solution[] = [
   {
     slug: "water-supply",
+    icon: "waterSupply",
+    photos: [
+      { src: "/images/solutions/water-supply-1.jpg", brand: "polymelt" },
+      { src: "/images/solutions/water-supply-2.jpg", brand: "polymelt" },
+      { src: "/images/solutions/water-supply-3.jpg", brand: "aquapa" },
+      { src: "/images/solutions/water-supply-4.jpg", brand: "georg-fischer" },
+      { src: "/images/solutions/water-supply-5.jpg", brand: "polo-egypt" },
+    ],
     wall: 2.5,
     spec: "PP-R · PP-RCT · ML5 · Ø 20–200",
     lines: [
@@ -136,19 +155,25 @@ export const solutions: Solution[] = [
       },
       {
         id: "kasPpr",
-        name: "KAS PPR-C",
+        name: "KAS PPR",
         brand: "kas",
-        specs: [
-          { key: "material", value: "PPR-C · PPR-C/AL · PPR-C composite" },
-          { key: "diameter", value: "Ø 20–110 mm" },
-          { key: "pressure", value: "PN 10 · 16 · 20 · 25" },
-        ],
+        // Owner 2026-10-04: AtlasPlast supplies KAS PPR only (not PPR-C).
+        specs: [{ key: "material", value: "PPR" }],
         source: "confirmed:2026-10-04",
       },
     ],
   },
   {
     slug: "drainage",
+    icon: "drainage",
+    photos: [
+      { src: "/images/solutions/drainage-1.jpg", brand: "georg-fischer" },
+      { src: "/images/solutions/drainage-2.jpg", brand: "poloplast" },
+      { src: "/images/solutions/drainage-3.jpg", brand: "poloplast" },
+      { src: "/images/solutions/drainage-4.jpg", brand: "ostendorf" },
+      { src: "/images/solutions/drainage-5.jpg", brand: "ostendorf" },
+      { src: "/images/solutions/drainage-6.jpg", brand: "georg-fischer" },
+    ],
     wall: 4,
     spec: "PVC-U · PP · Silent · Ø 25–500",
     lines: [
@@ -263,6 +288,10 @@ export const solutions: Solution[] = [
   },
   {
     slug: "water-heaters",
+    icon: "waterHeater",
+    photos: [
+      { src: "/images/solutions/water-heaters-1.jpg", brand: "saudi-ceramics" },
+    ],
     wall: 6,
     spec: "10–300 L · 8.5 bar",
     lines: [
@@ -282,6 +311,14 @@ export const solutions: Solution[] = [
   },
   {
     slug: "infrastructure",
+    icon: "network",
+    photos: [
+      { src: "/images/solutions/infrastructure-1.jpg", brand: "pimtas" },
+      { src: "/images/solutions/infrastructure-2.jpg", brand: "pimtas" },
+      { src: "/images/solutions/infrastructure-3.jpg", brand: "turan-borfit" },
+      { src: "/images/solutions/infrastructure-4.jpg", brand: "turan-borfit" },
+      { src: "/images/solutions/infrastructure-5.jpg", brand: "georg-fischer" },
+    ],
     wall: 3,
     spec: "PE100 · U-PVC · Ø 20–2000",
     lines: [
@@ -359,6 +396,15 @@ export const solutions: Solution[] = [
   },
   {
     slug: "sanitaryware",
+    icon: "toilet",
+    photos: [
+      { src: "/images/solutions/sanitaryware-1.jpg", brand: "saudi-ceramics" },
+      { src: "/images/solutions/sanitaryware-2.jpg", brand: "quarterbath" },
+      { src: "/images/solutions/sanitaryware-3.jpg", brand: "wisa" },
+      { src: "/images/solutions/sanitaryware-4.jpg", brand: "saudi-ceramics" },
+      { src: "/images/solutions/sanitaryware-5.jpg", brand: "quarterbath" },
+      { src: "/images/solutions/sanitaryware-6.jpg", brand: "quarterbath" },
+    ],
     wall: 8,
     spec: "Dual flush 3/6 L · SASO · CE",
     lines: [
@@ -423,6 +469,10 @@ export const solutions: Solution[] = [
   },
   {
     slug: "pumps",
+    icon: "pump",
+    photos: [
+      { src: "/images/solutions/pumps-1.jpg", brand: "dab" },
+    ],
     wall: 5,
     spec: "≤ 10 bar · 0–110 °C",
     lines: [
@@ -442,6 +492,13 @@ export const solutions: Solution[] = [
   },
   {
     slug: "faucets-valves",
+    icon: "faucet",
+    photos: [
+      { src: "/images/solutions/faucets-valves-1.jpg", brand: "guarri" },
+      { src: "/images/solutions/faucets-valves-2.jpg" },
+      { src: "/images/solutions/faucets-valves-3.jpg" },
+      { src: "/images/solutions/faucets-valves-4.jpg", brand: "pimtas" },
+    ],
     wall: 10,
     spec: "NSF/ANSI 61 · DVGW",
     lines: [
@@ -470,6 +527,13 @@ export const solutions: Solution[] = [
   },
   {
     slug: "installation-tools",
+    icon: "wrench",
+    photos: [
+      { src: "/images/solutions/installation-tools-1.jpg", brand: "turan-borfit" },
+      { src: "/images/solutions/installation-tools-2.jpg", brand: "turan-borfit" },
+      { src: "/images/solutions/installation-tools-3.jpg", brand: "ascelik" },
+      { src: "/images/solutions/installation-tools-4.jpg", brand: "candan" },
+    ],
     wall: 7,
     spec: "Welding Ø 20–1200 · fixings",
     lines: [

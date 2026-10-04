@@ -356,3 +356,21 @@ p {
     animation: none;
   }
 }
+
+/* Gentle push-in for product photos on white cards. */
+@keyframes ken-burns-soft {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.06);
+  }
+}
+.ken-burns-soft {
+  animation: ken-burns-soft 6s ease-out both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ken-burns-soft {
+    animation: none;
+  }
+}

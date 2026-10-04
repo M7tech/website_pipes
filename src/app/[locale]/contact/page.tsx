@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Icon } from "@/components/ui/Icon";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import { company, whatsappHref } from "@/content/company";
@@ -34,9 +35,9 @@ export default async function ContactPage({ params }: PageProps<"/[locale]/conta
   const common = await getTranslations("Common");
 
   const lines = [
-    { label: h("whatsapp"), value: company.whatsapp, href: whatsappHref(company.whatsapp), external: true },
-    { label: h("projects"), value: company.projectsPhone, href: whatsappHref(company.projectsPhone), external: true },
-    { label: h("email"), value: company.email, href: `mailto:${company.email}` },
+    { label: h("whatsapp"), value: company.whatsapp, href: whatsappHref(company.whatsapp), external: true, icon: "whatsapp" as const },
+    { label: h("projects"), value: company.projectsPhone, href: whatsappHref(company.projectsPhone), external: true, icon: "helmet" as const },
+    { label: h("email"), value: company.email, href: `mailto:${company.email}`, icon: "mail" as const },
   ];
 
   return (
@@ -68,11 +69,17 @@ export default async function ContactPage({ params }: PageProps<"/[locale]/conta
             <h2 id="channels-title" className="eyebrow border-t-2 border-ink pt-5 text-steel">
               {t("channels")}
             </h2>
-            <p className="text-steel">{h("hours")}</p>
+            <p className="flex items-center gap-2 text-steel">
+              <Icon name="clock" className="size-5 text-atlas-blue" />
+              {h("hours")}
+            </p>
           </div>
           <div className="grid content-start lg:col-span-7 lg:col-start-6">
             <a href={`tel:${company.mainPhone}`} className="group grid gap-2 border-t border-rule py-6">
-              <span className="eyebrow text-steel">{h("mainLine")}</span>
+              <span className="eyebrow flex items-center gap-2 text-steel">
+                <Icon name="phone" className="size-5 text-atlas-blue" />
+                {h("mainLine")}
+              </span>
               <span className="font-display-latin text-[clamp(3.5rem,9vw,7rem)] font-semibold leading-none tabular text-atlas-blue group-hover:text-atlas-navy">
                 <Ltr>{company.mainPhone}</Ltr>
               </span>
@@ -84,7 +91,10 @@ export default async function ContactPage({ params }: PageProps<"/[locale]/conta
                 {...(line.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                 className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-t border-rule py-5 text-lg hover:text-atlas-blue"
               >
-                <span className="text-steel">{line.label}</span>
+                <span className="flex items-center gap-3 text-steel">
+                  <Icon name={line.icon} className="size-5 text-atlas-blue" />
+                  {line.label}
+                </span>
                 <span className="font-mono tabular">
                   <Ltr>{line.value}</Ltr>
                 </span>

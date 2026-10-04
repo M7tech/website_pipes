@@ -1,6 +1,15 @@
 import { getTranslations } from "next-intl/server";
+import { Icon } from "@/components/ui/Icon";
 
 const services = ["distribution", "projects", "technical", "afterSales", "training", "privateLabel"] as const;
+const serviceIcons = {
+  distribution: "truck",
+  projects: "helmet",
+  technical: "headset",
+  afterSales: "shieldCheck",
+  training: "graduation",
+  privateLabel: "tag",
+} as const;
 const community = ["sponsorship", "vocational", "entrepreneurs", "schools"] as const;
 
 export async function ServiceModel() {
@@ -26,14 +35,22 @@ export async function ServiceModel() {
           <dl className="grid border-t border-rule sm:grid-cols-2 sm:gap-x-8">
             {services.map((key) => (
               <div key={key} className="grid content-start gap-2 border-b border-rule py-7">
-                <dt className="text-xl font-semibold">{t(`items.${key}.title`)}</dt>
+                <dt className="grid gap-4 text-xl font-semibold">
+                  <span className="inline-flex size-12 items-center justify-center rounded-full bg-atlas-blue/8 text-atlas-blue">
+                    <Icon name={serviceIcons[key]} />
+                  </span>
+                  {t(`items.${key}.title`)}
+                </dt>
                 <dd className="text-steel">{t(`items.${key}.text`)}</dd>
               </div>
             ))}
           </dl>
 
           <div className="grid gap-5 bg-paper p-6 md:p-8">
-            <h3 className="eyebrow text-steel">{t("communityTitle")}</h3>
+            <h3 className="eyebrow flex items-center gap-2 text-steel">
+              <Icon name="heart" className="size-5 text-atlas-blue" />
+              {t("communityTitle")}
+            </h3>
             <ul className="grid gap-3 sm:grid-cols-2 sm:gap-x-8">
               {community.map((key) => (
                 <li key={key} className="flex gap-3">

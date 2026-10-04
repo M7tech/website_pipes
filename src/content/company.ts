@@ -31,7 +31,7 @@ export const facts = [
   { key: "agents", value: "600+", source: "profile:p4,p23,p27" },
   { key: "brands", value: "23", source: "profile:p4" },
   { key: "trained", value: "6,000+", source: "profile:p20" },
-  { key: "stock", value: "6", source: "profile:p9-10" },
+  { key: "stock", value: "9", source: "confirmed:2026-10-04" },
 ] as const satisfies readonly { key: string; value: string; source: Source }[];
 
 type City = keyof typeof CITY_POINTS;

@@ -13,7 +13,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Ltr } from "@/components/ui/Ltr";
 import { TextLink } from "@/components/ui/TextLink";
-import { SectionGlyph } from "@/components/sections/SectionGlyph";
+import { Icon } from "@/components/ui/Icon";
 import { BrandGrid } from "@/components/brands/BrandGrid";
 import { BrandDocuments } from "@/components/brands/BrandDocuments";
 import { EnquiryBand } from "@/components/solutions/EnquiryBand";
@@ -126,13 +126,19 @@ export default async function BrandPage({ params }: PageProps<"/[locale]/brands/
         <dl className="mt-2 flex flex-wrap gap-x-10 gap-y-4 border-t border-rule-dark pt-5 text-sm">
           {brand.country ? (
             <div className="grid gap-1">
-              <dt className="text-on-dark-muted">{t("labels.country")}</dt>
+              <dt className="flex items-center gap-2 text-on-dark-muted">
+                <Icon name="globe" className="size-4" />
+                {t("labels.country")}
+              </dt>
               <dd>{countries(brand.country)}</dd>
             </div>
           ) : null}
           {lineCount ? (
             <div className="grid gap-1">
-              <dt className="text-on-dark-muted">{s("labels.lines")}</dt>
+              <dt className="flex items-center gap-2 text-on-dark-muted">
+                <Icon name="layers" className="size-4" />
+                {s("labels.lines")}
+              </dt>
               <dd className="font-mono tabular">
                 <Ltr>{lineCount}</Ltr>
               </dd>
@@ -167,7 +173,7 @@ export default async function BrandPage({ params }: PageProps<"/[locale]/brands/
               {groups.map(({ solution, lines }) => (
                 <div key={solution.slug} className="grid gap-x-8 gap-y-6 md:grid-cols-12">
                   <div className="grid content-start gap-4 md:col-span-3">
-                    <SectionGlyph wall={solution.wall} className="text-atlas-blue" />
+                    <Icon name={solution.icon} className="size-9 text-atlas-blue" />
                     <h3 className="font-display-latin text-[clamp(1.5rem,2.4vw,2rem)] font-semibold leading-tight [:lang(ar)_&]:leading-normal [:lang(ckb)_&]:leading-normal">
                       {s(`${solutionKey(solution.slug)}.name`)}
                     </h3>

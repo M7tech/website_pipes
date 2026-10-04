@@ -766,3 +766,9 @@ Before making any changes:
 - **Terms (owner, Arabic):** خزانات الدفن / طراد, never سيفونات; حرفيين, never فنيين. A test guards this.
 - **Water motion** (CSS in `globals.css`, all off with reduced motion): wave edge on dark bands (`components/water/Waves.tsx`), caustic light, Ken Burns photos, ripples on map offices, liquid-fill buttons, water progress bar in the header (`ScrollWater.tsx`).
 - `SectionWipe` now observes an unclipped wrapper: Chrome reports a fully clipped element as not intersecting, which had kept the Iraq map hidden.
+
+## 22. Icons, product photos and owner corrections (2026-10-04, later)
+
+- **Product photos** come from the company profile PDF (`pdfimages`, alpha masks flattened on white): `public/images/solutions/<slug>-<n>.jpg`, listed per solution in `solutions.ts` (`photos`, with the brand when the profile page names it). Each solution header shows them in `PhotoSlider`. AtlasPlast's own warehouse photos (profile p23) are `public/images/hero/warehouse-*.jpg`, used on the hero "reach" slide and the About, Locations and Solutions headers. Profile photos are ~500 px wide; replace with originals when available.
+- **Icons:** `components/ui/Icon.tsx` (line icons, decorative). Each solution has an `icon`; services, hero facts, contact lines, document kinds, presence headings and brand facts use them too. `SectionGlyph` was removed.
+- **Owner corrections:** stock covers **nine** months (was six); KAS is supplied as **PPR only** (the PPR-C catalogue link and PPR-C specs were removed).

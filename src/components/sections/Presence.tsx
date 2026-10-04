@@ -1,4 +1,5 @@
 import { getLocale, getTranslations } from "next-intl/server";
+import { Icon } from "@/components/ui/Icon";
 import type { Locale } from "@/i18n/routing";
 import { cityNames, mapsHref, offices, regionalOffices, warehouses } from "@/content/company";
 import { PinIcon } from "@/components/ui/PinIcon";
@@ -54,7 +55,10 @@ export async function Presence({ cta = true }: { cta?: boolean } = {}) {
 
           <div className="grid content-start gap-10 lg:col-span-5 lg:col-start-8">
             <div>
-              <h3 className="eyebrow mb-3 text-steel">{t("offices")}</h3>
+              <h3 className="eyebrow mb-3 flex items-center gap-2 text-steel">
+                <Icon name="building" className="size-5 text-atlas-blue" />
+                {t("offices")}
+              </h3>
               <ul className="border-t border-rule">
                 {offices.map((o) => (
                   <li key={o.id} className="border-b border-rule text-lg">
@@ -77,7 +81,10 @@ export async function Presence({ cta = true }: { cta?: boolean } = {}) {
             </div>
             <div className="grid gap-10 sm:grid-cols-2 sm:gap-8">
               <div>
-                <h3 className="eyebrow mb-3 text-steel">{t("warehouses")}</h3>
+                <h3 className="eyebrow mb-3 flex items-center gap-2 text-steel">
+                  <Icon name="warehouse" className="size-5 text-atlas-blue" />
+                  {t("warehouses")}
+                </h3>
                 <ul className="border-t border-rule">
                   {warehouses.map((w) => (
                     <li key={w.id} className="border-b border-rule py-2.5">{w.name[locale]}</li>
@@ -85,7 +92,10 @@ export async function Presence({ cta = true }: { cta?: boolean } = {}) {
                 </ul>
               </div>
               <div>
-                <h3 className="eyebrow mb-3 text-steel">{t("regional")}</h3>
+                <h3 className="eyebrow mb-3 flex items-center gap-2 text-steel">
+                  <Icon name="globe" className="size-5 text-atlas-blue" />
+                  {t("regional")}
+                </h3>
                 <ul className="border-t border-rule">
                   {regionalOffices.map((r) => (
                     <li key={r.en} className="border-b border-rule py-2.5">{r[locale]}</li>

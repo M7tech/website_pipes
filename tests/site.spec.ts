@@ -103,3 +103,12 @@ test("Arabic copy uses the owner's trade terms", async ({ page }) => {
     expect(text, path).not.toMatch(/سيفون|الفنيين|فنيين/);
   }
 });
+
+test("owner corrections: nine months of stock, KAS PPR only, solution photos", async ({ page }) => {
+  await page.goto("/en");
+  await expect(page.locator("main")).toContainText("Nine months");
+  await page.goto("/en/brands/kas");
+  expect(await page.locator("main").innerText()).not.toContain("PPR-C");
+  await page.goto("/en/solutions/water-supply");
+  await expect(page.locator('header [aria-roledescription="carousel"] img').first()).toBeVisible();
+});

@@ -9,11 +9,11 @@ import { localeUrl, pageLd, pageMetadata } from "@/lib/site";
 import { productLinesLd } from "@/lib/structured-data";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { PageHeader } from "@/components/ui/PageHeader";
+import { PhotoSlider } from "@/components/ui/PhotoSlider";
 import { Ltr } from "@/components/ui/Ltr";
 import { Link } from "@/i18n/navigation";
 import { EnquiryBand } from "@/components/solutions/EnquiryBand";
 import { ProductLineRow } from "@/components/solutions/ProductLineRow";
-import { SectionGlyph } from "@/components/sections/SectionGlyph";
 import { SolutionList, solutionBrands } from "@/components/solutions/SolutionList";
 
 export const dynamicParams = false;
@@ -88,7 +88,17 @@ export default async function SolutionPage({ params }: PageProps<"/[locale]/solu
           { label: nav("solutions"), href: "/solutions" },
           { label: name },
         ]}
-        aside={<SectionGlyph wall={solution.wall} className="!size-40 text-atlas-sky md:!size-56" />}
+        icon={solution.icon}
+        aside={
+          <PhotoSlider
+            label={t("labels.photos", { name })}
+            photos={solution.photos.map((photo) => ({
+              src: photo.src,
+              alt: photo.brand ? t("photoAlt", { name, brand: brandBySlug(photo.brand).name }) : name,
+            }))}
+            photoOf={solution.photos.map((_, i) => t("labels.photoOf", { current: i + 1, total: solution.photos.length }))}
+          />
+        }
       >
         <dl className="mt-2 flex flex-wrap gap-x-10 gap-y-4 border-t border-rule-dark pt-5 text-sm">
           <div className="grid gap-1">

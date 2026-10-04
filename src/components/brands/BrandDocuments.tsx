@@ -1,7 +1,10 @@
 import { getTranslations } from "next-intl/server";
+import { Icon } from "@/components/ui/Icon";
 import type { BrandDocument } from "@/content/brands";
 import { Arrow } from "@/components/ui/Arrow";
 import { Ltr } from "@/components/ui/Ltr";
+
+const kindIcon = { catalogue: "book", datasheet: "fileText", certificate: "certificate", downloads: "download" } as const;
 
 /** Downloadable English documents for a brand: catalogues, data sheets and certificates. */
 export async function BrandDocuments({ documents }: { documents: BrandDocument[] }) {
@@ -28,7 +31,10 @@ export async function BrandDocuments({ documents }: { documents: BrandDocument[]
                   rel={external ? "noopener noreferrer" : undefined}
                   className="group grid gap-x-8 gap-y-1 py-5 hover:bg-paper md:grid-cols-9 md:items-baseline"
                 >
-                  <span className="text-sm text-atlas-blue md:col-span-3">{t(`kinds.${doc.kind}`)}</span>
+                  <span className="flex items-center gap-2 text-sm text-atlas-blue md:col-span-3">
+                    <Icon name={kindIcon[doc.kind]} className="size-5" />
+                    {t(`kinds.${doc.kind}`)}
+                  </span>
                   <span lang="en" className="text-lg font-medium md:col-span-4">
                     {doc.title}
                   </span>

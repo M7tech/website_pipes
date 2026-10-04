@@ -47,6 +47,7 @@ export default async function LocationsPage({ params }: PageProps<"/[locale]/loc
         })}
       />
       <PageHeader
+        image={{ src: "/images/hero/warehouse-aerial.jpg", alt: common("warehousePhoto") }}
         eyebrow={t("eyebrow")}
         title={t("title")}
         intro={t("intro")}

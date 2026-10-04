@@ -26,7 +26,8 @@
     "skipToContent": "Skip to content",
     "since": "Since {year}",
     "brandName": "AtlasPlast",
-    "breadcrumb": "Breadcrumb"
+    "breadcrumb": "Breadcrumb",
+    "warehousePhoto": "AtlasPlast warehouse"
   },
   "Nav": {
     "label": "Main navigation",
@@ -86,7 +87,7 @@
         "reach": {
           "tab": "Stock and reach",
           "eyebrow": "Nationwide",
-          "title": "Six months of national demand, held in stock.",
+          "title": "Nine months of national demand, held in stock.",
           "lead": "Warehouses in Baghdad, Basra, Erbil, Duhok and Zakho supply more than 600 agents and dealers across every governorate.",
           "cta": "Our locations"
         }
@@ -103,7 +104,7 @@
       "eyebrow": "Who we are",
       "title": "A distributor built on stock, reach and technical knowledge.",
       "body1": "AtlasPlast holds commercial agencies for international manufacturers of piping, drainage, sanitaryware and pumps, many of them exclusive in Iraq. We supply the materials and the technical support behind housing, infrastructure and government developments.",
-      "body2": "Our warehouses in Baghdad, Basra, Erbil, Duhok and Zakho are planned to cover the country’s demand for six months, so contractors and installers are supplied without interruption.",
+      "body2": "Our warehouses in Baghdad, Basra, Erbil, Duhok and Zakho are planned to cover the country’s demand for nine months, so contractors and installers are supplied without interruption.",
       "projects": "Hundreds of projects completed with AtlasPlast products."
     },
     "solutions": {
@@ -208,7 +209,9 @@
       "enquireText": "Our sales and technical teams advise on selection, quantities and delivery for projects of every size.",
       "enquireCta": "Talk to sales",
       "others": "Other solutions",
-      "all": "All solutions"
+      "all": "All solutions",
+      "photos": "{name}: product photos",
+      "photoOf": "Photo {current} of {total}"
     },
     "specs": {
       "diameter": "Diameter",
@@ -410,9 +413,10 @@
         "text": "Polyester and vinyl ester chemical anchors, pipe sealants and super glue."
       },
       "kasPpr": {
-        "text": "PPR-C pipes and fittings for hot and cold water, including aluminium-reinforced and composite pipes."
+        "text": "PPR pipes and fittings for hot and cold water."
       }
-    }
+    },
+    "photoAlt": "{name} by {brand}"
   },
   "Projects": {
     "sectors": {

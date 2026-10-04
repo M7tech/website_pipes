@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Icon } from "@/components/ui/Icon";
 import type { ReactNode } from "react";
 import { getLocale, getTranslations } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
@@ -12,6 +13,8 @@ import { PipeSection } from "./PipeSection";
 import { IraqMap } from "./IraqMap";
 import { HeroCarousel } from "./HeroCarousel";
 import { Waves } from "@/components/water/Waves";
+
+const factIcons = { agents: "users", brands: "award", trained: "graduation", stock: "warehouse" } as const;
 
 /** Partner marks shown on the brands slide (all with approved artwork). */
 const heroBrands = [
@@ -112,7 +115,7 @@ export async function Hero() {
     },
     {
       id: "history",
-      image: "/images/brands/ostendorf.jpg",
+      image: "/images/hero/landmark.jpg",
       tab: s("history.tab"),
       content: (
         <SlideFrame
@@ -174,7 +177,7 @@ export async function Hero() {
     },
     {
       id: "reach",
-      image: "/images/hero/landmark.jpg",
+      image: "/images/hero/warehouse-aerial.jpg",
       tab: s("reach.tab"),
       content: (
         <SlideFrame
@@ -229,7 +232,10 @@ export async function Hero() {
               key={fact.key}
               className={`flex flex-col-reverse justify-end gap-2 border-rule-dark py-6 pe-4 md:py-8 ${i % 2 === 1 ? "border-s ps-4 lg:ps-6" : ""} ${i >= 2 ? "border-t lg:border-t-0" : ""} ${i === 2 ? "lg:border-s lg:ps-6" : ""}`}
             >
-              <dt className="max-w-[24ch] text-sm text-on-dark-muted">{f(fact.key)}</dt>
+              <dt className="flex max-w-[26ch] items-start gap-2 text-sm text-on-dark-muted">
+                <Icon name={factIcons[fact.key]} className="size-5 shrink-0 text-atlas-sky" />
+                {f(fact.key)}
+              </dt>
               <dd className="font-display-latin text-[clamp(2rem,4vw,3.25rem)] font-semibold leading-none tabular">
                 <Ltr>{fact.value}</Ltr>
               </dd>

@@ -46,6 +46,7 @@ export default async function SolutionsPage({ params }: PageProps<"/[locale]/sol
         })}
       />
       <PageHeader
+        image={{ src: "/images/hero/warehouse-stock.jpg", alt: common("warehousePhoto") }}
         waveFill="fill-surface"
         eyebrow={t("eyebrow")}
         title={t("title")}

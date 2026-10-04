@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import { Icon } from "@/components/ui/Icon";
 import { company, whatsappHref } from "@/content/company";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Ltr } from "@/components/ui/Ltr";
@@ -7,9 +8,9 @@ export async function ContactBand() {
   const t = await getTranslations("Home.contact");
 
   const lines = [
-    { label: t("whatsapp"), value: company.whatsapp, href: whatsappHref(company.whatsapp), external: true },
-    { label: t("projects"), value: company.projectsPhone, href: whatsappHref(company.projectsPhone), external: true },
-    { label: t("email"), value: company.email, href: `mailto:${company.email}`, external: false },
+    { label: t("whatsapp"), value: company.whatsapp, href: whatsappHref(company.whatsapp), external: true, icon: "whatsapp" as const },
+    { label: t("projects"), value: company.projectsPhone, href: whatsappHref(company.projectsPhone), external: true, icon: "helmet" as const },
+    { label: t("email"), value: company.email, href: `mailto:${company.email}`, external: false, icon: "mail" as const },
   ];
 
   return (
@@ -24,7 +25,10 @@ export async function ContactBand() {
           >
             {t("title")}
           </h2>
-          <p className="text-on-dark-muted">{t("hours")}</p>
+          <p className="flex items-center gap-2 text-on-dark-muted">
+            <Icon name="clock" className="size-5" />
+            {t("hours")}
+          </p>
           <div>
             <ButtonLink href="/contact" variant="inverse">
               {t("cta")}
@@ -34,7 +38,10 @@ export async function ContactBand() {
 
         <div className="grid content-start gap-0 lg:col-span-5 lg:col-start-8">
           <a href={`tel:${company.mainPhone}`} className="group grid gap-2 border-t border-rule-dark py-6">
-            <span className="eyebrow text-on-dark-muted">{t("mainLine")}</span>
+            <span className="eyebrow flex items-center gap-2 text-on-dark-muted">
+              <Icon name="phone" className="size-5 text-atlas-sky" />
+              {t("mainLine")}
+            </span>
             <span className="font-display-latin text-[clamp(3.5rem,9vw,7rem)] font-semibold leading-none tabular group-hover:text-white">
               <Ltr>{company.mainPhone}</Ltr>
             </span>
@@ -46,7 +53,10 @@ export async function ContactBand() {
               {...(line.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-t border-rule-dark py-4 hover:text-white"
             >
-              <span className="text-on-dark-muted">{line.label}</span>
+              <span className="flex items-center gap-3 text-on-dark-muted">
+                <Icon name={line.icon} className="size-5 text-atlas-sky" />
+                {line.label}
+              </span>
               <span className="font-mono tabular">
                 <Ltr>{line.value}</Ltr>
               </span>

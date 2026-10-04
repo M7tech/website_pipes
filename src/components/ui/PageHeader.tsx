@@ -2,11 +2,14 @@ import type { ReactNode } from "react";
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import { Waves } from "@/components/water/Waves";
+import { Icon, type IconName } from "./Icon";
 
 type Crumb = { label: string; href?: string };
 
 type PageHeaderProps = {
   eyebrow: string;
+  /** Line icon shown with the eyebrow. */
+  icon?: IconName;
   title: string;
   /** Set when the title is a Latin name shown on an Arabic-script page, e.g. "en". */
   titleLang?: string;
@@ -26,7 +29,7 @@ type PageHeaderProps = {
  * Opening band for inner pages: continues the navy header, carries the
  * breadcrumb, the page h1 and an optional technical drawing.
  */
-export function PageHeader({ eyebrow, title, titleLang, intro, crumbs, breadcrumbLabel, aside, image, waveFill, children }: PageHeaderProps) {
+export function PageHeader({ eyebrow, icon, title, titleLang, intro, crumbs, breadcrumbLabel, aside, image, waveFill, children }: PageHeaderProps) {
   return (
     <header className="on-dark relative isolate overflow-hidden bg-atlas-navy text-on-dark">
       <div className="absolute inset-0 -z-10 overflow-hidden">
@@ -59,7 +62,10 @@ export function PageHeader({ eyebrow, title, titleLang, intro, crumbs, breadcrum
           </ol>
         </nav>
         <div className={`grid content-start gap-6 ${aside ? "lg:col-span-8" : "lg:col-span-10"}`}>
-          <p className="eyebrow text-on-dark-muted">{eyebrow}</p>
+          <p className="eyebrow flex items-center gap-3 text-on-dark-muted">
+            {icon ? <Icon name={icon} className="size-8 text-atlas-sky" /> : null}
+            {eyebrow}
+          </p>
           <h1 lang={titleLang} className="font-display-latin max-w-[20ch] text-[clamp(2.4rem,6vw,5.25rem)] font-semibold leading-[1] [:lang(ar)_&]:leading-[1.3] [:lang(ckb)_&]:leading-[1.3]">
             {title}
           </h1>

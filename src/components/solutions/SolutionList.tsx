@@ -4,7 +4,7 @@ import { brandBySlug } from "@/content/brands";
 import { solutionKey, solutions, type Solution } from "@/content/solutions";
 import { Arrow } from "@/components/ui/Arrow";
 import { Ltr } from "@/components/ui/Ltr";
-import { SectionGlyph } from "@/components/sections/SectionGlyph";
+import { Icon } from "@/components/ui/Icon";
 
 /** Unique brand slugs of a solution, in the order its lines list them. */
 export function solutionBrands(solution: Solution) {
@@ -31,10 +31,9 @@ export async function SolutionList({ only, headingLevel = "h3" }: { only?: strin
               className="group -mx-3 grid gap-x-8 gap-y-3 px-3 py-7 transition-colors duration-(--duration-base) hover:bg-paper md:grid-cols-12 md:items-baseline md:py-9"
             >
               <span className="flex items-center gap-4 md:col-span-5">
-                <SectionGlyph
-                  wall={solution.wall}
-                  className="text-atlas-blue transition-transform duration-(--duration-reveal) ease-(--ease-out-expo) group-hover:rotate-90"
-                />
+                <span className="inline-flex size-12 shrink-0 items-center justify-center rounded-full bg-atlas-blue/8 text-atlas-blue transition-colors duration-(--duration-base) group-hover:bg-atlas-blue group-hover:text-white">
+                  <Icon name={solution.icon} className="size-6" />
+                </span>
                 <Heading className="font-display-latin text-[clamp(1.5rem,2.6vw,2.25rem)] font-semibold leading-tight [:lang(ar)_&]:leading-normal [:lang(ckb)_&]:leading-normal">
                   {t(`${key}.name`)}
                 </Heading>
