@@ -131,6 +131,14 @@ p {
   letter-spacing: 0;
 }
 
+/* Latin names marked lang="en" (brands, product lines) keep Archivo on Arabic-script pages. */
+:lang(ar) .font-display-latin:lang(en),
+:lang(ckb) .font-display-latin:lang(en) {
+  font-family: var(--font-display);
+  font-stretch: 112%;
+  letter-spacing: -0.02em;
+}
+
 /* Small uppercase label; letter-spacing applies to Latin only. */
 @utility eyebrow {
   font-family: var(--font-mono);

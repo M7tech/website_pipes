@@ -4,12 +4,13 @@ import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing, type Locale } from "@/i18n/routing";
 import { brandBySlug } from "@/content/brands";
-import { company } from "@/content/company";
 import { solutionBySlug, solutionKey, solutions } from "@/content/solutions";
 import { localeUrl, pageMetadata } from "@/lib/site";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Ltr } from "@/components/ui/Ltr";
-import { ButtonLink } from "@/components/ui/ButtonLink";
+import { Link } from "@/i18n/navigation";
+import { EnquiryBand } from "@/components/solutions/EnquiryBand";
+import { ProductLineRow } from "@/components/solutions/ProductLineRow";
 import { SectionGlyph } from "@/components/sections/SectionGlyph";
 import { SolutionList, solutionBrands } from "@/components/solutions/SolutionList";
 
@@ -44,7 +45,6 @@ export default async function SolutionPage({ params }: PageProps<"/[locale]/solu
   const t = await getTranslations("Solutions");
   const nav = await getTranslations("Nav");
   const common = await getTranslations("Common");
-  const contact = await getTranslations("Home.contact");
   const key = solutionKey(slug);
   const name = t(`${key}.name`);
   const position = solutions.indexOf(solution) + 1;
@@ -87,7 +87,16 @@ export default async function SolutionPage({ params }: PageProps<"/[locale]/solu
           </div>
           <div className="grid gap-1">
             <dt className="text-on-dark-muted">{t("labels.brands")}</dt>
-            <dd lang="en">{brands.map((b) => brandBySlug(b).name).join(" · ")}</dd>
+            <dd lang="en" className="flex flex-wrap gap-x-2">
+              {brands.map((b, i) => (
+                <span key={b}>
+                  {i > 0 ? <span aria-hidden="true" className="me-2 text-on-dark-muted">·</span> : null}
+                  <Link href={`/brands/${b}`} className="underline-offset-4 hover:underline">
+                    {brandBySlug(b).name}
+                  </Link>
+                </span>
+              ))}
+            </dd>
           </div>
         </dl>
       </PageHeader>
@@ -101,87 +110,45 @@ export default async function SolutionPage({ params }: PageProps<"/[locale]/solu
             {solution.lines.map((line) => {
               const brand = brandBySlug(line.brand);
               const logo = line.logo ?? brand.logo;
-              const lineName = t.has(`lines.${line.id}.name`) ? t(`lines.${line.id}.name`) : line.name;
-              const latinName = !t.has(`lines.${line.id}.name`);
               return (
-                <li
+                <ProductLineRow
                   key={line.id}
-                  className="grid gap-x-8 gap-y-5 border-b border-rule py-8 first:pt-2 md:grid-cols-12 md:py-10"
-                >
-                  <div className="flex items-start gap-4 md:col-span-3 md:flex-col md:gap-3">
-                    <div className="flex h-12 w-28 items-center md:h-14 md:w-36">
-                      {logo ? (
-                        <Image
-                          src={logo}
-                          alt={brand.name}
-                          width={160}
-                          height={64}
-                          unoptimized
-                          className="max-h-full w-auto max-w-full object-contain"
-                        />
-                      ) : (
-                        <span lang="en" className="font-display-latin text-xl font-semibold text-steel">
-                          {brand.name}
-                        </span>
-                      )}
-                    </div>
-                    {logo ? <p lang="en" className="text-sm text-steel">{brand.name}</p> : null}
-                  </div>
-                  <div className="grid content-start gap-3 md:col-span-4">
-                    <h3
-                      lang={latinName ? "en" : undefined}
-                      className="font-display-latin text-[clamp(1.375rem,2.2vw,1.875rem)] font-semibold leading-tight [:lang(ar)_&]:leading-normal [:lang(ckb)_&]:leading-normal"
-                    >
-                      {lineName}
-                    </h3>
-                    <p className="text-steel">{t(`lines.${line.id}.text`)}</p>
-                  </div>
-                  {line.specs.length ? (
-                    <dl aria-label={t("labels.specs")} className="grid content-start md:col-span-5">
-                      {line.specs.map((spec) => (
-                        <div
-                          key={spec.key}
-                          className="grid grid-cols-[minmax(7rem,2fr)_3fr] gap-4 border-t border-rule py-2.5 text-sm last:border-b"
-                        >
-                          <dt className="text-steel">{t(`specs.${spec.key}`)}</dt>
-                          <dd className="font-mono text-ink">
-                            <Ltr>{spec.value}</Ltr>
-                          </dd>
-                        </div>
-                      ))}
-                    </dl>
-                  ) : null}
-                </li>
+                  line={line}
+                  lead={
+                    <>
+                      <div className="flex h-12 w-28 items-center md:h-14 md:w-36">
+                        {logo ? (
+                          <Image
+                            src={logo}
+                            alt={brand.name}
+                            width={160}
+                            height={64}
+                            unoptimized
+                            className="max-h-full w-auto max-w-full object-contain"
+                          />
+                        ) : (
+                          <span lang="en" className="font-display-latin text-xl font-semibold text-steel">
+                            {brand.name}
+                          </span>
+                        )}
+                      </div>
+                      <Link
+                        href={`/brands/${brand.slug}`}
+                        lang="en"
+                        className="text-sm text-steel underline-offset-4 hover:text-atlas-blue hover:underline"
+                      >
+                        {brand.name}
+                      </Link>
+                    </>
+                  }
+                />
               );
             })}
           </ul>
         </div>
       </section>
 
-      <section aria-labelledby="enquire-title" className="on-dark bg-atlas-navy text-on-dark">
-        <div className="container-page grid gap-8 py-14 md:grid-cols-12 md:items-end md:gap-8 md:py-20">
-          <div className="grid gap-4 md:col-span-7">
-            <h2
-              id="enquire-title"
-              className="font-display-latin text-[clamp(1.875rem,3.6vw,3rem)] font-semibold leading-[1.05] [:lang(ar)_&]:leading-[1.35] [:lang(ckb)_&]:leading-[1.35]"
-            >
-              {t("labels.enquireTitle")}
-            </h2>
-            <p className="max-w-[48ch] text-on-dark-muted">{t("labels.enquireText")}</p>
-          </div>
-          <div className="flex flex-wrap items-center gap-x-8 gap-y-4 md:col-span-5 md:justify-end">
-            <ButtonLink href="/contact" variant="inverse">
-              {t("labels.enquireCta")}
-            </ButtonLink>
-            <a href={`tel:${company.mainPhone}`} className="grid">
-              <span className="text-sm text-on-dark-muted">{contact("mainLine")}</span>
-              <span className="font-display-latin text-3xl font-semibold tabular">
-                <Ltr>{company.mainPhone}</Ltr>
-              </span>
-            </a>
-          </div>
-        </div>
-      </section>
+      <EnquiryBand title={t("labels.enquireTitle")} text={t("labels.enquireText")} />
 
       <section aria-labelledby="others-title" className="section-space bg-surface">
         <div className="container-page grid gap-10">

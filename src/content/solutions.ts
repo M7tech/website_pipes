@@ -510,3 +510,10 @@ export function solutionBySlug(slug: string) {
 export function solutionKey(slug: string) {
   return slug.replace(/-([a-z])/g, (_, c: string) => c.toUpperCase());
 }
+
+/** A brand's product lines grouped by the solution they belong to, in solution order. */
+export function brandSolutions(brand: string) {
+  return solutions
+    .map((solution) => ({ solution, lines: solution.lines.filter((l) => l.brand === brand) }))
+    .filter((group) => group.lines.length > 0);
+}

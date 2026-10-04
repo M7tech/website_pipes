@@ -4,7 +4,8 @@
     "homeTitle": "AtlasPlast | Pipe systems and sanitaryware in Iraq since 1975",
     "homeDescription": "AtlasPlast supplies water supply, drainage, infrastructure piping, sanitaryware and pumps from leading international manufacturers to projects and installers across Iraq, since 1975.",
     "placeholderDescription": "This section of the new AtlasPlast website is being prepared.",
-    "solutionsDescription": "AtlasPlast solutions: water supply pipes, drainage and grey water, water heaters, infrastructure networks, sanitaryware, pumps, faucets and installation tools from international manufacturers."
+    "solutionsDescription": "AtlasPlast solutions: water supply pipes, drainage and grey water, water heaters, infrastructure networks, sanitaryware, pumps, faucets and installation tools from international manufacturers.",
+    "brandsDescription": "Brands AtlasPlast represents and supplies in Iraq: pipe systems, drainage, sanitaryware, pumps and installation tools from Europe, Turkey and the Middle East."
   },
   "Common": {
     "skipToContent": "Skip to content",
@@ -409,6 +410,26 @@
   "Brands": {
     "notes": {
       "baenningerTerritory": "Exclusive agent, central and southern Iraq"
+    },
+    "index": {
+      "eyebrow": "Brands",
+      "title": "The brands we represent and supply.",
+      "intro": "Manufacturers from {count} countries in Europe, Turkey and the Middle East. Choose a brand to see the product lines AtlasPlast carries."
+    },
+    "detail": {
+      "intro": "AtlasPlast supplies {brand} products to projects and installers across Iraq."
+    },
+    "labels": {
+      "country": "Country of origin",
+      "solutions": "Solutions",
+      "supplied": "What we supply",
+      "viewSolution": "View solution",
+      "onRequestTitle": "Range on request",
+      "onRequest": "Product details for {brand} are available from our sales team. Call or write to us for current stock and specifications.",
+      "onRequestShort": "Range on request",
+      "enquireTitle": "Planning a project with {brand}?",
+      "others": "Other brands",
+      "all": "All brands"
     }
   },
   "Countries": {

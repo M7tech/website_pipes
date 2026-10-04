@@ -6,6 +6,8 @@ type Crumb = { label: string; href?: string };
 type PageHeaderProps = {
   eyebrow: string;
   title: string;
+  /** Set when the title is a Latin name shown on an Arabic-script page, e.g. "en". */
+  titleLang?: string;
   intro?: string;
   crumbs: Crumb[];
   breadcrumbLabel: string;
@@ -18,7 +20,7 @@ type PageHeaderProps = {
  * Opening band for inner pages: continues the navy header, carries the
  * breadcrumb, the page h1 and an optional technical drawing.
  */
-export function PageHeader({ eyebrow, title, intro, crumbs, breadcrumbLabel, aside, children }: PageHeaderProps) {
+export function PageHeader({ eyebrow, title, titleLang, intro, crumbs, breadcrumbLabel, aside, children }: PageHeaderProps) {
   return (
     <header className="on-dark bg-atlas-navy text-on-dark">
       <div className="container-page grid gap-10 pb-14 pt-8 md:pb-20 lg:grid-cols-12 lg:gap-8">
@@ -42,7 +44,7 @@ export function PageHeader({ eyebrow, title, intro, crumbs, breadcrumbLabel, asi
         </nav>
         <div className={`grid content-start gap-6 ${aside ? "lg:col-span-8" : "lg:col-span-10"}`}>
           <p className="eyebrow text-on-dark-muted">{eyebrow}</p>
-          <h1 className="font-display-latin max-w-[20ch] text-[clamp(2.4rem,6vw,5.25rem)] font-semibold leading-[1] [:lang(ar)_&]:leading-[1.3] [:lang(ckb)_&]:leading-[1.3]">
+          <h1 lang={titleLang} className="font-display-latin max-w-[20ch] text-[clamp(2.4rem,6vw,5.25rem)] font-semibold leading-[1] [:lang(ar)_&]:leading-[1.3] [:lang(ckb)_&]:leading-[1.3]">
             {title}
           </h1>
           {intro ? <p className="max-w-[52ch] text-lg text-on-dark-muted md:text-xl">{intro}</p> : null}
