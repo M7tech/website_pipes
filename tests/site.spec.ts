@@ -110,5 +110,7 @@ test("owner corrections: nine months of stock, KAS PPR only, solution photos", a
   await page.goto("/en/brands/kas");
   expect(await page.locator("main").innerText()).not.toContain("PPR-C");
   await page.goto("/en/solutions/water-supply");
-  await expect(page.locator('header [aria-roledescription="carousel"] img').first()).toBeVisible();
+  // Product photos cross-fade behind the header text, with one dot per photo.
+  await expect(page.locator("main header img").first()).toBeVisible();
+  await expect(page.locator('main header [aria-roledescription="carousel"] button')).not.toHaveCount(0);
 });
