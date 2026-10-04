@@ -84,6 +84,9 @@ export async function Presence({ cta = true }: { cta?: boolean } = {}) {
                 <h3 className="eyebrow mb-3 flex items-center gap-2 text-steel">
                   <Icon name="warehouse" className="size-5 text-atlas-blue" />
                   {t("warehouses")}
+                  <span className="ms-auto rounded-full bg-atlas-blue/10 px-2 py-0.5 text-[0.7rem] font-medium tracking-normal text-atlas-blue normal-case">
+                    {t("open247")}
+                  </span>
                 </h3>
                 <ul className="border-t border-rule">
                   {warehouses.map((w) => (

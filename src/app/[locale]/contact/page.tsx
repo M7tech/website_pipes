@@ -37,6 +37,7 @@ export default async function ContactPage({ params }: PageProps<"/[locale]/conta
   const lines = [
     { label: h("whatsapp"), value: company.whatsapp, href: whatsappHref(company.whatsapp), external: true, icon: "whatsapp" as const },
     { label: h("projects"), value: company.projectsPhone, href: whatsappHref(company.projectsPhone), external: true, icon: "helmet" as const },
+    { label: h("sales"), value: company.salesPhone, href: whatsappHref(company.salesPhone), external: true, icon: "tag" as const },
     { label: h("email"), value: company.email, href: `mailto:${company.email}`, icon: "mail" as const },
   ];
 
@@ -69,10 +70,17 @@ export default async function ContactPage({ params }: PageProps<"/[locale]/conta
             <h2 id="channels-title" className="eyebrow border-t-2 border-ink pt-5 text-steel">
               {t("channels")}
             </h2>
-            <p className="flex items-center gap-2 text-steel">
-              <Icon name="clock" className="size-5 text-atlas-blue" />
-              {h("hours")}
-            </p>
+            <div className="grid gap-2 text-steel">
+              <p className="flex items-center gap-2">
+                <Icon name="clock" className="size-5 shrink-0 text-atlas-blue" />
+                {h("hours")}
+              </p>
+              <p className="ps-7">{h("friday")}</p>
+              <p className="flex items-center gap-2">
+                <Icon name="warehouse" className="size-5 shrink-0 text-atlas-blue" />
+                {h("warehouses")}
+              </p>
+            </div>
           </div>
           <div className="grid content-start lg:col-span-7 lg:col-start-6">
             <a href={`tel:${company.mainPhone}`} className="group grid gap-2 border-t border-rule py-6">

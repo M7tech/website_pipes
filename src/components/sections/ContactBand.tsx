@@ -10,6 +10,7 @@ export async function ContactBand() {
   const lines = [
     { label: t("whatsapp"), value: company.whatsapp, href: whatsappHref(company.whatsapp), external: true, icon: "whatsapp" as const },
     { label: t("projects"), value: company.projectsPhone, href: whatsappHref(company.projectsPhone), external: true, icon: "helmet" as const },
+    { label: t("sales"), value: company.salesPhone, href: whatsappHref(company.salesPhone), external: true, icon: "tag" as const },
     { label: t("email"), value: company.email, href: `mailto:${company.email}`, external: false, icon: "mail" as const },
   ];
 
@@ -25,10 +26,17 @@ export async function ContactBand() {
           >
             {t("title")}
           </h2>
-          <p className="flex items-center gap-2 text-on-dark-muted">
-            <Icon name="clock" className="size-5" />
-            {t("hours")}
-          </p>
+          <div className="grid gap-2 text-on-dark-muted">
+            <p className="flex items-center gap-2">
+              <Icon name="clock" className="size-5 shrink-0" />
+              {t("hours")}
+            </p>
+            <p className="ps-7">{t("friday")}</p>
+            <p className="flex items-center gap-2">
+              <Icon name="warehouse" className="size-5 shrink-0" />
+              {t("warehouses")}
+            </p>
+          </div>
           <div>
             <ButtonLink href="/contact" variant="inverse">
               {t("cta")}

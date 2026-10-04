@@ -772,3 +772,9 @@ Before making any changes:
 - **Product photos** come from the company profile PDF (`pdfimages`, alpha masks flattened on white): `public/images/solutions/<slug>-<n>.jpg`, listed per solution in `solutions.ts` (`photos`, with the brand when the profile page names it). Each solution header cross-fades them as its background (`HeaderSlides`, via `PageHeader` `slides`), like the home hero. AtlasPlast's own warehouse photos (profile p23) are `public/images/hero/warehouse-*.jpg`, used on the hero "reach" slide and the About, Locations and Solutions headers. Profile photos are ~500 px wide; replace with originals when available.
 - **Icons:** `components/ui/Icon.tsx` (line icons, decorative). Each solution has an `icon`; services, hero facts, contact lines, document kinds, presence headings and brand facts use them too. `SectionGlyph` was removed.
 - **Owner corrections:** stock covers **nine** months (was six); KAS is supplied as **PPR only** (the PPR-C catalogue link and PPR-C specs were removed).
+
+## 23. Old-site items carried over (2026-10-04, late)
+
+Added from the old atlasplast.iq (verified in the content audit): sales department line +964 780 288 0009 (WhatsApp; also a ContactPoint), Friday pickup/shipping note, warehouses 24/7 and round-the-clock delivery, Georg Fischer galvanized malleable-iron fittings (EN 10242, water supply), Bänninger PP-R · PP-RCT (water supply) and PE · PVC-U Ø 8–1000 mm (infrastructure).
+
+Still waiting on the owner: leadership team, vision/mission, testimonials (consent), NASSAR, the "up to 50 years" warranty, fuller pre-2009 history, the YouTube video, project photos.

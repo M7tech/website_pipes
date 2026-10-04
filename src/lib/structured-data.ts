@@ -50,6 +50,7 @@ export function contactPointLd() {
     contactPoint: [
       { "@type": "ContactPoint", telephone: company.mainPhone, contactType: "sales", areaServed: "IQ", availableLanguage: languages },
       { "@type": "ContactPoint", telephone: company.projectsPhone, contactType: "sales", name: "Projects division", areaServed: "IQ", availableLanguage: languages },
+      { "@type": "ContactPoint", telephone: company.salesPhone, contactType: "sales", name: "Sales department", areaServed: "IQ", availableLanguage: languages },
       { "@type": "ContactPoint", telephone: company.whatsapp, contactType: "customer service", areaServed: "IQ", availableLanguage: languages },
     ],
   };

@@ -11,6 +11,8 @@ export const company = {
   mainPhone: "6779",
   whatsapp: "+964 783 305 6475",
   projectsPhone: "+964 772 267 1130",
+  /** Sales department. Source: site:/ar/اتصل-بنا/ (departments list). */
+  salesPhone: "+964 780 288 0009",
   social: {
     facebook: "https://www.facebook.com/AtlasPlast.llc/",
     instagram: "https://www.instagram.com/atlasplast.iq/",

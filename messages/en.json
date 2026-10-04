@@ -139,7 +139,7 @@
       "items": {
         "distribution": {
           "title": "Product distribution",
-          "text": "Exclusive and authorised distribution of international brands through 600+ agents nationwide."
+          "text": "Exclusive and authorised distribution of international brands through 600+ agents nationwide, with delivery to every region around the clock."
         },
         "projects": {
           "title": "Project supply",
@@ -181,7 +181,8 @@
       "mapLabel": "Map of Iraq showing AtlasPlast offices and warehouses",
       "legendOffice": "Office",
       "legendWarehouse": "Warehouse",
-      "cta": "All locations"
+      "cta": "All locations",
+      "open247": "Open 24/7"
     },
     "contact": {
       "eyebrow": "Contact",
@@ -191,7 +192,10 @@
       "projects": "Projects division",
       "email": "Email",
       "hours": "Saturday to Thursday, 07:00 to 15:00",
-      "cta": "Send an enquiry"
+      "cta": "Send an enquiry",
+      "sales": "Sales department",
+      "friday": "Friday: goods pickup and shipping only.",
+      "warehouses": "Warehouses open 24 hours a day, 7 days a week."
     }
   },
   "Solutions": {
@@ -298,7 +302,7 @@
         "text": "PP-R pipes and fittings for hot and cold water."
       },
       "baenningerPpr": {
-        "text": "PP-R pipes for hot and cold water. AtlasPlast is the exclusive Bänninger agent for central and southern Iraq."
+        "text": "PP-R and PP-RCT pipes for hot and cold water. AtlasPlast is the exclusive Bänninger agent for central and southern Iraq."
       },
       "poloEgy": {
         "text": "PP-R pipes for hot and cold water."
@@ -414,6 +418,13 @@
       },
       "kasPpr": {
         "text": "PPR pipes and fittings for hot and cold water."
+      },
+      "gfMalleable": {
+        "name": "Galvanized malleable iron fittings",
+        "text": "Threaded fittings in galvanized malleable cast iron to EN 10242."
+      },
+      "baenningerPe": {
+        "text": "PE and PVC-U pipe systems from Ø 8 to 1000 mm. AtlasPlast is the exclusive Bänninger agent for central and southern Iraq."
       }
     },
     "photoAlt": "{name} by {brand}"

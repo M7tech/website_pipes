@@ -118,6 +118,16 @@ export const solutions: Solution[] = [
         source: "profile:p7",
       },
       {
+        id: "gfMalleable",
+        name: "Malleable iron fittings",
+        brand: "georg-fischer",
+        specs: [
+          { key: "material", value: "Malleable cast iron, galvanized" },
+          { key: "standards", value: "EN 10242" },
+        ],
+        source: "site:/ar/الوكالات/",
+      },
+      {
         id: "aquapa",
         name: "Aquapa PP-R",
         brand: "aquapa",
@@ -131,9 +141,10 @@ export const solutions: Solution[] = [
       },
       {
         id: "baenningerPpr",
-        name: "Bänninger PP-R",
+        name: "Bänninger PP-R · PP-RCT",
         brand: "baenninger",
         specs: [
+          { key: "material", value: "PP-R · PP-RCT" },
           { key: "diameter", value: "Ø 20–110 mm" },
           { key: "length", value: "4–6 m" },
           { key: "pressure", value: "PN 10 · 16 · 20 · 25" },
@@ -391,6 +402,16 @@ export const solutions: Solution[] = [
           { key: "standards", value: "EN 12201-2 · ISO 4427:2019" },
         ],
         source: "profile:p7",
+      },
+      {
+        id: "baenningerPe",
+        name: "Bänninger PE · PVC-U",
+        brand: "baenninger",
+        specs: [
+          { key: "material", value: "PE · PVC-U" },
+          { key: "diameter", value: "Ø 8–1000 mm" },
+        ],
+        source: "site:/ar/الوكالات/",
       },
     ],
   },
