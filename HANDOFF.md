@@ -1,6 +1,6 @@
 # ATLASPLAST WEBSITE — PROJECT HANDOFF
 
-Last updated: 2026-10-04 (end of the first build session). Written from the repository state at commit `14bf432` on branch `feat/home-page`.
+Last updated: 2026-10-04. Written from the repository state at commit `c7d9f17` on branch `feat/home-page`. This revision adds the Solutions pages and the four-slide hero.
 
 ---
 
@@ -10,9 +10,9 @@ Last updated: 2026-10-04 (end of the first build session). Written from the repo
 - **Company:** AtlasPlast. Legal/trading name **Ufuq Al-Atlas Ltd.** (UFUQ ALATLAS LTD. – Commercial Agencies). It is an Iraqi distributor and exclusive agent for international pipe-system, drainage, sanitaryware, pump, faucet and installation-tool manufacturers. It has been in business since 1975 and opened its first showroom in 1990.
 - **Purpose:** present AtlasPlast as an established, technically capable national supplier. It should help contractors, installers and project owners find solutions and brands, see projects, and contact sales.
 - **Stage:**
-  - The **Home page is built** in three languages and is the approved visual benchmark.
-  - Every other page is an **interim placeholder** (noindex).
-  - The owner (MOhammed) asked for the next round, which is **not started in code yet**: a 3–4 slide hero, a true multipage site, and a **Solutions** section. See §23.
+  - The **Home page is built** in three languages and is the approved visual benchmark. Its hero is now a four-slide carousel, as the owner asked on 2026-10-04.
+  - **Solutions is built:** an index plus 8 solution pages, in three languages.
+  - Brands, Projects, About, Locations and Contact are still **interim placeholders** (noindex). The owner wants a full multipage site, so these are next (§23).
 - **Stack:** Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS 4, Motion for React, next-intl 4.
 - **Deployment:** GitHub → Coolify → Linux VPS. No Vercel-specific features or dependencies.
 - **Languages:**
@@ -101,23 +101,24 @@ There is no `.claude/` directory in the repo.
   - UI copy lives in `messages/*.json`.
   - Brand and product names stay in Latin script, marked `lang="en"` where needed.
 - **Images:** there is no photography yet. Logos are SVG, rendered with `next/image` using `unoptimized`, because SVGs need no optimisation. `next.config` has AVIF/WebP enabled for future raster photos.
-- **Translations:** there is one JSON file per locale, with identical key structure (parity was verified). The namespaces are `Meta`, `Common`, `Nav`, `Footer`, `Home.{hero,facts,statement,products,brands,projects,timeline,services,presence,contact}`, `Products.families`, `Projects.sectors`, `Brands.notes`, `Countries`, `Placeholder` and `NotFound`.
+- **Translations:** there is one JSON file per locale, with identical key structure (parity was verified). The namespaces are `Meta`, `Common`, `Nav`, `Footer`, `Home.{hero,facts,statement,products,brands,projects,timeline,services,presence,contact}`, `Solutions`, `Projects.sectors`, `Brands.notes`, `Countries`, `Placeholder` and `NotFound`.
 
 ## 4. Current Sitemap
 
 | Route | Status | Notes |
 |---|---|---|
 | `/` | DONE | redirects to `/en` (next-intl proxy) |
-| `/en`, `/ar`, `/ckb` (Home) | DONE | approved benchmark. Hero still needs to become a 3–4 slide slider (§23) |
-| `/{locale}/products` | PLACEHOLDER | to be replaced by **Solutions** (owner request 2026-10-04) |
-| `/{locale}/solutions` + `/solutions/[slug]` | NOT STARTED | requested by owner; facts gathered in §23 |
+| `/en`, `/ar`, `/ckb` (Home) | DONE | approved benchmark, with a four-slide hero |
+| `/{locale}/solutions` | DONE | index of the 8 solutions |
+| `/{locale}/solutions/{slug}` | DONE | water-supply, drainage, water-heaters, infrastructure, sanitaryware, pumps, faucets-valves, installation-tools |
+| `/{locale}/products` | REMOVED | returns 404; replaced by Solutions |
 | `/{locale}/brands` | PLACEHOLDER | brand index and per-brand pages planned |
 | `/{locale}/projects` | PLACEHOLDER | |
 | `/{locale}/about` | PLACEHOLDER | history, services, values; vision/mission pending owner approval |
 | `/{locale}/locations` | PLACEHOLDER | |
 | `/{locale}/contact` | PLACEHOLDER | |
 | `/{locale}/<unknown>` | DONE | localized 404 (`not-found.tsx`) |
-| `/sitemap.xml`, `/robots.txt`, `/icon.svg` | DONE | sitemap lists Home only |
+| `/sitemap.xml`, `/robots.txt`, `/icon.svg` | DONE | sitemap lists Home, Solutions and the 8 solution pages in every locale |
 
 Placeholder pages say "in preparation", show the main line 6779, and are `robots: { index: false }`.
 
@@ -233,11 +234,11 @@ The site should feel premium, sophisticated, modern, architectural, industrial, 
 |---|---|---|---|
 | Meta, Common, Nav, Footer | complete | complete | complete |
 | Home (all 10 namespaces) | complete | complete | complete |
-| Products.families (7) | complete | complete | complete |
 | Projects.sectors, Brands.notes, Countries | complete | complete | complete |
 | Content data (offices, warehouses, regional offices, timeline, project names) | complete | complete | complete |
 | Placeholder / NotFound | complete | complete | complete |
-| Solutions / Brands / Projects / About / Locations / Contact pages | **not written** | **not written** | **not written** |
+| Solutions (index, 8 solutions, 41 product lines, spec labels) and hero slides | complete | complete | complete, needs native review |
+| Brands / Projects / About / Locations / Contact pages | **not written** | **not written** | **not written** |
 
 **Needs human review:**
 - **Kurdish Sorani has not been reviewed by a native speaker.** Claude wrote it carefully, and several fixes were made this session:
@@ -306,38 +307,34 @@ Source files are in the shared project folder (not in the repo):
 
 `src/app/[locale]/page.tsx` renders the sections in this order. All are complete in three languages.
 
-1. **Hero** — `sections/Hero.tsx` (server) with `PipeSection.tsx` (client).
-   - Navy band containing:
-     - eyebrow "AtlasPlast · Ufuq Al-Atlas Ltd."
-     - h1 animated by `LineRise`, word by word
-     - lead text
-     - two buttons: Explore products → `/products`, and Contact sales → `/contact`
-     - the PE100 SDR11 Ø110 pipe drawing on the end side, which draws itself
-   - Below it, a `dl` of 4 figures (2 columns on mobile, 4 on large screens).
-   - **Pending change:** the owner wants 3–4 slides here showing history and brands (§23).
-2. **Statement** — `Statement.tsx`. "A distributor built on stock, reach and technical knowledge." Two paragraphs, plus a blue-ruled line: "Hundreds of projects completed…".
-3. **Product families** — `ProductIndex.tsx`.
-   - White section listing 7 families with a `SectionGlyph`, description, mono spec and brand list.
-   - The rows link to `/products`; the glyph rotates on hover.
-   - Should become **Solutions** (§23).
-4. **Brands** — `BrandWall.tsx`.
-   - 21 partner logos in a hairline grid (2 columns, 3 from `sm`), grayscale until hover, each with its country and the Bänninger territory note.
-   - Polo Egypt has no logo file and renders as text.
-5. **Projects** — `ProjectIndex.tsx`. 14 featured projects with sector labels in two columns, plus a "Contractors we supply" inline list of 36 names and "And many more".
-6. **Timeline** — `Timeline.tsx`.
-   - Milestones 1975, 1990, 2004, 2009, 2010, 2012, 2019 and 2025.
-   - 4-column grid; `ScrollRule` fills the top rule on scroll.
-7. **Service model** — `ServiceModel.tsx`.
-   - Sticky heading "More than supply" on the start side, with 6 services in a 2-column list.
-   - Below that, an "In the community" panel with 4 items.
-8. **Presence** — `Presence.tsx` with `IraqMap.tsx`.
-   - "From Zakho to Basra." An SVG Iraq map wipes in via `SectionWipe`, showing office dots and warehouse squares with a legend.
-   - Lists of offices (HQ flagged), warehouses and regional offices.
-9. **Contact band** — `ContactBand.tsx`.
-   - Navy band with "Talk to our sales and projects teams", the hours and a "Send an enquiry" button → `/contact`.
-   - The giant main line 6779, with WhatsApp, projects division and email rows.
+1. **Hero carousel**: `sections/Hero.tsx` (server) composes the slides; `sections/HeroCarousel.tsx` (client) runs them.
+   - The navy band has four slides:
+     1. **Solutions**: the h1 (animated by `LineRise`), the lead, the Explore solutions (`/solutions`) and Contact sales buttons, and the `PipeSection` drawing.
+     2. **History**: "Five decades supplying the builders of Iraq", with a `YearScale` ruler from 1975 to 2025 marking the milestones. The button goes to `/about`, which is a placeholder.
+     3. **Brands**: lists the manufacturer countries, with a 3×3 grid of white-inverted partner logos. The button goes to `/brands`, a placeholder.
+     4. **Reach**: "Six months of national demand, held in stock", with `IraqMap tone="dark"`. The button goes to `/locations`, a placeholder.
+   - The tab bar has numbered tabs with labels (only the active label shows on phones), plus prev, next and pause controls.
+   - Each slide's visual is hidden below `md` to keep the hero short on phones.
+   - Below the carousel is a `dl` of 4 figures.
+2. **Statement**: `Statement.tsx`.
+3. **Solutions**: `SolutionIndex.tsx` (SectionHead + `solutions/SolutionList.tsx`). It lists the 8 solutions, each linking to its page.
+4. **Brands**: `BrandWall.tsx`, 21 logos.
+5. **Projects**: `ProjectIndex.tsx`.
+6. **Timeline**: `Timeline.tsx` with `ScrollRule`.
+7. **Service model**: `ServiceModel.tsx`.
+8. **Presence**: `Presence.tsx` + `IraqMap`.
+9. **Contact band**: `ContactBand.tsx`.
 
-**Responsive:** all sections stack to one column below `md`/`lg`. The figures go 2×2 on mobile. QA found no horizontal overflow at 375 through 1920px.
+**Solutions pages** (new):
+- `/solutions` has a `PageHeader` (navy, with breadcrumb and h1) and the pipe drawing, then a `SolutionList` with h2 rows and the `ContactBand`.
+- `/solutions/[slug]` has:
+  - a `PageHeader` with the "01 / 08" eyebrow, intro, line count and brand names, plus a large `SectionGlyph`
+  - product line rows: brand logo (or the Aquahot mark), name, description, and a spec `dl` in mono wrapped in `<Ltr>`
+  - a navy "Need help choosing?" band with the main line
+  - an "Other solutions" list
+  - `BreadcrumbList` JSON-LD
+
+**Responsive:** sections stack below `md`/`lg`. QA passed on Home and the Solutions pages at 375–1920px in all 3 locales.
 
 ## 11. Header and Navigation
 
@@ -346,7 +343,7 @@ Source files are in the shared project folder (not in the repo):
 - **Bar:** sticky, solid navy, z-40. There is no transparent state and no scroll-based change. It is `h-16`, or `md:h-20`.
 - **Logo:** the white lockup, sized by height (`!h-11 md:!h-14`, fixed this session; it previously overflowed the bar). It links to `/`.
 - **Desktop (≥ lg):**
-  - Nav items: Products, Brands, Projects, About, Locations.
+  - Nav items: Solutions, Brands, Projects, About, Locations.
   - An underline grows on hover and on `aria-current="page"`. Its origin flips in RTL.
   - On the end side: `LanguageSwitcher` (English / العربية / کوردی) and a bordered Contact button.
 - **Mobile (< lg):**
@@ -355,7 +352,7 @@ Source files are in the shared project folder (not in the repo):
   - Escape closes it; page scroll is locked while open; links close the menu.
 - **Known gaps:**
   - No focus trap inside the open mobile menu (Tab can leave it).
-  - Nav labels still say "Products". This should become "Solutions" per the owner's request.
+- **Nav items:** Solutions, Brands, Projects, About, Locations. Products was renamed to Solutions on 2026-10-04.
 
 ## 12. Footer
 
@@ -387,9 +384,12 @@ Source files are in the shared project folder (not in the repo):
 | `Logo` | `layout/Logo.tsx` | Official lockup (`/brand/atlasplast.svg` or `-white.svg`) via `next/image` (unoptimized, priority) | never mirrored; size it with height |
 | `LanguageSwitcher` | `layout/LanguageSwitcher.tsx` | Locale links keeping the path | `className`, `onNavigate` |
 | `SiteHeader` / `SiteFooter` | `layout/` | §11 and §12 | |
+| `HeroCarousel` | `sections/HeroCarousel.tsx` | Tabbed hero carousel (APG pattern) | client; props `slides {id, tab, content}[]`, `labels`, `interval` (default 8000). Autoplay is driven by the CSS `hero-progress` keyframes on the active tab rule (`onAnimationEnd` advances). It pauses on hover, focus and the pause button, and has no autoplay under reduced motion. Arrow keys follow the reading direction. Slides share one grid cell |
+| `PageHeader` | `ui/PageHeader.tsx` | Navy opening band for inner pages: breadcrumb, eyebrow, h1, intro, optional aside and children | use it on every new inner page |
+| `SolutionList` | `solutions/SolutionList.tsx` | Rule-separated solution rows linking to `/solutions/[slug]` | props `only?` (slugs), `headingLevel`; also exports `solutionBrands()` |
 | `PipeSection` | `sections/PipeSection.tsx` | Hero technical drawing | client; renders finished when reduced motion is on |
 | `SectionGlyph` | `sections/SectionGlyph.tsx` | Pipe cross-section marker for each product family | prop `wall` (ratio) |
-| `IraqMap` | `sections/IraqMap.tsx` | Map with office and warehouse markers | props `locale, label, officeCities, warehouseCities, cityNames`; never mirrored; `labelSide` puts Zakho/Najaf/Basra labels to the west |
+| `IraqMap` | `sections/IraqMap.tsx` | Map with office and warehouse markers | props `locale, label, officeCities, warehouseCities, cityNames, tone` (`light`/`dark`), `className`; never mirrored; `labelSide` puts Zakho/Najaf/Basra labels to the west |
 | `LineRise` | `motion/LineRise.tsx` | Word-mask headline reveal | splits only on spaces (keeps Arabic shaping); plain heading when reduced motion is on |
 | `SectionWipe` | `motion/SectionWipe.tsx` | clip-path reveal from the reading-start edge | for large visuals only; plain div when reduced motion is on |
 | `ScrollRule` | `motion/ScrollRule.tsx` | Timeline rule that fills with scroll (spring) | origin flips in RTL; full width when reduced motion is on |
@@ -408,6 +408,10 @@ Source files are in the shared project folder (not in the repo):
 - **Hover:**
   - Underline grow (320ms), the button arrow nudge, the product glyph rotating 90° (700ms) and brand logos changing from grayscale to colour.
 - **Mobile menu:** a 0.25s fade, with items staggered at 40ms.
+- **Hero carousel:**
+  - Slides crossfade over 0.6s (opacity only, no sliding).
+  - The active tab's 3px rule fills over 8s via the CSS keyframes `hero-progress`, defined in `globals.css`. When it ends, the next slide shows.
+  - Under reduced motion there is no autoplay and no pause button; the rule shows as full.
 - **Not implemented:** page transitions and parallax. Both are intentionally absent.
 - **Easing:** everything uses `cubic-bezier(0.22, 1, 0.36, 1)`.
 - **Reduced motion:**
@@ -454,7 +458,7 @@ Breakpoints are Tailwind defaults (sm 640, md 768, lg 1024, xl 1280). QA viewpor
 - **Favicon:** `src/app/icon.svg`, a viewBox crop of the stacked logo's globe mark.
 - **Partner logos:** in `public/brands/`.
   - alvit, aquapa, ascelik, baenninger, candan, dab, fv-plast, georg-fischer, guarri, kas, ostendorf, pestan, pimtas, poloplast, polymelt, quarterbath, saudi-ceramics, shield, turan-borfit and wisa (all used).
-  - `aquahot.svg` is **present but not used yet**. It is meant for the Water heaters solution.
+  - `aquahot.svg` is used on the Water heaters solution page as the Aquahot line's mark.
   - **Polo Egypt has no logo** (renders as text).
 - **Photography:**
   - There is **none**: no hero, product or project photos.
@@ -474,7 +478,10 @@ Breakpoints are Tailwind defaults (sm 640, md 768, lg 1024, xl 1280). QA viewpor
   - `alternates.canonical` (`/{locale}`), plus `alternates.languages` for en/ar/ckb and **x-default → /en** (`src/lib/site.ts`).
   - Open Graph: type, siteName, title, description, url and locale.
 - Placeholder pages: localized title, canonical and hreflang, plus `robots: { index: false }`.
-- `src/app/sitemap.ts` lists the three Home URLs with hreflang alternates. Add new pages here as they ship.
+- Solutions pages:
+  - Metadata comes from `pageMetadata()` in `src/lib/site.ts`, which sets the title, description, canonical, hreflang and OG.
+  - Detail pages also carry `BreadcrumbList` JSON-LD.
+- `src/app/sitemap.ts` lists Home, `/solutions` and every solution page with hreflang alternates. Add new pages to its `paths` array as they ship.
 - `src/app/robots.ts`: allow all, with the sitemap URL.
 - JSON-LD `Organization` on Home: name, legalName, url, logo, foundingDate 1975, email, telephone 6779, Baghdad address and sameAs social links.
 - `viewport.themeColor` is `#14284a`.
@@ -534,16 +541,18 @@ Breakpoints are Tailwind defaults (sm 640, md 768, lg 1024, xl 1280). QA viewpor
 
 ## 21. Git Status
 
-- **Current branch:** `feat/home-page`, which tracks `origin/feat/home-page` and is pushed.
+- **Current branch:** `feat/home-page`, which tracks `origin/feat/home-page`.
 - **Commits** (newest first):
+  - `c7d9f17` Add Solutions pages and a four-slide hero
+  - `6f84d2e` Add project handoff for future sessions (HANDOFF.md)
   - `14bf432` Add sitemap, robots and app icon
   - `0f613e5` Build the Home page
   - `2927911` Add site header, footer and locale layout
   - `27cf8bc` Add design tokens, typography and motion primitives
   - `9419020` Add trilingual routing for en, ar and ckb with next-intl
   - `ed44260` Scaffold Next.js 16 project… (this is `main`)
-- **Uncommitted:** none. HANDOFF.md was committed on `feat/home-page` after it was written.
-- **PR #1:** draft, assigned to M7tech. No CI workflows exist in the repo (no `.github/`).
+- **Uncommitted:** none, apart from this HANDOFF.md update, which is committed right after it is written.
+- **PR #1:** draft, assigned to M7tech. No CI workflows exist in the repo (no `.github/`). Run `git log --oneline` for exact hashes.
 
 ## 22. Completed Work
 
@@ -567,6 +576,13 @@ Breakpoints are Tailwind defaults (sm 640, md 768, lg 1024, xl 1280). QA viewpor
 - [x] Playwright QA across 3 locales × 6 widths: 0 overflow, 0 console errors, 0 failed requests, 0 broken images
 - [x] Visual review fixes: Arabic heading leading, header logo size, reduced-motion visuals, map labels, Sorani wording
 - [x] Pushed `main` + `feat/home-page`; draft PR #1 opened
+- [x] HANDOFF.md
+- [x] Products renamed to Solutions (nav, Home, CTAs, sitemap); `/products` removed
+- [x] Solutions data (`src/content/solutions.ts`): 8 solutions and 41 product lines, every line sourced
+- [x] `/solutions` index and 8 `/solutions/[slug]` pages in en/ar/ckb, with breadcrumb JSON-LD
+- [x] Four-slide accessible hero carousel (solutions, history, brands, reach)
+- [x] Reusable `PageHeader` and `pageMetadata()` for inner pages
+- [x] QA on Home and Solutions pages: 3 locales × 6 widths, 0 overflow, errors or broken images
 
 ## 23. Work Currently in Progress
 
@@ -574,71 +590,35 @@ Breakpoints are Tailwind defaults (sm 640, md 768, lg 1024, xl 1280). QA viewpor
 
 > "the main slides should be 3 to 4 shows our strong history and brands. all should be multipage not single page website. you should add solutions, water pipes > Polo UV, ecosan, ... Grey water > PVC > Boroug / Silent GF Silenta ... Water heater > Aquahot, Saudi Ceramic"
 
-**State:** research only. **No code has been written for this request yet.** Product facts were gathered from the profile (`ATLASProfile.txt`, pages 7–19) and from the old site's Poloplast agency page (`https://atlasplast.iq/wp-json/wp/v2/pages/3946`).
+**Done** (commit `c7d9f17`): the hero slides, the Solutions index and the 8 solution pages (§10).
 
-**Intended result:**
+**Next: the rest of the multipage site.** Replace the placeholders in this order, one route per commit:
+1. **Brands:** `/brands` index (the BrandWall plus country grouping) and `/brands/[slug]`. Each brand page shows its product lines from `solutions.ts` (filter by `line.brand`) and the solutions they belong to. Manufacturer facts such as founding years are the partner's, so use them sparingly (§9).
+2. **About:** history (`timeline.ts`), services and community (the ServiceModel copy). Vision/mission is still pending the owner's approval, so leave it out until then.
+3. **Locations:** offices with phones and addresses (`company.ts`), warehouses, regional offices and the `IraqMap`.
+4. **Contact:** phones, WhatsApp, email, hours and offices. A form needs a backend decision, so use direct links until then.
+5. **Projects:** featured projects and clients (`projects.ts`).
 
-1. **Hero slider** (3–4 slides) replacing the single hero in `src/components/sections/Hero.tsx`. Suggested slides, all from confirmed facts:
-   - Since 1975: five decades.
-   - 23 international brands, as a logo slide.
-   - Exclusive agencies: Bänninger in central and southern Iraq, plus the European and Turkish manufacturers.
-   - Six months of stock and nationwide reach.
+For each new route:
+- Create `src/app/[locale]/<section>/page.tsx` using `PageHeader` and `pageMetadata()`.
+- Remove the section from `placeholderSections` in `src/lib/nav.ts`.
+- Add it to `paths` in `src/app/sitemap.ts`.
+- Add its copy to all three message files.
+- Run QA.
 
-   Requirements:
-   - Accessible carousel: prev/next buttons, slide indicators, a pause control, and no autoplay under reduced motion.
-   - Pause on hover/focus, `aria-roledescription="carousel"`, and RTL-aware direction.
-   - No photography until the owner supplies it; keep the technical-drawing language.
-2. **Rename "Products" to "Solutions"**: nav key, `/solutions` index and `/solutions/[slug]` pages. Update the Home `ProductIndex` links, the hero CTA, the sitemap and `pagePaths`. Proposed solutions and their sourced product lines:
-   - **Water supply pipes:**
-     - Poloplast: POLO-POLYMUTAN (PP-R 80 hot/cold), POLO-ECOSAN (PP-R, corrosion-free drinking water), POLO-UV (UV-resistant ML5 fibre pipe with PP-R fittings, for exposed installs and irrigation) and POLO-POLYMUTAN ML5 (5-layer PP-R 80 / HPCE / PP-RCT). Source: old site, Poloplast page.
-     - Polymelt: Polymutan PP-R/PP-RCT (Ø20–110, PN10–25) and Polymelt UV (Ø20–110, SR7, black UV layer).
-     - GF Aquasystem (Ø20–200, PN10–25).
-     - Aquapa PP-R (Ø20–110).
-     - Polo EGY PP-R (Ø20–110).
-     - Bänninger PP-R (Ø20–110).
-   - **Drainage and grey water:**
-     - Boroug UPVC (Ø25–160, white, PVC cement).
-     - GF Silenta Premium (Ø58–200, 7 dB(A)) and Silenta 3A (Ø40–200, 17 dB(A)).
-     - Poloplast Polo-Kal NG (Ø32–200, 18 dB(A)) and Polo-Kal 3S (Ø75–160, 12 dB(A)).
-     - Aquapa Aqua Silent PP (Ø50–160, 22 dB(A)).
-     - Ostendorf Skolan Safe (Ø58–200, 17 dB(A)), HT Safe (Ø32–160) and KG-System (Ø110–500, SN4/8/10).
-   - **Water heaters:** Saudi Ceramics **Aquahot**.
-     - 10–300 L, vertical and horizontal, enamelled, two-valve 8.5 bar, Italian-made electrical components.
-     - Standards: SASO / IEC 60335-2-21.
-     - Logo file: `public/brands/aquahot.svg`.
-   - **Further solutions** from the existing 7 families, specs in the profile:
-     - Infrastructure: PE100 / U-PVC from Pimtaş, Turan Borfit, GF PE100.
-     - Sanitaryware and cisterns: Saudi Ceramics Oryx, QuarterBath, WISA/Fluidmaster.
-     - Pumps: DAB.
-     - Faucets and valves: KAS, Shield, Guarri.
-     - Installation tools: Candan, Turan Borfit welding, Asçelik clamps, Guarri chemicals.
-3. **Multipage:** replace the placeholders with real Brands (index + `/brands/[slug]`), Projects, About (history, services, community; vision/mission pending), Locations (offices with phones and addresses, warehouses, regional offices, map) and Contact (phones, WhatsApp, email, hours, offices; a form needs a backend decision).
-
-**Files to touch:**
-- `src/components/sections/Hero.tsx` (+ a new client `HeroSlider`)
-- `src/lib/nav.ts`
-- `src/app/[locale]/[section]/page.tsx` (shrink or remove as real pages land)
-- new `src/app/[locale]/solutions/…`, `brands/…`, etc.
-- new `src/content/solutions.ts`
-- `messages/*.json` (all three)
-- `src/app/sitemap.ts`
-- `src/components/sections/ProductIndex.tsx`
-
-**Defaults chosen (tell the owner):**
-- "Grey water" is presented as **"Drainage and grey water"**.
-- Spec values come verbatim from the profile.
-- Solutions become the primary nav item in place of Products.
+**Defaults chosen for Solutions (told to the owner):**
+- "Grey water" is presented as "Drainage and grey water".
+- Spec values are verbatim from the profile.
+- Generic product names are translated; trademarked names stay in Latin script.
 
 ## 24. Remaining Tasks
 
 **Critical (blocking production)**
-- Build the real pages, replacing the placeholders (Solutions, Brands, Projects, About, Locations, Contact). See §23.
+- Build the real pages, replacing the placeholders (Brands, About, Locations, Contact, Projects). See §23.
 - Owner review and merge of PR #1, then point Coolify at `main`.
 - Native-speaker review of the Sorani (and Arabic) copy.
 
 **High priority**
-- Hero slider, 3–4 slides (§23).
-- Rename Products to Solutions across nav, Home, sitemap and CTAs.
 - Resolve "23 brands" vs the 21 shown (§9, REQUIRES REVIEW).
 - Original photography from the owner, plus an image strategy (hero, projects, warehouses).
 - Contact page: decide on a form (needs a backend or email service via env vars) vs direct contact links.
@@ -667,14 +647,14 @@ Breakpoints are Tailwind defaults (sm 640, md 768, lg 1024, xl 1280). QA viewpor
    - Cause: Calpeda and Vitra were removed.
    - Needs the owner's answer; do not change the number on a guess.
 3. **Placeholders still linked from Home**
-   - Affects: the hero CTA and the ProductIndex rows go to `/products`, which is a placeholder.
-   - These resolve when Solutions ships.
+   - The hero slides and Home sections link to `/about`, `/brands` and `/locations`, which are still placeholders.
+   - These resolve as the pages ship (§23).
 4. **QA tooling not in the repo**
    - Playwright was run from a global install with scripts in a temp folder.
    - Next step: add the tooling as a devDependency.
 5. **`[section]` catch-all route**
    - `src/app/[locale]/[section]/page.tsx` serves every placeholder.
-   - When adding real routes such as `src/app/[locale]/brands/page.tsx`, **remove that section from `pagePaths`/`sections`**, or the two routes will conflict.
+   - When adding real routes such as `src/app/[locale]/brands/page.tsx`, **remove that section from `placeholderSections` in `src/lib/nav.ts`**. Otherwise both routes generate the same path.
 
 No visual or RTL bugs are open from the last QA pass.
 
@@ -705,7 +685,7 @@ No visual or RTL bugs are open from the last QA pass.
 - Do not hard-code secrets; only env var names belong in the repo.
 - Do not change working components for stylistic preference.
 - Do not hide layout bugs with ad-hoc CSS patches. Fix the cause; the Arabic leading bug, for example, was a specificity issue.
-- Do not remove features or routes without checking where they are used (`pagePaths` drives the sitemap and placeholders).
+- Do not remove features or routes without checking where they are used (`placeholderSections` drives the placeholder route; `sitemap.ts` lists indexable pages).
 - Do not do large refactors before understanding dependencies.
 - Do not use `next/link` for internal links (use `@/i18n/navigation`), and do not use `motion.*` (strict LazyMotion requires `m.*`).
 - Do not split headings inside words (it breaks Arabic and Sorani letter joining).
@@ -724,7 +704,7 @@ No visual or RTL bugs are open from the last QA pass.
 | `src/proxy.ts` | locale detection and redirects |
 | `src/i18n/routing.ts` | locales, default, direction helper |
 | `src/i18n/navigation.ts`, `src/i18n/request.ts` | localized links; message loading |
-| `src/lib/nav.ts` | primary nav, contact link, `pagePaths` (sitemap and placeholders) |
+| `src/lib/nav.ts` | primary nav, contact link, `placeholderSections` (interim pages) |
 | `src/lib/site.ts` | `SITE_URL`, canonical and hreflang helpers |
 | `src/lib/fonts.ts` | font loading and CSS variables |
 | `src/app/globals.css` | design tokens, Arabic-script rules, utilities |
@@ -736,17 +716,19 @@ No visual or RTL bugs are open from the last QA pass.
 | `src/content/brands.ts` | brands, logos, countries, product families |
 | `src/content/projects.ts`, `timeline.ts`, `iraq-map.ts` | projects and clients, milestones, map geometry |
 | `src/components/layout/SiteHeader.tsx`, `SiteFooter.tsx` | site chrome |
-| `src/components/sections/Hero.tsx` | the next file to change (slider) |
+| `src/components/sections/Hero.tsx`, `HeroCarousel.tsx` | Home hero slides |
+| `src/content/solutions.ts` | solutions, product lines, specs, sources |
+| `src/app/[locale]/solutions/` | Solutions index and detail pages; the pattern for new inner pages |
+| `src/components/ui/PageHeader.tsx`, `src/lib/site.ts` (`pageMetadata`) | inner-page header and metadata |
 | `/mnt/project-files/atlas/research/content-audit.md` | source facts and conflicts (outside the repo) |
 
 ## 29. Recommended Next Step
 
-Build the Solutions structure and the hero slider requested on 2026-10-04:
-- Create `src/content/solutions.ts` from the sourced product lines in §23.
-- Add `/[locale]/solutions` and `/[locale]/solutions/[slug]`, starting with water supply pipes, drainage and grey water, and water heaters.
-- Rename Products to Solutions in the nav, Home and sitemap.
-- Replace the hero with an accessible 3–4 slide slider about history and brands.
-- Test in EN/AR/CKB at 375 and 1440 px.
+Build the **Brands** pages next:
+- a `/[locale]/brands` index
+- a `/[locale]/brands/[slug]` page per brand, showing its product lines from `src/content/solutions.ts`
+
+Follow the Solutions page pattern (`PageHeader`, `pageMetadata`, sitemap entry, removal from `placeholderSections`). Then test in EN/AR/CKB at 375 and 1440 px.
 
 ## 30. New Session Instructions
 
