@@ -132,7 +132,7 @@ export default async function SolutionPage({ params }: PageProps<"/[locale]/solu
                         {logo ? (
                           <Image
                             src={logo}
-                            alt={brand.name}
+                            alt=""
                             width={160}
                             height={64}
                             unoptimized

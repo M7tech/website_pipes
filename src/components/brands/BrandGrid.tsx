@@ -29,7 +29,7 @@ export async function BrandGrid({ brands = allBrands, detailed = false }: { bran
                 {brand.logo ? (
                   <Image
                     src={brand.logo}
-                    alt={brand.name}
+                    alt=""
                     width={240}
                     height={80}
                     unoptimized

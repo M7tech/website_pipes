@@ -21,6 +21,8 @@ export const plexMono = IBM_Plex_Mono({
   weight: ["400", "500"],
   variable: "--font-plex-mono",
   display: "swap",
+  // Small labels only; not worth a slot on the critical path.
+  preload: false,
 });
 
 /**
@@ -29,7 +31,8 @@ export const plexMono = IBM_Plex_Mono({
  */
 export const plexArabic = IBM_Plex_Sans_Arabic({
   subsets: ["arabic"],
-  weight: ["400", "500", "600", "700"],
+  // Only the weights the UI uses (font-normal, font-medium, font-semibold).
+  weight: ["400", "500", "600"],
   variable: "--font-plex-arabic",
   display: "swap",
 });
