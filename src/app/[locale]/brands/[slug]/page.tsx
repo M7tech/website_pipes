@@ -4,9 +4,12 @@ import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing, type Locale } from "@/i18n/routing";
 import { Link } from "@/i18n/navigation";
-import { brands } from "@/content/brands";
+import { brands, type Brand } from "@/content/brands";
+import { company } from "@/content/company";
 import { brandSolutions, solutionKey } from "@/content/solutions";
-import { localeUrl, pageMetadata } from "@/lib/site";
+import { localeUrl, pageLd, pageMetadata } from "@/lib/site";
+import { productLinesLd } from "@/lib/structured-data";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Ltr } from "@/components/ui/Ltr";
 import { TextLink } from "@/components/ui/TextLink";
@@ -21,18 +24,35 @@ export function generateStaticParams() {
   return routing.locales.flatMap((locale) => brands.map((b) => ({ locale, slug: b.slug })));
 }
 
+/** Search title and description for a brand page, naming the lines AtlasPlast supplies. */
+async function brandMeta(locale: Locale, brand: Brand) {
+  const meta = await getTranslations({ locale, namespace: "Meta" });
+  const s = await getTranslations({ locale, namespace: "Solutions" });
+  const lines = brandSolutions(brand.slug).flatMap((g) => g.lines);
+  const names = lines.map((l) => (s.has(`lines.${l.id}.name`) ? s(`lines.${l.id}.name`) : l.name));
+  const separator = locale === "en" ? ", " : "، ";
+  return {
+    title: meta("brandTitle", { brand: brand.name }),
+    description: names.length
+      ? meta("brandDescription", { brand: brand.name, lines: names.slice(0, 5).join(separator) })
+      : meta("brandDescriptionOnRequest", { brand: brand.name, phone: company.mainPhone }),
+    names,
+  };
+}
+
 export async function generateMetadata({ params }: PageProps<"/[locale]/brands/[slug]">): Promise<Metadata> {
   const { locale, slug } = await params;
   const brand = brands.find((b) => b.slug === slug);
   if (!brand) return {};
-  const t = await getTranslations({ locale, namespace: "Brands" });
   const meta = await getTranslations({ locale, namespace: "Meta" });
+  const { title, description } = await brandMeta(locale as Locale, brand);
   return pageMetadata({
     locale: locale as Locale,
     path: `/brands/${slug}`,
-    title: brand.name,
-    description: t("detail.intro", { brand: brand.name }),
+    title,
+    description,
     siteName: meta("siteName"),
+    imageAlt: meta("ogImageAlt"),
   });
 }
 
@@ -51,22 +71,26 @@ export default async function BrandPage({ params }: PageProps<"/[locale]/brands/
   const lineCount = groups.reduce((n, g) => n + g.lines.length, 0);
   const others = brands.filter((b) => b.slug !== slug);
 
-  const breadcrumbLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: nav("home"), item: localeUrl(locale as Locale) },
-      { "@type": "ListItem", position: 2, name: nav("brands"), item: localeUrl(locale as Locale, "/brands") },
-      { "@type": "ListItem", position: 3, name: brand.name, item: localeUrl(locale as Locale, `/brands/${slug}`) },
+  const path = `/brands/${slug}`;
+  const { title, description, names } = await brandMeta(locale as Locale, brand);
+  const ld = pageLd({
+    locale: locale as Locale,
+    path,
+    name: title,
+    description,
+    crumbs: [
+      { name: nav("home"), path: "/" },
+      { name: nav("brands"), path: "/brands" },
+      { name: brand.name, path },
     ],
-  };
+    extra: names.length
+      ? [productLinesLd(`${localeUrl(locale as Locale, path)}#lines`, names.map((name) => ({ name, brand: brand.name })))]
+      : [],
+  });
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd).replace(/</g, "\\u003c") }}
-      />
+      <JsonLd data={ld} />
       <PageHeader
         eyebrow={nav("brands")}
         title={brand.name}

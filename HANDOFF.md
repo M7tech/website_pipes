@@ -472,28 +472,31 @@ Breakpoints are Tailwind defaults (sm 640, md 768, lg 1024, xl 1280). QA viewpor
 
 ## 17. SEO
 
-**Implemented:**
-- Root layout `generateMetadata`: `metadataBase` = `SITE_URL`, title template `%s | <siteName>`, localized description and `applicationName`.
-- Home metadata:
-  - Absolute localized title and description.
-  - `alternates.canonical` (`/{locale}`), plus `alternates.languages` for en/ar/ckb and **x-default → /en** (`src/lib/site.ts`).
-  - Open Graph: type, siteName, title, description, url and locale.
-- Inner pages: localized title, description, canonical, hreflang and Open Graph via `pageMetadata()`; solution and brand pages add BreadcrumbList JSON-LD.
-- Solutions pages:
-  - Metadata comes from `pageMetadata()` in `src/lib/site.ts`, which sets the title, description, canonical, hreflang and OG.
-  - Detail pages also carry `BreadcrumbList` JSON-LD.
-- `src/app/sitemap.ts` lists Home, `/solutions` and every solution page with hreflang alternates. Add new pages to its `paths` array as they ship.
-- `src/app/robots.ts`: allow all, with the sitemap URL.
-- JSON-LD `Organization` on Home: name, legalName, url, logo, foundingDate 1975, email, telephone 6779, Baghdad address and sameAs social links.
-- `viewport.themeColor` is `#14284a`.
+Full SEO pass done 2026-10-04 at the owner's request ("make sure SEO is the best for the website and all pages").
 
-**Unfinished:**
-- OG/Twitter image.
-- Per-page metadata for the real pages.
-- `LocalBusiness`/branch structured data.
-- `BreadcrumbList`.
-- Sitemap entries for future pages.
-- `og:locale` uses the bare locale code (`ar`, `ckb`); consider `ar_IQ` / `ckb_IQ`.
+**Metadata** (`pageMetadata()` in `src/lib/site.ts`, used by every page):
+- Keyword-led titles per page in all three languages (`Meta.*Title` keys), e.g. "Water supply pipes in Iraq | AtlasPlast", "Polymelt in Iraq | AtlasPlast". Home uses an absolute title.
+- Descriptions are kept under about 160 characters. Solution pages use the solution's short text plus "Supplied across Iraq by AtlasPlast". Brand pages name the product lines supplied, or "ask our sales team" when there are none.
+- Canonical URL, hreflang for en/ar/ckb plus x-default → /en.
+- Open Graph with `og:locale` en_US / ar_IQ / ckb_IQ and the other two as `og:locale:alternate`, plus the share image `/og.png` (1200×630, localized alt). Twitter `summary_large_image`.
+- The main line in titles and descriptions comes from `company.mainPhone` via `{phone}`, so it updates in one place.
+
+**Structured data** (`src/lib/structured-data.ts`, `src/components/seo/JsonLd.tsx`, one `@graph` per page):
+- Home: `Organization` (@id `SITE_URL/#organization`, logo, founding 1975, contact points, sameAs) and `WebSite`, plus `WebPage`.
+- Every inner page: a typed page node (`CollectionPage`, `AboutPage`, `ContactPage` or `WebPage`) and `BreadcrumbList`.
+- Solution and brand pages: an `ItemList` of product lines. This is deliberately not `Product`, because there are no prices or reviews and Product without them raises Search Console errors.
+- Locations: one `LocalBusiness` per Iraqi office (city, phone, parentOrganization).
+- Contact: Organization `contactPoint`s (main line, projects line, WhatsApp).
+
+**Other:**
+- `src/app/sitemap.ts` lists all 36 pages × 3 locales (108 URLs) with hreflang alternates and a build-time `lastModified`.
+- `src/app/robots.ts` allows all and points to the sitemap. The 404 page is noindex.
+- `src/app/manifest.ts`, `src/app/icon.svg` and `src/app/apple-icon.png`. `viewport.themeColor` is `#14284a`.
+- The share image is rendered by `scripts/og-image.js` (needs the production server on :3600 for fonts). Re-run it if the branding changes.
+
+**Verified:** across all 108 sitemap URLs there are no duplicate titles, every canonical matches its URL, every JSON-LD block parses, and each page has exactly one h1. Two descriptions (Arabic and Sorani water supply) run slightly over 160 characters, which is acceptable.
+
+**Still open:** submit the sitemap in Google Search Console and Bing Webmaster Tools after the domain goes live (this needs the owner's account), and add original photography for richer share images.
 
 ## 18. Accessibility
 

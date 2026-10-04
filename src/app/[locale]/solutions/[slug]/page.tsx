@@ -5,7 +5,9 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing, type Locale } from "@/i18n/routing";
 import { brandBySlug } from "@/content/brands";
 import { solutionBySlug, solutionKey, solutions } from "@/content/solutions";
-import { localeUrl, pageMetadata } from "@/lib/site";
+import { localeUrl, pageLd, pageMetadata } from "@/lib/site";
+import { productLinesLd } from "@/lib/structured-data";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Ltr } from "@/components/ui/Ltr";
 import { Link } from "@/i18n/navigation";
@@ -30,9 +32,10 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/solution
   return pageMetadata({
     locale: locale as Locale,
     path: `/solutions/${slug}`,
-    title: t(`${key}.name`),
-    description: t(`${key}.intro`),
+    title: meta("solutionTitle", { name: t(`${key}.name`) }),
+    description: meta("solutionDescription", { text: t(`${key}.text`) }),
     siteName: meta("siteName"),
+    imageAlt: meta("ogImageAlt"),
   });
 }
 
@@ -50,22 +53,31 @@ export default async function SolutionPage({ params }: PageProps<"/[locale]/solu
   const position = solutions.indexOf(solution) + 1;
   const brands = solutionBrands(solution);
 
-  const breadcrumbLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: nav("home"), item: localeUrl(locale as Locale) },
-      { "@type": "ListItem", position: 2, name: nav("solutions"), item: localeUrl(locale as Locale, "/solutions") },
-      { "@type": "ListItem", position: 3, name, item: localeUrl(locale as Locale, `/solutions/${slug}`) },
+  const meta = await getTranslations("Meta");
+  const path = `/solutions/${slug}`;
+  const lineName = (id: string, fallback: string) => (t.has(`lines.${id}.name`) ? t(`lines.${id}.name`) : fallback);
+  const ld = pageLd({
+    locale: locale as Locale,
+    path,
+    type: "CollectionPage",
+    name: meta("solutionTitle", { name }),
+    description: meta("solutionDescription", { text: t(`${key}.text`) }),
+    crumbs: [
+      { name: nav("home"), path: "/" },
+      { name: nav("solutions"), path: "/solutions" },
+      { name, path },
     ],
-  };
+    extra: [
+      productLinesLd(
+        `${localeUrl(locale as Locale, path)}#lines`,
+        solution.lines.map((l) => ({ name: lineName(l.id, l.name), brand: brandBySlug(l.brand).name })),
+      ),
+    ],
+  });
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd).replace(/</g, "\\u003c") }}
-      />
+      <JsonLd data={ld} />
       <PageHeader
         eyebrow={`${String(position).padStart(2, "0")} / ${String(solutions.length).padStart(2, "0")} · ${nav("solutions")}`}
         title={name}

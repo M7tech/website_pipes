@@ -2,20 +2,21 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import { clients, featuredProjects, type Sector } from "@/content/projects";
-import { pageMetadata } from "@/lib/site";
+import { pageLd, pageMetadata } from "@/lib/site";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { ContactBand } from "@/components/sections/ContactBand";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/projects">): Promise<Metadata> {
   const { locale } = await params;
-  const nav = await getTranslations({ locale, namespace: "Nav" });
   const meta = await getTranslations({ locale, namespace: "Meta" });
   return pageMetadata({
     locale: locale as Locale,
     path: "/projects",
-    title: nav("projects"),
+    title: meta("projectsTitle"),
     description: meta("projectsDescription"),
     siteName: meta("siteName"),
+    imageAlt: meta("ogImageAlt"),
   });
 }
 
@@ -26,11 +27,25 @@ export default async function ProjectsPage({ params }: PageProps<"/[locale]/proj
   const home = await getTranslations("Home.projects");
   const sectors = await getTranslations("Projects.sectors");
   const nav = await getTranslations("Nav");
+  const meta = await getTranslations("Meta");
   const common = await getTranslations("Common");
   const sectorOrder = [...new Set(featuredProjects.map((p) => p.sector))] as Sector[];
 
   return (
     <>
+      <JsonLd
+        data={pageLd({
+          locale: locale as Locale,
+          path: "/projects",
+          type: "CollectionPage",
+          name: meta("projectsTitle"),
+          description: meta("projectsDescription"),
+          crumbs: [
+            { name: nav("home"), path: "/" },
+            { name: nav("projects"), path: "/projects" },
+          ],
+        })}
+      />
       <PageHeader
         eyebrow={t("eyebrow")}
         title={t("title")}

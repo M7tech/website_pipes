@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import { company, whatsappHref } from "@/content/company";
-import { pageMetadata } from "@/lib/site";
+import { pageLd, pageMetadata } from "@/lib/site";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { contactPointLd } from "@/lib/structured-data";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Ltr } from "@/components/ui/Ltr";
 import { OfficeLines } from "@/components/company/OfficeLines";
@@ -11,14 +13,14 @@ const socialNames = { facebook: "Facebook", instagram: "Instagram", linkedin: "L
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/contact">): Promise<Metadata> {
   const { locale } = await params;
-  const nav = await getTranslations({ locale, namespace: "Nav" });
   const meta = await getTranslations({ locale, namespace: "Meta" });
   return pageMetadata({
     locale: locale as Locale,
     path: "/contact",
-    title: nav("contact"),
-    description: meta("contactDescription"),
+    title: meta("contactTitle", { phone: company.mainPhone }),
+    description: meta("contactDescription", { phone: company.mainPhone }),
     siteName: meta("siteName"),
+    imageAlt: meta("ogImageAlt"),
   });
 }
 
@@ -28,6 +30,7 @@ export default async function ContactPage({ params }: PageProps<"/[locale]/conta
   const t = await getTranslations("Contact");
   const h = await getTranslations("Home.contact");
   const nav = await getTranslations("Nav");
+  const meta = await getTranslations("Meta");
   const common = await getTranslations("Common");
 
   const lines = [
@@ -38,6 +41,19 @@ export default async function ContactPage({ params }: PageProps<"/[locale]/conta
 
   return (
     <>
+      <JsonLd
+        data={pageLd({
+          locale: locale as Locale,
+          path: "/contact",
+          type: "ContactPage",
+          name: meta("contactTitle", { phone: company.mainPhone }),
+          description: meta("contactDescription", { phone: company.mainPhone }),
+          crumbs: [
+            { name: nav("home"), path: "/" },
+            { name: nav("contact"), path: "/contact" },
+          ], extra: [contactPointLd()],
+        })}
+      />
       <PageHeader
         eyebrow={t("eyebrow")}
         title={t("title")}

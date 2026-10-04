@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import { facts } from "@/content/company";
-import { pageMetadata } from "@/lib/site";
+import { pageLd, pageMetadata } from "@/lib/site";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Ltr } from "@/components/ui/Ltr";
 import { Statement } from "@/components/sections/Statement";
@@ -12,14 +13,14 @@ import { ContactBand } from "@/components/sections/ContactBand";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/about">): Promise<Metadata> {
   const { locale } = await params;
-  const nav = await getTranslations({ locale, namespace: "Nav" });
   const meta = await getTranslations({ locale, namespace: "Meta" });
   return pageMetadata({
     locale: locale as Locale,
     path: "/about",
-    title: nav("about"),
+    title: meta("aboutTitle"),
     description: meta("aboutDescription"),
     siteName: meta("siteName"),
+    imageAlt: meta("ogImageAlt"),
   });
 }
 
@@ -29,10 +30,24 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
   const t = await getTranslations("About");
   const f = await getTranslations("Home.facts");
   const nav = await getTranslations("Nav");
+  const meta = await getTranslations("Meta");
   const common = await getTranslations("Common");
 
   return (
     <>
+      <JsonLd
+        data={pageLd({
+          locale: locale as Locale,
+          path: "/about",
+          type: "AboutPage",
+          name: meta("aboutTitle"),
+          description: meta("aboutDescription"),
+          crumbs: [
+            { name: nav("home"), path: "/" },
+            { name: nav("about"), path: "/about" },
+          ],
+        })}
+      />
       <PageHeader
         eyebrow={t("eyebrow")}
         title={t("title")}

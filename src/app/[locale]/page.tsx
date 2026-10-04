@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
-import { company, offices } from "@/content/company";
-import { SITE_URL, languageAlternates, localeUrl } from "@/lib/site";
+import { ORG_ID, SITE_URL, localeUrl, pageMetadata } from "@/lib/site";
+import { organizationLd } from "@/lib/structured-data";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { Hero } from "@/components/sections/Hero";
 import { Statement } from "@/components/sections/Statement";
 import { SolutionIndex } from "@/components/sections/SolutionIndex";
@@ -16,51 +17,42 @@ import { ContactBand } from "@/components/sections/ContactBand";
 export async function generateMetadata({ params }: PageProps<"/[locale]">): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Meta" });
-  return {
-    title: { absolute: t("homeTitle") },
+  return pageMetadata({
+    locale: locale as Locale,
+    path: "",
+    title: t("homeTitle"),
     description: t("homeDescription"),
-    alternates: { canonical: localeUrl(locale as Locale), languages: languageAlternates() },
-    openGraph: {
-      type: "website",
-      siteName: t("siteName"),
-      title: t("homeTitle"),
-      description: t("homeDescription"),
-      url: localeUrl(locale as Locale),
-      locale,
-    },
-  };
+    siteName: t("siteName"),
+    imageAlt: t("ogImageAlt"),
+    absoluteTitle: true,
+  });
 }
 
 export default async function HomePage({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  // Organization data uses only confirmed company facts.
-  const jsonLd = {
+  const meta = await getTranslations("Meta");
+  const ld = {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    name: company.name,
-    legalName: company.legalName,
-    url: SITE_URL,
-    logo: `${SITE_URL}/brand/atlasplast.svg`,
-    foundingDate: String(company.foundingYear),
-    email: company.email,
-    telephone: company.mainPhone,
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Baghdad",
-      addressCountry: "IQ",
-      streetAddress: offices.find((o) => o.hq)?.name.en,
-    },
-    sameAs: Object.values(company.social),
+    "@graph": [
+      ...organizationLd(locale as Locale, { name: meta("siteName"), description: meta("homeDescription") }),
+      {
+        "@type": "WebPage",
+        "@id": `${localeUrl(locale as Locale)}#webpage`,
+        url: localeUrl(locale as Locale),
+        name: meta("homeTitle"),
+        description: meta("homeDescription"),
+        inLanguage: locale,
+        isPartOf: { "@id": `${SITE_URL}/#website` },
+        about: { "@id": ORG_ID },
+      },
+    ],
   };
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
-      />
+      <JsonLd data={ld} />
       <Hero />
       <Statement />
       <SolutionIndex />

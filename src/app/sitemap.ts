@@ -17,11 +17,14 @@ const paths: { path: string; priority: number }[] = [
   { path: "/contact", priority: 0.8 },
 ];
 
+/** Build time, so every URL does not claim to change on each request. */
+const lastModified = new Date();
+
 export default function sitemap(): MetadataRoute.Sitemap {
   return paths.flatMap(({ path, priority }) =>
     routing.locales.map((locale) => ({
       url: localeUrl(locale, path),
-      lastModified: new Date(),
+      lastModified,
       changeFrequency: "monthly" as const,
       priority,
       alternates: { languages: languageAlternates(path) },
