@@ -3,9 +3,12 @@
     "siteName": "AtlasPlast",
     "homeTitle": "AtlasPlast | Pipe systems and sanitaryware in Iraq since 1975",
     "homeDescription": "AtlasPlast supplies water supply, drainage, infrastructure piping, sanitaryware and pumps from leading international manufacturers to projects and installers across Iraq, since 1975.",
-    "placeholderDescription": "This section of the new AtlasPlast website is being prepared.",
     "solutionsDescription": "AtlasPlast solutions: water supply pipes, drainage and grey water, water heaters, infrastructure networks, sanitaryware, pumps, faucets and installation tools from international manufacturers.",
-    "brandsDescription": "Brands AtlasPlast represents and supplies in Iraq: pipe systems, drainage, sanitaryware, pumps and installation tools from Europe, Turkey and the Middle East."
+    "brandsDescription": "Brands AtlasPlast represents and supplies in Iraq: pipe systems, drainage, sanitaryware, pumps and installation tools from Europe, Turkey and the Middle East.",
+    "aboutDescription": "AtlasPlast has supplied construction materials in Iraq since 1975: its history, services and community work.",
+    "locationsDescription": "AtlasPlast offices, showrooms and warehouses across Iraq, with branch phone numbers and regional offices.",
+    "contactDescription": "Contact AtlasPlast: main line 6779, projects division, WhatsApp and email.",
+    "projectsDescription": "Projects across Iraq supplied with AtlasPlast products, and the contractors AtlasPlast works with."
   },
   "Common": {
     "skipToContent": "Skip to content",
@@ -444,14 +447,35 @@
     "CZ": "Czech Republic",
     "RS": "Serbia"
   },
-  "Placeholder": {
-    "eyebrow": "In preparation",
-    "body": "This page is being prepared as part of the new AtlasPlast website. In the meantime, our sales team is available on the main line.",
-    "back": "Back to home"
-  },
   "NotFound": {
     "title": "Page not found",
     "body": "The page you are looking for does not exist or has moved.",
     "back": "Back to home"
+  },
+  "About": {
+    "eyebrow": "About",
+    "title": "Since 1975, supplying the systems Iraq builds with.",
+    "intro": "AtlasPlast, trading as Ufuq Al-Atlas Ltd., began supplying construction materials in 1975 and opened its first showroom in Baghdad in 1990. Today it represents international manufacturers of piping, drainage, sanitaryware and pumps across Iraq.",
+    "historyTitle": "Milestones"
+  },
+  "Locations": {
+    "eyebrow": "Locations",
+    "title": "Offices, showrooms and warehouses across Iraq.",
+    "intro": "Offices and showrooms in five cities, warehouses in five, and regional offices in Saudi Arabia, Turkey, Syria and Egypt.",
+    "call": "Call"
+  },
+  "Contact": {
+    "eyebrow": "Contact",
+    "title": "Talk to AtlasPlast.",
+    "intro": "Call the main line for sales, or reach the projects division, WhatsApp and email directly.",
+    "channels": "Ways to reach us",
+    "branches": "Branch lines",
+    "follow": "Follow AtlasPlast"
+  },
+  "ProjectsPage": {
+    "eyebrow": "Projects",
+    "title": "Hundreds of projects built with AtlasPlast products.",
+    "intro": "A selection of airports, stadiums, hotels, hospitals and housing supplied by AtlasPlast, and the contractors we work with.",
+    "selected": "Selected projects"
   }
 }

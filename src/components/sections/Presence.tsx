@@ -7,7 +7,8 @@ import { SectionWipe } from "@/components/motion/SectionWipe";
 import { IraqMap } from "./IraqMap";
 
 
-export async function Presence() {
+/** Set `cta` to false on the page the section links to. */
+export async function Presence({ cta = true }: { cta?: boolean } = {}) {
   const locale = (await getLocale()) as Locale;
   const t = await getTranslations("Home.presence");
 
@@ -19,7 +20,7 @@ export async function Presence() {
           eyebrow={t("eyebrow")}
           title={t("title")}
           intro={t("intro")}
-          action={<TextLink href="/locations">{t("cta")}</TextLink>}
+          action={cta ? <TextLink href="/locations">{t("cta")}</TextLink> : undefined}
         />
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
           <figure className="grid gap-4 lg:col-span-6">

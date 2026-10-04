@@ -9,10 +9,4 @@ export const primaryNav = [
 
 export const contactHref = "/contact";
 
-/**
- * Sections still served by the interim placeholder route (noindex).
- * Remove a section from this list when its real route lands under src/app/[locale]/.
- */
-export const placeholderSections = ["projects", "about", "locations", "contact"] as const;
-
 export const languageNames = { en: "English", ar: "العربية", ckb: "کوردی" } as const;

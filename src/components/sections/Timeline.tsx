@@ -5,7 +5,8 @@ import { SectionHead } from "@/components/ui/SectionHead";
 import { TextLink } from "@/components/ui/TextLink";
 import { ScrollRule } from "@/components/motion/ScrollRule";
 
-export async function Timeline() {
+/** Set `cta` to false on the page the section links to. */
+export async function Timeline({ cta = true }: { cta?: boolean } = {}) {
   const locale = (await getLocale()) as Locale;
   const t = await getTranslations("Home.timeline");
 
@@ -16,7 +17,7 @@ export async function Timeline() {
           id="timeline-title"
           eyebrow={t("eyebrow")}
           title={t("title")}
-          action={<TextLink href="/about">{t("cta")}</TextLink>}
+          action={cta ? <TextLink href="/about">{t("cta")}</TextLink> : undefined}
         />
         <ScrollRule>
           <ol className="grid gap-x-8 sm:grid-cols-2 lg:grid-cols-4">
