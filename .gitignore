@@ -42,3 +42,7 @@ next-env.d.ts
 
 # example env file is safe to commit
 !.env.example
+
+# Playwright
+/test-results/
+/playwright-report/

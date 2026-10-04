@@ -20,7 +20,7 @@ export async function SiteFooter() {
   ];
 
   return (
-    <footer className="on-dark bg-atlas-navy-deep text-on-dark">
+    <footer id="site-footer" className="on-dark bg-atlas-navy-deep text-on-dark">
       <div className="container-page grid gap-12 py-16 md:grid-cols-12 md:gap-8 md:py-20">
         <div className="grid content-start gap-6 md:col-span-4">
           <Logo tone="white" label={brand} className="w-40" />

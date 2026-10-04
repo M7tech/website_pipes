@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { AnimatePresence, m } from "motion/react";
 import { Link, usePathname } from "@/i18n/navigation";
@@ -14,23 +14,47 @@ export function SiteHeader() {
   const brand = useTranslations("Common")("brandName");
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
+  const burgerRef = useRef<HTMLButtonElement>(null);
 
-  // Lock page scroll and allow Escape while the mobile menu is open.
+  // While the mobile menu is open: lock page scroll, make the page behind it inert,
+  // keep Tab inside the header, close on Escape, and return focus to the burger on close.
   useEffect(() => {
     if (!open) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    const behind = [document.getElementById("main"), document.getElementById("site-footer")];
+    behind.forEach((el) => el?.setAttribute("inert", ""));
     document.documentElement.style.overflow = "hidden";
+    const burger = burgerRef.current;
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") return setOpen(false);
+      if (e.key !== "Tab" || !headerRef.current) return;
+      const focusable = [
+        ...headerRef.current.querySelectorAll<HTMLElement>("a[href], button:not([disabled])"),
+      ].filter((el) => el.offsetParent !== null);
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
     window.addEventListener("keydown", onKey);
     return () => {
+      behind.forEach((el) => el?.removeAttribute("inert"));
       document.documentElement.style.overflow = "";
       window.removeEventListener("keydown", onKey);
+      burger?.focus();
     };
   }, [open]);
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
   return (
-    <header className="on-dark sticky top-0 z-40 bg-atlas-navy text-on-dark">
+    <header ref={headerRef} className="on-dark sticky top-0 z-40 bg-atlas-navy text-on-dark">
       <div className="container-page flex h-16 items-center justify-between gap-6 md:h-20">
         <Link href="/" className="shrink-0" aria-label={brand}>
           <Logo tone="white" label={brand} className="!h-11 !w-auto md:!h-14" />
@@ -64,6 +88,7 @@ export function SiteHeader() {
         </div>
 
         <button
+          ref={burgerRef}
           type="button"
           className="-me-2 inline-flex size-11 items-center justify-center lg:hidden"
           aria-expanded={open}
