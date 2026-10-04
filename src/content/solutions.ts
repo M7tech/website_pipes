@@ -51,18 +51,16 @@ export type Solution = {
   lines: ProductLine[];
 };
 
-const POLOPLAST_PAGE = "site:atlasplast.iq/ar/الوكالات/شركة-بولوبلاست";
-
 export const solutions: Solution[] = [
   {
     slug: "water-supply",
     wall: 2.5,
     spec: "PP-R · PP-RCT · ML5 · Ø 20–200",
     lines: [
-      { id: "poloPolymutan", name: "POLO-POLYMUTAN", brand: "poloplast", specs: [{ key: "material", value: "PP-R 80" }], source: POLOPLAST_PAGE },
-      { id: "poloEcosan", name: "POLO-ECOSAN", brand: "poloplast", specs: [{ key: "material", value: "PP-R" }], source: POLOPLAST_PAGE },
-      { id: "poloUv", name: "POLO-UV", brand: "poloplast", specs: [{ key: "material", value: "POLO-UV ML5 · PP-R" }], source: POLOPLAST_PAGE },
-      { id: "poloPolymutanMl5", name: "POLO-POLYMUTAN ML5", brand: "poloplast", specs: [{ key: "material", value: "PP-R 80 · HPCE · PP-RCT" }], source: POLOPLAST_PAGE },
+      { id: "poloPolymutan", name: "POLO-POLYMUTAN", brand: "polymelt", specs: [{ key: "material", value: "PP-R 80" }], source: "confirmed:2026-10-04" },
+      { id: "poloEcosan", name: "POLO-ECOSAN", brand: "polymelt", specs: [{ key: "material", value: "PP-R" }], source: "confirmed:2026-10-04" },
+      { id: "poloUv", name: "POLO-UV", brand: "polymelt", specs: [{ key: "material", value: "POLO-UV ML5 · PP-R" }], source: "confirmed:2026-10-04" },
+      { id: "poloPolymutanMl5", name: "POLO-POLYMUTAN ML5", brand: "polymelt", specs: [{ key: "material", value: "PP-R 80 · HPCE · PP-RCT" }], source: "confirmed:2026-10-04" },
       {
         id: "polymutan",
         name: "Polymutan PP-R / PP-RCT",
