@@ -15,6 +15,7 @@ import { Ltr } from "@/components/ui/Ltr";
 import { TextLink } from "@/components/ui/TextLink";
 import { SectionGlyph } from "@/components/sections/SectionGlyph";
 import { BrandGrid } from "@/components/brands/BrandGrid";
+import { BrandDocuments } from "@/components/brands/BrandDocuments";
 import { EnquiryBand } from "@/components/solutions/EnquiryBand";
 import { ProductLineRow } from "@/components/solutions/ProductLineRow";
 
@@ -180,6 +181,8 @@ export default async function BrandPage({ params }: PageProps<"/[locale]/brands/
           )}
         </div>
       </section>
+
+      {brand.documents?.length ? <BrandDocuments documents={brand.documents} /> : null}
 
       <EnquiryBand title={t("labels.enquireTitle", { brand: brand.name })} text={s("labels.enquireText")} />
 

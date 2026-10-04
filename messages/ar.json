@@ -445,6 +445,18 @@
       "enquireTitle": "تخطّط لمشروع بمنتجات {brand}؟",
       "others": "علامات أخرى",
       "all": "جميع العلامات"
+    },
+    "documents": {
+      "documents": "الوثائق الفنية",
+      "documentsNote": "الملفات باللغة الإنجليزية.",
+      "kinds": {
+        "catalogue": "الكتالوج الفني",
+        "datasheet": "ورقة البيانات الفنية",
+        "certificate": "شهادة",
+        "other": "وثيقة"
+      },
+      "download": "تنزيل",
+      "opensNewTab": "يُفتح في علامة تبويب جديدة"
     }
   },
   "Countries": {

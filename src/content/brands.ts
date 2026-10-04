@@ -3,6 +3,17 @@ import type { Source } from "./types";
 /** Country keys map to localized names in messages (Countries namespace). */
 export type Country = "CH" | "DE" | "AT" | "NL" | "IT" | "TR" | "SA" | "EG" | "CZ" | "RS";
 
+export type BrandDocument = {
+  kind: "catalogue" | "datasheet" | "certificate" | "other";
+  /** Title as printed on the file (English). */
+  title: string;
+  /** Self-hosted file under /public/docs/<brand>/, or an absolute manufacturer URL. */
+  href: string;
+  /** File size in KB, shown next to the link when known. */
+  sizeKb?: number;
+  source: Source;
+};
+
 export type Brand = {
   slug: string;
   name: string;
@@ -11,6 +22,8 @@ export type Brand = {
   country?: Country;
   /** Message key under Brands.notes for an agency note, e.g. territory. */
   note?: "baenningerTerritory";
+  /** English technical documents (owner decision 2026-10-04: English files only). */
+  documents?: BrandDocument[];
   source: Source;
 };
 

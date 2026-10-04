@@ -445,6 +445,18 @@
       "enquireTitle": "Planning a project with {brand}?",
       "others": "Other brands",
       "all": "All brands"
+    },
+    "documents": {
+      "documents": "Technical documents",
+      "documentsNote": "Files are in English.",
+      "kinds": {
+        "catalogue": "Technical catalogue",
+        "datasheet": "Technical data sheet",
+        "certificate": "Certificate",
+        "other": "Document"
+      },
+      "download": "Download",
+      "opensNewTab": "opens in a new tab"
     }
   },
   "Countries": {
