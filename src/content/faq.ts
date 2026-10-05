@@ -1350,9 +1350,9 @@ export const faqs: Faq[] = [
       ckb: "چۆن بزانم ئەتلەس پلاست چی لە FV-Plast یان Peštan هەیە؟",
     },
     a: {
-      en: "FV-Plast, AtlasPlast’s Czech agency, is ordered directly from the manufacturer through AtlasPlast. Peštan, its Serbian agency, is available on request. Call the sales team on {mainPhone} or write to {email} for current stock and specifications.",
-      ar: "تُطلب منتجات FV-Plast، الوكالة التشيكية لأطلس بلاست، مباشرة من المصنّع عبر أطلس بلاست. أما Peštan، وكالتها الصربية، فتشكيلتها متوفرة عند الطلب. اتصل بفريق المبيعات على {mainPhone} أو راسلنا على {email} لمعرفة المخزون والمواصفات الحالية.",
-      ckb: "بەرهەمەکانی FV-Plast، بریکارایەتیی چیکیی ئەتلەس پلاست، ڕاستەوخۆ لە بەرهەمهێنەرەوە لە ڕێگەی ئەتلەس پلاستەوە داوا دەکرێن. بەرهەمەکانی Peštan، بریکارایەتیی سڕبییەکەی، بە داواکاری بەردەستن. بۆ زانینی کۆگا و تایبەتمەندییەکانی ئێستا پەیوەندی بە تیمی فرۆشتنەوە بکە لەسەر {mainPhone} یان بنووسە بۆ {email}.",
+      en: "The range from these brands is available on request. FV-Plast is AtlasPlast’s Czech agency and is ordered directly from the manufacturer through AtlasPlast; Peštan is its Serbian agency. Call the sales team on {mainPhone} or write to {email} for current stock and specifications.",
+      ar: "تشكيلة هذه العلامات متوفرة عند الطلب. FV-Plast هي الوكالة التشيكية لأطلس بلاست وتُطلب منتجاتها مباشرة من المصنّع عبر أطلس بلاست، وPeštan وكالتها الصربية. اتصل بفريق المبيعات على {mainPhone} أو راسلنا على {email} لمعرفة المخزون والمواصفات الحالية.",
+      ckb: "بەرهەمەکانی ئەم براندانە بە داواکاری بەردەستن. FV-Plast بریکارایەتیی چیکیی ئەتلەس پلاستە و بەرهەمەکانی ڕاستەوخۆ لە بەرهەمهێنەرەوە لە ڕێگەی ئەتلەس پلاستەوە داوا دەکرێن، و Peštan بریکارایەتیی سڕبییەکەیەتی. بۆ زانینی کۆگا و تایبەتمەندییەکانی ئێستا پەیوەندی بە تیمی فرۆشتنەوە بکە لەسەر {mainPhone} یان بنووسە بۆ {email}.",
     },
   },
   {

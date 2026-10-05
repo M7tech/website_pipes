@@ -71,9 +71,7 @@ function brandList() {
       const sister = b.sisterOf ? brands.find((s) => s.slug === b.sisterOf)?.name : undefined;
       const range = supplied.length
         ? `${supplied.join(", ")}.`
-        : b.note === "directOrder"
-          ? "Ordered direct from the manufacturer through AtlasPlast."
-          : "Range on request.";
+        : `Range on request.${b.note === "directOrder" ? " Ordered direct from the manufacturer through AtlasPlast." : ""}`;
       return `- [${b.name}](${localeUrl("en", `/brands/${b.slug}`)}):${origin ? ` ${origin}.` : ""}${
         sister ? ` A ${sister} brand with the same range.` : ""
       } ${range}`;
