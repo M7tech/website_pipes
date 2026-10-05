@@ -4,7 +4,7 @@ export type Leader = {
   id: string;
   name: Localized;
   role: Localized;
-  /** Portrait under /public; the studio portraits from the company profile's management page. */
+  /** Portrait under /public: the owner's photo, or the studio portrait from the company profile's management page (p5). */
   photo: { src: string; width: number; height: number };
   source: Source;
 };
@@ -18,7 +18,8 @@ export const chairman: Leader = {
     ar: "رئيس مجلس إدارة مجموعة أطلس",
     ckb: "سەرۆکی ئەنجومەنی بەڕێوەبەرایەتیی گرووپی ئەتلەس",
   },
-  photo: { src: "/images/leadership/jaafar-almusawi.jpg", width: 362, height: 511 },
+  // Sent by the owner 2026-10-05 to replace the profile portrait. A larger original is still wanted.
+  photo: { src: "/images/leadership/jaafar-almusawi-portrait.jpg", width: 286, height: 401 },
   source: "confirmed:2026-10-05",
 };
 

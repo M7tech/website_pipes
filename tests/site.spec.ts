@@ -110,6 +110,31 @@ test("every office opens in Google Maps", async ({ page }) => {
   await expect(page.locator('main a[href^="https://www.google.com/maps/search/"]')).toHaveCount(0);
 });
 
+test("Contact: 6475 is Al-Shaab's WhatsApp, 6604 is Camp Sara's, Duhok has its own pin", async ({ page }) => {
+  for (const code of ["en", "ar", "ckb"]) {
+    await page.goto(`/${code}/contact`);
+    const branches = page.locator('section[aria-labelledby="branches-title"] li');
+    await expect(branches.nth(0), code).toContainText("+964 787 116 6604");
+    await expect(branches.nth(1), code).toContainText("+964 783 305 6475");
+    await expect(branches.nth(5).locator('a[href^="https://maps.google.com/"]')).toHaveAttribute(
+      "href",
+      "https://maps.google.com/?cid=12732420289314848059",
+    );
+  }
+  await expect(page.locator('main a[href="tel:6779"]')).toHaveCount(1);
+  await expect(page.locator('main a[href="https://wa.me/9647833056475"]').first()).toBeVisible();
+});
+
+test("maps show at once with reduced motion", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  for (const path of ["/en/locations", "/ar/contact"]) {
+    await page.goto(path, { waitUntil: "networkidle" });
+    const map = page.locator("main svg[aria-label]").first();
+    await map.scrollIntoViewIfNeeded();
+    expect(await map.evaluate((el) => getComputedStyle(el.parentElement!).clipPath), path).toBe("none");
+  }
+});
+
 test("Arabic copy uses the owner's trade terms", async ({ page }) => {
   for (const path of ["/ar", "/ar/solutions/sanitaryware", "/ar/brands/wisa"]) {
     await page.goto(path);
@@ -140,6 +165,25 @@ test("galvanized fittings are a Georg Fischer solution made in Austria", async (
   expect(await page.locator('section[aria-labelledby="lines-title"]').innerText()).not.toContain("malleable");
   await page.goto("/ar/brands/georg-fischer");
   await expect(page.locator("main")).toContainText("النمسا");
+});
+
+test("ceramic and porcelain tiles are the tenth solution, on Home and in Solutions", async ({ page }) => {
+  await page.goto("/en");
+  const home = page.locator('section[aria-labelledby="solutions-title"]');
+  await expect(home.locator("h2")).toHaveText("Ten solutions, one supplier.");
+  await expect(home.locator('a[href^="/en/solutions/"]:not([href="/en/solutions"])')).toHaveCount(10);
+  await home.locator('a[href="/en/solutions/tiles"]').click();
+  await expect(page).toHaveURL(/\/en\/solutions\/tiles$/);
+  await expect(page.locator("h1")).toHaveText("Ceramic and porcelain tiles");
+  const lines = page.locator('section[aria-labelledby="lines-title"]');
+  await expect(lines).toContainText("Porcelain tiles");
+  await expect(lines).toContainText("Ceramic tiles");
+  await expect(lines).toContainText("R9 · R10 · R11");
+  // The tiles moved out of sanitaryware.
+  await page.goto("/en/solutions/sanitaryware");
+  expect(await page.locator('section[aria-labelledby="lines-title"]').innerText()).not.toContain("tiles");
+  await page.goto("/ar/solutions/tiles");
+  await expect(page.locator("h1")).toHaveText("السيراميك والبورسلين");
 });
 
 test("About carries vision, mission and the full history", async ({ page }) => {
@@ -210,6 +254,9 @@ test("About leads to the Chairman's message and the board members", async ({ pag
     expect(await photo.evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0), name).toBe(true);
   }
   await expect(page.locator('section[aria-labelledby="board-title"] li')).toHaveCount(2);
+  // The owner's portrait of the chairman, and the three values his message names.
+  await expect(page.locator('main header img[alt="Jaafar Almusawi"]')).toHaveAttribute("src", /jaafar-almusawi-portrait/);
+  await expect(page.locator("main li", { hasText: /^(Excellence|Integrity|Progress)$/ })).toHaveCount(3);
 });
 
 test("moving photos can be paused on touch screens", async ({ page }) => {

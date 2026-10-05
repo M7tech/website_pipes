@@ -3,7 +3,7 @@
     "siteName": "AtlasPlast",
     "homeTitle": "AtlasPlast | Pipe systems and sanitaryware in Iraq since 1975",
     "homeDescription": "AtlasPlast supplies pipe systems, drainage, sanitaryware and pumps from international manufacturers to projects across Iraq, since 1975.",
-    "solutionsDescription": "Water supply pipes, drainage, water heaters, infrastructure networks, sanitaryware, pumps, faucets and installation tools, supplied across Iraq.",
+    "solutionsDescription": "Water supply pipes, drainage, water heaters, infrastructure networks, sanitaryware, tiles, pumps, faucets and installation tools, supplied across Iraq.",
     "brandsDescription": "Brands AtlasPlast represents in Iraq: pipe systems, drainage, sanitaryware, pumps and tools from Europe, Turkey and the Middle East.",
     "aboutDescription": "AtlasPlast has supplied construction materials in Iraq since 1975. Our history, services, training and community work.",
     "locationsDescription": "AtlasPlast offices, showrooms and warehouses across Iraq, with branch phone numbers and regional offices.",
@@ -116,7 +116,7 @@
     },
     "solutions": {
       "eyebrow": "Solutions",
-      "title": "Nine solutions, one supplier.",
+      "title": "Ten solutions, one supplier.",
       "intro": "Every solution is sourced from manufacturers we represent directly, with stock held in Iraq.",
       "cta": "All solutions"
     },
@@ -195,7 +195,7 @@
       "eyebrow": "Contact",
       "title": "Talk to our sales and projects teams.",
       "mainLine": "Main line",
-      "whatsapp": "WhatsApp",
+      "whatsapp": "WhatsApp · Al-Shaab",
       "projects": "Projects division",
       "email": "Email",
       "hours": "Saturday to Thursday, 07:00 to 15:00",
@@ -209,7 +209,7 @@
     "index": {
       "eyebrow": "Solutions",
       "title": "Complete systems, from the water main to the tap.",
-      "intro": "Our range is organised by what you are building: drinking water, drainage and grey water, water heating, networks, galvanized fittings, bathrooms, pumping and installation. Every product line comes from a manufacturer AtlasPlast represents, with stock held in Iraq."
+      "intro": "Our range is organised by what you are building: drinking water, drainage and grey water, water heating, networks, galvanized fittings, bathrooms, tiles, pumping and installation. Every product line comes from a manufacturer AtlasPlast represents, with stock held in Iraq."
     },
     "labels": {
       "lines": "Product lines",
@@ -241,6 +241,9 @@
       "weldRange": "Welding range",
       "power": "Power",
       "sizes": "Sizes",
+      "thickness": "Thickness",
+      "absorption": "Water absorption",
+      "slip": "Slip resistance",
       "standards": "Standards",
       "madeIn": "Made in"
     },
@@ -271,8 +274,13 @@
     },
     "sanitaryware": {
       "name": "Sanitaryware and cisterns",
-      "text": "Vitreous china, bathroom furniture, tiles, concealed cisterns and pre-wall frames.",
-      "intro": "Everything visible in a finished bathroom and the frames behind the wall: vitreous china WCs, basins, urinals and bidets, moisture-resistant bathroom furniture, porcelain and ceramic tiles, and concealed cisterns with dual-flush 3/6 litre systems."
+      "text": "Vitreous china, bathroom furniture, concealed cisterns and pre-wall frames.",
+      "intro": "Everything visible in a finished bathroom and the frames behind the wall: vitreous china WCs, basins, urinals and bidets, moisture-resistant bathroom furniture, and concealed cisterns with dual-flush 3/6 litre systems."
+    },
+    "tiles": {
+      "name": "Ceramic and porcelain tiles",
+      "text": "Porcelain and ceramic wall and floor tiles from Saudi Ceramics, for indoor, outdoor and wet areas.",
+      "intro": "Porcelain and ceramic tiles from Saudi Ceramics for walls and floors, indoors and out, in wet areas and commercial spaces. Porcelain comes in sizes up to 120×60 cm, with water absorption of 0.5% or less and anti-slip models rated R9 to R11."
     },
     "pumps": {
       "name": "Pumps and pressure",
@@ -377,9 +385,13 @@
         "name": "Oryx sanitaryware",
         "text": "Fully glazed vitreous WCs, basins, urinals and bidets, with rimless, soft-close, anti-bacterial and water-saving designs."
       },
-      "saudiTiles": {
-        "name": "Porcelain and ceramic tiles",
-        "text": "For walls and floors, indoors and out, in glossy, matt, polished and anti-slip finishes."
+      "saudiPorcelain": {
+        "name": "Porcelain tiles",
+        "text": "Rectified and non-rectified porcelain in glossy, matt, polished and semi-polished finishes, with anti-slip models."
+      },
+      "saudiCeramic": {
+        "name": "Ceramic tiles",
+        "text": "Wall and floor tiles for indoor, outdoor and wet areas and commercial spaces, in glossy, matt, polished, rustic and anti-slip finishes."
       },
       "quarterbathSanitary": {
         "name": "Sanitaryware",
@@ -548,7 +560,13 @@
     "intro": "Call the main line for sales, or reach the projects division, WhatsApp and email directly.",
     "channels": "Ways to reach us",
     "branches": "Branch lines",
-    "follow": "Follow AtlasPlast"
+    "follow": "Follow AtlasPlast",
+    "callLabel": "Call the main line",
+    "chat": "Chat on WhatsApp",
+    "write": "Send an email",
+    "channelsTitle": "Every line goes straight to a team.",
+    "hoursTitle": "When we’re open",
+    "branchesTitle": "Six offices across Iraq."
   },
   "ProjectsPage": {
     "eyebrow": "Projects",
@@ -584,6 +602,12 @@
       "p4": "Our achievements are not just the result of strategy and vision, but of the commitment and trust of the people who make up the AtlasPlast family."
     },
     "quote": "At AtlasPlast, we believe that sustainable growth is built on vision, dedication, and trust.",
+    "valuesTitle": "The values that guide us",
+    "values": {
+      "excellence": "Excellence",
+      "integrity": "Integrity",
+      "progress": "Progress"
+    },
     "membersTitle": "Board members",
     "read": "Read the Chairman’s message"
   }

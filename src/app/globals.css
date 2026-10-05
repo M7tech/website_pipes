@@ -202,6 +202,19 @@ p {
   animation: ken-burns 18s ease-out both;
 }
 
+/* A portrait standing in a band's wave edge rises out of the water once, on load. */
+@keyframes rise-from-water {
+  from {
+    transform: translateY(3rem);
+  }
+  to {
+    transform: none;
+  }
+}
+.rise-from-water {
+  animation: rise-from-water 1.2s var(--ease-out-expo) 0.1s both;
+}
+
 /* Caustic light: soft highlights drifting over dark bands like light through water. */
 @keyframes caustic-drift {
   0% {
@@ -361,8 +374,13 @@ p {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .section-wipe {
+    clip-path: none !important;
+    transition: none !important;
+  }
   .wave-layer,
   .ken-burns,
+  .rise-from-water,
   .caustics,
   .ripple-ring,
   .liquid,

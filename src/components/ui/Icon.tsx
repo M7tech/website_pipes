@@ -56,6 +56,7 @@ const icons = {
     </>
   ),
   wrench: <path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z" />,
+  tiles: <path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z" />,
   // Threaded elbow: two pipe walls turning 90 degrees, with a collar at each end.
   fitting: (
     <>
@@ -120,6 +121,7 @@ const icons = {
       <circle cx="7.5" cy="7.5" r="1.5" />
     </>
   ),
+  trendUp: <path d="M3 17l6-6 4 4 8-8M15 7h6v6" />,
   heart: <path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z" />,
   // Vision, mission and values
   eye: (

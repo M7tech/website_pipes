@@ -33,6 +33,7 @@ npm run build
 | Name | Required | Purpose |
 | --- | --- | --- |
 | `NEXT_PUBLIC_SITE_URL` | Recommended | Public origin used for canonical URLs, hreflang, sitemap and Open Graph. Defaults to `https://atlasplast.iq`. |
+| `YOUTUBE_API_KEY` | Optional | Server-only YouTube Data API v3 key. With it the Media page lists every public video on the channel; without it, the latest 15 from the public feed. Set it as a runtime variable in Coolify (not a build argument). |
 
 Secrets are never committed. Set variables in the hosting environment (Coolify) or in `.env.local` locally.
 

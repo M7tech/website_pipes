@@ -4,14 +4,17 @@ import { mapsHref, offices, whatsappHref } from "@/content/company";
 import { Ltr } from "@/components/ui/Ltr";
 import { PinIcon } from "@/components/ui/PinIcon";
 
-/** Offices with their direct lines (WhatsApp links) and a Google Maps link, as a rule-separated grid. */
-export async function OfficeLines() {
+/**
+ * Offices with their direct lines (WhatsApp links) and a Google Maps link, as a rule-separated grid.
+ * `narrow` keeps it to two columns when it shares the row with something else.
+ */
+export async function OfficeLines({ narrow = false }: { narrow?: boolean } = {}) {
   const locale = (await getLocale()) as Locale;
   const p = await getTranslations("Home.presence");
   const t = await getTranslations("Locations");
 
   return (
-    <ul className="grid border-t border-rule sm:grid-cols-2 sm:gap-x-8 lg:grid-cols-3">
+    <ul className={`grid border-t border-rule sm:grid-cols-2 sm:gap-x-8 ${narrow ? "" : "lg:grid-cols-3"}`}>
       {offices.map((o) => (
         <li key={o.id} className="grid content-start gap-3 border-b border-rule py-6">
           <p className="flex items-baseline justify-between gap-4">

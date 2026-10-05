@@ -26,6 +26,9 @@ export type SpecKey =
   | "weldRange"
   | "power"
   | "sizes"
+  | "thickness"
+  | "absorption"
+  | "slip"
   | "standards";
 
 export type ProductLine = {
@@ -454,16 +457,6 @@ export const solutions: Solution[] = [
         source: "profile:p10",
       },
       {
-        id: "saudiTiles",
-        name: "Porcelain and ceramic tiles",
-        brand: "saudi-ceramics",
-        specs: [
-          { key: "sizes", value: "30×30 · 60×60 · 30×60 · 120×60 cm" },
-          { key: "standards", value: "ISO 9001 · SASO QM · CE" },
-        ],
-        source: "profile:p10",
-      },
-      {
         id: "quarterbathSanitary",
         name: "Sanitaryware",
         brand: "quarterbath",
@@ -499,6 +492,44 @@ export const solutions: Solution[] = [
           { key: "standards", value: "WELS 3-star · SASO · ISO 9001 · CE · KIWA" },
         ],
         source: "profile:p14",
+      },
+    ],
+  },
+  {
+    // Owner, 2026-10-05: ceramic and porcelain tiles are a solution of their own (the tenth).
+    slug: "tiles",
+    icon: "tiles",
+    photos: [
+      { src: "/images/solutions/tiles-1.jpg", brand: "saudi-ceramics" },
+      { src: "/images/solutions/tiles-2.jpg", brand: "saudi-ceramics" },
+    ],
+    wall: 8,
+    spec: "30×30 – 120×60 cm · R9 – R11",
+    lines: [
+      {
+        id: "saudiPorcelain",
+        name: "Porcelain tiles",
+        brand: "saudi-ceramics",
+        specs: [
+          { key: "sizes", value: "30×30 · 60×60 · 30×60 · 120×60 cm" },
+          { key: "thickness", value: "10 mm" },
+          { key: "absorption", value: "≤ 0.5 %" },
+          { key: "slip", value: "R9 · R10 · R11" },
+          { key: "standards", value: "ISO 9001:2015 · SASO QM · CE · ESMA · G-Mark" },
+        ],
+        source: "profile:p10",
+      },
+      {
+        id: "saudiCeramic",
+        name: "Ceramic tiles",
+        brand: "saudi-ceramics",
+        specs: [
+          { key: "sizes", value: "30×30 · 60×60 · 30×60 cm" },
+          { key: "thickness", value: "8 · 9 · 10 · 12 mm" },
+          { key: "absorption", value: "≤ 3 %" },
+          { key: "standards", value: "ISO 9001:2015 · SASO QM · CE · ESMA · G-Mark" },
+        ],
+        source: "profile:p10",
       },
     ],
   },

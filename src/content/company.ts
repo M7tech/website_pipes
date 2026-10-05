@@ -9,6 +9,7 @@ export const company = {
   email: "info@atlasplast.iq",
   /** Short-code main line. Source: confirmed:2026-10-04 */
   mainPhone: "6779",
+  /** Al-Shaab branch WhatsApp, also the site's WhatsApp line (owner 2026-10-05; it was listed under Camp Sara before). */
   whatsapp: "+964 783 305 6475",
   projectsPhone: "+964 772 267 1130",
   /** Sales department. Source: site:/ar/اتصل-بنا/ (departments list). */
@@ -77,8 +78,8 @@ export const offices: Office[] = [
     city: "baghdad",
     hq: true,
     name: { en: "Camp Sara, Baghdad", ar: "كمب سارة، بغداد", ckb: "کەمپ سارە، بەغدا" },
-    phone: "+964 783 305 6475",
-    source: "confirmed:2026-10-04",
+    phone: "+964 787 116 6604",
+    source: "confirmed:2026-10-05",
   },
   {
     id: "al-shaab",
@@ -86,7 +87,8 @@ export const offices: Office[] = [
     mapUrl: "https://maps.google.com/?cid=12315681913268910686",
     city: "baghdad",
     name: { en: "Al-Shaab, Baghdad", ar: "الشعب، بغداد", ckb: "شەعب، بەغدا" },
-    source: "confirmed:2026-10-04",
+    phone: "+964 783 305 6475",
+    source: "confirmed:2026-10-05",
   },
   {
     id: "najaf",
@@ -119,7 +121,8 @@ export const offices: Office[] = [
   {
     id: "duhok",
     mapQuery: "Qazi Mohammed Street, Duhok, Iraq",
-    mapUrl: "https://maps.google.com/?cid=5212968092964585088",
+    // Sent by the owner 2026-10-05: the "شركة اطلس بلاست" place (36.8691, 42.9351).
+    mapUrl: "https://maps.google.com/?cid=12732420289314848059",
     city: "duhok",
     name: { en: "Duhok", ar: "دهوك", ckb: "دهۆک" },
     phone: "+964 750 991 0065",
