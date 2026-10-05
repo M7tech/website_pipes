@@ -13,13 +13,13 @@ export function ScrollRule({ children, className = "" }: { children: ReactNode; 
   const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.4 });
 
   return (
-    <div ref={ref} className={`relative ${className}`}>
-      <div aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-rule" />
-      <m.div
-        aria-hidden="true"
-        style={{ scaleX }}
-        className="absolute inset-x-0 top-0 h-[3px] -translate-y-px bg-atlas-blue origin-left rtl:origin-right motion-reduce:!scale-x-100"
-      />
+    <div ref={ref} className={`relative min-w-0 pt-8 ${className}`}>
+      <div aria-hidden="true" className="absolute inset-x-0 top-0 h-1 overflow-hidden rounded-full bg-rule">
+        <m.div
+          style={{ scaleX }}
+          className="absolute inset-0 bg-atlas-blue origin-left rtl:origin-right motion-reduce:!scale-x-100"
+        />
+      </div>
       {children}
     </div>
   );

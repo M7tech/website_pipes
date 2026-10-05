@@ -12,24 +12,24 @@ export async function BrandDocuments({ documents }: { documents: BrandDocument[]
 
   return (
     <section aria-labelledby="documents-title" className="section-space bg-surface">
-      <div className="container-page grid gap-10 md:grid-cols-12 md:gap-8">
-        <div className="grid content-start gap-3 border-t-2 border-ink pt-5 md:col-span-3">
-          <h2 id="documents-title" className="eyebrow text-steel">
+      <div className="container-page grid gap-10">
+        <div className="grid content-start gap-3">
+          <h2 id="documents-title" className="section-title">
             {t("documents")}
           </h2>
-          <p className="text-sm text-steel">{t("documentsNote")}</p>
+          <p className="text-steel">{t("documentsNote")}</p>
         </div>
-        <ul className="border-t border-rule md:col-span-9">
+        <ul className="divide-y divide-rule/70 overflow-hidden rounded-card bg-paper">
           {documents.map((doc) => {
             const external = doc.href.startsWith("http");
             const isPdf = /\.pdf($|\?)/i.test(doc.href);
             return (
-              <li key={doc.href} className="border-b border-rule">
+              <li key={doc.href}>
                 <a
                   href={doc.href}
                   target="_blank"
                   rel={external ? "noopener noreferrer" : undefined}
-                  className="group grid gap-x-8 gap-y-1 py-5 hover:bg-paper md:grid-cols-9 md:items-baseline"
+                  className="group grid gap-x-8 gap-y-1 px-5 py-5 transition-colors duration-(--duration-base) hover:bg-atlas-blue/5 active:bg-atlas-blue/10 md:grid-cols-9 md:items-baseline md:px-7"
                 >
                   <span className="flex items-center gap-2 text-sm text-atlas-blue md:col-span-3">
                     <Icon name={kindIcon[doc.kind]} className="size-5" />

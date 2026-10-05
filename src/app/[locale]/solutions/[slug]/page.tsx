@@ -104,7 +104,7 @@ export default async function SolutionPage({ params }: PageProps<"/[locale]/solu
           play: hero("play"),
         }}
       >
-        <dl className="mt-2 flex flex-wrap gap-x-10 gap-y-4 border-t border-rule-dark pt-5 text-sm">
+        <dl className="glass-on-dark mt-2 flex flex-wrap gap-x-10 gap-y-4 justify-self-start rounded-card px-5 py-4 text-sm">
           <div className="grid gap-1">
             <dt className="text-on-dark-muted">{t("labels.lines")}</dt>
             <dd className="font-mono tabular">
@@ -129,10 +129,10 @@ export default async function SolutionPage({ params }: PageProps<"/[locale]/solu
 
       <section aria-labelledby="lines-title" className="section-space">
         <div className="container-page grid gap-10">
-          <h2 id="lines-title" className="eyebrow border-t-2 border-ink pt-5 text-steel">
+          <h2 id="lines-title" className="section-title">
             {t("labels.count", { count: solution.lines.length })}
           </h2>
-          <ul className="grid">
+          <ul className="grid gap-3 md:gap-4">
             {solution.lines.map((line) => {
               const brand = brandBySlug(line.brand);
               const logo = line.logo ?? brand.logo;
@@ -178,7 +178,7 @@ export default async function SolutionPage({ params }: PageProps<"/[locale]/solu
 
       <section aria-labelledby="others-title" className="section-space bg-surface">
         <div className="container-page grid gap-10">
-          <h2 id="others-title" className="eyebrow border-t-2 border-ink pt-5 text-steel">
+          <h2 id="others-title" className="section-title">
             {t("labels.others")}
           </h2>
           <SolutionList only={solutions.filter((s) => s.slug !== slug).map((s) => s.slug)} />

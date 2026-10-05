@@ -110,7 +110,7 @@ export default async function BrandPage({ params }: PageProps<"/[locale]/brands/
         ]}
         aside={
           brand.logo ? (
-            <div className="flex aspect-[4/3] w-56 items-center justify-center bg-surface p-8 md:w-72">
+            <div className="flex aspect-[4/3] w-56 items-center justify-center rounded-panel bg-surface p-8 shadow-[var(--shadow-lift)] md:w-72">
               <Image
                 src={brand.logo}
                 alt=""
@@ -123,7 +123,7 @@ export default async function BrandPage({ params }: PageProps<"/[locale]/brands/
           ) : undefined
         }
       >
-        <dl className="mt-2 flex flex-wrap gap-x-10 gap-y-4 border-t border-rule-dark pt-5 text-sm">
+        <dl className="glass-on-dark mt-2 flex flex-wrap gap-x-10 gap-y-4 justify-self-start rounded-card px-5 py-4 text-sm">
           {brand.country ? (
             <div className="grid gap-1">
               <dt className="flex items-center gap-2 text-on-dark-muted">
@@ -165,7 +165,7 @@ export default async function BrandPage({ params }: PageProps<"/[locale]/brands/
 
       <section aria-labelledby="supplied-title" className="section-space">
         <div className="container-page grid gap-10">
-          <h2 id="supplied-title" className="eyebrow border-t-2 border-ink pt-5 text-steel">
+          <h2 id="supplied-title" className="section-title">
             {groups.length ? t("labels.supplied") : t("labels.onRequestTitle")}
           </h2>
           {groups.length ? (
@@ -179,7 +179,7 @@ export default async function BrandPage({ params }: PageProps<"/[locale]/brands/
                     </h3>
                     <TextLink href={`/solutions/${solution.slug}`}>{t("labels.viewSolution")}</TextLink>
                   </div>
-                  <ul className="grid md:col-span-9">
+                  <ul className="grid gap-3 md:col-span-9 md:gap-4">
                     {lines.map((line) => (
                       <ProductLineRow key={line.id} line={line} headingLevel="h4" />
                     ))}
@@ -199,13 +199,13 @@ export default async function BrandPage({ params }: PageProps<"/[locale]/brands/
 
       <section aria-labelledby="others-title" className="section-space bg-surface">
         <div className="container-page grid gap-10">
-          <div className="flex items-baseline justify-between gap-6 border-t-2 border-ink pt-5">
-            <h2 id="others-title" className="eyebrow text-steel">
+          <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-3">
+            <h2 id="others-title" className="section-title">
               {t("labels.others")}
             </h2>
             <TextLink href="/brands">{t("labels.all")}</TextLink>
           </div>
-          <BrandGrid brands={others} />
+          <BrandGrid brands={others} tone="paper" />
         </div>
       </section>
     </>

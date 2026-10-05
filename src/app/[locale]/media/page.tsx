@@ -94,10 +94,10 @@ export default async function MediaPage({ params }: PageProps<"/[locale]/media">
             href={youtube.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative isolate inline-flex min-h-12 items-center gap-3 overflow-hidden bg-paper px-6 text-[0.9375rem] font-medium text-atlas-navy transition-[color,background-color,border-color,scale] duration-(--duration-base) ease-(--ease-out-expo) active:scale-[0.97] active:duration-(--duration-fast)"
+            className="group relative isolate inline-flex min-h-12 items-center gap-3 overflow-hidden rounded-full bg-white px-6 text-[0.9375rem] font-medium text-atlas-navy transition-[color,background-color,border-color,scale] duration-(--duration-base) ease-(--ease-out-expo) active:scale-[0.97] active:duration-(--duration-fast)"
           >
             <span aria-hidden="true" className="liquid-box -z-10">
-              <span className="liquid bg-white" />
+              <span className="liquid bg-atlas-mist" />
             </span>
             <Icon name="video" className="size-5 text-atlas-blue" />
             <span>{t("channel")}</span>
@@ -108,14 +108,14 @@ export default async function MediaPage({ params }: PageProps<"/[locale]/media">
 
       <section aria-labelledby="videos-title" className="section-space">
         <div className="container-page grid gap-10">
-          <h2 id="videos-title" className="eyebrow border-t-2 border-ink pt-5 text-steel">
+          <h2 id="videos-title" className="section-title">
             {t("videos", { count: videos.length })}
           </h2>
           <VideoGallery
             videos={videos}
             listLabel={t("all")}
             aside={
-              <div className="grid gap-4 border-t-2 border-atlas-blue bg-paper p-6">
+              <div className="grid gap-4 rounded-card bg-surface p-6">
                 <Icon name="video" className="size-8 text-atlas-blue" />
                 <p className="text-steel">{t("more")}</p>
                 <a

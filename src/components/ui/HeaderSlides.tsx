@@ -87,7 +87,7 @@ export function HeaderSlides({
           onBlur={(e) => {
             if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setHeld(false);
           }}
-          className="absolute bottom-14 end-[var(--gutter)] z-10 flex gap-1 md:bottom-24"
+          className="glass-on-dark absolute bottom-14 end-[var(--gutter)] z-10 flex gap-0.5 rounded-full px-1 md:bottom-24"
         >
           {photos.map((photo, i) => (
             <button

@@ -47,7 +47,7 @@ export async function Presence({ cta = true }: { cta?: boolean } = {}) {
                 {t("legendOffice")}
               </span>
               <span className="flex items-center gap-2">
-                <span aria-hidden="true" className="size-3.5 border-[1.5px] border-atlas-blue" />
+                <span aria-hidden="true" className="size-3.5 rounded-[3px] border-[1.5px] border-atlas-blue" />
                 {t("legendWarehouse")}
               </span>
             </figcaption>
@@ -59,15 +59,15 @@ export async function Presence({ cta = true }: { cta?: boolean } = {}) {
                 <Icon name="building" className="size-5 text-atlas-blue" />
                 {t("offices")}
               </h3>
-              <ul className="border-t border-rule">
+              <ul className="divide-y divide-rule/70 overflow-hidden rounded-card bg-surface">
                 {offices.map((o) => (
-                  <li key={o.id} className="border-b border-rule text-lg">
+                  <li key={o.id} className="text-lg">
                     <a
                       href={mapsHref(o)}
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={loc("openMapFor", { place: o.name[locale] })}
-                      className="group flex items-baseline justify-between gap-4 py-3.5 hover:text-atlas-blue"
+                      className="group flex items-baseline justify-between gap-4 px-5 py-3.5 transition-colors duration-(--duration-base) hover:bg-atlas-blue/5 hover:text-atlas-blue active:bg-atlas-blue/10"
                     >
                       <span className="flex items-baseline gap-2">
                         <PinIcon className="translate-y-0.5 text-atlas-blue opacity-60 transition-opacity group-hover:opacity-100" />
@@ -84,13 +84,13 @@ export async function Presence({ cta = true }: { cta?: boolean } = {}) {
                 <h3 className="eyebrow mb-3 flex items-center gap-2 text-steel">
                   <Icon name="warehouse" className="size-5 text-atlas-blue" />
                   {t("warehouses")}
-                  <span className="ms-auto rounded-full bg-atlas-blue/10 px-2 py-0.5 text-[0.7rem] font-medium tracking-normal text-atlas-blue normal-case">
+                  <span className="ms-auto rounded-full bg-atlas-blue/10 px-2.5 py-0.5 text-xs font-medium text-atlas-blue">
                     {t("open247")}
                   </span>
                 </h3>
-                <ul className="border-t border-rule">
+                <ul className="divide-y divide-rule/70 rounded-card bg-surface">
                   {warehouses.map((w) => (
-                    <li key={w.id} className="border-b border-rule py-2.5">{w.name[locale]}</li>
+                    <li key={w.id} className="px-5 py-2.5">{w.name[locale]}</li>
                   ))}
                 </ul>
               </div>
@@ -99,9 +99,9 @@ export async function Presence({ cta = true }: { cta?: boolean } = {}) {
                   <Icon name="globe" className="size-5 text-atlas-blue" />
                   {t("regional")}
                 </h3>
-                <ul className="border-t border-rule">
+                <ul className="divide-y divide-rule/70 rounded-card bg-surface">
                   {regionalOffices.map((r) => (
-                    <li key={r.en} className="border-b border-rule py-2.5">{r[locale]}</li>
+                    <li key={r.en} className="px-5 py-2.5">{r[locale]}</li>
                   ))}
                 </ul>
               </div>

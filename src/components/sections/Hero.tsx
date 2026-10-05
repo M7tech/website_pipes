@@ -154,11 +154,11 @@ export async function Hero() {
             </>
           }
           visual={
-            <ul className="grid w-full max-w-[30rem] grid-cols-3 border-s border-t border-rule-dark">
+            <ul className="grid w-full max-w-[30rem] grid-cols-3 gap-2">
               {heroBrands.map((slug) => {
                 const brand = brandBySlug(slug);
                 return (
-                  <li key={slug} className="flex aspect-[4/3] items-center justify-center border-b border-e border-rule-dark p-4">
+                  <li key={slug} className="glass-on-dark flex aspect-[4/3] items-center justify-center rounded-tile p-4">
                     <Image
                       src={brand.logo!}
                       alt={brand.name}
@@ -211,7 +211,7 @@ export async function Hero() {
 
   return (
     <div className="on-dark relative isolate overflow-hidden bg-atlas-navy pb-10 text-on-dark md:pb-16">
-      <div className="container-page pb-4 pt-12 md:pt-20 lg:pt-24">
+      <div className="container-page pb-4 pt-[calc(var(--header-h)+3rem)] md:pt-[calc(var(--header-h)+5rem)] lg:pt-[calc(var(--header-h)+6rem)]">
         <HeroCarousel
           slides={slides}
           labels={{
@@ -226,14 +226,11 @@ export async function Hero() {
       </div>
 
       <div className="container-page">
-        <dl aria-label={f("label")} className="grid grid-cols-2 border-t border-rule-dark lg:grid-cols-4">
-          {facts.map((fact, i) => (
-            <div
-              key={fact.key}
-              className={`flex flex-col-reverse justify-end gap-2 border-rule-dark py-6 pe-4 md:py-8 ${i % 2 === 1 ? "border-s ps-4 lg:ps-6" : ""} ${i >= 2 ? "border-t lg:border-t-0" : ""} ${i === 2 ? "lg:border-s lg:ps-6" : ""}`}
-            >
+        <dl aria-label={f("label")} className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+          {facts.map((fact) => (
+            <div key={fact.key} className="glass-on-dark flex flex-col-reverse justify-end gap-2 rounded-card p-5 md:p-6">
               <dt className="flex max-w-[26ch] items-start gap-2 text-sm text-on-dark-muted">
-                <Icon name={factIcons[fact.key]} className="size-5 shrink-0 text-atlas-sky" />
+                <Icon name={factIcons[fact.key]} className="size-5 shrink-0 text-atlas-mist" />
                 {f(fact.key)}
               </dt>
               <dd className="font-display-latin text-[clamp(2rem,4vw,3.25rem)] font-semibold leading-none tabular">

@@ -75,7 +75,7 @@ export default async function BoardPage({ params }: PageProps<"/[locale]/about/b
           // Stands in the header's wave edge: the negative margin cancels the band's bottom padding.
           <div className="rise-from-water relative -mb-20 w-full max-w-64 sm:max-w-72 md:-mb-28 lg:max-w-80">
             {/* An open frame offset behind the photo, so the portrait reads as placed, not pasted. */}
-            <div aria-hidden="true" className="absolute -end-4 -top-4 bottom-16 start-4 border border-atlas-sky/60 md:-end-6 md:-top-6" />
+            <div aria-hidden="true" className="absolute -end-4 -top-4 bottom-16 start-4 rounded-panel border border-atlas-sky/60 md:-end-6 md:-top-6" />
             <Image
               src={chairman.photo.src}
               width={chairman.photo.width}
@@ -83,7 +83,7 @@ export default async function BoardPage({ params }: PageProps<"/[locale]/about/b
               alt={chairman.name[locale]}
               sizes="(min-width: 1024px) 20rem, (min-width: 640px) 18rem, 16rem"
               priority
-              className="relative w-full"
+              className="relative w-full rounded-t-card"
             />
           </div>
         }
@@ -108,10 +108,10 @@ export default async function BoardPage({ params }: PageProps<"/[locale]/about/b
                 “
               </span>
               <div className="grid gap-4">
-                <h2 className="eyebrow border-t-2 border-ink pt-5 text-steel">{t("valuesTitle")}</h2>
-                <ul className="grid">
+                <h2 className="eyebrow text-atlas-blue">{t("valuesTitle")}</h2>
+                <ul className="divide-y divide-rule/70 rounded-card bg-surface">
                   {values.map((v) => (
-                    <li key={v.key} className="flex items-center gap-4 border-b border-rule py-4">
+                    <li key={v.key} className="flex items-center gap-4 px-5 py-4">
                       <span className="inline-flex size-12 shrink-0 items-center justify-center rounded-full bg-atlas-blue/8 text-atlas-blue">
                         <Icon name={v.icon} />
                       </span>
@@ -156,10 +156,10 @@ export default async function BoardPage({ params }: PageProps<"/[locale]/about/b
       <section aria-labelledby="board-title" className="section-space bg-surface">
         <div className="container-page grid gap-12">
           <SectionHead id="board-title" eyebrow={t("eyebrow")} title={t("membersTitle")} />
-          <ul className="grid max-w-3xl grid-cols-2 gap-4 sm:gap-6 md:ms-[calc(25%+0.5rem)]">
+          <ul className="grid max-w-3xl grid-cols-2 gap-3 sm:gap-4">
             {boardMembers.map((member) => (
               <li key={member.id} className="surface-in">
-                <figure className="group relative isolate overflow-hidden bg-atlas-navy">
+                <figure className="group relative isolate overflow-hidden rounded-card bg-atlas-navy">
                   <Image
                     src={member.photo.src}
                     width={member.photo.width}

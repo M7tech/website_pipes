@@ -30,14 +30,14 @@ export async function Purpose() {
     >
       <div aria-hidden="true" className="caustics absolute -inset-[10%] -z-10 mix-blend-screen" />
       <div className="container-page grid gap-12 md:gap-16">
-        <h2 id="purpose-title" className="eyebrow border-t-2 border-on-dark pt-5 text-on-dark-muted">
+        <h2 id="purpose-title" className="eyebrow text-atlas-mist">
           {t("eyebrow")}
         </h2>
-        <div className="grid gap-12 md:grid-cols-2 md:gap-8">
+        <div className="grid gap-3 md:grid-cols-2 md:gap-4">
           {statements.map(({ key, icon }) => (
-            <div key={key} className="grid content-start gap-5">
+            <div key={key} className="glass-on-dark grid content-start gap-5 rounded-panel p-7 md:p-10">
               <h3 className="flex items-center gap-3 text-xl font-semibold">
-                <span className="inline-flex size-12 items-center justify-center rounded-full bg-white/10 text-atlas-sky">
+                <span className="inline-flex size-12 items-center justify-center rounded-full bg-white/10 text-atlas-mist">
                   <Icon name={icon} />
                 </span>
                 {t(`${key}Title`)}
@@ -48,12 +48,12 @@ export async function Purpose() {
             </div>
           ))}
         </div>
-        <div className="grid gap-6 border-t border-rule-dark pt-8">
-          <h3 className="eyebrow text-on-dark-muted">{t("valuesTitle")}</h3>
-          <ul className="grid gap-x-8 gap-y-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-5 pt-4">
+          <h3 className="eyebrow text-atlas-mist">{t("valuesTitle")}</h3>
+          <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {values.map(({ key, icon }) => (
-              <li key={key} className="flex items-center gap-3 text-lg">
-                <Icon name={icon} className="text-atlas-sky" />
+              <li key={key} className="glass-on-dark flex items-center gap-3 rounded-card px-5 py-4 text-lg">
+                <Icon name={icon} className="text-atlas-mist" />
                 {t(`values.${key}`)}
               </li>
             ))}

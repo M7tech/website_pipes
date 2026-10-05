@@ -44,7 +44,7 @@ export function IraqMap({ locale, label, officeCities, warehouseCities, cityName
         const marker = (
           <>
             {warehouse ? (
-              <rect x={x - 9} y={y - 9} width="18" height="18" className={dark ? "fill-none stroke-atlas-sky" : "fill-none stroke-atlas-blue"} strokeWidth="1.5" />
+              <rect x={x - 9} y={y - 9} width="18" height="18" rx="3" className={dark ? "fill-none stroke-atlas-sky" : "fill-none stroke-atlas-blue"} strokeWidth="1.5" />
             ) : null}
             {office ? (
               <>
