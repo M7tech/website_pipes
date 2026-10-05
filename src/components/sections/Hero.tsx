@@ -26,6 +26,7 @@ const heroBrands = [
   "wisa",
   "aquapa",
   "saudi-ceramics",
+  "quarterbath",
 ];
 
 const slideTitle =
