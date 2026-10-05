@@ -120,6 +120,7 @@ There is no `.claude/` directory in the repo.
 | `/{locale}/about` | DONE | intro, figures, statement, full timeline, services; vision/mission pending owner approval |
 | `/{locale}/locations` | DONE | map, offices, warehouses, regional offices, branch phone lines |
 | `/{locale}/contact` | DONE | main line, WhatsApp, projects line, email, social, branch lines; no form yet |
+| `/{locale}/links` | DONE | unlisted روابط page (old site's `/روابط/`): main line, WhatsApp, email, social, branch maps, craftsmen app. In no menu or sitemap, `noindex`. `/روابط` and `/ar/روابط` redirect (308) to `/ar/links` via `redirects()` in `next.config.ts`, with percent-encoded sources because Next matches the encoded path |
 | `/{locale}/<unknown>` | DONE | localized 404 (`not-found.tsx`) |
 | `/sitemap.xml`, `/robots.txt`, `/icon.svg` | DONE | sitemap lists all 36 public pages in every locale (108 URLs) |
 
@@ -598,6 +599,7 @@ Full SEO pass done 2026-10-04 at the owner's request ("make sure SEO is the best
 - [x] Visual review fixes: Arabic heading leading, header logo size, reduced-motion visuals, map labels, Sorani wording
 - [x] Pushed `main` + `feat/home-page`; draft PR #1 opened
 - [x] HANDOFF.md
+- [x] Unlisted روابط links page (`/{locale}/links`) and exact office map pins from the old site
 - [x] Products renamed to Solutions (nav, Home, CTAs, sitemap); `/products` removed
 - [x] Solutions data (`src/content/solutions.ts`): 8 solutions and 41 product lines, every line sourced
 - [x] `/solutions` index and 8 `/solutions/[slug]` pages in en/ar/ckb, with breadcrumb JSON-LD
@@ -762,7 +764,7 @@ Before making any changes:
 ## 21. Photos, maps and water motion (2026-10-04)
 
 - **Photos:** the 10 manufacturer-site photos from the company profile are in `public/images/brands/<slug>.jpg` (`photos` map in `src/content/brands.ts`); the p21 landmark photo is `public/images/hero/landmark.jpg`. They appear as brand page header backdrops, a flowing photo strip on Home and Brands, and hero slide backdrops. No product or project photography exists yet: add files under `public/images/` and reference them from content.
-- **Maps:** every office has `mapQuery` (street and district from the profile) and an optional `mapUrl` for an exact Google Maps pin from the owner. Office lists, branch cards and the Iraq map dots link to Google Maps (opens the app on phones).
+- **Maps:** every office has `mapQuery` (street and district from the profile) and an optional `mapUrl` for an exact Google Maps place. Since 2026-10-05, Camp Sara, Al-Shaab, Najaf, Erbil and Duhok use `https://maps.google.com/?cid=…`, the places pinned on the old site's روابط page (the old "Headquarter" pin, in Al-Shaab, went to Al-Shaab). Basra stays a search: the old page shows the Najaf pin under Basra. The craftsmen app links (`craftsmenApp` in `company.ts`) are the store pages the old goo.gl/apple.co links led to; both stores now list the app as SAWA. Office lists, branch cards and the Iraq map dots link to Google Maps (opens the app on phones).
 - **Terms (owner, Arabic):** خزانات الدفن / طراد, never سيفونات; حرفيين, never فنيين. A test guards this.
 - **Water motion** (CSS in `globals.css`, all off with reduced motion): wave edge on dark bands (`components/water/Waves.tsx`), caustic light, Ken Burns photos, ripples on map offices, liquid-fill buttons, water progress bar in the header (`ScrollWater.tsx`).
 - `SectionWipe` now observes an unclipped wrapper: Chrome reports a fully clipped element as not intersecting, which had kept the Iraq map hidden.
