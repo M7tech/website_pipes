@@ -164,7 +164,7 @@ export function HeroCarousel({ slides, labels, interval = 8000 }: HeroCarouselPr
             type="button"
             onClick={() => go(index - 1)}
             aria-label={labels.prev}
-            className="inline-flex size-11 items-center justify-center border border-transparent hover:border-rule-dark"
+            className="inline-flex size-11 items-center justify-center border border-transparent transition-[scale] duration-(--duration-base) ease-(--ease-out-expo) hover:border-rule-dark active:scale-[0.95] active:duration-(--duration-fast)"
           >
             <Arrow className="rotate-180" />
           </button>
@@ -172,7 +172,7 @@ export function HeroCarousel({ slides, labels, interval = 8000 }: HeroCarouselPr
             type="button"
             onClick={() => go(index + 1)}
             aria-label={labels.next}
-            className="inline-flex size-11 items-center justify-center border border-transparent hover:border-rule-dark"
+            className="inline-flex size-11 items-center justify-center border border-transparent transition-[scale] duration-(--duration-base) ease-(--ease-out-expo) hover:border-rule-dark active:scale-[0.95] active:duration-(--duration-fast)"
           >
             <Arrow />
           </button>
@@ -181,7 +181,7 @@ export function HeroCarousel({ slides, labels, interval = 8000 }: HeroCarouselPr
               type="button"
               onClick={() => setPlaying((p) => !p)}
               aria-label={playing ? labels.pause : labels.play}
-              className="inline-flex size-11 items-center justify-center border border-transparent hover:border-rule-dark"
+              className="inline-flex size-11 items-center justify-center border border-transparent transition-[scale] duration-(--duration-base) ease-(--ease-out-expo) hover:border-rule-dark active:scale-[0.95] active:duration-(--duration-fast)"
             >
               {playing ? (
                 <svg aria-hidden="true" viewBox="0 0 20 20" className="size-4" fill="currentColor">

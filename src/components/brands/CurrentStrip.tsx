@@ -27,7 +27,7 @@ export function CurrentStrip({
           type="button"
           onClick={() => setPaused((p) => !p)}
           aria-label={paused ? play : pause}
-          className="inline-flex size-11 items-center justify-center border border-transparent text-steel hover:border-rule hover:text-ink"
+          className="inline-flex size-11 items-center justify-center border border-transparent text-steel transition-[scale] duration-(--duration-base) ease-(--ease-out-expo) hover:border-rule hover:text-ink active:scale-[0.95] active:duration-(--duration-fast)"
         >
           {paused ? (
             <svg aria-hidden="true" viewBox="0 0 20 20" className="size-4" fill="currentColor">

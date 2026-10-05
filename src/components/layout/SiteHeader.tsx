@@ -81,7 +81,7 @@ export function SiteHeader() {
           <LanguageSwitcher />
           <Link
             href={contactHref}
-            className="group inline-flex min-h-11 items-center gap-2 border border-on-dark/50 px-4 text-sm hover:border-white hover:bg-white/10"
+            className="group inline-flex min-h-11 items-center gap-2 border border-on-dark/50 px-4 text-sm transition-[color,background-color,border-color,scale] duration-(--duration-base) ease-(--ease-out-expo) hover:border-white hover:bg-white/10 active:scale-[0.97] active:duration-(--duration-fast)"
           >
             {t("contact")}
             <Arrow />

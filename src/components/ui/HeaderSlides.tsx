@@ -103,7 +103,7 @@ export function HeaderSlides({
               type="button"
               onClick={() => setPlaying((p) => !p)}
               aria-label={playing ? pause : play}
-              className="inline-flex size-11 items-center justify-center text-white/80 hover:text-white"
+              className="inline-flex size-11 items-center justify-center text-white/80 transition-[scale] duration-(--duration-base) ease-(--ease-out-expo) hover:text-white active:scale-[0.95] active:duration-(--duration-fast)"
             >
               {playing ? (
                 <svg aria-hidden="true" viewBox="0 0 20 20" className="size-4" fill="currentColor">
