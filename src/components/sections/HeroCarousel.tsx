@@ -21,8 +21,8 @@ type HeroCarouselProps = {
  * Tabbed hero carousel (WAI-ARIA APG pattern).
  * - Slides share one grid cell, so the hero keeps the height of the tallest slide.
  * - Autoplay is driven by the active tab's progress rule (a CSS animation): it pauses
- *   on hover, on keyboard focus and with the pause button, and never runs when the
- *   visitor prefers reduced motion.
+ *   on mouse hover, on keyboard focus and with the pause button (never on a tap), and
+ *   never runs when the visitor prefers reduced motion.
  * - Arrow keys follow the reading direction, so they swap in RTL.
  */
 export function HeroCarousel({ slides, labels, interval = 8000 }: HeroCarouselProps) {
@@ -57,9 +57,15 @@ export function HeroCarousel({ slides, labels, interval = 8000 }: HeroCarouselPr
     <section
       aria-roledescription="carousel"
       aria-label={labels.label}
-      onMouseEnter={() => setHeld(true)}
-      onMouseLeave={() => setHeld(false)}
-      onFocus={() => setHeld(true)}
+      onPointerEnter={(e) => {
+        if (e.pointerType === "mouse") setHeld(true);
+      }}
+      onPointerLeave={(e) => {
+        if (e.pointerType === "mouse") setHeld(false);
+      }}
+      onFocus={(e) => {
+        if (e.target.matches(":focus-visible")) setHeld(true);
+      }}
       onBlur={(e) => {
         if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setHeld(false);
       }}

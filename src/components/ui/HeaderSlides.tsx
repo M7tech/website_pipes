@@ -10,9 +10,9 @@ type Photo = { src: string; alt: string };
  * Photo backdrop for a page header that cross-fades like the home hero.
  * On wide screens the photos fill the end side and fade into the navy behind
  * the text; on phones they sit under a navy wash. Advances on its own (held
- * on hover or focus of the dots, stopped by the pause button, never with
- * reduced motion); the dots select a photo directly. Must be a direct child
- * of the positioned, isolated header.
+ * on mouse hover or keyboard focus of the dots, stopped by the pause button,
+ * never with reduced motion); the dots select a photo directly. Must be a
+ * direct child of the positioned, isolated header.
  */
 export function HeaderSlides({
   photos,
@@ -75,9 +75,15 @@ export function HeaderSlides({
           role="group"
           aria-roledescription="carousel"
           aria-label={label}
-          onMouseEnter={() => setHeld(true)}
-          onMouseLeave={() => setHeld(false)}
-          onFocus={() => setHeld(true)}
+          onPointerEnter={(e) => {
+            if (e.pointerType === "mouse") setHeld(true);
+          }}
+          onPointerLeave={(e) => {
+            if (e.pointerType === "mouse") setHeld(false);
+          }}
+          onFocus={(e) => {
+            if (e.target.matches(":focus-visible")) setHeld(true);
+          }}
           onBlur={(e) => {
             if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setHeld(false);
           }}

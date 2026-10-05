@@ -178,3 +178,26 @@ test("moving photos can be paused on touch screens", async ({ page }) => {
   await photos.getByRole("button", { name: "Pause slideshow" }).click();
   await expect(photos.getByRole("button", { name: "Play slideshow" })).toBeVisible();
 });
+
+test.describe("on a phone", () => {
+  test.use({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+
+  test("Play resumes the slideshows straight after a tap", async ({ page }) => {
+    await page.goto("/en");
+    const hero = page.locator('section[aria-roledescription="carousel"]');
+    await hero.getByRole("button", { name: "Pause slideshow" }).tap();
+    await hero.getByRole("button", { name: "Play slideshow" }).tap();
+    await expect(page.locator('[role="tab"][aria-selected="true"] span[style*="hero-progress"]')).toHaveCSS(
+      "animation-play-state",
+      "running",
+    );
+
+    await page.goto("/en/solutions/water-supply");
+    const photos = page.getByRole("group", { name: "Water supply pipes: product photos" });
+    await photos.getByRole("button", { name: "Pause slideshow" }).tap();
+    await photos.getByRole("button", { name: "Play slideshow" }).tap();
+    await expect(photos.locator('button[aria-current="true"]')).not.toHaveAttribute("aria-label", "Photo 1 of 5", {
+      timeout: 8000,
+    });
+  });
+});
