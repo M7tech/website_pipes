@@ -163,3 +163,18 @@ test("media page lists the channel's videos and YouTube is in Follow us", async 
   await page.goto("/ar/contact");
   await expect(page.locator('main a[href="https://www.youtube.com/@atlasplast"]')).toHaveText("YouTube");
 });
+
+test("moving photos can be paused on touch screens", async ({ page }) => {
+  await page.goto("/en/brands");
+  const track = page.locator(".current-track").first();
+  await page.getByRole("button", { name: "Pause slideshow" }).first().click();
+  await expect(track).toHaveCSS("animation-play-state", "paused");
+  await page.getByRole("button", { name: "Play slideshow" }).first().click();
+  await page.mouse.move(0, 0);
+  await expect(track).toHaveCSS("animation-play-state", "running");
+
+  await page.goto("/en/solutions/water-supply");
+  const photos = page.getByRole("group", { name: "Water supply pipes: product photos" });
+  await photos.getByRole("button", { name: "Pause slideshow" }).click();
+  await expect(photos.getByRole("button", { name: "Play slideshow" })).toBeVisible();
+});
