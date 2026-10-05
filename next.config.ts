@@ -54,7 +54,11 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
   },
   async redirects() {
-    return oldPages.map(([source, destination]) => ({ source, destination, permanent: true }));
+    return [
+      ...oldPages.map(([source, destination]) => ({ source, destination, permanent: true })),
+      // Polo Egypt is shown as Boroug since 2026-10-05.
+      { source: "/:locale(en|ar|ckb)/brands/polo-egypt", destination: "/:locale/brands/boroug", permanent: true },
+    ];
   },
   async headers() {
     return [

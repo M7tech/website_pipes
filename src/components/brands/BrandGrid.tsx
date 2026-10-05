@@ -65,7 +65,9 @@ export async function BrandGrid({
                 {brand.note ? <span className="text-xs font-medium text-atlas-blue">{notes(brand.note)}</span> : null}
                 {detailed ? (
                   <span className="mt-2 inline-flex justify-self-start rounded-full bg-atlas-blue/8 px-2.5 py-1 text-xs font-medium text-atlas-blue">
-                    {lineCount ? solutionsT("labels.count", { count: lineCount }) : labels("onRequestShort")}
+                    {lineCount
+                      ? solutionsT("labels.count", { count: lineCount })
+                      : labels(brand.note === "directOrder" ? "directShort" : "onRequestShort")}
                   </span>
                 ) : null}
               </span>

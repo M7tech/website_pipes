@@ -36,7 +36,10 @@ async function brandMeta(locale: Locale, brand: Brand) {
     title: meta("brandTitle", { brand: brand.name }),
     description: names.length
       ? meta("brandDescription", { brand: brand.name, lines: names.slice(0, 5).join(separator) })
-      : meta("brandDescriptionOnRequest", { brand: brand.name, phone: company.mainPhone }),
+      : meta(brand.note === "directOrder" ? "brandDescriptionDirect" : "brandDescriptionOnRequest", {
+          brand: brand.name,
+          phone: company.mainPhone,
+        }),
     names,
   };
 }
@@ -71,6 +74,7 @@ export default async function BrandPage({ params }: PageProps<"/[locale]/brands/
   const groups = brandSolutions(slug);
   const lineCount = groups.reduce((n, g) => n + g.lines.length, 0);
   const others = brands.filter((b) => b.slug !== slug);
+  const direct = brand.note === "directOrder";
 
   const path = `/brands/${slug}`;
   const { title, description } = await brandMeta(locale as Locale, brand);
@@ -86,8 +90,12 @@ export default async function BrandPage({ params }: PageProps<"/[locale]/brands/
       { name: brand.name, path },
     ],
     props: { mainEntity: { "@id": `${SITE_URL}/#brand-${brand.slug}` } },
+    // A sister brand's lines carry its sister's brand node, so its own node is added for mainEntity.
     extra: groups.length
-      ? await productLinesLd(locale as Locale, `${url}#lines`, groups)
+      ? [
+          ...(await productLinesLd(locale as Locale, `${url}#lines`, groups)),
+          ...(brand.sisterOf ? [brandLd(brand, locale as Locale)] : []),
+        ]
       : [brandLd(brand, locale as Locale)],
   });
 
@@ -168,7 +176,7 @@ export default async function BrandPage({ params }: PageProps<"/[locale]/brands/
       <section aria-labelledby="supplied-title" className="section-space">
         <div className="container-page grid gap-10">
           <h2 id="supplied-title" className="section-title">
-            {groups.length ? t("labels.supplied") : t("labels.onRequestTitle")}
+            {groups.length ? t("labels.supplied") : t(direct ? "labels.directTitle" : "labels.onRequestTitle")}
           </h2>
           {groups.length ? (
             <div className="grid gap-14 md:gap-20">
@@ -190,7 +198,9 @@ export default async function BrandPage({ params }: PageProps<"/[locale]/brands/
               ))}
             </div>
           ) : (
-            <p className="max-w-[52ch] text-lg text-steel">{t("labels.onRequest", { brand: brand.name })}</p>
+            <p className="max-w-[52ch] text-lg text-steel">
+              {t(direct ? "labels.direct" : "labels.onRequest", { brand: brand.name })}
+            </p>
           )}
         </div>
       </section>

@@ -1222,9 +1222,9 @@ export const faqs: Faq[] = [
       ckb: "بریکارایەتییەکانی کۆمپانیای ئەتلەس پلاست کامانەن؟",
     },
     a: {
-      en: "Georg Fischer, Polymelt, Bänninger, Ostendorf, Poloplast, FV-Plast, Peštan, WISA, DAB Pumps, Saudi Ceramics, Aquapa, Pimtaş, Turan Borfit, KAS, Guarri, Topsan, Asçelik Clamp, Polo Egypt, Shield, QuarterBath, Candan Makina and Alvit.",
-      ar: "Georg Fischer وPolymelt وBänninger وOstendorf وPoloplast وFV-Plast وPeštan وWISA وDAB Pumps والخزف السعودي (Saudi Ceramics) وAquapa وPimtaş وTuran Borfit وKAS وGuarri وTopsan وAsçelik Clamp وPolo Egypt وShield وQuarterBath وCandan Makina وAlvit.",
-      ckb: "Georg Fischer، Polymelt، Bänninger، Ostendorf، Poloplast، FV-Plast، Peštan، WISA، DAB Pumps، سعوودی سێرامیکس (Saudi Ceramics)، Aquapa، Pimtaş، Turan Borfit، KAS، Guarri، Topsan، Asçelik Clamp، Polo Egypt، Shield، QuarterBath، Candan Makina و Alvit.",
+      en: "Georg Fischer, Polymelt, Bänninger, Ostendorf, Poloplast, FV-Plast, Peštan, WISA, DAB Pumps, Saudi Ceramics, Aquapa, Pimtaş, Turan Borfit, KAS, Guarri, Topsan, Asçelik Clamp, Boroug, Shield, QuarterBath, Candan Makina and Alvit.",
+      ar: "Georg Fischer وPolymelt وBänninger وOstendorf وPoloplast وFV-Plast وPeštan وWISA وDAB Pumps والخزف السعودي (Saudi Ceramics) وAquapa وPimtaş وTuran Borfit وKAS وGuarri وTopsan وAsçelik Clamp وBoroug وShield وQuarterBath وCandan Makina وAlvit.",
+      ckb: "Georg Fischer، Polymelt، Bänninger، Ostendorf، Poloplast، FV-Plast، Peštan، WISA، DAB Pumps، سعوودی سێرامیکس (Saudi Ceramics)، Aquapa، Pimtaş، Turan Borfit، KAS، Guarri، Topsan، Asçelik Clamp، Boroug، Shield، QuarterBath، Candan Makina و Alvit.",
     },
   },
   {
@@ -1345,14 +1345,14 @@ export const faqs: Faq[] = [
     href: "/brands",
     source: "confirmed:2026-10-04",
     q: {
-      en: "How do I find out what AtlasPlast stocks from FV-Plast, Peštan or Alvit?",
-      ar: "كيف أعرف ما تتوفر عليه أطلس بلاست من FV-Plast أو Peštan أو Alvit؟",
-      ckb: "چۆن بزانم ئەتلەس پلاست چی لە FV-Plast، Peštan یان Alvit هەیە؟",
+      en: "How do I find out what AtlasPlast stocks from FV-Plast or Peštan?",
+      ar: "كيف أعرف ما تتوفر عليه أطلس بلاست من FV-Plast أو Peštan؟",
+      ckb: "چۆن بزانم ئەتلەس پلاست چی لە FV-Plast یان Peštan هەیە؟",
     },
     a: {
-      en: "The range from these brands is available on request. FV-Plast is AtlasPlast’s Czech agency and Peštan its Serbian agency. Call the sales team on {mainPhone} or write to {email} for current stock and specifications.",
-      ar: "تشكيلة هذه العلامات متوفرة عند الطلب. FV-Plast هي الوكالة التشيكية لأطلس بلاست، وPeštan وكالتها الصربية. اتصل بفريق المبيعات على {mainPhone} أو راسلنا على {email} لمعرفة المخزون والمواصفات الحالية.",
-      ckb: "بەرهەمەکانی ئەم براندانە بە داواکاری بەردەستن. FV-Plast بریکارایەتیی چیکیی ئەتلەس پلاستە و Peštan بریکارایەتیی سڕبییەکەیەتی. بۆ زانینی کۆگا و تایبەتمەندییەکانی ئێستا پەیوەندی بە تیمی فرۆشتنەوە بکە لەسەر {mainPhone} یان بنووسە بۆ {email}.",
+      en: "FV-Plast, AtlasPlast’s Czech agency, is ordered directly from the manufacturer through AtlasPlast. Peštan, its Serbian agency, is available on request. Call the sales team on {mainPhone} or write to {email} for current stock and specifications.",
+      ar: "تُطلب منتجات FV-Plast، الوكالة التشيكية لأطلس بلاست، مباشرة من المصنّع عبر أطلس بلاست. أما Peštan، وكالتها الصربية، فتشكيلتها متوفرة عند الطلب. اتصل بفريق المبيعات على {mainPhone} أو راسلنا على {email} لمعرفة المخزون والمواصفات الحالية.",
+      ckb: "بەرهەمەکانی FV-Plast، بریکارایەتیی چیکیی ئەتلەس پلاست، ڕاستەوخۆ لە بەرهەمهێنەرەوە لە ڕێگەی ئەتلەس پلاستەوە داوا دەکرێن. بەرهەمەکانی Peštan، بریکارایەتیی سڕبییەکەی، بە داواکاری بەردەستن. بۆ زانینی کۆگا و تایبەتمەندییەکانی ئێستا پەیوەندی بە تیمی فرۆشتنەوە بکە لەسەر {mainPhone} یان بنووسە بۆ {email}.",
     },
   },
   {
@@ -1366,9 +1366,9 @@ export const faqs: Faq[] = [
       ckb: "ئەتلەس پلاست چ براندێکی میسری دابین دەکات؟",
     },
     a: {
-      en: "Polo Egypt, for POLO EGY PP-R water supply pipes and Boroug UPVC drainage pipes, and Shield, for brass valves, faucet sets and accessories.",
-      ar: "Polo Egypt لأنابيب إمدادات المياه POLO EGY PP-R وأنابيب الصرف Boroug UPVC، وShield للمحابس النحاسية وأطقم الحنفيات والملحقات.",
-      ckb: "Polo Egypt بۆ بۆریی دابینکردنی ئاوی POLO EGY PP-R و بۆریی ئاوەڕۆی Boroug UPVC، و Shield بۆ ڤاڵڤی مسی زەرد، کۆمەڵەی حەنەفیە و پێداویستییەکان.",
+      en: "Boroug, for Boroug UPVC drainage pipes and POLO EGY PP-R water supply pipes, and Shield, for brass valves, faucet sets and accessories.",
+      ar: "Boroug لأنابيب الصرف Boroug UPVC وأنابيب إمدادات المياه POLO EGY PP-R، وShield للمحابس النحاسية وأطقم الحنفيات والملحقات.",
+      ckb: "Boroug بۆ بۆریی ئاوەڕۆی Boroug UPVC و بۆریی دابینکردنی ئاوی POLO EGY PP-R، و Shield بۆ ڤاڵڤی مسی زەرد، کۆمەڵەی حەنەفیە و پێداویستییەکان.",
     },
   },
   // ── Projects and services ─────────────────────────────────────────

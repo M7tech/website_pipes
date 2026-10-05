@@ -22,6 +22,7 @@
     "solutionDescription": "{text} Supplied across Iraq by AtlasPlast.",
     "brandDescription": "{brand} in Iraq from AtlasPlast: {lines}.",
     "brandDescriptionOnRequest": "{brand} products in Iraq from AtlasPlast. Ask our sales team on {phone} for the current range.",
+    "brandDescriptionDirect": "{brand} products in Iraq, ordered direct from the manufacturer through AtlasPlast. Call our sales team on {phone}.",
     "ogImageAlt": "AtlasPlast logo",
     "linksTitle": "Links",
     "linksDescription": "AtlasPlast in one place: main line {phone}, WhatsApp, email, social channels, branch maps and the craftsmen app.",
@@ -479,7 +480,9 @@
   },
   "Brands": {
     "notes": {
-      "baenningerTerritory": "Exclusive agent, central and southern Iraq"
+      "baenningerTerritory": "Exclusive agent, central and southern Iraq",
+      "directOrder": "Ordered direct from the manufacturer through AtlasPlast",
+      "quarterbathSister": "A QuarterBath brand: same range and support"
     },
     "index": {
       "eyebrow": "Brands",
@@ -497,6 +500,9 @@
       "onRequestTitle": "Range on request",
       "onRequest": "Product details for {brand} are available from our sales team. Call or write to us for current stock and specifications.",
       "onRequestShort": "Range on request",
+      "directTitle": "Ordered from the manufacturer",
+      "direct": "{brand} products are ordered directly from the manufacturer through AtlasPlast. Tell our sales team what you need and we place the order with the manufacturer for you.",
+      "directShort": "Direct order",
       "enquireTitle": "Planning a project with {brand}?",
       "others": "Other brands",
       "all": "All brands"

@@ -127,7 +127,7 @@ The repo has an empty, untracked `.claude/` folder and no `.github/` (no CI work
 | `/{locale}/solutions/{slug}` | DONE | water-supply, drainage, water-heaters, infrastructure, galvanized-fittings, sanitaryware, tiles, pumps, faucets-valves, installation-tools. 46 product lines in all |
 | `/{locale}/products` | REMOVED | returns 404; replaced by Solutions |
 | `/{locale}/brands` | DONE | logo grid with country and product-line count per brand, plus the photo strip |
-| `/{locale}/brands/{slug}` | DONE | 22 brands; product lines grouped by solution, or "range on request" for FV-Plast, Peštan and Alvit; technical documents for 15 brands. Topsan (Turkey, faucets, built-in valves, shower sets, valves) added 2026-10-05 at the owner's request, facts from topsanmusluk.com.tr |
+| `/{locale}/brands/{slug}` | DONE | 22 brands; product lines grouped by solution, "direct order from the manufacturer" for FV-Plast, or "range on request" for Peštan; Alvit is a QuarterBath brand and shows QuarterBath's range, documents and photo (`sisterOf`, owner 2026-10-05); technical documents for 15 brands. Topsan (Turkey, faucets, built-in valves, shower sets, valves) added 2026-10-05 at the owner's request, facts from topsanmusluk.com.tr |
 | `/{locale}/projects` | DONE | featured projects grouped by sector, plus the contractor list |
 | `/{locale}/media` | DONE | the YouTube channel's videos, click to load; revalidates hourly. Every public video when `YOUTUBE_API_KEY` is set, otherwise the feed's latest 15 |
 | `/{locale}/about` | DONE | intro, figures, statement, vision/mission/values, a chairman teaser linking to the board page, the full history, services |
@@ -303,7 +303,7 @@ Source files are in the shared project folder (not in the repo):
 - **Regional offices:** Saudi Arabia, Turkey, Syria, Egypt.
 - **Hours:** Saturday to Thursday, 07:00 to 15:00 (old site).
 - **Bänninger:** AtlasPlast is the exclusive agent for **central and southern Iraq**; Massary holds Kurdistan. Ranges: PP-R · PP-RCT (water supply) and PE · PVC-U Ø 8–1000 mm (infrastructure).
-- The Czech agency is **FV-Plast**; the Serbian agency is **Pestan**.
+- The Czech agency is **FV-Plast** (ordered direct from the manufacturer through AtlasPlast, owner 2026-10-05); the Serbian agency is **Pestan**.
 - **Polymelt** lines: POLO-Polymutan, Polo-Ecosan, Polo-UV, Polo-Polymutan ML5. **Poloplast:** Polo-Kal NG and Polo-Kal 3S only.
 - **KAS** = kas.com.tr, supplied as **PP-R only** (not PPR-C).
 - **Georg Fischer galvanized malleable-iron fittings** (EN 10242) are their own solution, made in Austria (owner, 2026-10-05).
@@ -329,7 +329,7 @@ Source files are in the shared project folder (not in the repo):
 - **Office count:** the profile contradicts itself (14 vs 10). Not published.
 - **Financial and growth figures, market-share bars, the unnamed ISO certificate:** do not publish.
 - **Profile main number +964 790 135 0331:** not used, because the owner chose 6779.
-- **Boroug UPVC:** it may be a private label. It appears on the Polo Egypt page of the profile and in the logo pack (unconfirmed).
+- **Boroug:** the owner supplied the Boroug logo on 2026-10-05 and asked for it in place of Polo Egypt, so the profile's Polo Egypt brand (p17) is now the Boroug brand at `/brands/boroug` (Boroug UPVC and POLO EGY PP-R). `/brands/polo-egypt` redirects there.
 - **Partner-company founding years:** these are the manufacturers' facts. Use them sparingly.
 - **Still waiting on the owner:** testimonials (with consent), NASSAR, the "up to 50 years" warranty, project photos.
 
@@ -496,7 +496,7 @@ Breakpoints are Tailwind defaults (sm 640, md 768, lg 1024, xl 1280). QA viewpor
 - **Partner logos:** in `public/brands/`.
   - alvit, aquapa, ascelik, baenninger, candan, dab, fv-plast, georg-fischer, guarri, kas, ostendorf, pestan, pimtas, poloplast, polymelt, quarterbath, saudi-ceramics, shield, turan-borfit and wisa (all used).
   - `aquahot.svg` is used on the Water heaters solution page as the Aquahot line's mark.
-  - **Polo Egypt has no logo** (renders as text).
+  - **Boroug** (formerly Polo Egypt) was traced from the owner's PNG on 2026-10-05 into a two-colour SVG.
 - **Photography** (all from the company profile PDF; no original photos yet):
   - `public/images/brands/<slug>.jpg`: 10 manufacturer-site photos (`photos` map in `brands.ts`). Used as brand page header backdrops, in the photo strip and as hero backdrops.
   - `public/images/hero/`: `landmark.jpg` (p21) and AtlasPlast's own warehouse photos `warehouse-*.jpg` (p23), used on the hero "reach" slide and the About, Locations and Solutions headers.
@@ -545,7 +545,7 @@ Full SEO pass done 2026-10-04 at the owner's request ("make sure SEO is the best
 
 - Brand pages show a **Technical documents** section when `documents` is set on the brand in `src/content/brands.ts`.
 - Owner decision 2026-10-04: the files come from the **manufacturers' official websites** and must be **in English**. They are linked, not re-hosted. Each has `source: "manufacturer:2026-10-04"`.
-- 14 brands have documents. None were found for WISA (site timed out), Turan Borfit, Guarri, Asçelik, Polo Egypt, Shield and Alvit (Turkish only).
+- 14 brands have documents. None were found for WISA (site timed out), Turan Borfit, Guarri, Asçelik, Boroug and Shield. Alvit shares QuarterBath's.
 - Unverified: the Bänninger Range of Products PDF (34 MB, not opened). Saudi Ceramics links to its catalogue page; the files themselves are on Google Drive and were not opened.
 - To self-host a file instead, put it under `public/docs/<brand>/` and use `href: "/docs/<brand>/<file>.pdf"`.
 
