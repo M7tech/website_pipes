@@ -452,10 +452,7 @@
         "text": "أنظمة أنابيب PE وPVC-U بأقطار من 8 إلى 1000 مم. أطلس بلاست الوكيل الحصري لباننجر في وسط العراق وجنوبه."
       }
     },
-    "photoAlt": "{name} من {brand}",
-    "photoSubjects": {
-      "gfBuilding": "مبنى شركة Georg Fischer"
-    }
+    "photoAlt": "{name} من {brand}"
   },
   "Projects": {
     "sectors": {

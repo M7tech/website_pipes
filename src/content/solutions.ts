@@ -51,10 +51,8 @@ export type ProductLine = {
 
 export type SolutionPhoto = {
   src: string;
-  /** Brand slug when the photo shows that brand's products (atlasprofile brand page). */
+  /** Brand slug when the photo shows that brand's products. */
   brand?: string;
-  /** Message key under Solutions.photoSubjects when the photo shows something other than products. */
-  subject?: string;
 };
 
 export type Solution = {
@@ -416,8 +414,8 @@ export const solutions: Solution[] = [
   {
     slug: "galvanized-fittings",
     icon: "fitting",
-    // No product photo yet: the profile's Georg Fischer page (p8) has only the company building.
-    photos: [{ src: "/images/solutions/galvanized-fittings-1.jpg", brand: "georg-fischer", subject: "gfBuilding" }],
+    // Photo supplied by the owner, 2026-10-05 (the profile's Georg Fischer page shows only the building).
+    photos: [{ src: "/images/solutions/galvanized-fittings-2.jpg", brand: "georg-fischer" }],
     wall: 4,
     spec: "EN 10242",
     lines: [

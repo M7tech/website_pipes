@@ -160,6 +160,8 @@ test("galvanized fittings are a Georg Fischer solution made in Austria", async (
   const main = page.locator("main");
   await expect(main).toContainText("Georg Fischer");
   await expect(main.locator("dl", { hasText: "Made in" })).toContainText("Austria");
+  // The header shows the fittings themselves, not the Georg Fischer building.
+  await expect(main.locator("header img").first()).toHaveAttribute("alt", "Galvanized fittings by Georg Fischer");
   await page.goto("/en/solutions/water-supply");
   // The line moved out of water supply (the "other solutions" list below still links to it).
   expect(await page.locator('section[aria-labelledby="lines-title"]').innerText()).not.toContain("malleable");

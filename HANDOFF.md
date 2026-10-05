@@ -499,7 +499,7 @@ Breakpoints are Tailwind defaults (sm 640, md 768, lg 1024, xl 1280). QA viewpor
 - **Photography** (all from the company profile PDF; no original photos yet):
   - `public/images/brands/<slug>.jpg`: 10 manufacturer-site photos (`photos` map in `brands.ts`). Used as brand page header backdrops, in the photo strip and as hero backdrops.
   - `public/images/hero/`: `landmark.jpg` (p21) and AtlasPlast's own warehouse photos `warehouse-*.jpg` (p23), used on the hero "reach" slide and the About, Locations and Solutions headers.
-  - `public/images/solutions/<slug>-<n>.jpg`: 33 product photos extracted with `pdfimages` (alpha masks flattened on white), listed per solution in `solutions.ts` with the brand when the profile page names it. Galvanized fittings has no product photo: its header uses the GF building from p8 until the owner sends one.
+  - `public/images/solutions/<slug>-<n>.jpg`: 33 product photos extracted with `pdfimages` (alpha masks flattened on white), listed per solution in `solutions.ts` with the brand when the profile page names it. Galvanized fittings uses the owner's photo of the Georg Fischer malleable-iron range (`galvanized-fittings-2.jpg`, 960 px wide, sent 2026-10-05; original in `/mnt/project-files/atlas/sources/`). Galvanized on the left, black on the right, as sent.
   - `public/images/leadership/`: the three portraits (p5).
   - Profile photos are about 500px wide; replace them with originals when the owner sends them.
   - Never substitute AI-generated "company" photos, and never present partner-factory photos as AtlasPlast's.
@@ -668,7 +668,7 @@ Nothing is half-done in the code. These are waiting on the owner:
 
 **High priority**
 - Resolve "23 brands" vs the 21 shown (§9, REQUIRES REVIEW).
-- Original photography from the owner: projects, sharper originals of the profile photos, and a real photo of the galvanized fittings.
+- Original photography from the owner: projects and sharper originals of the profile photos.
 - Contact page: decide on a form (needs a backend or email service via env vars) vs direct contact links.
 
 **Medium priority**

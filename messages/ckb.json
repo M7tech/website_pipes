@@ -452,10 +452,7 @@
         "text": "سیستەمی بۆریی PE و PVC-U بە تیرەی 8 تا 1000 ملم. ئەتلەس پلاست بریکاری تایبەتی بانینگەرە لە ناوەڕاست و باشووری عێراق."
       }
     },
-    "photoAlt": "{name} لە {brand}",
-    "photoSubjects": {
-      "gfBuilding": "بینای کۆمپانیای Georg Fischer"
-    }
+    "photoAlt": "{name} لە {brand}"
   },
   "Projects": {
     "sectors": {
