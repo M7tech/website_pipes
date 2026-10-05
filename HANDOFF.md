@@ -1,6 +1,8 @@
 # ATLASPLAST WEBSITE — PROJECT HANDOFF
 
-Last updated: 2026-10-04. Written from the repository state at commit `85a05c5` on branch `feat/home-page`. This revision adds the Brands, About, Locations, Contact and Projects pages: every section in the navigation is now a real page.
+Last updated: 2026-10-05. Written from the repository state at commit `002e3a5` on branch `feat/home-page`. This revision brings every section up to date after the Media, Links and Board pages, the exact office map pins, and the merge of the ten animation fixes. It also folds the dated notes that used to be appended at the end into the sections they belong to.
+
+A copy of this file is kept at `/mnt/project-files/atlas/HANDOFF.md`. Keep the two identical.
 
 ---
 
@@ -9,10 +11,13 @@ Last updated: 2026-10-04. Written from the repository state at commit `85a05c5` 
 - **What:** a new corporate website for **AtlasPlast**, replacing the current WordPress site at https://atlasplast.iq/.
 - **Company:** AtlasPlast. Legal/trading name **Ufuq Al-Atlas Ltd.** (UFUQ ALATLAS LTD. – Commercial Agencies). It is an Iraqi distributor and exclusive agent for international pipe-system, drainage, sanitaryware, pump, faucet and installation-tool manufacturers. It has been in business since 1975 and opened its first showroom in 1990.
 - **Purpose:** present AtlasPlast as an established, technically capable national supplier. It should help contractors, installers and project owners find solutions and brands, see projects, and contact sales.
-- **Stage:**
-  - The **Home page is built** in three languages and is the approved visual benchmark. Its hero is now a four-slide carousel, as the owner asked on 2026-10-04.
-  - **Solutions is built:** an index plus 8 solution pages, in three languages.
-  - **Brands** (index plus 21 brand pages), **About**, **Locations**, **Contact** and **Projects** are built. The interim placeholder route has been removed.
+- **Stage:** the full multipage site is built in three languages and runs on the preview domain **https://new.atlasplast.iq** (see §20).
+  - Home (the approved visual benchmark, with a four-slide hero).
+  - Solutions: an index plus **9** solution pages.
+  - Brands: an index plus **21** brand pages.
+  - Projects, Media, About (with a Board of Directors page), Locations and Contact.
+  - An unlisted links page (روابط) that keeps the old site's address.
+- **Not yet production:** the site lives on branch `feat/home-page` in draft PR #1. `main` still holds only the scaffold.
 - **Stack:** Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS 4, Motion for React, next-intl 4.
 - **Deployment:** GitHub → Coolify → Linux VPS. No Vercel-specific features or dependencies.
 - **Languages:**
@@ -22,30 +27,30 @@ Last updated: 2026-10-04. Written from the repository state at commit `85a05c5` 
 - **Content sources:**
   - `ATLASProfile.pdf` (the "atlasprofile"), stored in the project's shared files at `/mnt/project-files/atlas/sources/`.
   - https://atlasplast.iq/
-  - Explicit decisions by MOhammed in the project thread.
-- **Company facts must never be invented.** Every fact on the site must trace to one of these sources. Each record in `src/content/*.ts` carries a `source` field (`profile:pN`, `site:…` or `confirmed:YYYY-MM-DD`).
+  - Explicit decisions by MOhammed (the owner) in the project chat.
+- **Company facts must never be invented.** Every fact on the site must trace to one of these sources. Each record in `src/content/*.ts` carries a `source` field (`profile:pN`, `site:…`, `manufacturer:YYYY-MM-DD` or `confirmed:YYYY-MM-DD`).
 
 ## 2. Current Technology Stack
 
-Installed versions, from `npm ls --depth=0`:
+Versions from `package.json` / `npm ls --depth=0`:
 
 | Package | Version | Use |
 |---|---|---|
 | next | 16.3.8 | App Router, Turbopack (default), `proxy.ts` (replaces middleware), static generation |
 | react / react-dom | 19.2.8 | |
-| typescript | 5.9.3 | strict, path alias `@/*` → `src/*` |
-| tailwindcss / @tailwindcss/postcss | 4.3.3 | CSS-first config via `@theme` in `src/app/globals.css` (there is no tailwind.config file) |
+| typescript | 5.9.x | strict, path alias `@/*` → `src/*` |
+| tailwindcss / @tailwindcss/postcss | 4.x | CSS-first config via `@theme` in `src/app/globals.css` (there is no tailwind.config file) |
 | motion | 14.0.0 | imported from `motion/react`; LazyMotion + `m` components |
 | next-intl | 4.14.9 | locale routing, messages, navigation |
-| eslint / eslint-config-next | 9.39.5 / 16.3.8 | `npm run lint` |
-| @types/node, @types/react, @types/react-dom | 20 / 19 | |
+| eslint / eslint-config-next | 9 / 16.3.8 | `npm run lint` |
+| @playwright/test / playwright-core | 1.56.1 | site checks in `tests/site.spec.ts` |
+| @axe-core/playwright | 4.13 | WCAG 2.1 AA checks inside the Playwright suite |
 
-- **Fonts:** loaded with `next/font/google` in `src/lib/fonts.ts`, so they are self-hosted at build time with no runtime Google requests. The families are Archivo (wdth axis), IBM Plex Sans, IBM Plex Mono (400/500) and IBM Plex Sans Arabic (400/500/600/700).
-- **Not installed:** there is no icon library (the arrows are inline SVG in `src/components/ui/Arrow.tsx`). There is also no test runner and no Playwright dependency.
-  - QA used a **global** Playwright install in the build container, run with `NODE_PATH=$(npm root -g)` and Chromium from `/opt/pw-browsers`. The QA scripts live outside the repo.
-  - Adding `@playwright/test` as a devDependency is an open task (§24).
-- **Scripts** (`package.json`): `dev`, `build`, `start`, `lint`, and `typecheck` (`next typegen && tsc --noEmit`).
-- **Engines:** `node >= 20.9.0`.
+- **Fonts:** loaded with `next/font/google` in `src/lib/fonts.ts`, so they are self-hosted at build time with no runtime Google requests. The families are Archivo (wdth axis), IBM Plex Sans, IBM Plex Mono (400/500) and IBM Plex Sans Arabic (400/500/600).
+- **No icon library:** icons are inline SVG in `src/components/ui/Icon.tsx`, `Arrow.tsx` and `PinIcon.tsx`.
+- **Scripts** (`package.json`): `dev`, `build`, `start`, `lint`, `typecheck` (`next typegen && tsc --noEmit`) and `test:e2e` (`playwright test`).
+- **Engines:** `node >= 20.9.0`. The Docker image uses Node 22.
+- **Playwright in the cloud sandbox:** Chromium is preinstalled at `/opt/pw-browsers`; never run `playwright install` there. On a new machine run `npx playwright install chromium` once.
 
 ## 3. Project Architecture
 
@@ -54,56 +59,63 @@ Installed versions, from `npm ls --depth=0`:
 ├── AGENTS.md / CLAUDE.md     Next.js agent rules (CLAUDE.md just includes AGENTS.md). Read node_modules/next/dist/docs before using Next APIs: Next 16 differs from older versions.
 ├── HANDOFF.md                this file
 ├── README.md                 setup, checks, env vars, Coolify deploy steps, structure
+├── Dockerfile, .dockerignore production image for Coolify (standalone output, Node 22 Alpine)
 ├── .env.example              NEXT_PUBLIC_SITE_URL only (allowed by .gitignore `!.env.example`)
-├── next.config.ts            next-intl plugin, poweredByHeader false, AVIF/WebP image formats
+├── next.config.ts            next-intl plugin, standalone output, image formats, security headers, the روابط redirects
+├── playwright.config.ts      site checks; uses BASE_URL when set, otherwise builds and serves on :3100
+├── tests/site.spec.ts        every template × locale × width, axe, and feature tests (167 tests)
+├── scripts/og-image.js       renders public/og.png from a running production server
 ├── messages/                 en.json, ar.json, ckb.json — ALL user-facing UI copy
 ├── public/
 │   ├── brand/                official AtlasPlast logos (SVG, from the 2026 logo pack)
-│   └── brands/               partner manufacturer logos (SVG, cropped and optimised with svgo)
+│   ├── brands/               partner manufacturer logos (SVG, cropped and optimised with svgo)
+│   ├── images/               brands/, hero/, solutions/, leadership/ (photos from the company profile)
+│   └── og.png                share image (1200×630)
 └── src/
     ├── proxy.ts              next-intl middleware (Next 16 name for middleware)
     ├── i18n/                 routing.ts, navigation.ts, request.ts
-    ├── lib/                  site.ts (URLs/hreflang), nav.ts (menu and page list), fonts.ts
-    ├── content/              typed company data with sources: company, brands, projects, timeline, iraq-map
+    ├── lib/                  site.ts (URLs, hreflang, pageMetadata, pageLd), structured-data.ts, nav.ts, fonts.ts, motion.ts (easing), youtube.ts (channel feed)
+    ├── content/              typed company data with sources: company, brands, solutions, projects, timeline, leadership, media, iraq-map, types
     ├── components/
-    │   ├── layout/           SiteHeader (client), SiteFooter (server), LanguageSwitcher (client), Logo
-    │   ├── sections/         Home page sections (server by default)
+    │   ├── layout/           SiteHeader (client), SiteFooter, LanguageSwitcher (client), Logo
+    │   ├── sections/         Home and About sections (server by default)
+    │   ├── solutions/        SolutionList, ProductLineRow, EnquiryBand
+    │   ├── brands/           BrandGrid, BrandDocuments, BrandPhotoStrip, CurrentStrip (client)
+    │   ├── company/          OfficeLines
+    │   ├── media/            VideoGallery (client)
+    │   ├── water/            Waves, ScrollWater (client)
+    │   ├── seo/              JsonLd
     │   ├── motion/           MotionProvider, LineRise, SectionWipe, ScrollRule, useDirection
-    │   └── ui/               ButtonLink, TextLink, Arrow, SectionHead, Ltr
+    │   └── ui/               ButtonLink, TextLink, Arrow, Icon, PinIcon, SectionHead, PageHeader, HeaderSlides (client), Ltr
     └── app/
-        ├── globals.css       design tokens (@theme), base styles, utilities
-        ├── icon.svg          favicon (globe mark cropped from atlasplast-stacked.svg)
-        ├── robots.ts, sitemap.ts
+        ├── globals.css       design tokens (@theme), base styles, utilities, water motion keyframes
+        ├── icon.svg, apple-icon.png, manifest.ts, robots.ts, sitemap.ts
         └── [locale]/
             ├── layout.tsx    <html lang dir>, fonts, providers, header/footer, skip link
             ├── page.tsx      Home page with Organization JSON-LD
             ├── not-found.tsx
-            ├── solutions/        index + [slug] (8 pages)
+            ├── solutions/        index + [slug] (9 pages)
             ├── brands/           index + [slug] (21 pages)
-            └── about/, locations/, contact/, projects/   single pages
+            ├── about/            About + board/ (Board of Directors)
+            ├── projects/, media/, locations/, contact/   single pages
+            └── links/            unlisted روابط page
 ```
 
-There is no `.claude/` directory in the repo.
+The repo has an empty, untracked `.claude/` folder and no `.github/` (no CI workflows).
 
 **Architectural decisions:**
 - **Routing:** every route lives under `src/app/[locale]/`. `localePrefix: "always"`, so `/` redirects (307) to `/en` (or to the visitor's preferred locale).
 - **Static generation:**
   - `generateStaticParams` builds every locale.
   - The `[slug]` routes use `dynamicParams = false`, so unknown slugs return 404.
-  - The build currently produces 113 static pages.
-- **Server vs client components:** components are Server Components by default. Only these are client components:
-  - `SiteHeader`, because of menu state and the active link.
-  - `LanguageSwitcher`.
-  - `PipeSection`, because it animates.
-  - The motion components.
-
-  Section components fetch copy with `getTranslations` on the server.
+  - The build produces **127** static pages. Media also revalidates hourly (§10).
+- **Server vs client components:** Server Components by default. Client components are only for interaction and animation: `SiteHeader`, `LanguageSwitcher`, `HeroCarousel`, `PipeSection`, `HeaderSlides`, `CurrentStrip`, `VideoGallery`, `ScrollWater` and the motion components. Section components fetch copy with `getTranslations` on the server.
 - **Content:**
-  - Facts (phones, offices, brands, projects, timeline, map points) live in typed modules in `src/content/`, with `Localized<T> = Record<Locale, T>` for names.
+  - Facts (phones, offices, brands, solutions, projects, timeline, leadership, map points) live in typed modules in `src/content/`, with `Localized<T> = Record<Locale, T>` for names.
   - UI copy lives in `messages/*.json`.
   - Brand and product names stay in Latin script, marked `lang="en"` where needed.
-- **Images:** there is no photography yet. Logos are SVG, rendered with `next/image` using `unoptimized`, because SVGs need no optimisation. `next.config` has AVIF/WebP enabled for future raster photos.
-- **Translations:** there is one JSON file per locale, with identical key structure (parity was verified). The namespaces are `Meta`, `Common`, `Nav`, `Footer`, `Home.{hero,facts,statement,products,brands,projects,timeline,services,presence,contact}`, `Solutions`, `Brands.{notes,index,detail,labels}`, `About`, `Locations`, `Contact`, `ProjectsPage`, `Projects.sectors`, `Countries` and `NotFound`. The `Placeholder` namespace was removed.
+- **Images:** logos are SVG, rendered with `next/image` using `unoptimized`. Photos are JPEGs under `public/images/`, served through `next/image` with AVIF/WebP.
+- **Translations:** one JSON file per locale, with identical key structure. Top-level namespaces: `Meta`, `Common`, `Nav`, `Footer`, `Home` (hero, facts, statement, solutions, brands, projects, timeline, services, presence, contact), `Solutions`, `Projects`, `Brands`, `Countries`, `NotFound`, `About`, `Locations`, `Contact`, `ProjectsPage`, `Media`, `Links` and `Board`.
 
 ## 4. Current Sitemap
 
@@ -111,32 +123,33 @@ There is no `.claude/` directory in the repo.
 |---|---|---|
 | `/` | DONE | redirects to `/en` (next-intl proxy) |
 | `/en`, `/ar`, `/ckb` (Home) | DONE | approved benchmark, with a four-slide hero |
-| `/{locale}/solutions` | DONE | index of the 8 solutions |
-| `/{locale}/solutions/{slug}` | DONE | water-supply, drainage, water-heaters, infrastructure, sanitaryware, pumps, faucets-valves, installation-tools |
+| `/{locale}/solutions` | DONE | index of the 9 solutions |
+| `/{locale}/solutions/{slug}` | DONE | water-supply, drainage, water-heaters, infrastructure, sanitaryware, pumps, faucets-valves, installation-tools, galvanized-fittings. 43 product lines in all |
 | `/{locale}/products` | REMOVED | returns 404; replaced by Solutions |
-| `/{locale}/brands` | DONE | logo grid with country and product-line count per brand |
-| `/{locale}/brands/{slug}` | DONE | 21 brands; product lines grouped by solution, or "range on request" for FV-Plast, Peštan and Alvit |
+| `/{locale}/brands` | DONE | logo grid with country and product-line count per brand, plus the photo strip |
+| `/{locale}/brands/{slug}` | DONE | 21 brands; product lines grouped by solution, or "range on request" for FV-Plast, Peštan and Alvit; technical documents for 14 brands |
 | `/{locale}/projects` | DONE | featured projects grouped by sector, plus the contractor list |
-| `/{locale}/about` | DONE | intro, figures, statement, full timeline, services; vision/mission pending owner approval |
-| `/{locale}/locations` | DONE | map, offices, warehouses, regional offices, branch phone lines |
-| `/{locale}/contact` | DONE | main line, WhatsApp, projects line, email, social, branch lines; no form yet |
-| `/{locale}/about/board` | DONE | Board of Directors: the chairman's message (text from the owner 2026-10-05, matching the profile's CEO message; ar/ckb are translations) signed Jaafar Almusawi, Chairman of the Board, Atlas Group; then board members Omer Ibrahim and Mohammed Bajalan. Portraits from the profile's management page (p5), confirmed by the owner. Linked from an About section; About stays active in the nav |
+| `/{locale}/media` | DONE | the YouTube channel's latest videos, click to load; revalidates hourly |
+| `/{locale}/about` | DONE | intro, figures, statement, vision/mission/values, a chairman teaser linking to the board page, the full history, services |
+| `/{locale}/about/board` | DONE | Board of Directors: the chairman's message (owner's text 2026-10-05; ar/ckb are Claude's translations, pending review) signed Jaafar Almusawi, Chairman of the Board, Atlas Group; then board members Omer Ibrahim and Mohammed Bajalan with portraits. About stays active in the nav |
+| `/{locale}/locations` | DONE | map, offices, warehouses, regional offices, branch phone lines; every office opens its exact Google Maps place |
+| `/{locale}/contact` | DONE | main line, WhatsApp, projects and sales lines, email, hours, social, branch lines; no form yet |
 | `/{locale}/links` | DONE | unlisted روابط page (old site's `/روابط/`): main line, WhatsApp, email, social, branch maps, craftsmen app. In no menu or sitemap, `noindex`. `/روابط` and `/ar/روابط` redirect (308) to `/ar/links` via `redirects()` in `next.config.ts`, with percent-encoded sources because Next matches the encoded path |
 | `/{locale}/<unknown>` | DONE | localized 404 (`not-found.tsx`) |
-| `/sitemap.xml`, `/robots.txt`, `/icon.svg` | DONE | sitemap lists all 36 public pages in every locale (108 URLs) |
+| `/sitemap.xml`, `/robots.txt`, `/icon.svg`, `/manifest.webmanifest` | DONE | sitemap lists 39 public pages in every locale (117 URLs) |
 
 ## 5. Design System
 
 All tokens are in `src/app/globals.css`, in `@theme` and `:root`.
 
-**Style:** editorial and architectural. Square geometry, hairline rules, 2px section rules, a 12-column grid, no decorative shadows or gradients, and navy bands for emphasis. Technical-drawing motifs (pipe cross-sections) stand in for photography until real photos arrive.
+**Style:** editorial and architectural. Square geometry, hairline rules, 2px section rules, a 12-column grid, no decorative shadows or gradients, and navy bands for emphasis. Technical-drawing motifs (the hero pipe section) and a water theme (§14) carry the identity.
 
 **Colours:**
 - Brand colours were sampled from the vector logo:
   - `--color-atlas-blue: #26549f`. Primary accent with 7.37:1 contrast on white, so it is safe for text.
   - `--color-atlas-sky: #3c84c2`. Decorative only, at 4.0:1; never use it for small text.
   - `--color-atlas-grey: #70767b`.
-  - `--color-atlas-navy: #14284a`. Derived; used for the header, hero, contact band and theme-color.
+  - `--color-atlas-navy: #14284a`. Derived; used for the header, hero, page headers, contact band and theme-color.
   - `--color-atlas-navy-deep: #0e1c35`. Footer.
 - Neutrals:
   - `--color-paper: #f3f4f2`. Page background.
@@ -166,24 +179,24 @@ All tokens are in `src/app/globals.css`, in `@theme` and `:root`.
 - Utilities: `container-page` (max-width `--container-wide` 95rem / 1520px, with inline padding of `--gutter`) and `section-space`.
 - `--container-content` is 80rem and `--container-text` is 42rem.
 
-**Grid:** `md:grid-cols-12`, with the label in 3 columns and content in 9. This pattern comes from `SectionHead`.
+**Grid:** `md:grid-cols-12`, with the label in 3 columns and content in 9. This pattern comes from `SectionHead`. Inner pages often use a 4 + 7 split (label, then content from column 6).
 
 **Radius:** square everywhere. `--radius-input: 2px` is reserved for future form fields.
 
 **Buttons:**
 - `ButtonLink` variants: `primary` (blue), `secondary` (ink outline), `inverse` (paper on navy) and `inverseOutline`.
-- All are 48px min height, square, with an arrow that nudges in the reading direction on hover.
+- All are 48px min height, square, with an arrow that nudges in the reading direction on hover, a water fill on hover or keyboard focus, and a press to `scale(0.97)`.
 - `TextLink` is an underlined link with an arrow.
 
 **Cards:** there are no rounded cards. Brand tiles form a hairline-bordered grid. Product and project rows are rule-separated lists.
 
-**Images:** partner logos appear in grayscale and switch to colour on hover.
+**Images:** partner logos appear in grayscale and switch to colour on hover. Photos sit in square frames; page headers cross-fade them behind the navy (`HeaderSlides`).
 
-**Icons:** a single inline-SVG `Arrow` (mirrored in RTL), plus `SectionGlyph` (pipe cross-section markers).
+**Icons:** `Icon` (line icons on a 24px grid, 1.5 stroke, always decorative next to text), `Arrow` (mirrored in RTL) and `PinIcon` (on links that open Google Maps).
 
-**Motion tokens:** `--ease-out-expo: cubic-bezier(0.22,1,0.36,1)`, `--duration-fast: 160ms`, `--duration-base: 320ms`, `--duration-reveal: 700ms`.
+**Motion tokens:** `--ease-out-expo: cubic-bezier(0.22,1,0.36,1)`, `--ease-in-out: cubic-bezier(0.77,0,0.175,1)`, `--duration-fast: 160ms`, `--duration-base: 320ms`, `--duration-reveal: 700ms`. Motion (JS) uses `easeOutExpo` from `src/lib/motion.ts`, which mirrors `--ease-out-expo`; change both together.
 
-**Header:** a solid navy sticky bar, 64px tall (80px at `md`). See §11.
+**Header:** a solid navy sticky bar, 64px tall (80px at `md`), with the water progress pipe along its foot. See §11.
 
 **Footer:** deep-navy, 12-column. See §12.
 
@@ -202,10 +215,10 @@ The site should feel premium, sophisticated, modern, architectural, industrial, 
 - template-looking layouts
 
 **Decisions already made:**
-- The **technical-drawing language**: the hero PE100 SDR11 Ø110 pipe section and the `SectionGlyph` markers. Product data is set in mono with real specs (e.g. "PP-R · PP-RCT · Ø 20–200").
-- **Navy bands** for the hero and contact, with paper and white alternating between other sections.
+- The **technical-drawing language**: the hero PE100 SDR11 Ø110 pipe section. Product data is set in mono with real specs (e.g. "PP-R · PP-RCT · Ø 20–200").
+- **Navy bands** for the hero, page headers and contact, with paper and white alternating between other sections.
 - **Lists and indexes instead of cards** for products, projects and clients. The **brand wall** is a hairline grid.
-- **Restrained motion**: one reveal per heading, a drawing that draws itself, and a timeline rule that fills on scroll.
+- **Water theme** (owner, 2026-10-04: "fully animated with a water theme"): waves, caustic light, ripples, water-fill buttons and a water progress pipe. It stays restrained and is off under reduced motion.
 - The logo lockup reads "PIPE SYSTEMS · SINCE 1990". This is the official artwork and must not be edited; the copy uses "Since 1975" (see §9).
 
 ## 7. RTL and Multilingual Architecture
@@ -215,7 +228,7 @@ The site should feel premium, sophisticated, modern, architectural, industrial, 
   - `defineRouting` with `localePrefix: "always"` and `defaultLocale: "en"`.
   - `src/i18n/request.ts` loads `messages/${locale}.json`.
   - `src/i18n/navigation.ts` exports `Link`, `usePathname`, `redirect` and so on from `createNavigation`. **Always use these**, not `next/link`, for internal links.
-- **Proxy:** `src/proxy.ts` is `createMiddleware(routing)`, with matcher `/((?!api|_next|_vercel|.*\\..*).*)`.
+- **Proxy:** `src/proxy.ts` is `createMiddleware(routing)`, with matcher `/((?!api|_next|_vercel|.*\\..*).*)`. Next runs `headers` → `redirects` (next.config) → the proxy → the filesystem, so the روابط redirects fire before locale detection.
 - **lang/dir:** `src/app/[locale]/layout.tsx` renders `<html lang={locale} dir={getDirection(locale)}>`.
 - **Font switching:** handled by the `:lang(ar)` / `:lang(ckb)` CSS rules (§5). The language switcher sets `lang` on each option so every language name renders in its own font.
 - **Logical CSS:** only `ms-/me-/ps-/pe-/start-/end-/border-s/border-e` are used; there is no left/right. `rtl:` variants are used only where a transform must flip:
@@ -227,8 +240,7 @@ The site should feel premium, sophisticated, modern, architectural, industrial, 
 - **Motion direction:** `useDirectionSign()` returns +1 or -1. `SectionWipe` opens from the reading-start edge.
 - **Navigation:** the language switcher keeps the current path (`usePathname` + `locale` prop).
 - **Known RTL issues:**
-  - None open from the last QA pass.
-  - The Arabic heading leading bug was fixed this session.
+  - Arabic and Sorani pages repaint continuously while the header water and the caustic light both run (performance only, nothing visible). Pre-existing; see §25.
   - Brand names in mono-styled country labels need `[:lang(ar)_&]:font-arabic`, because Plex Mono has no Arabic glyphs. Remember this for any new mono text that may contain Arabic script.
 
 ## 8. Translation Status
@@ -236,26 +248,22 @@ The site should feel premium, sophisticated, modern, architectural, industrial, 
 | Area | English | Arabic | Kurdish Sorani |
 |---|---|---|---|
 | Meta, Common, Nav, Footer | complete | complete | complete |
-| Home (all 10 namespaces) | complete | complete | complete |
-| Projects.sectors, Brands.notes, Countries | complete | complete | complete |
-| Content data (offices, warehouses, regional offices, timeline, project names) | complete | complete | complete |
-| Brands, About, Locations, Contact, Projects, NotFound | complete | complete | complete |
-| Solutions (index, 8 solutions, 41 product lines, spec labels) and hero slides | complete | complete | complete, needs native review |
-| Brands / Projects / About / Locations / Contact pages | **not written** | **not written** | **not written** |
+| Home (all 10 namespaces) and hero slides | complete | complete | complete |
+| Solutions (index, 9 solutions, 43 product lines, spec labels) | complete | complete | complete |
+| Brands, Projects, About (incl. vision/mission/values), Locations, Contact, Media, NotFound | complete | complete | complete |
+| Links | complete | complete | complete |
+| Board (chairman's message) | owner's text | Claude's translation | Claude's translation |
+| Content data (offices, warehouses, regional offices, timeline, project names, leadership names and roles) | complete | complete | complete |
 
 **Needs human review:**
-- **Kurdish Sorani has not been reviewed by a native speaker.** Claude wrote it carefully, and several fixes were made this session:
-  - سعوودیە, سڕبیا, کۆماری چیک, گیرەی بۆری
-  - "پەیوەندی بە بەشی فرۆشتنەوە بکە"
-  - `PPی` written attached
-  - non-breaking space after the conjunction "و" in titles
-
-  It is still **not approved copy**. Arabic has not had a native review either.
+- **Kurdish Sorani has not been reviewed by a native speaker.** Claude wrote it carefully (fixes made include سعوودیە, سڕبیا, کۆماری چیک, گیرەی بۆری, `PPی` written attached, and a non-breaking space after the conjunction "و" in titles). It is still **not approved copy**. Arabic has not had a native review either.
+- **The chairman's message in Arabic and Sorani** is Claude's translation of the owner's English text. The Arabic signature line is the owner's own wording.
 - **Client names** (36 contractors in `src/content/projects.ts`) are shown in Latin script in every locale. Arabic/Kurdish spellings were not supplied.
 
 **Consistent terminology:**
 - Brand name: AtlasPlast / أطلس بلاست / ئەتلەس پلاست.
 - Company name: Ufuq Al-Atlas Ltd. / شركة أفق الأطلس المحدودة / کۆمپانیای ئوفوق ئەلئەتلەس.
+- **Owner's Arabic trade terms:** خزانات الدفن / طراد, never سيفونات; حرفيين, never فنيين ("الدعم الفني" stays). A test guards this. The Sorani equivalent of سيفونات is still open with the owner.
 - Manufacturer and product names stay in Latin script (Georg Fischer, Silenta, PP-R…).
 - Numerals are Western digits, wrapped in `<Ltr>`.
 
@@ -264,98 +272,100 @@ The site should feel premium, sophisticated, modern, architectural, industrial, 
 Source files are in the shared project folder (not in the repo):
 - `/mnt/project-files/atlas/sources/ATLASProfile.pdf` (31 pages), plus the extracted text `ATLASProfile.txt`.
 - `/mnt/project-files/atlas/sources/All_AtlasPlast_Logos_2026.pdf` (logo pack).
-- `/mnt/project-files/atlas/sources/profile-images/`: 13 PNGs, mostly partner-factory photos at about 1000px. They are not AtlasPlast's own photos.
+- `/mnt/project-files/atlas/sources/profile-images/`: 13 PNGs, mostly partner-factory photos at about 1000px.
 - Full audit: `/mnt/project-files/atlas/research/content-audit.md` (Rev B; section 0 holds the final decisions).
 
-**Precedence:** MOhammed's confirmations (newest wins) > ATLASProfile > atlasplast.iq.
+**Precedence:** MOhammed's confirmations (newest wins) > ATLASProfile > atlasplast.iq. Much of atlasplast.iq is WordPress theme demo content; never reuse it.
 
 **Confirmed and in use:**
 - Since 1975 (first showroom 1990).
 - "Hundreds of projects."
-- Main phone **6779**. WhatsApp/HQ +964 783 305 6475. Projects division +964 772 267 1130. Email info@atlasplast.iq.
-- **Offices in Iraq:**
+- Main phone **6779** (a normal `tel:` link). Every mobile number opens WhatsApp (`wa.me`): WhatsApp/HQ +964 783 305 6475, projects division +964 772 267 1130, sales department +964 780 288 0009 (old site). Email info@atlasplast.iq.
+- **Offices in Iraq** (each with an exact Google Maps place, `mapUrl` in `company.ts`):
   - Camp Sara (Baghdad) — HQ
   - Al-Shaab (Baghdad)
   - Najaf — +964 783 700 6314
   - Basra — Al-Watan St, +964 787 116 6601
   - Erbil — Gulan St, +964 787 803 0001
   - Duhok — +964 750 991 0065
-- **Warehouses:** Baghdad (includes Al-Radwaniyah), Basra, Erbil, Duhok, Zakho.
+- **Map pins:** all six use `https://maps.google.com/?cid=<decimal CID>`. Camp Sara, Al-Shaab, Najaf, Erbil and Duhok are the places pinned on the old site's روابط page (its "Headquarter" pin is in Al-Shaab). Basra is the "Atlas plast" place the owner sent on 2026-10-05, because the old page showed the Najaf pin under Basra.
+- **Warehouses:** Baghdad, Basra, Erbil, Duhok, Zakho. Open 24/7 with round-the-clock delivery, plus a Friday pickup/shipping note (old site).
 - **Regional offices:** Saudi Arabia, Turkey, Syria, Egypt.
-- **Bänninger:** AtlasPlast is the exclusive agent for **central and southern Iraq**; Massary holds Kurdistan.
+- **Hours:** Saturday to Thursday, 07:00 to 15:00 (old site).
+- **Bänninger:** AtlasPlast is the exclusive agent for **central and southern Iraq**; Massary holds Kurdistan. Ranges: PP-R · PP-RCT (water supply) and PE · PVC-U Ø 8–1000 mm (infrastructure).
 - The Czech agency is **FV-Plast**; the Serbian agency is **Pestan**.
+- **Polymelt** lines: POLO-Polymutan, Polo-Ecosan, Polo-UV, Polo-Polymutan ML5. **Poloplast:** Polo-Kal NG and Polo-Kal 3S only.
+- **KAS** = kas.com.tr, supplied as **PP-R only** (not PPR-C).
+- **Georg Fischer galvanized malleable-iron fittings** (EN 10242) are their own solution, made in Austria (owner, 2026-10-05).
 - **Calpeda and Vitra are no longer partners.** Do not show them.
-- Operations Manager is Raid Thamer. Hussein Raad and Hassan Al-Oreibi have left; do not publish them.
+- Hussein Raad and Hassan Al-Oreibi have left; do not publish them.
 - Client names: approved for publication.
-- Figures used:
+- **Figures used:**
   - 600+ agents and dealers
-  - 23 brands
+  - 23 brands (see REQUIRES REVIEW)
   - 6,000+ engineers and plumbers trained
-  - 6 months of national demand held in stock
-- Hours: Sat–Thu 07:00–15:00 (website).
+  - **9 months** of national demand held in stock (owner corrected six to nine on 2026-10-04)
+- **Vision, mission and values** (About, `About.purpose`): the statements combine the old site's (water and sewage networks) with the profile's (sanitaryware, p6); the values are the profile's. Told to the owner as editable.
+- **History:** besides the key milestones, About shows the sanctions years 1990–2003 (State Company for Construction Materials Trading), the 2006–2007 move to Sulaymaniyah, the 2007 ARBAK partnership, the 2008 return to Baghdad and the 2009 Al-Amir showroom with FABCO. Source: the old Arabic About page as summarised in the content audit; the owner approved adding them.
+- **Leadership** (`src/content/leadership.ts`): Jaafar Almusawi, "Chairman of the Board, Atlas Group" (the owner's title; the profile called him CEO), and board members Omer Ibrahim and Mohammed Bajalan. Portraits from the profile's management page (p5); the owner sent the same photos to confirm. Nobody else from that page is published.
+- **YouTube:** channel @atlasplast (`UCURwlrQZe8PnV7ZUzTme-AQ`), confirmed by the owner.
+- **Craftsmen app:** the old روابط page linked an "Iraqi Craftsmen" app. The links (`craftsmenApp` in `company.ts`) are the store pages it led to, but both stores now list the app as **SAWA**. The owner has been asked whether to keep it.
 
 **REQUIRES REVIEW:**
-- **"23 international brands" vs 21 brands shown.** The profile says 23. After Calpeda and Vitra were removed, the brand wall shows 21. Ask the owner whether the figure should change.
-- **Vision/mission:** the profile's version is sanitaryware-only, while the website's is about water and sewage networks. A combined statement is to be drafted and approved. It is not on the site.
+- **"23 international brands" vs 21 brands shown.** The profile says 23. After Calpeda and Vitra were removed, the brand wall shows 21. Ask the owner whether the figure should change; do not change it on a guess.
 - **Projects completed:** the profile says 700+ (p6) and 800+ (p23). Only "hundreds" is used.
 - **Warehouse area:** the profile gives 40,000 m² + 16,000+ m² vs a 76,000 m² total, and the old site said 20,000 m². None of these is published.
 - **Office count:** the profile contradicts itself (14 vs 10). Not published.
 - **Financial and growth figures, market-share bars, the unnamed ISO certificate:** do not publish.
-- **Leadership:** since 2026-10-05 the owner asked for the chairman's message and two board members (`src/content/leadership.ts`, `/about/board`). Nobody else from the profile's management page is published; Hussein Raad has left.
 - **Profile main number +964 790 135 0331:** not used, because the owner chose 6779.
 - **Boroug UPVC:** it may be a private label. It appears on the Polo Egypt page of the profile and in the logo pack (unconfirmed).
 - **Partner-company founding years:** these are the manufacturers' facts. Use them sparingly.
+- **Still waiting on the owner:** testimonials (with consent), NASSAR, the "up to 50 years" warranty, project photos.
 
 ## 10. Home Page
 
 `src/app/[locale]/page.tsx` renders the sections in this order. All are complete in three languages.
 
 1. **Hero carousel**: `sections/Hero.tsx` (server) composes the slides; `sections/HeroCarousel.tsx` (client) runs them.
-   - The navy band has four slides:
-     1. **Solutions**: the h1 (animated by `LineRise`), the lead, the Explore solutions (`/solutions`) and Contact sales buttons, and the `PipeSection` drawing.
-     2. **History**: "Five decades supplying the builders of Iraq", with a `YearScale` ruler from 1975 to 2025 marking the milestones. The button goes to `/about`.
-     3. **Brands**: lists the manufacturer countries, with a 3×3 grid of white-inverted partner logos. The button goes to `/brands`.
-     4. **Reach**: "Six months of national demand, held in stock", with `IraqMap tone="dark"`. The button goes to `/locations`.
+   - The navy band has four slides, each with a photo backdrop:
+     1. **Solutions**: the h1 (animated by `LineRise`), the lead, the Explore solutions and Contact sales buttons, and the `PipeSection` drawing.
+     2. **Our history**: "Five decades supplying the builders of Iraq", with a `YearScale` ruler from 1975 to 2025 marking the milestones. The button goes to `/about`.
+     3. **Our brands**: lists the manufacturer countries, with a 3×3 grid of white-inverted partner logos. The button goes to `/brands`.
+     4. **Stock and reach**: "Nine months of national demand, held in stock", with `IraqMap tone="dark"`. The button goes to `/locations`.
    - The tab bar has numbered tabs with labels (only the active label shows on phones), plus prev, next and pause controls.
    - Each slide's visual is hidden below `md` to keep the hero short on phones.
    - Below the carousel is a `dl` of 4 figures.
 2. **Statement**: `Statement.tsx`.
-3. **Solutions**: `SolutionIndex.tsx` (SectionHead + `solutions/SolutionList.tsx`). It lists the 8 solutions, each linking to its page.
-4. **Brands**: `BrandWall.tsx`, 21 logos.
+3. **Solutions**: `SolutionIndex.tsx` (SectionHead + `solutions/SolutionList.tsx`), the 9 solutions with icons.
+4. **Brands**: `BrandWall.tsx`, 21 logos and the manufacturer photo strip (`BrandPhotoStrip` inside `CurrentStrip`, with a pause button).
 5. **Projects**: `ProjectIndex.tsx`.
-6. **Timeline**: `Timeline.tsx` with `ScrollRule`.
+6. **Timeline**: `Timeline.tsx` with `ScrollRule` (key milestones only).
 7. **Service model**: `ServiceModel.tsx`.
-8. **Presence**: `Presence.tsx` + `IraqMap`.
+8. **Presence**: `Presence.tsx` + `IraqMap`; offices link to Google Maps.
 9. **Contact band**: `ContactBand.tsx`.
 
-**Solutions pages** (new):
-- `/solutions` has a `PageHeader` (navy, with breadcrumb and h1) and the pipe drawing, then a `SolutionList` with h2 rows and the `ContactBand`.
-- `/solutions/[slug]` has:
-  - a `PageHeader` with the "01 / 08" eyebrow, intro, line count and brand names, plus a large `SectionGlyph`
-  - product line rows: brand logo (or the Aquahot mark), name, description, and a spec `dl` in mono wrapped in `<Ltr>`
-  - a navy "Need help choosing?" band with the main line
-  - an "Other solutions" list
-  - `BreadcrumbList` JSON-LD
+**Inner pages:**
+- Every inner page opens with `PageHeader` (navy, breadcrumb, eyebrow, h1, intro). The `image` prop puts one photo under a navy wash with a slow Ken Burns (warehouse photos on About, Locations and the Solutions index; manufacturer photos on brand pages). The `slides` prop cross-fades several photos instead (`HeaderSlides`, with a pause button and dots); each solution page uses it for its product photos.
+- `/solutions/[slug]`: the "01 / 09" eyebrow, intro, line count and brand names; product line rows (brand logo or the Aquahot mark, name, description, a spec `dl` in mono wrapped in `<Ltr>`, and "Made in" when `madeIn` differs from the brand's country); a navy "Need help choosing?" band; an "Other solutions" list; `BreadcrumbList` and `ItemList` JSON-LD.
+- `/media`: `lib/youtube.ts` reads the channel's public feed (latest 15 uploads) with `next.revalidate` 3600, and the page has `revalidate = 3600`, so new uploads appear within the hour without a redeploy. If the feed is unreachable (as in the build sandbox) it falls back to the old site's video `xatuZC65KuM`. `VideoGallery` is click-to-load (thumbnail first, then a youtube-nocookie embed). VideoObject JSON-LD only for feed items with a title and date.
+- `/about/board` and `/links`: see §4.
 
-**Responsive:** sections stack below `md`/`lg`. QA passed on Home and the Solutions pages at 375–1920px in all 3 locales.
+**Responsive:** sections stack below `md`/`lg`. The Playwright suite checks every template at 375, 768 and 1440px in all 3 locales.
 
 ## 11. Header and Navigation
 
 `src/components/layout/SiteHeader.tsx` (client).
 
-- **Bar:** sticky, solid navy, z-40. There is no transparent state and no scroll-based change. It is `h-16`, or `md:h-20`.
-- **Logo:** the white lockup, sized by height (`!h-11 md:!h-14`, fixed this session; it previously overflowed the bar). It links to `/`.
+- **Bar:** sticky, solid navy, z-40. There is no transparent state. It is `h-16`, or `md:h-20`. Along its foot runs the reading-progress water pipe (`water/ScrollWater.tsx`).
+- **Logo:** the white lockup, sized by height (`!h-11 md:!h-14`). It links to `/`.
+- **Nav items** (`src/lib/nav.ts`): Solutions, Brands, Projects, Media, About, Locations. Contact is a separate button. `/about/board` keeps About marked as current.
 - **Desktop (≥ lg):**
-  - Nav items: Solutions, Brands, Projects, About, Locations.
   - An underline grows on hover and on `aria-current="page"`. Its origin flips in RTL.
   - On the end side: `LanguageSwitcher` (English / العربية / کوردی) and a bordered Contact button.
 - **Mobile (< lg):**
   - A two-line burger opens a full-screen navy menu under the bar.
-  - The menu has large links with arrows (staggered fade-up), plus the language switcher.
-  - Escape closes it; page scroll is locked while open; links close the menu.
-- **Known gaps:**
-  - No focus trap inside the open mobile menu (Tab can leave it).
-- **Nav items:** Solutions, Brands, Projects, About, Locations. Products was renamed to Solutions on 2026-10-04.
+  - The menu has large links with arrows (rows fade and rise in, staggered), plus the language switcher.
+  - While it is open: page scroll is locked, the page behind is `inert`, Tab stays inside the header, Escape closes it, and focus returns to the burger. Links close the menu. A test guards this.
 
 ## 12. Footer
 
@@ -363,87 +373,92 @@ Source files are in the shared project folder (not in the repo):
 
 - **Columns:**
   - logo and tagline
-  - "Explore" links (the nav plus Contact)
-  - "Offices in Iraq" (6 offices)
+  - "Explore": the nav plus Contact
+  - "Offices in Iraq" (6 office names)
   - Contact (main line 6779, email)
-  - Follow (Facebook, Instagram, LinkedIn)
+  - Follow (Facebook, Instagram, LinkedIn, YouTube), from `company.social` and `socialNames`
 - **Bottom bar:** © year Ufuq Al-Atlas Ltd.
 - **Mobile:** the columns stack.
-- **Missing:**
-  - Warehouse and regional office lists.
-  - Office addresses and phone numbers (data exists in `company.ts`).
-  - A link to the future Solutions pages.
-  - Social URLs are taken from the old site and have not been re-verified.
+- **Not in the footer:** warehouses, regional offices, office addresses and phones (they are on Locations and Contact), and the روابط page (unlisted on purpose).
 
 ## 13. Components
 
 | Component | File | Purpose / where used | Notes |
 |---|---|---|---|
-| `SectionHead` | `src/components/ui/SectionHead.tsx` | Section opener: 2px rule, eyebrow (3 cols), h2 + intro + action (9 cols). Used by most Home sections | props `eyebrow, title, intro?, id, action?, tone` (light/dark). Arabic leading override built in |
-| `ButtonLink` | `ui/ButtonLink.tsx` | Primary CTA links (next-intl `Link`) | `variant`: primary/secondary/inverse/inverseOutline; the arrow nudge flips in RTL |
+| `SectionHead` | `ui/SectionHead.tsx` | Section opener: 2px rule, eyebrow (3 cols), h2 + intro + action (9 cols) | props `eyebrow, title, intro?, id, action?, tone` (light/dark). Arabic leading override built in |
+| `PageHeader` | `ui/PageHeader.tsx` | Navy opening band for inner pages: breadcrumb, eyebrow, h1, intro, optional `icon`, `aside`, children, and a backdrop: one `image` or cross-fading `slides` | use it on every new inner page |
+| `HeaderSlides` | `ui/HeaderSlides.tsx` | Photo backdrop for a page header that cross-fades like the hero, with a pause button and dots | client; holds on mouse hover and keyboard focus, never after a tap |
+| `ButtonLink` | `ui/ButtonLink.tsx` | CTA links (next-intl `Link`) | `variant`: primary/secondary/inverse/inverseOutline; water fill, arrow nudge (flips in RTL), press scale |
 | `TextLink` | `ui/TextLink.tsx` | Underlined "All …" links | |
-| `Arrow` | `ui/Arrow.tsx` | Forward arrow | `rtl:-scale-x-100` |
+| `Icon` | `ui/Icon.tsx` | Line icons next to text | always decorative; `IconName` type lists them |
+| `Arrow`, `PinIcon` | `ui/` | Forward arrow; map pin | `Arrow` is `rtl:-scale-x-100` |
 | `Ltr` | `ui/Ltr.tsx` | `<bdi dir="ltr">` for numbers and codes in RTL | |
-| `Logo` | `layout/Logo.tsx` | Official lockup (`/brand/atlasplast.svg` or `-white.svg`) via `next/image` (unoptimized, priority) | never mirrored; size it with height |
+| `Logo` | `layout/Logo.tsx` | Official lockup via `next/image` (unoptimized, priority) | never mirrored; size it with height |
 | `LanguageSwitcher` | `layout/LanguageSwitcher.tsx` | Locale links keeping the path | `className`, `onNavigate` |
 | `SiteHeader` / `SiteFooter` | `layout/` | §11 and §12 | |
-| `HeroCarousel` | `sections/HeroCarousel.tsx` | Tabbed hero carousel (APG pattern) | client; props `slides {id, tab, content}[]`, `labels`, `interval` (default 8000). Autoplay is driven by the CSS `hero-progress` keyframes on the active tab rule (`onAnimationEnd` advances). It pauses on mouse hover (`pointerType === "mouse"`), keyboard focus (`:focus-visible` only) and the pause button, so a tap on a phone never leaves it held; no autoplay under reduced motion. Arrow keys follow the reading direction. Slides share one grid cell |
-| `PageHeader` | `ui/PageHeader.tsx` | Navy opening band for inner pages: breadcrumb, eyebrow, h1, intro, optional aside and children | use it on every new inner page |
-| `SolutionList` | `solutions/SolutionList.tsx` | Rule-separated solution rows linking to `/solutions/[slug]` | props `only?` (slugs), `headingLevel`; also exports `solutionBrands()` |
+| `HeroCarousel` | `sections/HeroCarousel.tsx` | Tabbed hero carousel (APG pattern) | client; props `slides {id, tab, content}[]`, `labels`, `interval` (default 8000). Autoplay is driven by the CSS `hero-progress` keyframes on the active tab rule (`onAnimationEnd` advances). It pauses on mouse hover (`pointerType === "mouse"`), keyboard focus (`:focus-visible` only) and the pause button, so a tap on a phone never leaves it held; no autoplay under reduced motion. Arrow keys follow the reading direction |
 | `PipeSection` | `sections/PipeSection.tsx` | Hero technical drawing | client; renders finished when reduced motion is on |
-| `SectionGlyph` | `sections/SectionGlyph.tsx` | Pipe cross-section marker for each product family | prop `wall` (ratio) |
-| `IraqMap` | `sections/IraqMap.tsx` | Map with office and warehouse markers | props `locale, label, officeCities, warehouseCities, cityNames, tone` (`light`/`dark`), `className`; never mirrored; `labelSide` puts Zakho/Najaf/Basra labels to the west |
+| `IraqMap` | `sections/IraqMap.tsx` | Map with office and warehouse markers; office dots link to Google Maps | props `locale, label, officeCities, warehouseCities, cityNames, tone`, `className`; never mirrored |
+| `Purpose` | `sections/Purpose.tsx` | About: vision, mission, values | copy in `About.purpose` |
+| `Timeline` | `sections/Timeline.tsx` | Milestones with `ScrollRule` | `full` shows all (About); otherwise `keyMilestones` |
+| `SolutionList` | `solutions/SolutionList.tsx` | Rule-separated solution rows | props `only?` (slugs), `headingLevel`; also exports `solutionBrands()` |
+| `ProductLineRow`, `EnquiryBand` | `solutions/` | Product-line row and sales band, shared by solution and brand pages | |
+| `BrandGrid` | `brands/BrandGrid.tsx` | Hairline logo grid | Brands index and Home |
+| `BrandDocuments` | `brands/BrandDocuments.tsx` | Technical documents on brand pages | renders when `documents` is set in `brands.ts` |
+| `BrandPhotoStrip` + `CurrentStrip` | `brands/` | Manufacturer photos drifting past; `CurrentStrip` (client) adds the pause button | the list renders twice for a seamless loop; the copy is hidden from assistive tech |
+| `OfficeLines` | `company/OfficeLines.tsx` | Branch phone lines and map links | Locations, Contact, Links |
+| `VideoGallery` | `media/VideoGallery.tsx` | Featured player plus the video list, click to load | client |
+| `Waves`, `ScrollWater` | `water/` | Wave edge at the foot of dark bands; header water progress pipe | CSS motion, off under reduced motion |
+| `JsonLd` | `seo/JsonLd.tsx` | Renders one `@graph` per page | builders in `lib/structured-data.ts` and `pageLd()` in `lib/site.ts` |
 | `LineRise` | `motion/LineRise.tsx` | Word-mask headline reveal | splits only on spaces (keeps Arabic shaping); plain heading when reduced motion is on |
-| `SectionWipe` | `motion/SectionWipe.tsx` | clip-path reveal from the reading-start edge | for large visuals only; plain div when reduced motion is on |
+| `SectionWipe` | `motion/SectionWipe.tsx` | clip-path reveal from the reading-start edge | observes an unclipped wrapper (Chrome treats a fully clipped element as not intersecting) |
 | `ScrollRule` | `motion/ScrollRule.tsx` | Timeline rule that fills with scroll (spring) | origin flips in RTL; full width when reduced motion is on |
 | `MotionProvider` | `motion/MotionProvider.tsx` | `LazyMotion` (domAnimation, strict) + `MotionConfig reducedMotion="user"` | strict mode means you **must use `m.*`, not `motion.*`** |
 | `useDirectionSign` | `motion/useDirection.ts` | +1 LTR / -1 RTL | |
 
 ## 14. Animation System
 
-- **Philosophy:** purposeful and restrained. Motion explains (a drawing draws itself, a timeline fills) and never decorates. One reveal per element, once.
+- **Philosophy:** purposeful and restrained, with a water theme the owner asked for. Motion explains (a drawing draws itself, a timeline fills) or carries the water identity; it never blocks content. One reveal per element, once.
 - **Hero:**
-  - `LineRise` rises each word out of a mask (0.9s, ease-out-expo, 45ms stagger).
+  - `LineRise` rises each word out of a mask (0.9s, ease-out-expo, 45ms stagger), as a `transform` string so it runs off the main thread.
   - `PipeSection` strokes draw via `pathLength` (1.6s, staggered 0.3–1.1s), then labels fade in.
+  - Slides crossfade over 0.6s (opacity only). The active tab's 3px rule fills over 8s via the CSS keyframes `hero-progress`; when it ends, the next slide shows.
 - **Scroll:**
   - `SectionWipe` on the map (1.1s, `whileInView`, once, at 25% visibility).
   - `ScrollRule` on the timeline (spring with stiffness 120, damping 30).
-- **Hover:**
-  - Underline grow (320ms), the button arrow nudge, the product glyph rotating 90° (700ms) and brand logos changing from grayscale to colour.
-- **Mobile menu:** a 0.25s fade, with items staggered at 40ms.
-- **Hero carousel:**
-  - Slides crossfade over 0.6s (opacity only, no sliding).
-  - The active tab's 3px rule fills over 8s via the CSS keyframes `hero-progress`, defined in `globals.css`. When it ends, the next slide shows.
-  - Under reduced motion there is no autoplay and no pause button; the rule shows as full.
-- **Not implemented:** page transitions and parallax. Both are intentionally absent.
-- **Easing:** everything uses `cubic-bezier(0.22, 1, 0.36, 1)`: `easeOutExpo` in `src/lib/motion.ts` for Motion, `var(--ease-out-expo)` in CSS. The one exception is the header photo dots, on `--ease-in-out` (`cubic-bezier(0.77, 0, 0.175, 1)`, 200ms).
-- **Audit fixes (plans 001-010, merged 2026-10-05):** the plans are in `/mnt/project-files/atlas/animation-plans/`. In short:
-  - The button water fill only runs on hover-capable devices and on keyboard focus; idle fills are paused, and the rise runs on the compositor (`.liquid-box`).
-  - The brand photo strip (`CurrentStrip`) and the header photos (`HeaderSlides`) have pause buttons (WCAG 2.2.2).
-  - Buttons press to `scale(0.97)` (icon buttons `0.95`) on the fast duration.
+  - `ScrollWater`: the header pipe scales with the scroll; inside it the `water-flow` strip slides on `transform`.
+- **Water motion** (CSS in `globals.css`): wave edge on dark bands (`Waves`), caustic light, slow Ken Burns on photos, ripples on map offices, water-fill buttons and the header pipe.
+- **Photos:** the brand photo strip drifts continuously; page header photos cross-fade. Both have pause buttons (WCAG 2.2.2), hold on mouse hover and keyboard focus, and resume straight after Play on touch screens. The header dots grow with `scale` over 200ms on `--ease-in-out`.
+- **Hover and press:**
+  - Underline grow (320ms), the button arrow nudge, solution rows tinting with their icon filling blue, and brand logos changing from grayscale to colour.
+  - The button water fill runs only on hover-capable devices (`@media (hover: hover)`) and on keyboard focus. Idle fills are paused, and the rise runs on the compositor (`.liquid-box`).
+  - Buttons press to `scale(0.97)` (icon buttons `0.95`) on `--duration-fast`.
   - Only the featured video's play button pulses.
-  - Header water (`water-flow`), the headline rise (`LineRise`) and the mobile menu rows animate `transform`, so they run off the main thread; reduced motion keeps fades only.
-  - Open: Arabic and Sorani pages repaint while the header water and the caustics both run (pre-existing, see the plans README).
+- **Mobile menu:** a 0.25s fade, with rows rising in on a `transform` string, staggered at 40ms.
+- **Not implemented:** page transitions and parallax. Both are intentionally absent.
+- **Easing:** everything uses `cubic-bezier(0.22, 1, 0.36, 1)`: `easeOutExpo` in `src/lib/motion.ts` for Motion, `var(--ease-out-expo)` in CSS. The one exception is the header photo dots, on `--ease-in-out`.
 - **Reduced motion:**
-  - `MotionConfig reducedMotion="user"`.
-  - `LineRise`, `SectionWipe` and `PipeSection` check `useReducedMotion()` and render the final state.
+  - `MotionConfig reducedMotion="user"`. It skips transform shorthands but not `transform` strings, so components that animate a `transform` string check `useReducedMotion()` themselves (`LineRise`, the menu rows).
+  - `LineRise`, `SectionWipe` and `PipeSection` render the final state.
   - `ScrollRule` uses `motion-reduce:!scale-x-100`.
-  - `html` smooth scrolling is turned off under `prefers-reduced-motion`.
+  - All water motion, Ken Burns and the hero and header-photo autoplay stop; the hero rule shows as full and its pause button is hidden. The photo strip stops and becomes a plain horizontal scroller.
+  - `html` smooth scrolling is turned off.
+- **Animation audit (2026-10-05):** the audit and its ten plans are in `/mnt/project-files/atlas/reviews/animation-audit.md` and `/mnt/project-files/atlas/animation-plans/`. All ten were merged into `feat/home-page` on 2026-10-05 (merge `b4a5ed1`). The plans README also lists two unplanned ideas and the open RTL repaint issue (§25).
 - **Do not change:**
   - The `LazyMotion strict` + `m` pattern (bundle size).
-  - The reduced-motion fallbacks.
+  - The reduced-motion fallbacks and the pause buttons.
   - That the map and drawing are never mirrored.
   - That `LineRise` never splits inside a word (it would break Arabic and Sorani joining).
 
 ## 15. Responsive Design
 
-Breakpoints are Tailwind defaults (sm 640, md 768, lg 1024, xl 1280). QA viewports: 375, 430, 768, 1024, 1440 and 1920.
+Breakpoints are Tailwind defaults (sm 640, md 768, lg 1024, xl 1280). QA viewports: 375, 430, 768, 1024, 1440 and 1920 by hand; the suite runs 375, 768 and 1440.
 
 - **375/430:**
   - Burger menu and single-column sections.
   - Figures in a 2×2 grid.
   - Brand wall in 2 columns (the last odd tile spans both).
-  - Pipe drawing below the hero text.
+  - Hero slide visuals hidden; header photos sit under a navy wash behind the text.
   - Header 64px.
 - **768:**
   - The 12-column `SectionHead` grid starts (label beside the heading).
@@ -455,63 +470,65 @@ Breakpoints are Tailwind defaults (sm 640, md 768, lg 1024, xl 1280). QA viewpor
   - Figures in 4 columns.
   - Timeline in 4 columns.
   - Presence in two columns (map + lists).
+  - Page header photos fill the end side and fade into the navy.
 - **1440/1920:** content is capped at 1520px plus gutters.
-- **Typography:** scales fluidly with `clamp()`. There is no image cropping yet because there are no photos.
+- **Typography:** scales fluidly with `clamp()`.
 - **RTL on mobile:** verified for ar and ckb at 375 and 390, including the menu.
-- **Known problems:** none open. Fixed this session: the Basra map label was clipped at mobile width.
+- **Known problems:** none open.
 
 ## 16. Images and Assets
 
 - **AtlasPlast logos:** in `public/brand/`.
   - `atlasplast.svg` (colour, horizontal), `atlasplast-white.svg` and `atlasplast-stacked.svg`.
   - All come from the 2026 logo pack PDF via `pdftocairo` and svgo.
-- **Favicon:** `src/app/icon.svg`, a viewBox crop of the stacked logo's globe mark.
+- **Favicon:** `src/app/icon.svg`, a viewBox crop of the stacked logo's globe mark; `apple-icon.png` and `manifest.ts` beside it.
 - **Partner logos:** in `public/brands/`.
   - alvit, aquapa, ascelik, baenninger, candan, dab, fv-plast, georg-fischer, guarri, kas, ostendorf, pestan, pimtas, poloplast, polymelt, quarterbath, saudi-ceramics, shield, turan-borfit and wisa (all used).
   - `aquahot.svg` is used on the Water heaters solution page as the Aquahot line's mark.
   - **Polo Egypt has no logo** (renders as text).
-- **Photography:**
-  - There is **none**: no hero, product or project photos.
-  - The owner has been asked for original photos of warehouses, showrooms, team and projects.
-  - The profile images in `/mnt/project-files/atlas/sources/profile-images/` are mostly partner factories at about 1000px, so they are not suitable as AtlasPlast hero imagery.
-  - Never substitute AI-generated "company" photos.
+- **Photography** (all from the company profile PDF; no original photos yet):
+  - `public/images/brands/<slug>.jpg`: 10 manufacturer-site photos (`photos` map in `brands.ts`). Used as brand page header backdrops, in the photo strip and as hero backdrops.
+  - `public/images/hero/`: `landmark.jpg` (p21) and AtlasPlast's own warehouse photos `warehouse-*.jpg` (p23), used on the hero "reach" slide and the About, Locations and Solutions headers.
+  - `public/images/solutions/<slug>-<n>.jpg`: 33 product photos extracted with `pdfimages` (alpha masks flattened on white), listed per solution in `solutions.ts` with the brand when the profile page names it. Galvanized fittings has no product photo: its header uses the GF building from p8 until the owner sends one.
+  - `public/images/leadership/`: the three portraits (p5).
+  - Profile photos are about 500px wide; replace them with originals when the owner sends them.
+  - Never substitute AI-generated "company" photos, and never present partner-factory photos as AtlasPlast's.
 - **Fonts:** self-hosted by `next/font` (§2).
-- **OG image:** none yet.
-- **Preview screenshots** (not in the repo): `/mnt/project-files/atlas/preview/home-{en,ar,ckb}-1440.jpg`, `home-ckb-390.jpg` and `home-ar-390.jpg`.
+- **OG image:** `public/og.png` (1200×630), rendered by `scripts/og-image.js` from a running production server on :3600. Re-run it if the branding changes.
+- **Review screenshots** (not in the repo): `/mnt/project-files/atlas/preview/` and `/mnt/project-files/atlas/reviews/`.
 
 ## 17. SEO
 
-Full SEO pass done 2026-10-04 at the owner's request ("make sure SEO is the best for the website and all pages").
+Full SEO pass done 2026-10-04 at the owner's request ("make sure SEO is the best for the website and all pages"). New pages follow the same pattern.
 
 **Metadata** (`pageMetadata()` in `src/lib/site.ts`, used by every page):
-- Keyword-led titles per page in all three languages (`Meta.*Title` keys), e.g. "Water supply pipes in Iraq | AtlasPlast", "Polymelt in Iraq | AtlasPlast". Home uses an absolute title.
-- Descriptions are kept under about 160 characters. Solution pages use the solution's short text plus "Supplied across Iraq by AtlasPlast". Brand pages name the product lines supplied, or "ask our sales team" when there are none.
+- Keyword-led titles per page in all three languages (`Meta.*Title` keys), e.g. "Water supply pipes in Iraq | AtlasPlast". Home uses an absolute title.
+- Descriptions are kept under about 160 characters. The main line comes from `company.mainPhone` via `{phone}`, so it updates in one place.
 - Canonical URL, hreflang for en/ar/ckb plus x-default → /en.
-- Open Graph with `og:locale` en_US / ar_IQ / ckb_IQ and the other two as `og:locale:alternate`, plus the share image `/og.png` (1200×630, localized alt). Twitter `summary_large_image`.
-- The main line in titles and descriptions comes from `company.mainPhone` via `{phone}`, so it updates in one place.
+- Open Graph with `og:locale` en_US / ar_IQ / ckb_IQ and the other two as `og:locale:alternate`, plus `/og.png` with a localized alt. Twitter `summary_large_image`.
+- `/links` is `noindex, follow`; the 404 page is noindex.
 
-**Structured data** (`src/lib/structured-data.ts`, `src/components/seo/JsonLd.tsx`, one `@graph` per page):
-- Home: `Organization` (@id `SITE_URL/#organization`, logo, founding 1975, contact points, sameAs) and `WebSite`, plus `WebPage`.
+**Structured data** (`src/lib/structured-data.ts`, `pageLd()` in `src/lib/site.ts`, `JsonLd`; one `@graph` per page):
+- Home: `Organization` (@id `SITE_URL/#organization`, logo, founding 1975, contact points, `sameAs` including YouTube) and `WebSite`, plus `WebPage`.
 - Every inner page: a typed page node (`CollectionPage`, `AboutPage`, `ContactPage` or `WebPage`) and `BreadcrumbList`.
-- Solution and brand pages: an `ItemList` of product lines. This is deliberately not `Product`, because there are no prices or reviews and Product without them raises Search Console errors.
+- Solution and brand pages: an `ItemList` of product lines. Deliberately not `Product`, because there are no prices or reviews.
 - Locations: one `LocalBusiness` per Iraqi office (city, phone, parentOrganization).
-- Contact: Organization `contactPoint`s (main line, projects line, WhatsApp).
+- Contact: Organization `contactPoint`s (main line, projects line, sales line, WhatsApp).
+- Media: `VideoObject` per feed video with a title and date.
+- Board: a `Person` per leader (name, jobTitle, image, worksFor the organization).
 
 **Other:**
-- `src/app/sitemap.ts` lists all 36 pages × 3 locales (108 URLs) with hreflang alternates and a build-time `lastModified`.
-- `src/app/robots.ts` allows all and points to the sitemap. The 404 page is noindex.
-- `src/app/manifest.ts`, `src/app/icon.svg` and `src/app/apple-icon.png`. `viewport.themeColor` is `#14284a`.
-- The share image is rendered by `scripts/og-image.js` (needs the production server on :3600 for fonts). Re-run it if the branding changes.
-
-**Verified:** across all 108 sitemap URLs there are no duplicate titles, every canonical matches its URL, every JSON-LD block parses, and each page has exactly one h1. Two descriptions (Arabic and Sorani water supply) run slightly over 160 characters, which is acceptable.
+- `src/app/sitemap.ts` lists 39 pages × 3 locales (117 URLs) with hreflang alternates and a build-time `lastModified`. Add every new public page to `paths`; `/links` stays out on purpose.
+- `src/app/robots.ts` allows all and points to the sitemap.
+- `viewport.themeColor` is `#14284a`.
 
 **Still open:** submit the sitemap in Google Search Console and Bing Webmaster Tools after the domain goes live (this needs the owner's account), and add original photography for richer share images.
 
 ### Brand technical documents
 
-- Brand pages show a **Technical documents** section when `documents` is set on the brand in `src/content/brands.ts` (component `src/components/brands/BrandDocuments.tsx`).
-- Owner decision 2026-10-04: the files come from the **manufacturers' official websites** and must be **in English**. They are linked, not re-hosted (the sandbox cannot download from those domains). Each has `source: "manufacturer:2026-10-04"`.
-- 14 brands have documents. KAS = kas.com.tr, confirmed by the owner 2026-10-04; its PP-R line (KAS PPR-C) is in Water supply. None were found for WISA (site timed out), Turan Borfit, Guarri, Asçelik, Polo Egypt, Shield and Alvit (Turkish only).
+- Brand pages show a **Technical documents** section when `documents` is set on the brand in `src/content/brands.ts`.
+- Owner decision 2026-10-04: the files come from the **manufacturers' official websites** and must be **in English**. They are linked, not re-hosted. Each has `source: "manufacturer:2026-10-04"`.
+- 14 brands have documents. None were found for WISA (site timed out), Turan Borfit, Guarri, Asçelik, Polo Egypt, Shield and Alvit (Turkish only).
 - Unverified: the Bänninger Range of Products PDF (34 MB, not opened). Saudi Ceramics links to its catalogue page; the files themselves are on Google Drive and were not opened.
 - To self-host a file instead, put it under `public/docs/<brand>/` and use `href: "/docs/<brand>/<file>.pdf"`.
 
@@ -522,165 +539,144 @@ Full SEO pass done 2026-10-04 at the owner's request ("make sure SEO is the best
 - One h1 per page, with sections labelled by `aria-labelledby`.
 - `dl` for the figures and `aria-current` on nav and language links.
 - Visible `:focus-visible` outline: 2px Atlas Blue, or light on dark sections.
-- `aria-expanded`/`aria-controls` on the burger, plus Escape to close.
-- Alt text on logos (brand names).
+- Mobile menu: `aria-expanded`/`aria-controls`, focus kept inside, the page behind made `inert`, Escape to close, focus returned to the burger.
+- Pause buttons on every moving photo set (hero, header photos, photo strip), as WCAG 2.2.2 requires.
+- Alt text on logos (brand names) and portraits (names); decorative icons are hidden.
 - `role="img"` + `aria-label` on the map and pipe drawing.
 - `LineRise` keeps the full heading in `aria-label`, with the word spans `aria-hidden`.
 - `lang`/`dir` on `<html>`, plus `lang` on Latin-script brand names and language options.
-- Reduced motion is honoured.
+- Reduced motion is honoured (§14).
 - Atlas Sky is not used for text.
-- Tap targets are at least 44px (burger 44px, buttons 48px).
+- Tap targets are at least 44px (burger and icon buttons 44px, buttons 48px).
+- **axe (WCAG 2.1 AA)** runs on every template in every locale in the test suite; serious and critical violations fail it.
 
 **Known issues:**
-- No focus trap in the mobile menu.
 - No forms yet; the contact form is still to be designed, with labels and errors.
-- No automated axe audit has been run.
 
 ## 19. Performance
 
-- All pages are statically prerendered (SSG) with Server Components by default. Only the header, language switcher, pipe drawing and motion helpers ship client JS.
+- All pages are statically prerendered (SSG) with Server Components by default. Only the client components in §3 ship JS.
 - Motion uses `LazyMotion` + `domAnimation` (a reduced feature bundle).
-- Fonts use `next/font` (self-hosted, `display: swap`, subset); the Arabic font loads the arabic subset only.
-- Logos are lightweight SVGs (svgo-optimised).
-- AVIF/WebP are configured for future photos.
-- **Known problems:** none measured. No Lighthouse run yet.
+- Continuous motion runs on the compositor: the photo strip, header water, headline rise, menu rows, button fill rise and photo dots animate `transform`/`opacity`/`scale`, and idle button fills are paused.
+- Fonts use `next/font` (self-hosted, `display: swap`, subset); the Arabic font loads the arabic subset only. Mono labels are not preloaded.
+- Logos are lightweight SVGs (svgo-optimised). Photos go through `next/image` (AVIF/WebP, `sizes` set).
 
-**Lighthouse 12 (2026-10-04, mobile, simulated slow 4G, standalone server):**
+**Lighthouse 12 (2026-10-04, mobile, simulated slow 4G, standalone server; before the photos and water motion):**
 - `/en`: Performance 87, Accessibility 100, Best Practices 100, SEO 92. LCP 4.0 s, TBT 60 ms, CLS 0.
 - `/ar/brands/polymelt`: Performance 89, Accessibility 100, Best Practices 100, SEO 92. LCP 3.7 s.
 - The SEO 92 is only the `canonical` audit, because the test ran on localhost while canonicals point to `https://atlasplast.iq`. It passes on the real domain.
-- LCP is the hero lead paragraph, delayed by web-font loading (all locales share one layout, so Latin and Arabic fonts are both preloaded). Already applied: mono labels are not preloaded, and the unused Arabic 700 weight was dropped. A further gain would mean splitting the font loading per script.
+- LCP is the hero lead paragraph, delayed by web-font loading (all locales share one layout, so Latin and Arabic fonts are both preloaded). A further gain would mean splitting the font loading per script.
+- **Not re-measured** since photos and water motion were added. Run Lighthouse again before launch.
+
+**Known problem:** Arabic and Sorani pages repaint continuously while the header water and the caustic light both run (§25).
 
 ## 20. Coolify Deployment
 
 - **Repository:** https://github.com/M7tech/website_pipes
-- **Production branch:** `main`, which holds only the scaffold. The site is on `feat/home-page` in **draft PR #1** (https://github.com/M7tech/website_pipes/pull/1). Deploy `main` only after the PR is merged.
-- **Build method: Dockerfile** (repo root). It is multi-stage on `node:22-alpine`, uses `output: "standalone"`, runs as a non-root user, and has a built-in `HEALTHCHECK` on `/en`. `.dockerignore` keeps tests, `.git` and env files out of the image.
-  - The image was **not built in this sandbox** (no Docker daemon). The same standalone server (`node .next/standalone/server.js` with `public` and `.next/static` copied in) was run locally, and all 121 Playwright checks passed against it.
-- **Build argument:** `NEXT_PUBLIC_SITE_URL` must be set as a build-time variable, because it is inlined during the build. It defaults to `https://atlasplast.iq`.
-- **Port:** 3000. **Health check:** host `127.0.0.1` (the server is IPv4 only and `localhost` may resolve to `::1`), port 3000, path `/en` (`/` returns a 307 redirect), return code 200. The image includes `curl` for Coolify's check.
+- **Preview:** https://new.atlasplast.iq. Coolify deploys branch **`feat/home-page`** automatically on every push. Canonicals still point to `https://atlasplast.iq`.
+- **Production:** `main` holds only the scaffold. The site is on `feat/home-page` in **draft PR #1** (https://github.com/M7tech/website_pipes/pull/1). After the owner merges it, switch Coolify to `main` and point the live domain at it.
+- **Build method: Dockerfile** (repo root, not Railpack). It is multi-stage on `node:22-alpine`, uses `output: "standalone"`, runs as a non-root user, and has a built-in `HEALTHCHECK` on `/en`. `.dockerignore` keeps tests, `.git`, env files and Markdown (except README) out of the image.
+- **Build argument:** `NEXT_PUBLIC_SITE_URL=https://atlasplast.iq`, set as a build-time variable because it is inlined during the build. It defaults to `https://atlasplast.iq`.
+- **Port:** 3000. **Health check:** host `127.0.0.1` (the server is IPv4 only; `HOSTNAME=::` crashes without IPv6 and `localhost` may resolve to `::1`), port 3000, path `/en` (`/` returns a 307 redirect), return code 200. The image includes `curl` for Coolify's check.
 - **Headers** (`next.config.ts`):
   - `X-Content-Type-Options`, `Referrer-Policy`, `X-Frame-Options: SAMEORIGIN` and `Permissions-Policy` on every response.
   - A one-week cache on `/brand/*` and `/brands/*` logos.
   - HSTS is left to Coolify's proxy.
-- **Without Docker:** `npm ci && npm run build && npm run start` still works (`next start` runs fine with standalone output).
+- **Without Docker:** `npm ci && npm run build && npm run start` still works.
 - **Domain:** point it at the Coolify app and enable HTTPS there.
 - No secrets are needed or committed. `.env*` is gitignored, except `.env.example`.
 
 ## 21. Git Status
 
-- **Current branch:** `feat/home-page`, which tracks `origin/feat/home-page`.
-- **Commits** (newest first):
-  - `c7d9f17` Add Solutions pages and a four-slide hero
-  - `6f84d2e` Add project handoff for future sessions (HANDOFF.md)
-  - `14bf432` Add sitemap, robots and app icon
-  - `0f613e5` Build the Home page
-  - `2927911` Add site header, footer and locale layout
-  - `27cf8bc` Add design tokens, typography and motion primitives
-  - `9419020` Add trilingual routing for en, ar and ckb with next-intl
-  - `ed44260` Scaffold Next.js 16 project… (this is `main`)
-- **Uncommitted:** none, apart from this HANDOFF.md update, which is committed right after it is written.
-- **PR #1:** draft, assigned to M7tech. No CI workflows exist in the repo (no `.github/`). Run `git log --oneline` for exact hashes.
+- **Current branch:** `feat/home-page`, which tracks `origin/feat/home-page`. Clean apart from this HANDOFF update, which is committed right after it is written.
+- **Recent commits** (newest first; `git log --oneline --first-parent` for the rest):
+  - `002e3a5` docs: handoff notes for the merged animation fixes
+  - `b4a5ed1` merge: animation fixes 001-010 into the preview branch
+  - `5b6f973` feat: Board of Directors page under About
+  - `849d3d8` fix: Basra opens its exact Google Maps place
+  - `29f56dc` feat: unlisted روابط links page and exact office pins
+  - `c32fe4b` feat: galvanized fittings solution, vision and mission, fuller history, Media page
+  - `8b61028` feat: carry over old-site sales line, service hours, GF and Bänninger ranges
+  - `314d3b5` feat: solution photos as cross-fading header backgrounds
+  - `77764e5` feat: icons, solution photo sliders, nine-month stock, KAS PPR only
+  - `5a8c24d` feat: photos, Google Maps links, owner trade terms and water motion
+  - `5d14f71` fix(docker): make health checks reliable on Coolify
+- **Other branches** (all pushed):
+  - `main`: the scaffold (`ed44260`), the PR's base.
+  - `anim/fixes`: the ten animation fixes, now merged into `feat/home-page`.
+  - `anim/001-liquid-hover-gate`, `anim/002-pause-moving-photos`: single-plan branches already contained in `anim/fixes`. Delete only if the owner asks.
+- **Merge convention:** merge commits, never rebase or force-push shared branches.
+- **PR #1:** draft. There are no CI workflows (`.github/` does not exist), so run the checks in §30 locally before every push.
 
 ## 22. Completed Work
 
 - [x] Research: website and profile audit, with conflicts resolved with the owner (`content-audit.md`)
 - [x] Next.js 16 + TypeScript + Tailwind 4 + Motion + next-intl project initialised
 - [x] Multilingual routing (`/en`, `/ar`, `/ckb`) with proxy redirects
-- [x] English locale (LTR)
-- [x] Arabic locale (RTL)
-- [x] Kurdish Sorani locale (RTL), pending native review
+- [x] English, Arabic (RTL) and Kurdish Sorani (RTL) locales, Sorani pending native review
 - [x] Message catalogues with key parity across 3 languages
 - [x] Design tokens, fonts (Sorani glyph coverage verified) and RTL foundation with logical properties
 - [x] Logo and partner logo assets (SVG)
-- [x] Header with desktop nav, language switcher and mobile menu
-- [x] Footer
-- [x] Home page, all 9 sections
-- [x] Motion primitives with reduced-motion support
-- [x] Localized 404
-- [x] Brands index and 21 brand pages
-- [x] About, Locations, Contact and Projects pages
-- [x] SEO: metadata, canonical, hreflang + x-default, OG, sitemap, robots, Organization JSON-LD, favicon
+- [x] Header with desktop nav, language switcher and an accessible mobile menu (focus kept inside, inert page)
+- [x] Footer with YouTube in Follow us
+- [x] Home page, all 9 sections, with a four-slide accessible hero carousel
+- [x] Solutions: index and 9 solution pages, 43 sourced product lines, photo headers
+- [x] Brands: index and 21 brand pages, technical documents for 14 brands
+- [x] Projects, Media (YouTube feed), About (vision/mission/values, full history), Locations and Contact
+- [x] Board of Directors page under About: the chairman's message and two board members with portraits
+- [x] Unlisted روابط links page with the old address redirected
+- [x] Exact Google Maps places for all six offices
+- [x] Owner corrections: nine months of stock, KAS PPR only, Polymelt/Poloplast lines, Arabic trade terms, WhatsApp for every mobile number
+- [x] Photos from the company profile (brands, hero, solutions, leadership) and line icons
+- [x] Water-themed motion with reduced-motion fallbacks
+- [x] Animation audit and all ten fix plans, merged
+- [x] SEO: metadata, canonical, hreflang + x-default, OG image, sitemap, robots, JSON-LD on every page
+- [x] Playwright + axe suite in the repo (167 tests, all passing on `b4a5ed1`)
+- [x] Dockerfile, security headers and Coolify preview deployment
 - [x] README with Coolify notes, plus `.env.example`
-- [x] Lint, typecheck and build pass from a clean clone
-- [x] Playwright QA across 3 locales × 6 widths: 0 overflow, 0 console errors, 0 failed requests, 0 broken images
-- [x] Visual review fixes: Arabic heading leading, header logo size, reduced-motion visuals, map labels, Sorani wording
-- [x] Pushed `main` + `feat/home-page`; draft PR #1 opened
 - [x] HANDOFF.md
-- [x] Unlisted روابط links page (`/{locale}/links`) and exact office map pins from the old site
-- [x] Board of Directors page under About: chairman's message and board members with portraits
-- [x] Products renamed to Solutions (nav, Home, CTAs, sitemap); `/products` removed
-- [x] Solutions data (`src/content/solutions.ts`): 8 solutions and 41 product lines, every line sourced
-- [x] `/solutions` index and 8 `/solutions/[slug]` pages in en/ar/ckb, with breadcrumb JSON-LD
-- [x] Four-slide accessible hero carousel (solutions, history, brands, reach)
-- [x] Reusable `PageHeader` and `pageMetadata()` for inner pages
-- [x] QA on Home and Solutions pages: 3 locales × 6 widths, 0 overflow, errors or broken images
 
 ## 23. Work Currently in Progress
 
-**Owner request (MOhammed, 2026-10-04 14:19):**
-
-> "the main slides should be 3 to 4 shows our strong history and brands. all should be multipage not single page website. you should add solutions, water pipes > Polo UV, ecosan, ... Grey water > PVC > Boroug / Silent GF Silenta ... Water heater > Aquahot, Saudi Ceramic"
-
-**Done** (commit `c7d9f17`): the hero slides, the Solutions index and the 8 solution pages (§10).
-
-**Done** (commits `4930069`, `85a05c5`): the rest of the multipage site, built in this order:
-1. **Brands:** `/brands` index (the BrandWall plus country grouping) and `/brands/[slug]`. Each brand page shows its product lines from `solutions.ts` (filter by `line.brand`) and the solutions they belong to. Manufacturer facts such as founding years are the partner's, so use them sparingly (§9).
-2. **About:** history (`timeline.ts`), services and community (the ServiceModel copy). Vision/mission is still pending the owner's approval, so leave it out until then.
-3. **Locations:** offices with phones and addresses (`company.ts`), warehouses, regional offices and the `IraqMap`.
-4. **Contact:** phones, WhatsApp, email, hours and offices. A form needs a backend decision, so use direct links until then.
-5. **Projects:** featured projects and clients (`projects.ts`).
-
-For any future route:
-- Create `src/app/[locale]/<section>/page.tsx` using `PageHeader` and `pageMetadata()`.
-- Add it to `paths` in `src/app/sitemap.ts`.
-- Add its copy to all three message files.
-- Run QA.
-
-**Defaults chosen for Solutions (told to the owner):**
-- "Grey water" is presented as "Drainage and grey water".
-- Spec values are verbatim from the profile.
-- Generic product names are translated; trademarked names stay in Latin script.
+Nothing is half-done in the code. These are waiting on the owner:
+- **Craftsmen app:** both store links now show the app as "SAWA". Keep the links on the روابط page or remove them?
+- **Chairman's message:** review of the Arabic and Sorani translations.
 
 ## 24. Remaining Tasks
 
 **Critical (blocking production)**
-- Owner review and merge of PR #1, then point Coolify at `main`.
+- Owner review and merge of PR #1, then switch Coolify to `main`, connect the live domain atlasplast.iq and submit the sitemap in Search Console.
 - Native-speaker review of the Sorani (and Arabic) copy.
 
 **High priority**
 - Resolve "23 brands" vs the 21 shown (§9, REQUIRES REVIEW).
-- Original photography from the owner, plus an image strategy (hero, projects, warehouses).
+- Original photography from the owner: projects, sharper originals of the profile photos, and a real photo of the galvanized fittings.
 - Contact page: decide on a form (needs a backend or email service via env vars) vs direct contact links.
 
 **Medium priority**
-- Vision/mission combined statement for About, to be approved by the owner.
-- OG image, per-page metadata, sitemap entries, LocalBusiness JSON-LD for branches.
-- Focus trap for the mobile menu.
-- Add `@playwright/test` and commit the QA scripts (overflow, console, broken images, lang/dir per locale × width).
-- Footer: add warehouses and regional offices, and a Solutions link.
+- The Sorani equivalent of سيفونات (owner).
+- Testimonials (with consent), NASSAR, the "up to 50 years" warranty, if the owner supplies them.
+- Investigate the Arabic/Sorani repaint (§25).
+- Re-run Lighthouse now that photos and motion are in.
 - Arabic/Kurdish spellings of client names, if the owner supplies them.
 
 **Polish**
 - Brand logo optical sizing (some marks such as Bänninger read small).
-- `og:locale` region codes.
-- Lighthouse and axe audits.
+- The two unplanned animation ideas in the plans README (office list linked to the map dots; a pause/play icon cross-fade).
 
 ## 25. Known Problems / Bugs
 
-1. **Mobile menu has no focus trap**
-   - Affects: `SiteHeader.tsx`.
-   - Tab can move focus behind the overlay.
-   - Next step: trap focus inside `#mobile-menu` and return focus to the burger on close.
+1. **Arabic and Sorani pages repaint while the header water and the caustics both run**
+   - Affects: every ar/ckb page; performance only, nothing visible.
+   - Measured on `/ar/about` with a DevTools trace: about 260–320 paints in 2 s with everything running, 0 with `caustic-drift` paused; `/en/about` paints 0. It was there before the animation fixes.
+   - Suspect: the `.caustics` layer (`mix-blend-mode: screen`) in RTL. `will-change`, `contain: paint`, `overflow: clip` and `clip-path` on the bar did not remove it.
+   - Next step: its own investigation and plan.
 2. **"23 brands" figure vs 21 logos**
    - Affects: `src/content/company.ts` (`facts`) and the Home hero figures.
    - Cause: Calpeda and Vitra were removed.
    - Needs the owner's answer; do not change the number on a guess.
-3. **QA tooling not in the repo**
-   - Playwright was run from a global install with scripts in a temp folder.
-   - Next step: add the tooling as a devDependency.
 
-No visual or RTL bugs are open from the last QA pass.
+No layout, RTL or accessibility bugs are open: the full suite passes.
 
 ## 26. Decisions That Must Be Preserved
 
@@ -691,12 +687,16 @@ No visual or RTL bugs are open from the last QA pass.
   - Archivo + Plex for English.
 - **Colours:** Atlas Blue is the text-safe accent. Atlas Sky is decorative only. Navy is derived from the brand blue.
 - **Never mirrored:** the logo, the map and the technical drawings.
-- **Design language:** square, editorial, hairline rules, technical drawings, lists over cards. The Home page is the benchmark for every new page; reuse `SectionHead`, `ButtonLink`, `TextLink` and `container-page`/`section-space`.
+- **Design language:** square, editorial, hairline rules, technical drawings, lists over cards, a restrained water theme. The Home page is the benchmark for every new page; reuse `SectionHead`, `PageHeader`, `ButtonLink`, `TextLink` and `container-page`/`section-space`.
 - **Server Components by default.** Client components only for interaction and animation. `LazyMotion strict` with `m.*`.
 - **Copy:** never hard-code UI copy; add keys to all three message files together.
-- **Calpeda/Vitra:** not partners. **Hussein Raad / Hassan Al-Oreibi:** not published.
-- **Wording:** "Since 1975" in copy; the logo artwork keeps "since 1990". "Hundreds of projects", not a number. Main phone 6779.
-- **Deployment and git:** Coolify on a Node server with no Vercel dependencies. Work on feature branches with logical commits; `main` is production.
+- **Calpeda/Vitra:** not partners. **Hussein Raad / Hassan Al-Oreibi:** not published. No other people than the three on the board page.
+- **Wording:** "Since 1975" in copy; the logo artwork keeps "since 1990". "Hundreds of projects", not a number. Main phone 6779. Nine months of stock. The owner's Arabic trade terms (§8).
+- **Phones:** only 6779 is `tel:`; every mobile number opens WhatsApp.
+- **Maps:** offices open their exact Google Maps place (`?cid=`), never a search.
+- **Unlisted روابط page:** stays out of menus and the sitemap, `noindex`, with the old address redirected.
+- **Brand documents:** English, from the manufacturers' official sites, linked not re-hosted.
+- **Deployment and git:** Coolify on a Node server with no Vercel dependencies. Work on feature branches with logical commits; `main` is production. The preview deploys from `feat/home-page`.
 
 ## 27. Things Claude Must NOT Do
 
@@ -706,17 +706,19 @@ No visual or RTL bugs are open from the last QA pass.
 - Do not create separate RTL layouts or components; use logical properties and `rtl:` only for transforms.
 - Do not hard-code user-facing text; every string goes through `messages/*.json`.
 - Do not introduce Vercel-only dependencies (`@vercel/*`, Edge Config, Vercel image loaders, etc.).
-- Do not hard-code secrets; only env var names belong in the repo.
+- Do not hard-code secrets, and never write passwords, API keys, tokens, SSH keys, private keys or credentials into the repo or this file; only env var names belong here.
 - Do not change working components for stylistic preference.
 - Do not hide layout bugs with ad-hoc CSS patches. Fix the cause; the Arabic leading bug, for example, was a specificity issue.
-- Do not remove features or routes without checking where they are used (`sitemap.ts` lists indexable pages).
+- Do not remove features or routes without checking where they are used (`sitemap.ts` lists indexable pages; `/links` is unlisted on purpose).
 - Do not do large refactors before understanding dependencies.
 - Do not use `next/link` for internal links (use `@/i18n/navigation`), and do not use `motion.*` (strict LazyMotion requires `m.*`).
 - Do not split headings inside words (it breaks Arabic and Sorani letter joining).
 - Do not put Arabic-script text in Plex Mono without a font override.
 - Do not edit the logo SVGs or recolour partner logos beyond the grayscale hover treatment.
 - Do not publish the REQUIRES REVIEW items in §9.
-- Do not trust Next.js API knowledge from training data. Read `node_modules/next/dist/docs/` (AGENTS.md); Next 16 uses `proxy.ts`, async `params` and the generated global `PageProps`/`LayoutProps` types.
+- Do not use سيفونات or فنيين in Arabic copy.
+- Do not skip, disable or weaken a test to get green.
+- Do not trust Next.js API knowledge from training data. Read `node_modules/next/dist/docs/` (AGENTS.md); Next 16 uses `proxy.ts`, async `params` and the generated global `PageProps`/`LayoutProps` types. Redirect sources match the percent-encoded path.
 
 ## 28. Files That Are Especially Important
 
@@ -724,38 +726,41 @@ No visual or RTL bugs are open from the last QA pass.
 |---|---|
 | `AGENTS.md` / `CLAUDE.md` | Agent rules for this Next.js version |
 | `package.json` | scripts, versions, engines |
-| `next.config.ts` | next-intl plugin, image formats |
+| `next.config.ts` | next-intl plugin, standalone output, image formats, headers, the روابط redirects |
+| `Dockerfile` | the Coolify image and health check |
+| `playwright.config.ts`, `tests/site.spec.ts` | the site checks; add every new template to `paths` |
 | `src/proxy.ts` | locale detection and redirects |
 | `src/i18n/routing.ts` | locales, default, direction helper |
 | `src/i18n/navigation.ts`, `src/i18n/request.ts` | localized links; message loading |
 | `src/lib/nav.ts` | primary nav, contact link, language names |
-| `src/lib/site.ts` | `SITE_URL`, canonical and hreflang helpers |
+| `src/lib/site.ts` | `SITE_URL`, canonical and hreflang helpers, `pageMetadata`, `pageLd` |
+| `src/lib/structured-data.ts` | JSON-LD builders |
+| `src/lib/motion.ts` | the Motion easing (mirrors `--ease-out-expo`) |
+| `src/lib/youtube.ts` | the Media page's channel feed |
 | `src/lib/fonts.ts` | font loading and CSS variables |
-| `src/app/globals.css` | design tokens, Arabic-script rules, utilities |
+| `src/app/globals.css` | design tokens, Arabic-script rules, utilities, water motion |
 | `src/app/[locale]/layout.tsx` | html lang/dir, providers, header/footer, skip link, base metadata |
 | `src/app/[locale]/page.tsx` | Home composition and JSON-LD |
+| `src/app/sitemap.ts` | indexable pages |
 | `messages/en.json`, `ar.json`, `ckb.json` | all UI copy |
-| `src/content/company.ts` | phones, email, offices, warehouses, regional offices, figures |
-| `src/content/brands.ts` | brands, logos, countries, product families |
-| `src/content/projects.ts`, `timeline.ts`, `iraq-map.ts` | projects and clients, milestones, map geometry |
+| `src/content/company.ts` | phones, email, social, offices with map links, warehouses, regional offices, figures, craftsmen app |
+| `src/content/brands.ts` | brands, logos, countries, photos, documents |
+| `src/content/solutions.ts` | solutions, product lines, specs, photos, sources |
+| `src/content/leadership.ts` | the chairman and board members |
+| `src/content/projects.ts`, `timeline.ts`, `media.ts`, `iraq-map.ts` | projects and clients, milestones, the YouTube channel, map geometry |
 | `src/components/layout/SiteHeader.tsx`, `SiteFooter.tsx` | site chrome |
 | `src/components/sections/Hero.tsx`, `HeroCarousel.tsx` | Home hero slides |
-| `src/content/solutions.ts` | solutions, product lines, specs, sources |
-| `src/app/[locale]/solutions/` | Solutions index and detail pages; the pattern for new inner pages |
-| `src/components/ui/PageHeader.tsx`, `src/lib/site.ts` (`pageMetadata`) | inner-page header and metadata |
-| `src/app/[locale]/brands/`, `src/components/brands/BrandGrid.tsx` | Brands index and brand pages; shared logo grid |
-| `src/components/solutions/ProductLineRow.tsx`, `EnquiryBand.tsx` | product-line row and sales band shared by solution and brand pages |
-| `src/components/company/OfficeLines.tsx` | branch phone lines (Locations, Contact) |
-| `src/app/[locale]/about/`, `locations/`, `contact/`, `projects/` | the remaining inner pages |
+| `src/components/ui/PageHeader.tsx`, `HeaderSlides.tsx` | inner-page header and its photos |
 | `/mnt/project-files/atlas/research/content-audit.md` | source facts and conflicts (outside the repo) |
+| `/mnt/project-files/atlas/animation-plans/README.md` | animation plans, their status and open motion issues (outside the repo) |
 
 ## 29. Recommended Next Step
 
-All navigation sections are now real pages. The next task that needs no owner input:
-- Add a focus trap to the mobile menu (§25.1).
-- Add `@playwright/test` as a devDependency and commit the QA script (overflow, console errors, failed requests, broken images, one h1, per locale × width).
+Everything the owner asked for so far is built and on the preview. Waiting on the owner: the craftsmen app (SAWA) question, the chairman's message translations, the "23 brands" figure, photos, a contact form decision, the Sorani word for سيفونات, and merging PR #1.
 
-Owner inputs still open: the "23 brands" figure, the vision/mission text, a contact form decision, photography, and merging PR #1.
+Work that needs no owner input:
+- Investigate the Arabic/Sorani repaint (§25.1) and write a plan for it.
+- Re-run Lighthouse on the preview and record the results in §19.
 
 ## 30. New Session Instructions
 
@@ -770,33 +775,9 @@ Before making any changes:
 7. Reconcile any difference between HANDOFF.md and the code before editing.
 8. Continue from the "Recommended Next Step" unless the user gives a different instruction.
 
-## 21. Photos, maps and water motion (2026-10-04)
-
-- **Photos:** the 10 manufacturer-site photos from the company profile are in `public/images/brands/<slug>.jpg` (`photos` map in `src/content/brands.ts`); the p21 landmark photo is `public/images/hero/landmark.jpg`. They appear as brand page header backdrops, a flowing photo strip on Home and Brands, and hero slide backdrops. No product or project photography exists yet: add files under `public/images/` and reference them from content.
-- **Maps:** every office has `mapQuery` (street and district from the profile) and an optional `mapUrl` for an exact Google Maps place. Since 2026-10-05 all six offices use `https://maps.google.com/?cid=…`. Camp Sara, Al-Shaab, Najaf, Erbil and Duhok are the places pinned on the old site's روابط page (the old "Headquarter" pin, in Al-Shaab, went to Al-Shaab). Basra is the "Atlas plast" place the owner sent (the old page showed the Najaf pin under Basra). The craftsmen app links (`craftsmenApp` in `company.ts`) are the store pages the old goo.gl/apple.co links led to; both stores now list the app as SAWA. Office lists, branch cards and the Iraq map dots link to Google Maps (opens the app on phones).
-- **Terms (owner, Arabic):** خزانات الدفن / طراد, never سيفونات; حرفيين, never فنيين. A test guards this.
-- **Water motion** (CSS in `globals.css`, all off with reduced motion): wave edge on dark bands (`components/water/Waves.tsx`), caustic light, Ken Burns photos, ripples on map offices, liquid-fill buttons, water progress bar in the header (`ScrollWater.tsx`).
-- `SectionWipe` now observes an unclipped wrapper: Chrome reports a fully clipped element as not intersecting, which had kept the Iraq map hidden.
-
-## 22. Icons, product photos and owner corrections (2026-10-04, later)
-
-- **Product photos** come from the company profile PDF (`pdfimages`, alpha masks flattened on white): `public/images/solutions/<slug>-<n>.jpg`, listed per solution in `solutions.ts` (`photos`, with the brand when the profile page names it). Each solution header cross-fades them as its background (`HeaderSlides`, via `PageHeader` `slides`), like the home hero. AtlasPlast's own warehouse photos (profile p23) are `public/images/hero/warehouse-*.jpg`, used on the hero "reach" slide and the About, Locations and Solutions headers. Profile photos are ~500 px wide; replace with originals when available.
-- **Icons:** `components/ui/Icon.tsx` (line icons, decorative). Each solution has an `icon`; services, hero facts, contact lines, document kinds, presence headings and brand facts use them too. `SectionGlyph` was removed.
-- **Owner corrections:** stock covers **nine** months (was six); KAS is supplied as **PPR only** (the PPR-C catalogue link and PPR-C specs were removed).
-
-## 23. Old-site items carried over (2026-10-04, late)
-
-Added from the old atlasplast.iq (verified in the content audit): sales department line +964 780 288 0009 (WhatsApp; also a ContactPoint), Friday pickup/shipping note, warehouses 24/7 and round-the-clock delivery, Georg Fischer galvanized malleable-iron fittings (EN 10242, water supply), Bänninger PP-R · PP-RCT (water supply) and PE · PVC-U Ø 8–1000 mm (infrastructure).
-
-Still waiting on the owner: leadership team, testimonials (consent), NASSAR, the "up to 50 years" warranty, project photos. (Vision/mission, the fuller history and YouTube were added in §24.)
-
-## 24. Galvanized fittings, vision and mission, history, Media (2026-10-05)
-
-Owner request (MOhammed): galvanized fittings as their own solution under Georg Fischer, produced in Austria; vision and mission on About; the fuller history; a Media tab showing the YouTube channel's videos; YouTube in Follow us.
-
-- **Galvanized fittings:** new solution `galvanized-fittings` (9 solutions now, icon `fitting`). The `gfMalleable` line moved out of water supply. `ProductLine.madeIn` (country code) shows a "Made in" row; GF's brand country stays CH. No product photo exists: the header uses the GF building from profile p8 (`photoSubjects.gfBuilding` alt). Replace with a real photo of the fittings when the owner sends one.
-- **Vision, mission, values:** `components/sections/Purpose.tsx` on About, copy in `About.purpose`. The statements combine the old site's (water and sewage networks) with the profile's (sanitaryware, p6); the values are the profile's. Told to the owner as editable.
-- **History:** `timeline.ts` milestones can carry `until` (a period, shown "1990–2003") and `detail` (About only). Home and the hero year scale use `keyMilestones`; About shows all (`<Timeline full />`). Added 1990–2003 sanctions years (State Company for Construction Materials Trading), 2006–2007 move to Sulaymaniyah, 2007 ARBAK partnership, 2008 return to Baghdad, 2009 Al-Amir showroom with FABCO. Source: the old AR About page as summarised in the content audit (verbatim page could not be re-read); owner approved adding them.
-- **Media:** `/[locale]/media` (nav item after Projects, sitemap). `lib/youtube.ts` reads the channel's public feed (`youtube.com/feeds/videos.xml?channel_id=UCURwlrQZe8PnV7ZUzTme-AQ`, latest 15 uploads) with `next.revalidate` 3600, and the page has `revalidate = 3600`, so new uploads appear within the hour with no redeploy. If the feed is unreachable (as in the build sandbox) it falls back to the old site's video `xatuZC65KuM`. `VideoGallery` is click-to-load (thumbnail, then a youtube-nocookie embed). VideoObject JSON-LD only for feed items with title and date.
-- **YouTube** is in `company.social` (`socialNames` shared by footer and contact page) and the organization `sameAs`.
-- Tests: `/media` is in the template list; third-party YouTube requests and thumbnails are ignored by the request and broken-image checks (the sandbox cannot reach them).
+**Checks before every push** (there is no CI):
+- `npm run lint` and `npm run typecheck`.
+- `npm run build`, then serve it and run the suite against it: `npx next start -p 3800 -H 127.0.0.1` in one shell, `BASE_URL=http://127.0.0.1:3800 npx playwright test` in another. Without `BASE_URL`, Playwright builds and serves on :3100 itself and reuses any server already on that port, so do not leave another build running there.
+- When a script stops servers by name, match `next-server` and check each PID's working directory first; a pattern like `next start` also matches the shell running the script.
+- Turbopack refuses a `node_modules` symlinked from outside the project root, so build in a checkout with its own `node_modules`.
+- Pushing `feat/home-page` redeploys the preview.
