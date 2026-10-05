@@ -133,7 +133,7 @@ The repo has an empty, untracked `.claude/` folder and no `.github/` (no CI work
 | `/{locale}/about` | DONE | intro, figures, statement, vision/mission/values, a chairman teaser linking to the board page, the full history, services |
 | `/{locale}/about/board` | DONE | Board of Directors: the chairman's message (owner's text 2026-10-05; ar/ckb are Claude's translations, pending review) signed Jaafar Almusawi, Chairman of the Board, Atlas Group. Header: his portrait (the owner's photo, 286×401, a larger original is wanted) standing in the wave edge with the pull quote; then the message with the three values he names (excellence, integrity, progress); then board members Omer Ibrahim and Mohammed Bajalan as photo cards; then the contact band. About stays active in the nav |
 | `/{locale}/locations` | DONE | map, offices, warehouses, regional offices, branch phone lines; every office opens its exact Google Maps place |
-| `/{locale}/contact` | DONE | header with the main line 6779 and a WhatsApp button; tiles for WhatsApp (Al-Shaab), projects, sales and email; hours; branch lines beside the Iraq map; a Follow band. No form yet |
+| `/{locale}/contact` | DONE | header with the main line 6779 and a WhatsApp button; tiles for sales, projects and email (owner, 2026-10-05: the Al-Shaab WhatsApp tile is removed and the order is 6779, sales, projects, email, as in the Home contact card); hours; branch lines beside the Iraq map; a Follow band. No form yet |
 | `/{locale}/links` | DONE | unlisted روابط page (old site's `/روابط/`): main line, WhatsApp, email, social, branch maps, craftsmen app. In no menu or sitemap, `noindex`. `/روابط` and `/ar/روابط` redirect (308) to `/ar/links` via `redirects()` in `next.config.ts` (see §20, old-site redirects) |
 | `/{locale}/<unknown>` | DONE | localized 404 (`not-found.tsx`) |
 | `/{locale}/faq` | DONE | 100 questions and answers in ten topics (`src/content/faq.ts`), FAQPage JSON-LD; linked from the footer. Solution pages show their own questions |
@@ -290,7 +290,7 @@ Source files are in the shared project folder (not in the repo):
 **Confirmed and in use:**
 - Since 1975 (first showroom 1990).
 - "Hundreds of projects."
-- Main phone **6779** (a normal `tel:` link). Every mobile number opens WhatsApp (`wa.me`): the site's WhatsApp line +964 783 305 6475, which is **Al-Shaab's** (owner, 2026-10-05; it was listed under Camp Sara before), projects division +964 772 267 1130, sales department +964 780 288 0009 (old site). Email info@atlasplast.iq.
+- Main phone **6779** (a normal `tel:` link). Every mobile number opens WhatsApp (`wa.me`): the site's WhatsApp line +964 783 305 6475, which is **Al-Shaab's** (owner, 2026-10-05; it was listed under Camp Sara before), projects division +964 786 660 4002 (owner, 2026-10-05; it was +964 772 267 1130 before), sales department +964 780 288 0009 (old site). Email info@atlasplast.iq.
 - **Offices in Iraq** (each with an exact Google Maps place, `mapUrl` in `company.ts`):
   - Camp Sara (Baghdad) — HQ, +964 787 116 6604 (owner, 2026-10-05)
   - Al-Shaab (Baghdad) — +964 783 305 6475
@@ -353,7 +353,7 @@ Source files are in the shared project folder (not in the repo):
 6. **Timeline**: `Timeline.tsx` with `ScrollRule` (key milestones only).
 7. **Service model**: `ServiceModel.tsx`.
 8. **Presence**: `Presence.tsx` + `IraqMap`; offices link to Google Maps.
-9. **Contact band**: `ContactBand.tsx`.
+9. **Contact band**: `ContactBand.tsx`. The card lists the main line 6779, then sales, projects and email (owner, 2026-10-05).
 
 **Inner pages:**
 - Every inner page opens with `PageHeader` (navy, breadcrumb, eyebrow, h1, intro). The `image` prop puts one photo under a navy wash with a slow Ken Burns (warehouse photos on About, Locations and the Solutions index; manufacturer photos on brand pages). The `slides` prop cross-fades several photos instead (`HeaderSlides`, with a pause button and dots); each solution page uses it for its product photos.

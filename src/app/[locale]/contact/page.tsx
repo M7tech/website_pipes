@@ -42,9 +42,8 @@ export default async function ContactPage({ params }: PageProps<"/[locale]/conta
   const common = await getTranslations("Common");
 
   const channels: Channel[] = [
-    { label: h("whatsapp"), value: company.whatsapp, href: whatsappHref(company.whatsapp), action: t("chat"), icon: "whatsapp" },
-    { label: h("projects"), value: company.projectsPhone, href: whatsappHref(company.projectsPhone), action: t("chat"), icon: "helmet" },
     { label: h("sales"), value: company.salesPhone, href: whatsappHref(company.salesPhone), action: t("chat"), icon: "tag" },
+    { label: h("projects"), value: company.projectsPhone, href: whatsappHref(company.projectsPhone), action: t("chat"), icon: "helmet" },
     { label: h("email"), value: company.email, href: `mailto:${company.email}`, action: t("write"), icon: "mail" },
   ];
   const hours: { icon: IconName; text: string }[] = [
@@ -111,7 +110,7 @@ export default async function ContactPage({ params }: PageProps<"/[locale]/conta
       <section aria-labelledby="channels-title" className="section-space bg-surface">
         <div className="container-page grid gap-12">
           <SectionHead id="channels-title" eyebrow={t("channels")} title={t("channelsTitle")} />
-          <ul className="grid gap-3 sm:grid-cols-2 md:gap-4 xl:grid-cols-4">
+          <ul className="grid gap-3 md:grid-cols-3 md:gap-4">
             {channels.map((c) => (
               <li key={c.label}>
                 <a
