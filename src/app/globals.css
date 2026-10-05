@@ -283,7 +283,12 @@ p {
     transform: translateX(50%) rotate(-360deg);
   }
 }
-.group:hover > .liquid,
+/* Hover raises the water only where a real pointer can hover; a tap must not leave it filled. */
+@media (hover: hover) {
+  .group:hover > .liquid {
+    top: -40%;
+  }
+}
 .group:focus-visible > .liquid {
   top: -40%;
 }
