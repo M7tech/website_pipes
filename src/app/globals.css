@@ -267,41 +267,54 @@ p {
   animation: play-ripple 2.4s ease-out infinite;
 }
 
-/* Liquid fill for buttons: a rounded "water" body rises and turns on hover. */
-@keyframes liquid-turn {
-  to {
-    transform: translateX(-50%) rotate(360deg);
-  }
+/* Liquid fill for buttons: a rounded "water" body rises and turns on hover.
+   The box only rises (translate) and the body only turns (rotate); the turn is
+   paused while the water is hidden, so idle buttons cost nothing. */
+.liquid-box {
+  position: absolute;
+  inset: 0;
+  translate: 0 150%;
+  transition: translate 520ms var(--ease-out-expo);
+  pointer-events: none;
 }
 .liquid {
   position: absolute;
   inset-inline-start: 50%;
-  top: 110%;
+  top: -40%;
   width: 220%;
   aspect-ratio: 1;
   border-radius: 42%;
-  transform: translateX(-50%);
-  transition: top 520ms var(--ease-out-expo);
-  animation: liquid-turn 7s linear infinite;
-  pointer-events: none;
+  translate: -50% 0;
+  animation: liquid-turn 7s linear infinite paused;
+}
+@keyframes liquid-turn {
+  to {
+    rotate: 360deg;
+  }
 }
 [dir="rtl"] .liquid {
-  transform: translateX(50%);
+  translate: 50% 0;
   animation-name: liquid-turn-rtl;
 }
 @keyframes liquid-turn-rtl {
   to {
-    transform: translateX(50%) rotate(-360deg);
+    rotate: -360deg;
   }
 }
 /* Hover raises the water only where a real pointer can hover; a tap must not leave it filled. */
 @media (hover: hover) {
-  .group:hover > .liquid {
-    top: -40%;
+  .group:hover > .liquid-box {
+    translate: 0 0;
+  }
+  .group:hover > .liquid-box > .liquid {
+    animation-play-state: running;
   }
 }
-.group:focus-visible > .liquid {
-  top: -40%;
+.group:focus-visible > .liquid-box {
+  translate: 0 0;
+}
+.group:focus-visible > .liquid-box > .liquid {
+  animation-play-state: running;
 }
 
 /* Images surface from below with a soft rising edge as they scroll into view (where supported). */
@@ -363,7 +376,7 @@ p {
     animation: none;
     opacity: 0;
   }
-  .liquid {
+  .liquid-box {
     transition: none;
   }
   .current {
