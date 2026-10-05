@@ -387,7 +387,7 @@ Source files are in the shared project folder (not in the repo):
 | `Logo` | `layout/Logo.tsx` | Official lockup (`/brand/atlasplast.svg` or `-white.svg`) via `next/image` (unoptimized, priority) | never mirrored; size it with height |
 | `LanguageSwitcher` | `layout/LanguageSwitcher.tsx` | Locale links keeping the path | `className`, `onNavigate` |
 | `SiteHeader` / `SiteFooter` | `layout/` | §11 and §12 | |
-| `HeroCarousel` | `sections/HeroCarousel.tsx` | Tabbed hero carousel (APG pattern) | client; props `slides {id, tab, content}[]`, `labels`, `interval` (default 8000). Autoplay is driven by the CSS `hero-progress` keyframes on the active tab rule (`onAnimationEnd` advances). It pauses on hover, focus and the pause button, and has no autoplay under reduced motion. Arrow keys follow the reading direction. Slides share one grid cell |
+| `HeroCarousel` | `sections/HeroCarousel.tsx` | Tabbed hero carousel (APG pattern) | client; props `slides {id, tab, content}[]`, `labels`, `interval` (default 8000). Autoplay is driven by the CSS `hero-progress` keyframes on the active tab rule (`onAnimationEnd` advances). It pauses on mouse hover (`pointerType === "mouse"`), keyboard focus (`:focus-visible` only) and the pause button, so a tap on a phone never leaves it held; no autoplay under reduced motion. Arrow keys follow the reading direction. Slides share one grid cell |
 | `PageHeader` | `ui/PageHeader.tsx` | Navy opening band for inner pages: breadcrumb, eyebrow, h1, intro, optional aside and children | use it on every new inner page |
 | `SolutionList` | `solutions/SolutionList.tsx` | Rule-separated solution rows linking to `/solutions/[slug]` | props `only?` (slugs), `headingLevel`; also exports `solutionBrands()` |
 | `PipeSection` | `sections/PipeSection.tsx` | Hero technical drawing | client; renders finished when reduced motion is on |
@@ -416,7 +416,14 @@ Source files are in the shared project folder (not in the repo):
   - The active tab's 3px rule fills over 8s via the CSS keyframes `hero-progress`, defined in `globals.css`. When it ends, the next slide shows.
   - Under reduced motion there is no autoplay and no pause button; the rule shows as full.
 - **Not implemented:** page transitions and parallax. Both are intentionally absent.
-- **Easing:** everything uses `cubic-bezier(0.22, 1, 0.36, 1)`.
+- **Easing:** everything uses `cubic-bezier(0.22, 1, 0.36, 1)`: `easeOutExpo` in `src/lib/motion.ts` for Motion, `var(--ease-out-expo)` in CSS. The one exception is the header photo dots, on `--ease-in-out` (`cubic-bezier(0.77, 0, 0.175, 1)`, 200ms).
+- **Audit fixes (plans 001-010, merged 2026-10-05):** the plans are in `/mnt/project-files/atlas/animation-plans/`. In short:
+  - The button water fill only runs on hover-capable devices and on keyboard focus; idle fills are paused, and the rise runs on the compositor (`.liquid-box`).
+  - The brand photo strip (`CurrentStrip`) and the header photos (`HeaderSlides`) have pause buttons (WCAG 2.2.2).
+  - Buttons press to `scale(0.97)` (icon buttons `0.95`) on the fast duration.
+  - Only the featured video's play button pulses.
+  - Header water (`water-flow`), the headline rise (`LineRise`) and the mobile menu rows animate `transform`, so they run off the main thread; reduced motion keeps fades only.
+  - Open: Arabic and Sorani pages repaint while the header water and the caustics both run (pre-existing, see the plans README).
 - **Reduced motion:**
   - `MotionConfig reducedMotion="user"`.
   - `LineRise`, `SectionWipe` and `PipeSection` check `useReducedMotion()` and render the final state.
