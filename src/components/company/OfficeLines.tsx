@@ -21,6 +21,7 @@ export async function OfficeLines({ narrow = false, tone = "surface" }: { narrow
             <span className="text-xl font-semibold">{o.name[locale]}</span>
             {o.hq ? <span className="rounded-full bg-atlas-blue/8 px-2.5 py-0.5 text-xs font-medium text-atlas-blue">{p("hq")}</span> : null}
           </p>
+          {o.street ? <p className="text-sm text-steel">{o.street[locale]}</p> : null}
           {o.phone ? (
             <a
               href={whatsappHref(o.phone)}

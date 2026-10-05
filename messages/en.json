@@ -26,7 +26,9 @@
     "linksTitle": "Links",
     "linksDescription": "AtlasPlast in one place: main line {phone}, WhatsApp, email, social channels, branch maps and the craftsmen app.",
     "boardTitle": "Message from the Chairman",
-    "boardDescription": "A message from Jaafar Almusawi, Chairman of the Board of Atlas Group, and the AtlasPlast board members."
+    "boardDescription": "A message from Jaafar Almusawi, Chairman of the Board of Atlas Group, and the AtlasPlast board members.",
+    "faqTitle": "Frequently asked questions about AtlasPlast",
+    "faqDescription": "Answers to 100 questions about AtlasPlast in Iraq: PP-R and PE pipes, drainage, sanitaryware, tiles, pumps, brands, projects, delivery and contact."
   },
   "Common": {
     "skipToContent": "Skip to content",
@@ -45,6 +47,7 @@
     "about": "About",
     "locations": "Locations",
     "contact": "Contact",
+    "faq": "FAQ",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "language": "Language"
@@ -502,7 +505,8 @@
       "opensNewTab": "opens in a new tab"
     },
     "photoAlt": "{subject} production site",
-    "photoStrip": "Our manufacturers"
+    "photoStrip": "Our manufacturers",
+    "logoAlt": "{brand} logo"
   },
   "Countries": {
     "CH": "Switzerland",
@@ -607,5 +611,27 @@
     },
     "membersTitle": "Board members",
     "read": "Read the Chairman’s message"
+  },
+  "Faq": {
+    "eyebrow": "FAQ",
+    "title": "Questions and answers.",
+    "intro": "Clear answers about AtlasPlast, our products and brands, technical choices, projects, delivery and how to reach us. If your question is not here, call {phone}.",
+    "topicsLabel": "Topics",
+    "count": "{count, plural, one {# question} other {# questions}}",
+    "learnMore": "Read more",
+    "solutionTitle": "Questions about {name}",
+    "all": "All questions",
+    "topics": {
+      "company": "About AtlasPlast",
+      "products": "Products and solutions",
+      "waterSupply": "Water supply pipes",
+      "drainage": "Drainage and grey water",
+      "infrastructure": "Infrastructure networks",
+      "bathrooms": "Sanitaryware, tiles and water heaters",
+      "equipment": "Pumps, faucets and installation tools",
+      "brands": "Brands and agencies",
+      "services": "Projects and services",
+      "contact": "Ordering, delivery and contact"
+    }
   }
 }

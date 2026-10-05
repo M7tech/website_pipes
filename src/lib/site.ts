@@ -90,6 +90,7 @@ export function pageLd({
   description,
   crumbs,
   extra = [],
+  props = {},
 }: {
   locale: Locale;
   path: string;
@@ -98,6 +99,8 @@ export function pageLd({
   description: string;
   crumbs: { name: string; path: string }[];
   extra?: object[];
+  /** More properties of the page node itself, e.g. a FAQPage's mainEntity. */
+  props?: Record<string, unknown>;
 }) {
   const url = localeUrl(locale, path);
   return {
@@ -113,8 +116,18 @@ export function pageLd({
         isPartOf: { "@id": `${SITE_URL}/#website` },
         about: { "@id": ORG_ID },
         breadcrumb: { "@id": `${url}#breadcrumb` },
+        ...props,
       },
       { "@id": `${url}#breadcrumb`, ...breadcrumbLd(locale, crumbs) },
+      // The company itself on every page, so each page names the entity it is about.
+      {
+        "@type": "Organization",
+        "@id": ORG_ID,
+        name: "AtlasPlast",
+        legalName: "Ufuq Al-Atlas Ltd.",
+        url: SITE_URL,
+        logo: `${SITE_URL}/brand/atlasplast.svg`,
+      },
       ...extra,
     ],
   };
