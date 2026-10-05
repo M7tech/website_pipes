@@ -2,6 +2,7 @@ import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { brands, type Brand } from "@/content/brands";
+import { CurrentStrip } from "./CurrentStrip";
 
 function Card({ brand, alt }: { brand: Brand; alt: string }) {
   return (
@@ -29,11 +30,12 @@ function Card({ brand, alt }: { brand: Brand; alt: string }) {
  */
 export async function BrandPhotoStrip({ label }: { label: string }) {
   const t = await getTranslations("Brands");
+  const hero = await getTranslations("Home.hero");
   const pictured = brands.filter((b) => b.photo);
   const alt = (b: Brand) => t("photoAlt", { subject: b.photo!.subject ?? b.name });
 
   return (
-    <section aria-label={label} className="current overflow-hidden py-2">
+    <CurrentStrip label={label} pause={hero("pause")} play={hero("play")}>
       <div className="current-track flex w-max gap-6" style={{ ["--current-speed" as string]: `${pictured.length * 7}s` }}>
         <ul className="flex gap-6">
           {pictured.map((b) => (
@@ -50,6 +52,6 @@ export async function BrandPhotoStrip({ label }: { label: string }) {
           ))}
         </ul>
       </div>
-    </section>
+    </CurrentStrip>
   );
 }

@@ -325,7 +325,8 @@ p {
   animation-name: current-rtl;
 }
 .current:hover .current-track,
-.current:focus-within .current-track {
+.current:focus-within .current-track,
+.current[data-paused] .current-track {
   animation-play-state: paused;
 }
 

@@ -22,7 +22,7 @@ type PageHeaderProps = {
   /** Backdrop photo under a navy wash. */
   image?: { src: string; alt: string };
   /** Cross-fading backdrop photos on the end side, like the home hero slides. */
-  slides?: { photos: { src: string; alt: string }[]; label: string; photoOf: string[] };
+  slides?: { photos: { src: string; alt: string }[]; label: string; photoOf: string[]; pause: string; play: string };
   /** Fill of the wave edge: the background of the section that follows. */
   waveFill?: string;
   children?: ReactNode;
