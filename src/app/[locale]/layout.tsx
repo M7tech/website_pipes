@@ -24,6 +24,17 @@ export async function generateMetadata({
     title: { default: t("homeTitle"), template: `%s | ${t("siteName")}` },
     description: t("homeDescription"),
     applicationName: t("siteName"),
+    // Full-size image previews and unlimited snippets in search results and AI answers.
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
+    },
+    // Search Console and Bing Webmaster Tools ownership tags, set as build variables when used.
+    verification: {
+      ...(process.env.GOOGLE_SITE_VERIFICATION ? { google: process.env.GOOGLE_SITE_VERIFICATION } : {}),
+      ...(process.env.BING_SITE_VERIFICATION ? { other: { "msvalidate.01": process.env.BING_SITE_VERIFICATION } } : {}),
+    },
   };
 }
 
