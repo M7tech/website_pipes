@@ -3,7 +3,7 @@
 import { ScrollWater } from "@/components/water/ScrollWater";
 import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import { AnimatePresence, m } from "motion/react";
+import { AnimatePresence, m, useReducedMotion } from "motion/react";
 import { Link, usePathname } from "@/i18n/navigation";
 import { primaryNav, contactHref } from "@/lib/nav";
 import { Logo } from "./Logo";
@@ -15,6 +15,7 @@ export function SiteHeader() {
   const brand = useTranslations("Common")("brandName");
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const reduce = useReducedMotion();
   const headerRef = useRef<HTMLElement>(null);
   const burgerRef = useRef<HTMLButtonElement>(null);
 
@@ -120,8 +121,8 @@ export function SiteHeader() {
                   <m.li
                     key={item.key}
                     className="border-b border-rule-dark"
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    initial={reduce ? { opacity: 0 } : { opacity: 0, transform: "translateY(12px)" }}
+                    animate={reduce ? { opacity: 1 } : { opacity: 1, transform: "translateY(0px)" }}
                     transition={{ delay: 0.05 + i * 0.04, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                   >
                     <Link
