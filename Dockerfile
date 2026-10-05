@@ -15,6 +15,10 @@ COPY . .
 # Inlined at build time: canonical URLs, hreflang, sitemap and Open Graph use it.
 ARG NEXT_PUBLIC_SITE_URL=https://atlasplast.iq
 ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
+# Optional ownership tags for Google Search Console and Bing Webmaster Tools (HTML tag method).
+ARG GOOGLE_SITE_VERIFICATION=
+ARG BING_SITE_VERIFICATION=
+ENV GOOGLE_SITE_VERIFICATION=$GOOGLE_SITE_VERIFICATION BING_SITE_VERIFICATION=$BING_SITE_VERIFICATION
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
 

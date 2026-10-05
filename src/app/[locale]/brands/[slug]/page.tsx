@@ -7,8 +7,8 @@ import { Link } from "@/i18n/navigation";
 import { brands, type Brand } from "@/content/brands";
 import { company } from "@/content/company";
 import { brandSolutions, solutionKey } from "@/content/solutions";
-import { localeUrl, pageLd, pageMetadata } from "@/lib/site";
-import { productLinesLd } from "@/lib/structured-data";
+import { SITE_URL, localeUrl, pageLd, pageMetadata } from "@/lib/site";
+import { brandLd, productLinesLd } from "@/lib/structured-data";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Ltr } from "@/components/ui/Ltr";
@@ -73,7 +73,8 @@ export default async function BrandPage({ params }: PageProps<"/[locale]/brands/
   const others = brands.filter((b) => b.slug !== slug);
 
   const path = `/brands/${slug}`;
-  const { title, description, names } = await brandMeta(locale as Locale, brand);
+  const { title, description } = await brandMeta(locale as Locale, brand);
+  const url = localeUrl(locale as Locale, path);
   const ld = pageLd({
     locale: locale as Locale,
     path,
@@ -84,9 +85,10 @@ export default async function BrandPage({ params }: PageProps<"/[locale]/brands/
       { name: nav("brands"), path: "/brands" },
       { name: brand.name, path },
     ],
-    extra: names.length
-      ? [productLinesLd(`${localeUrl(locale as Locale, path)}#lines`, names.map((name) => ({ name, brand: brand.name })))]
-      : [],
+    props: { mainEntity: { "@id": `${SITE_URL}/#brand-${brand.slug}` } },
+    extra: groups.length
+      ? await productLinesLd(locale as Locale, `${url}#lines`, groups)
+      : [brandLd(brand, locale as Locale)],
   });
 
   return (
@@ -113,7 +115,7 @@ export default async function BrandPage({ params }: PageProps<"/[locale]/brands/
             <div className="flex aspect-[4/3] w-56 items-center justify-center rounded-panel bg-surface p-8 shadow-[var(--shadow-lift)] md:w-72">
               <Image
                 src={brand.logo}
-                alt=""
+                alt={t("logoAlt", { brand: brand.name })}
                 width={240}
                 height={120}
                 unoptimized

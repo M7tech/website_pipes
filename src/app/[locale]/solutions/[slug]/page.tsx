@@ -6,7 +6,10 @@ import { routing, type Locale } from "@/i18n/routing";
 import { brandBySlug } from "@/content/brands";
 import { solutionBySlug, solutionKey, solutions } from "@/content/solutions";
 import { localeUrl, pageLd, pageMetadata } from "@/lib/site";
-import { productLinesLd } from "@/lib/structured-data";
+import { faqLd, productLinesLd } from "@/lib/structured-data";
+import { solutionFaqs } from "@/content/faq";
+import { FaqList } from "@/components/faq/FaqList";
+import { TextLink } from "@/components/ui/TextLink";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Ltr } from "@/components/ui/Ltr";
@@ -48,6 +51,7 @@ export default async function SolutionPage({ params }: PageProps<"/[locale]/solu
   const nav = await getTranslations("Nav");
   const common = await getTranslations("Common");
   const hero = await getTranslations("Home.hero");
+  const faq = await getTranslations("Faq");
   const key = solutionKey(slug);
   const name = t(`${key}.name`);
   const position = solutions.indexOf(solution) + 1;
@@ -55,7 +59,8 @@ export default async function SolutionPage({ params }: PageProps<"/[locale]/solu
 
   const meta = await getTranslations("Meta");
   const path = `/solutions/${slug}`;
-  const lineName = (id: string, fallback: string) => (t.has(`lines.${id}.name`) ? t(`lines.${id}.name`) : fallback);
+  const faqs = solutionFaqs(slug);
+  const url = localeUrl(locale as Locale, path);
   const ld = pageLd({
     locale: locale as Locale,
     path,
@@ -68,10 +73,10 @@ export default async function SolutionPage({ params }: PageProps<"/[locale]/solu
       { name, path },
     ],
     extra: [
-      productLinesLd(
-        `${localeUrl(locale as Locale, path)}#lines`,
-        solution.lines.map((l) => ({ name: lineName(l.id, l.name), brand: brandBySlug(l.brand).name })),
-      ),
+      ...(await productLinesLd(locale as Locale, `${url}#lines`, [{ solution, lines: solution.lines }])),
+      ...(faqs.length
+        ? [{ "@type": "FAQPage", "@id": `${url}#faq`, isPartOf: { "@id": `${url}#webpage` }, mainEntity: faqLd(locale as Locale, faqs) }]
+        : []),
     ],
   });
 
@@ -169,6 +174,20 @@ export default async function SolutionPage({ params }: PageProps<"/[locale]/solu
           </ul>
         </div>
       </section>
+
+      {faqs.length ? (
+        <section aria-labelledby="faq-title" className="pb-[var(--section-space)]">
+          <div className="container-page grid gap-10">
+            <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-3">
+              <h2 id="faq-title" className="section-title">
+                {faq("solutionTitle", { name })}
+              </h2>
+              <TextLink href="/faq">{faq("all")}</TextLink>
+            </div>
+            <FaqList items={faqs} />
+          </div>
+        </section>
+      ) : null}
 
       <EnquiryBand title={t("labels.enquireTitle")} text={t("labels.enquireText")} />
 
