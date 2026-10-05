@@ -1,6 +1,7 @@
 "use client";
 
 import { m, useReducedMotion } from "motion/react";
+import { easeOutExpo } from "@/lib/motion";
 import type { ElementType } from "react";
 
 type LineRiseProps = {
@@ -29,7 +30,7 @@ export function LineRise({ text, as: Tag = "h1", className = "", delay = 0.1 }: 
             className="inline-block"
             initial={{ transform: "translateY(105%)" }}
             animate={{ transform: "translateY(0%)" }}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: delay + i * 0.045 }}
+            transition={{ duration: 0.9, ease: easeOutExpo, delay: delay + i * 0.045 }}
           >
             {word}
           </m.span>

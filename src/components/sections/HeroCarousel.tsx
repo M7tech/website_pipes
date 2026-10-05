@@ -3,6 +3,7 @@
 import { useId, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 import Image from "next/image";
 import { m, useReducedMotion } from "motion/react";
+import { easeOutExpo } from "@/lib/motion";
 import { useDirectionSign } from "@/components/motion/useDirection";
 import { Arrow } from "@/components/ui/Arrow";
 
@@ -105,7 +106,7 @@ export function HeroCarousel({ slides, labels, interval = 8000 }: HeroCarouselPr
               className={`flex flex-col justify-center [grid-area:1/1] ${active ? "z-10" : "pointer-events-none"}`}
               initial={false}
               animate={{ opacity: active ? 1 : 0 }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.6, ease: easeOutExpo }}
             >
               {slide.content}
             </m.div>

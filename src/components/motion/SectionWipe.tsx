@@ -41,7 +41,7 @@ export function SectionWipe({ children, className = "" }: { children: ReactNode;
             ? undefined
             : {
                 clipPath: shown ? "inset(0 0 0 0)" : hidden,
-                transition: "clip-path 1.1s cubic-bezier(0.22, 1, 0.36, 1)",
+                transition: "clip-path 1.1s var(--ease-out-expo)",
               }
         }
       >

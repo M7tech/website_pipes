@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { AnimatePresence, m, useReducedMotion } from "motion/react";
 import { Link, usePathname } from "@/i18n/navigation";
 import { primaryNav, contactHref } from "@/lib/nav";
+import { easeOutExpo } from "@/lib/motion";
 import { Logo } from "./Logo";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { Arrow } from "@/components/ui/Arrow";
@@ -123,7 +124,7 @@ export function SiteHeader() {
                     className="border-b border-rule-dark"
                     initial={reduce ? { opacity: 0 } : { opacity: 0, transform: "translateY(12px)" }}
                     animate={reduce ? { opacity: 1 } : { opacity: 1, transform: "translateY(0px)" }}
-                    transition={{ delay: 0.05 + i * 0.04, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                    transition={{ delay: 0.05 + i * 0.04, duration: 0.4, ease: easeOutExpo }}
                   >
                     <Link
                       href={item.href}
