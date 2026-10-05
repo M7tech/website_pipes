@@ -20,6 +20,7 @@ function answer(text: string, locale: Locale): ReactNode[] {
             <Fragment key={o.id}>
               {j > 0 ? separator : null}
               {o.name[locale]}
+              {o.street ? ` (${o.street[locale]})` : null}
               {o.phone ? (
                 <>
                   {" "}

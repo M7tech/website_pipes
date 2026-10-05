@@ -43,7 +43,9 @@ export function faqValues(locale: Locale): Record<string, string> {
     projectsPhone: company.projectsPhone,
     salesPhone: company.salesPhone,
     email: company.email,
-    branches: offices.map((o) => `${o.name[locale]} ${o.phone ?? ""}`.trim()).join(separator),
+    branches: offices
+      .map((o) => `${o.name[locale]}${o.street ? ` (${o.street[locale]})` : ""} ${o.phone ?? ""}`.trim())
+      .join(separator),
   };
 }
 

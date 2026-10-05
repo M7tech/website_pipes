@@ -40,7 +40,7 @@ function facts() {
     `- Business: distributor and commercial agent for international manufacturers of pipe systems, drainage, sanitaryware, tiles, water heaters, pumps, faucets, valves and installation tools, many under exclusive agencies in Iraq.`,
     `- In business since ${company.foundingYear}; first showroom ${company.firstShowroomYear} in Al-Shaab, Baghdad. Ufuq Al-Atlas established 2009.`,
     `- Headquarters: ${hq?.name.en}, Iraq.`,
-    `- Offices and showrooms: ${offices.map((o) => `${o.name.en} (${o.phone})`).join("; ")}.`,
+    `- Offices and showrooms: ${offices.map((o) => `${o.name.en}${o.street ? `, ${o.street.en}` : ""} (${o.phone})`).join("; ")}.`,
     `- Warehouses (open 24/7, nine months of national demand in stock): ${warehouses.map((w) => w.name.en).join(", ")}.`,
     `- Regional offices: ${regionalOffices.map((r) => r.en).join(", ")}.`,
     `- Main line: ${company.mainPhone} (short number, from Iraq). WhatsApp: ${company.whatsapp} (Al-Shaab branch). Projects division: ${company.projectsPhone}. Sales department: ${company.salesPhone}. Email: ${company.email}.`,

@@ -50,7 +50,7 @@ export function organizationLd(locale: Locale, { name, description }: { name: st
       telephone: company.mainPhone,
       address: {
         "@type": "PostalAddress",
-        streetAddress: hq?.name.en,
+        streetAddress: [hq?.street?.en, hq?.name.en].filter(Boolean).join(", "),
         addressLocality: "Baghdad",
         addressCountry: "IQ",
       },
@@ -100,7 +100,12 @@ export function officesLd(locale: Locale) {
       hasMap: mapsHref(o),
       openingHoursSpecification: openingHours,
       areaServed: { "@type": "Country", name: "Iraq" },
-      address: { "@type": "PostalAddress", addressLocality: cityNames[o.city][locale], addressCountry: "IQ" },
+      address: {
+        "@type": "PostalAddress",
+        ...(o.street ? { streetAddress: o.street[locale] } : {}),
+        addressLocality: cityNames[o.city][locale],
+        addressCountry: "IQ",
+      },
       parentOrganization: { "@id": ORG_ID },
     })),
     {
