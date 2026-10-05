@@ -388,15 +388,15 @@ p {
   }
 }
 
-/* Water running through the header's progress pipe. */
+/* Water running through the header's progress pipe: a two-tile strip slides one tile. */
 @keyframes water-flow {
   to {
-    background-position: 200% 0;
+    transform: translateX(-50%);
   }
 }
 .water-flow {
   background: linear-gradient(90deg, var(--color-atlas-blue), var(--color-atlas-sky), #9fd0f5, var(--color-atlas-sky), var(--color-atlas-blue));
-  background-size: 200% 100%;
+  background-size: 50% 100%;
   animation: water-flow 2.4s linear infinite;
 }
 @media (prefers-reduced-motion: reduce) {
