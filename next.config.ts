@@ -11,6 +11,41 @@ const securityHeaders = [
   { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), interest-cohort=()" },
 ];
 
+/** An old Arabic path, percent-encoded as browsers send it; `:params` stay as patterns. */
+const ar = (...segments: string[]) =>
+  `/ar/${segments.map((s) => (s.startsWith(":") ? s : encodeURIComponent(s))).join("/")}`;
+
+const OLD_HOME = "شركة-أطلس-بلاست-أكثر-من-45-سنة-خبرة-في-أنا";
+const AGENCIES = "الوكالات";
+
+/**
+ * The old WordPress site's pages (from its sitemaps, 2026-10-05), so bookmarks and
+ * search results land on the matching new page once atlasplast.iq points here.
+ * Its theme demo blog posts are left to 404. Most specific first.
+ */
+const oldPages: [source: string, destination: string][] = [
+  [ar(OLD_HOME, "أنظمة-مياه-الشرب"), "/ar/solutions/water-supply"],
+  [ar(OLD_HOME, ":rest*"), "/ar"],
+  [ar("من-نحن", "اتصل-بنا"), "/ar/contact"],
+  [ar("من-نحن"), "/ar/about"],
+  [ar(AGENCIES, "شركة-جورج-فشر"), "/ar/brands/georg-fischer"],
+  [ar(AGENCIES, "شركة-باننجر"), "/ar/brands/baenninger"],
+  [ar(AGENCIES, "شركة-بولوبلاست"), "/ar/brands/poloplast"],
+  [ar(AGENCIES, "شركة-فيزا"), "/ar/brands/wisa"],
+  [ar(AGENCIES, "شركة-داب-dab"), "/ar/brands/dab"],
+  // The agencies index, and Calpeda, which is no longer carried.
+  [ar(AGENCIES, ":rest*"), "/ar/brands"],
+  [ar("مشاريع"), "/ar/projects"],
+  ["/ar/project/:slug*", "/ar/projects"],
+  ["/project/:slug*", "/en/projects"],
+  ["/home/footer", "/en"],
+  ["/cart", "/en"],
+  ["/checkout", "/en"],
+  // The unlisted links page; Arabic was the old site's default language.
+  [`/${encodeURIComponent("روابط")}`, "/ar/links"],
+  [ar("روابط"), "/ar/links"],
+];
+
 const nextConfig: NextConfig = {
   // Self-contained server in .next/standalone for the Docker image (see Dockerfile).
   output: "standalone",
@@ -19,12 +54,7 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
   },
   async redirects() {
-    return [
-      // The old site's unlisted links page, /روابط/; Arabic was its default language.
-      // Sources match the percent-encoded path that browsers send.
-      { source: `/${encodeURIComponent("روابط")}`, destination: "/ar/links", permanent: true },
-      { source: `/ar/${encodeURIComponent("روابط")}`, destination: "/ar/links", permanent: true },
-    ];
+    return oldPages.map(([source, destination]) => ({ source, destination, permanent: true }));
   },
   async headers() {
     return [

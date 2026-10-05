@@ -61,9 +61,9 @@ Versions from `package.json` / `npm ls --depth=0`:
 ├── README.md                 setup, checks, env vars, Coolify deploy steps, structure
 ├── Dockerfile, .dockerignore production image for Coolify (standalone output, Node 22 Alpine)
 ├── .env.example              NEXT_PUBLIC_SITE_URL and the optional YOUTUBE_API_KEY (allowed by .gitignore `!.env.example`)
-├── next.config.ts            next-intl plugin, standalone output, image formats, security headers, the روابط redirects
+├── next.config.ts            next-intl plugin, standalone output, image formats, security headers, old-site redirects
 ├── playwright.config.ts      site checks; uses BASE_URL when set, otherwise builds and serves on :3100
-├── tests/site.spec.ts        every template × locale × width, axe, and feature tests (172 tests)
+├── tests/site.spec.ts        every template × locale × width, axe, and feature tests (173 tests)
 ├── scripts/og-image.js       renders public/og.png from a running production server
 ├── messages/                 en.json, ar.json, ckb.json — ALL user-facing UI copy
 ├── public/
@@ -134,7 +134,7 @@ The repo has an empty, untracked `.claude/` folder and no `.github/` (no CI work
 | `/{locale}/about/board` | DONE | Board of Directors: the chairman's message (owner's text 2026-10-05; ar/ckb are Claude's translations, pending review) signed Jaafar Almusawi, Chairman of the Board, Atlas Group. Header: his portrait (the owner's photo, 286×401, a larger original is wanted) standing in the wave edge with the pull quote; then the message with the three values he names (excellence, integrity, progress); then board members Omer Ibrahim and Mohammed Bajalan as photo cards; then the contact band. About stays active in the nav |
 | `/{locale}/locations` | DONE | map, offices, warehouses, regional offices, branch phone lines; every office opens its exact Google Maps place |
 | `/{locale}/contact` | DONE | header with the main line 6779 and a WhatsApp button; tiles for WhatsApp (Al-Shaab), projects, sales and email; hours; branch lines beside the Iraq map; a Follow band. No form yet |
-| `/{locale}/links` | DONE | unlisted روابط page (old site's `/روابط/`): main line, WhatsApp, email, social, branch maps, craftsmen app. In no menu or sitemap, `noindex`. `/روابط` and `/ar/روابط` redirect (308) to `/ar/links` via `redirects()` in `next.config.ts`, with percent-encoded sources because Next matches the encoded path |
+| `/{locale}/links` | DONE | unlisted روابط page (old site's `/روابط/`): main line, WhatsApp, email, social, branch maps, craftsmen app. In no menu or sitemap, `noindex`. `/روابط` and `/ar/روابط` redirect (308) to `/ar/links` via `redirects()` in `next.config.ts` (see §20, old-site redirects) |
 | `/{locale}/<unknown>` | DONE | localized 404 (`not-found.tsx`) |
 | `/sitemap.xml`, `/robots.txt`, `/icon.svg`, `/manifest.webmanifest` | DONE | sitemap lists 40 public pages in every locale (120 URLs) |
 
@@ -237,7 +237,7 @@ The site should feel premium, sophisticated, modern, architectural, industrial, 
   - `defineRouting` with `localePrefix: "always"` and `defaultLocale: "en"`.
   - `src/i18n/request.ts` loads `messages/${locale}.json`.
   - `src/i18n/navigation.ts` exports `Link`, `usePathname`, `redirect` and so on from `createNavigation`. **Always use these**, not `next/link`, for internal links.
-- **Proxy:** `src/proxy.ts` is `createMiddleware(routing)`, with matcher `/((?!api|_next|_vercel|.*\\..*).*)`. Next runs `headers` → `redirects` (next.config) → the proxy → the filesystem, so the روابط redirects fire before locale detection.
+- **Proxy:** `src/proxy.ts` is `createMiddleware(routing)`, with matcher `/((?!api|_next|_vercel|.*\\..*).*)`. Next runs `headers` → `redirects` (next.config) → the proxy → the filesystem, so the old-site redirects fire before locale detection.
 - **lang/dir:** `src/app/[locale]/layout.tsx` renders `<html lang={locale} dir={getDirection(locale)}>`.
 - **Font switching:** handled by the `:lang(ar)` / `:lang(ckb)` CSS rules (§5). The language switcher sets `lang` on each option so every language name renders in its own font.
 - **Logical CSS:** only `ms-/me-/ps-/pe-/start-/end-/border-s/border-e` are used; there is no left/right. `rtl:` variants are used only where a transform must flip:
@@ -594,7 +594,8 @@ Full SEO pass done 2026-10-04 at the owner's request ("make sure SEO is the best
   - A one-week cache on `/brand/*` and `/brands/*` logos.
   - HSTS is left to Coolify's proxy.
 - **Without Docker:** `npm ci && npm run build && npm run start` still works.
-- **Domain:** point it at the Coolify app and enable HTTPS there.
+- **Domain (DNS):** atlasplast.iq is on Cloudflare. As of 2026-10-05 the apex and `www` were proxied (orange cloud) to the old WordPress host, and `new` was DNS only to the VPS: A `159.195.113.233`, AAAA `2a0a:4cc0:61:4b8:8ec:69ff:fe1c:8f6d`. To go live: in Coolify set Domains to `https://atlasplast.iq,https://www.atlasplast.iq,https://new.atlasplast.iq` with "Redirect to non-www", then in Cloudflare point the apex and `www` A/AAAA records at the VPS, DNS only, so Coolify can issue the certificate. Leave MX and TXT records alone (the domain has email, info@atlasplast.iq).
+- **Old-site redirects** (`oldPages` in `next.config.ts`): every page in the old WordPress sitemaps (2026-10-05) redirects (308) to its new page: the Arabic home and its children, About, Contact, the agencies index and agency pages (Calpeda to the brand index), Projects and project pages, `/cart`, `/checkout`, `/home/footer`, and `/روابط`. The theme demo blog posts are left to 404. Sources are percent-encoded; Next matches either letter case and trailing slashes are stripped first.
 - No secrets are needed or committed. `.env*` is gitignored, except `.env.example`.
 
 ## 21. Git Status
@@ -647,7 +648,7 @@ Full SEO pass done 2026-10-04 at the owner's request ("make sure SEO is the best
 - [x] Animation audit and all ten fix plans, merged
 - [x] SEO: metadata, canonical, hreflang + x-default, OG image, sitemap, robots, JSON-LD on every page
 - [x] Board and Contact pages redesigned (2026-10-05)
-- [x] Playwright + axe suite in the repo (172 tests, all passing after the modern design pass)
+- [x] Playwright + axe suite in the repo (173 tests, all passing)
 - [x] Dockerfile, security headers and Coolify preview deployment
 - [x] README with Coolify notes, plus `.env.example`
 - [x] HANDOFF.md

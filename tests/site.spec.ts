@@ -213,6 +213,31 @@ test("media page lists the channel's videos and YouTube is in Follow us", async 
   await expect(page.locator('main a[href="https://www.youtube.com/@atlasplast"]')).toHaveText("YouTube");
 });
 
+test("the old site's addresses land on the matching new pages", async ({ request }) => {
+  // As the old WordPress site linked them: lowercase percent-encoding and a trailing slash.
+  const enc = (path: string) => path.split("/").map((s) => encodeURIComponent(s).toLowerCase()).join("/");
+  const home = "شركة-أطلس-بلاست-أكثر-من-45-سنة-خبرة-في-أنا";
+  const cases: [string, string][] = [
+    [`/ar/${home}/`, "/ar"],
+    [`/ar/${home}/أنظمة-مياه-الشرب/`, "/ar/solutions/water-supply"],
+    ["/ar/من-نحن/", "/ar/about"],
+    ["/ar/من-نحن/اتصل-بنا/", "/ar/contact"],
+    ["/ar/الوكالات/", "/ar/brands"],
+    ["/ar/الوكالات/شركة-جورج-فشر/", "/ar/brands/georg-fischer"],
+    ["/ar/الوكالات/شركة-داب-dab/", "/ar/brands/dab"],
+    ["/ar/الوكالات/شركة-كالبيدا-calpeda/", "/ar/brands"],
+    ["/ar/مشاريع/", "/ar/projects"],
+    ["/ar/project/فندق-جراند-ميلينيوم/", "/ar/projects"],
+    ["/project/mrf/", "/en/projects"],
+    ["/checkout/", "/en"],
+  ];
+  for (const [old, now] of cases) {
+    const res = await request.get(enc(old));
+    expect(res.status(), old).toBe(200);
+    expect(new URL(res.url()).pathname, old).toBe(now);
+  }
+});
+
 test("the unlisted links page keeps the old address, the office pins and stays out of menus", async ({ page, request }) => {
   // The old site's /روابط/ and /ar/روابط/ land on the Arabic page.
   for (const old of ["/%D8%B1%D9%88%D8%A7%D8%A8%D8%B7/", "/ar/%D8%B1%D9%88%D8%A7%D8%A8%D8%B7"]) {
