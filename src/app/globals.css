@@ -42,6 +42,7 @@
 
   /* Motion */
   --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1); /* strong ease-in-out for things that morph in place */
   --duration-fast: 160ms;
   --duration-base: 320ms;
   --duration-reveal: 700ms;

@@ -94,7 +94,7 @@ export function HeaderSlides({
             >
               <span
                 aria-hidden="true"
-                className={`h-1 rounded-full shadow-sm transition-all duration-500 ${i === index ? "w-8 bg-white" : "w-3 bg-white/50 group-hover:bg-white/80"}`}
+                className={`h-1 w-8 rounded-full shadow-sm transition-[scale,background-color] duration-200 ease-in-out motion-reduce:transition-none ${i === index ? "scale-x-100 bg-white" : "scale-x-[0.375] bg-white/50 group-hover:bg-white/80"}`}
               />
             </button>
           ))}
