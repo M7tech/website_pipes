@@ -14,7 +14,7 @@ A copy of this file is kept at `/mnt/project-files/atlas/HANDOFF.md`. Keep the t
 - **Stage:** the full multipage site is built in three languages and runs on the preview domain **https://new.atlasplast.iq** (see §20).
   - Home (the approved visual benchmark, with a four-slide hero).
   - Solutions: an index plus **10** solution pages.
-  - Brands: an index plus **21** brand pages.
+  - Brands: an index plus **22** brand pages.
   - Projects, Media, About (with a Board of Directors page), Locations and Contact.
   - An unlisted links page (روابط) that keeps the old site's address.
 - **Not yet production:** the site lives on branch `feat/home-page` in draft PR #1. `main` still holds only the scaffold.
@@ -95,7 +95,7 @@ Versions from `package.json` / `npm ls --depth=0`:
             ├── page.tsx      Home page with Organization JSON-LD
             ├── not-found.tsx
             ├── solutions/        index + [slug] (10 pages)
-            ├── brands/           index + [slug] (21 pages)
+            ├── brands/           index + [slug] (22 pages)
             ├── about/            About + board/ (Board of Directors)
             ├── projects/, media/, locations/, contact/   single pages
             └── links/            unlisted روابط page
@@ -108,7 +108,7 @@ The repo has an empty, untracked `.claude/` folder and no `.github/` (no CI work
 - **Static generation:**
   - `generateStaticParams` builds every locale.
   - The `[slug]` routes use `dynamicParams = false`, so unknown slugs return 404.
-  - The build produces **135** static pages. Media also revalidates hourly (§10).
+  - The build produces **138** static pages. Media also revalidates hourly (§10).
 - **Server vs client components:** Server Components by default. Client components are only for interaction and animation: `SiteHeader`, `LanguageSwitcher`, `HeroCarousel`, `PipeSection`, `HeaderSlides`, `CurrentStrip`, `VideoGallery`, `ScrollWater` and the motion components. Section components fetch copy with `getTranslations` on the server.
 - **Content:**
   - Facts (phones, offices, brands, solutions, projects, timeline, leadership, map points) live in typed modules in `src/content/`, with `Localized<T> = Record<Locale, T>` for names.
@@ -124,10 +124,10 @@ The repo has an empty, untracked `.claude/` folder and no `.github/` (no CI work
 | `/` | DONE | redirects to `/en` (next-intl proxy) |
 | `/en`, `/ar`, `/ckb` (Home) | DONE | approved benchmark, with a four-slide hero |
 | `/{locale}/solutions` | DONE | index of the 10 solutions |
-| `/{locale}/solutions/{slug}` | DONE | water-supply, drainage, water-heaters, infrastructure, galvanized-fittings, sanitaryware, tiles, pumps, faucets-valves, installation-tools. 44 product lines in all |
+| `/{locale}/solutions/{slug}` | DONE | water-supply, drainage, water-heaters, infrastructure, galvanized-fittings, sanitaryware, tiles, pumps, faucets-valves, installation-tools. 46 product lines in all |
 | `/{locale}/products` | REMOVED | returns 404; replaced by Solutions |
 | `/{locale}/brands` | DONE | logo grid with country and product-line count per brand, plus the photo strip |
-| `/{locale}/brands/{slug}` | DONE | 21 brands; product lines grouped by solution, or "range on request" for FV-Plast, Peštan and Alvit; technical documents for 14 brands |
+| `/{locale}/brands/{slug}` | DONE | 22 brands; product lines grouped by solution, or "range on request" for FV-Plast, Peštan and Alvit; technical documents for 15 brands. Topsan (Turkey, faucets, built-in valves, shower sets, valves) added 2026-10-05 at the owner's request, facts from topsanmusluk.com.tr |
 | `/{locale}/projects` | DONE | featured projects grouped by sector, plus the contractor list |
 | `/{locale}/media` | DONE | the YouTube channel's videos, click to load; revalidates hourly. Every public video when `YOUTUBE_API_KEY` is set, otherwise the feed's latest 15 |
 | `/{locale}/about` | DONE | intro, figures, statement, vision/mission/values, a chairman teaser linking to the board page, the full history, services |
@@ -137,7 +137,7 @@ The repo has an empty, untracked `.claude/` folder and no `.github/` (no CI work
 | `/{locale}/links` | DONE | unlisted روابط page (old site's `/روابط/`): main line, WhatsApp, email, social, branch maps, craftsmen app. In no menu or sitemap, `noindex`. `/روابط` and `/ar/روابط` redirect (308) to `/ar/links` via `redirects()` in `next.config.ts` (see §20, old-site redirects) |
 | `/{locale}/<unknown>` | DONE | localized 404 (`not-found.tsx`) |
 | `/{locale}/faq` | DONE | 100 questions and answers in ten topics (`src/content/faq.ts`), FAQPage JSON-LD; linked from the footer. Solution pages show their own questions |
-| `/sitemap.xml`, `/robots.txt`, `/llms.txt`, `/llms-full.txt`, `/icon.svg`, `/manifest.webmanifest` | DONE | sitemap lists 41 public pages in every locale (123 URLs) with image entries |
+| `/sitemap.xml`, `/robots.txt`, `/llms.txt`, `/llms-full.txt`, `/icon.svg`, `/manifest.webmanifest` | DONE | sitemap lists 42 public pages in every locale (126 URLs) with image entries |
 
 ## 5. Design System
 
@@ -259,7 +259,7 @@ The site should feel premium, sophisticated, modern, architectural, industrial, 
 |---|---|---|---|
 | Meta, Common, Nav, Footer | complete | complete | complete |
 | Home (all 10 namespaces) and hero slides | complete | complete | complete |
-| Solutions (index, 10 solutions, 44 product lines, spec labels) | complete | complete | complete |
+| Solutions (index, 10 solutions, 46 product lines, spec labels) | complete | complete | complete |
 | Brands, Projects, About (incl. vision/mission/values), Locations, Contact, Media, NotFound | complete | complete | complete |
 | Links | complete | complete | complete |
 | Board (chairman's message) | owner's text | Claude's translation | Claude's translation |
@@ -323,7 +323,7 @@ Source files are in the shared project folder (not in the repo):
 - **Craftsmen app:** the old روابط page linked an "Iraqi Craftsmen" app. The links (`craftsmenApp` in `company.ts`) are the store pages it led to, but both stores now list the app as **SAWA**. The owner has been asked whether to keep it.
 
 **REQUIRES REVIEW:**
-- **"23 international brands" vs 21 brands shown.** The profile says 23. After Calpeda and Vitra were removed, the brand wall shows 21. Ask the owner whether the figure should change; do not change it on a guess.
+- **"23 international brands" vs 22 brands shown.** The profile says 23. After Calpeda and Vitra were removed and Topsan was added, the brand wall shows 22. Ask the owner whether the figure should change; do not change it on a guess.
 - **Projects completed:** the profile says 700+ (p6) and 800+ (p23). Only "hundreds" is used.
 - **Warehouse area:** the profile gives 40,000 m² + 16,000+ m² vs a 76,000 m² total, and the old site said 20,000 m². None of these is published.
 - **Office count:** the profile contradicts itself (14 vs 10). Not published.
@@ -348,7 +348,7 @@ Source files are in the shared project folder (not in the repo):
    - Below the carousel is a `dl` of 4 figures.
 2. **Statement**: `Statement.tsx`.
 3. **Solutions**: `SolutionIndex.tsx` (SectionHead + `solutions/SolutionList.tsx`), "Ten solutions, one supplier.", the 10 solutions with icons.
-4. **Brands**: `BrandWall.tsx`, 21 logos and the manufacturer photo strip (`BrandPhotoStrip` inside `CurrentStrip`, with a pause button).
+4. **Brands**: `BrandWall.tsx`, 22 logos and the manufacturer photo strip (`BrandPhotoStrip` inside `CurrentStrip`, with a pause button).
 5. **Projects**: `ProjectIndex.tsx`.
 6. **Timeline**: `Timeline.tsx` with `ScrollRule` (key milestones only).
 7. **Service model**: `ServiceModel.tsx`.
@@ -531,7 +531,7 @@ Full SEO pass done 2026-10-04 at the owner's request ("make sure SEO is the best
 - Board: a `Person` per leader (name, jobTitle, image, worksFor the organization).
 
 **Other:**
-- `src/app/sitemap.ts` lists 41 pages × 3 locales (123 URLs) with hreflang alternates, image entries (solution photos, brand photos and logos) and a build-time `lastModified`. Add every new public page to `paths`; `/links` stays out on purpose.
+- `src/app/sitemap.ts` lists 42 pages × 3 locales (126 URLs) with hreflang alternates, image entries (solution photos, brand photos and logos) and a build-time `lastModified`. Add every new public page to `paths`; `/links` stays out on purpose.
 - `src/app/robots.ts` allows all and names the search and AI crawlers (OAI-SearchBot, ChatGPT-User, GPTBot, ClaudeBot, Claude-SearchBot, PerplexityBot, Google-Extended, Bingbot, Applebot and others), plus the sitemap and host.
 - Layout metadata: `max-image-preview:large`, `max-snippet:-1`; optional `GOOGLE_SITE_VERIFICATION` / `BING_SITE_VERIFICATION` build variables add the ownership meta tags.
 - **GEO:** `/llms.txt` (summary, key facts, solutions, brands, pages) and `/llms-full.txt` (plus product specs and every FAQ answer in en/ar/ckb) are built from `src/lib/llms.ts` out of the same content, so they never drift.
@@ -643,8 +643,8 @@ Full SEO pass done 2026-10-04 at the owner's request ("make sure SEO is the best
 - [x] Header with desktop nav, language switcher and an accessible mobile menu (focus kept inside, inert page)
 - [x] Footer with YouTube in Follow us
 - [x] Home page, all 9 sections, with a four-slide accessible hero carousel
-- [x] Solutions: index and 10 solution pages (tiles added 2026-10-05), 44 sourced product lines, photo headers
-- [x] Brands: index and 21 brand pages, technical documents for 14 brands
+- [x] Solutions: index and 10 solution pages (tiles added 2026-10-05), 46 sourced product lines, photo headers
+- [x] Brands: index and 22 brand pages, technical documents for 15 brands
 - [x] Projects, Media (YouTube feed), About (vision/mission/values, full history), Locations and Contact
 - [x] Board of Directors page under About: the chairman's message and two board members with portraits
 - [x] Unlisted روابط links page with the old address redirected

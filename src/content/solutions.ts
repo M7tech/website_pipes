@@ -29,7 +29,8 @@ export type SpecKey =
   | "thickness"
   | "absorption"
   | "slip"
-  | "standards";
+  | "standards"
+  | "cartridge";
 
 export type ProductLine = {
   /** Message key under Solutions.lines. */
@@ -586,6 +587,20 @@ export const solutions: Solution[] = [
         brand: "guarri",
         specs: [{ key: "standards", value: "ISO 9001:2015 · DVGW · NSF · CE" }],
         source: "profile:p18",
+      },
+      {
+        id: "topsanFaucets",
+        name: "Topsan faucets",
+        brand: "topsan",
+        specs: [{ key: "cartridge", value: "35 mm · 40 mm" }],
+        source: "manufacturer:2026-10-05",
+      },
+      {
+        id: "topsanShower",
+        name: "Built-in valves, shower sets and valves",
+        brand: "topsan",
+        specs: [],
+        source: "manufacturer:2026-10-05",
       },
     ],
   },

@@ -248,7 +248,8 @@
       "absorption": "Water absorption",
       "slip": "Slip resistance",
       "standards": "Standards",
-      "madeIn": "Made in"
+      "madeIn": "Made in",
+      "cartridge": "Cartridge"
     },
     "waterSupply": {
       "name": "Water supply pipes",
@@ -292,8 +293,8 @@
     },
     "faucetsValves": {
       "name": "Faucets and valves",
-      "text": "Basin, kitchen, shower and sensor mixers, with brass angle and ball valves.",
-      "intro": "Mixers and valves for bathrooms, kitchens and laundries: basin, kitchen, shower and bidet mixers including sensor series, and brass angle valves, ball valves and faucet sets."
+      "text": "Basin, kitchen, shower and sensor mixers, built-in valves and shower sets, with brass angle and ball valves.",
+      "intro": "Mixers and valves for bathrooms, kitchens and laundries: basin, kitchen, shower and bidet mixers including sensor series, built-in valves and shower sets, and brass angle valves, ball valves and faucet sets."
     },
     "installationTools": {
       "name": "Installation tools and fixings",
@@ -427,6 +428,14 @@
       "guarriFaucets": {
         "name": "Guarri faucets",
         "text": "Brass bathroom and kitchen faucets."
+      },
+      "topsanFaucets": {
+        "name": "Topsan faucets",
+        "text": "Mixers with 35 and 40 mm cartridges, classic, single and industrial faucets, made in Istanbul since 1979."
+      },
+      "topsanShower": {
+        "name": "Built-in valves, shower sets and valves",
+        "text": "Built-in (concealed) valves, robot, sliding and articulated shower sets, shattaf sets, and valves."
       },
       "turanWelding": {
         "name": "Butt welding machines",
