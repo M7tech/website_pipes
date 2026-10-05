@@ -20,13 +20,12 @@ const factIcons = { agents: "users", brands: "award", trained: "graduation", sto
 const heroBrands = [
   "georg-fischer",
   "polymelt",
-  "baenninger",
+  "pimtas",
   "poloplast",
-  "ostendorf",
+  "turan-borfit",
   "wisa",
   "aquapa",
   "saudi-ceramics",
-  "fv-plast",
 ];
 
 const slideTitle =
