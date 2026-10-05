@@ -243,6 +243,19 @@ p {
   text-decoration: underline;
 }
 
+/* Play buttons pulse outwards like a drop on still water. */
+@keyframes play-ripple {
+  from {
+    box-shadow: 0 0 0 0 rgb(255 255 255 / 0.45);
+  }
+  to {
+    box-shadow: 0 0 0 22px rgb(255 255 255 / 0);
+  }
+}
+.play-ripple {
+  animation: play-ripple 2.4s ease-out infinite;
+}
+
 /* Liquid fill for buttons: a rounded "water" body rises and turns on hover. */
 @keyframes liquid-turn {
   to {
@@ -321,6 +334,7 @@ p {
   .ken-burns,
   .caustics,
   .ripple-ring,
+  .play-ripple,
   .liquid,
   .surface-in,
   .current-track {

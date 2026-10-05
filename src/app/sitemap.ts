@@ -12,6 +12,7 @@ const paths: { path: string; priority: number }[] = [
   { path: "/brands", priority: 0.8 },
   ...brands.map((b) => ({ path: `/brands/${b.slug}`, priority: 0.6 })),
   { path: "/projects", priority: 0.7 },
+  { path: "/media", priority: 0.6 },
   { path: "/about", priority: 0.7 },
   { path: "/locations", priority: 0.7 },
   { path: "/contact", priority: 0.8 },

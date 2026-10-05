@@ -92,7 +92,11 @@ export default async function SolutionPage({ params }: PageProps<"/[locale]/solu
           label: t("labels.photos", { name }),
           photos: solution.photos.map((photo) => ({
             src: photo.src,
-            alt: photo.brand ? t("photoAlt", { name, brand: brandBySlug(photo.brand).name }) : name,
+            alt: photo.subject
+              ? t(`photoSubjects.${photo.subject}`)
+              : photo.brand
+                ? t("photoAlt", { name, brand: brandBySlug(photo.brand).name })
+                : name,
           })),
           photoOf: solution.photos.map((_, i) => t("labels.photoOf", { current: i + 1, total: solution.photos.length })),
         }}

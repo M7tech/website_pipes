@@ -62,7 +62,7 @@ export function SiteHeader() {
         </Link>
 
         <nav aria-label={t("label")} className="hidden lg:block">
-          <ul className="flex items-center gap-8">
+          <ul className="flex items-center gap-6 xl:gap-8">
             {primaryNav.map((item) => (
               <li key={item.key}>
                 <Link

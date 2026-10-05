@@ -1,7 +1,7 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
-import { company, offices } from "@/content/company";
+import { company, offices, socialNames } from "@/content/company";
 import { primaryNav, contactHref } from "@/lib/nav";
 import { Logo } from "./Logo";
 import { Ltr } from "@/components/ui/Ltr";
@@ -13,11 +13,10 @@ export async function SiteFooter() {
   const brand = (await getTranslations("Common"))("brandName");
   const year = new Date().getFullYear();
 
-  const social = [
-    { label: "Facebook", href: company.social.facebook },
-    { label: "Instagram", href: company.social.instagram },
-    { label: "LinkedIn", href: company.social.linkedin },
-  ];
+  const social = (Object.keys(company.social) as (keyof typeof company.social)[]).map((key) => ({
+    label: socialNames[key],
+    href: company.social[key],
+  }));
 
   return (
     <footer id="site-footer" className="on-dark bg-atlas-navy-deep text-on-dark">

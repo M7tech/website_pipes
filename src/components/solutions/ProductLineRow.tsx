@@ -18,6 +18,7 @@ export async function ProductLineRow({
 }) {
   const Heading = headingLevel;
   const t = await getTranslations("Solutions");
+  const countries = await getTranslations("Countries");
   const translated = t.has(`lines.${line.id}.name`);
   const name = translated ? t(`lines.${line.id}.name`) : line.name;
 
@@ -35,7 +36,7 @@ export async function ProductLineRow({
         </Heading>
         <p className="text-steel">{t(`lines.${line.id}.text`)}</p>
       </div>
-      {line.specs.length ? (
+      {line.specs.length || line.madeIn ? (
         <dl aria-label={t("labels.specs")} className="grid content-start md:col-span-5">
           {line.specs.map((spec) => (
             <div
@@ -48,6 +49,12 @@ export async function ProductLineRow({
               </dd>
             </div>
           ))}
+          {line.madeIn ? (
+            <div className="grid grid-cols-[minmax(7rem,2fr)_3fr] gap-4 border-t border-rule py-2.5 text-sm last:border-b">
+              <dt className="text-steel">{t("specs.madeIn")}</dt>
+              <dd className="text-ink">{countries(line.madeIn)}</dd>
+            </div>
+          ) : null}
         </dl>
       ) : null}
     </li>

@@ -7,6 +7,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Ltr } from "@/components/ui/Ltr";
 import { Statement } from "@/components/sections/Statement";
+import { Purpose } from "@/components/sections/Purpose";
 import { Timeline } from "@/components/sections/Timeline";
 import { ServiceModel } from "@/components/sections/ServiceModel";
 import { ContactBand } from "@/components/sections/ContactBand";
@@ -71,7 +72,8 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
         </dl>
       </PageHeader>
       <Statement />
-      <Timeline cta={false} />
+      <Purpose />
+      <Timeline cta={false} full />
       <ServiceModel />
       <ContactBand />
     </>

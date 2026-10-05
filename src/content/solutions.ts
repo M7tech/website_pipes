@@ -1,4 +1,5 @@
 import type { Source } from "./types";
+import type { Country } from "./brands";
 import type { IconName } from "@/components/ui/Icon";
 
 /**
@@ -40,6 +41,8 @@ export type ProductLine = {
   /** Brand slug from src/content/brands.ts. */
   brand: string;
   specs: { key: SpecKey; value: string }[];
+  /** Country of manufacture, when it differs from the brand's home country. */
+  madeIn?: Country;
   source: Source;
 };
 
@@ -47,6 +50,8 @@ export type SolutionPhoto = {
   src: string;
   /** Brand slug when the photo shows that brand's products (atlasprofile brand page). */
   brand?: string;
+  /** Message key under Solutions.photoSubjects when the photo shows something other than products. */
+  subject?: string;
 };
 
 export type Solution = {
@@ -116,16 +121,6 @@ export const solutions: Solution[] = [
           { key: "standards", value: "EN ISO 15874 · DIN 8077 · DIN 8078" },
         ],
         source: "profile:p7",
-      },
-      {
-        id: "gfMalleable",
-        name: "Malleable iron fittings",
-        brand: "georg-fischer",
-        specs: [
-          { key: "material", value: "Malleable cast iron, galvanized" },
-          { key: "standards", value: "EN 10242" },
-        ],
-        source: "site:/ar/الوكالات/",
       },
       {
         id: "aquapa",
@@ -411,6 +406,25 @@ export const solutions: Solution[] = [
           { key: "material", value: "PE · PVC-U" },
           { key: "diameter", value: "Ø 8–1000 mm" },
         ],
+        source: "site:/ar/الوكالات/",
+      },
+    ],
+  },
+  {
+    slug: "galvanized-fittings",
+    icon: "fitting",
+    // No product photo yet: the profile's Georg Fischer page (p8) has only the company building.
+    photos: [{ src: "/images/solutions/galvanized-fittings-1.jpg", brand: "georg-fischer", subject: "gfBuilding" }],
+    wall: 4,
+    spec: "EN 10242",
+    lines: [
+      {
+        id: "gfMalleable",
+        name: "Malleable iron fittings",
+        brand: "georg-fischer",
+        specs: [{ key: "standards", value: "EN 10242" }],
+        // Owner, 2026-10-04: these Georg Fischer fittings are produced in Austria.
+        madeIn: "AT",
         source: "site:/ar/الوكالات/",
       },
     ],

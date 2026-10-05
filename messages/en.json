@@ -17,6 +17,8 @@
     "locationsTitle": "Offices, showrooms and warehouses in Iraq",
     "contactTitle": "Contact AtlasPlast, main line {phone}",
     "projectsTitle": "Projects supplied across Iraq",
+    "mediaTitle": "Media and videos",
+    "mediaDescription": "Videos from the AtlasPlast YouTube channel. AtlasPlast supplies pipe systems, sanitaryware and technical support across Iraq.",
     "solutionDescription": "{text} Supplied across Iraq by AtlasPlast.",
     "brandDescription": "{brand} in Iraq from AtlasPlast: {lines}.",
     "brandDescriptionOnRequest": "{brand} products in Iraq from AtlasPlast. Ask our sales team on {phone} for the current range.",
@@ -35,6 +37,7 @@
     "solutions": "Solutions",
     "brands": "Brands",
     "projects": "Projects",
+    "media": "Media",
     "about": "About",
     "locations": "Locations",
     "contact": "Contact",
@@ -109,7 +112,7 @@
     },
     "solutions": {
       "eyebrow": "Solutions",
-      "title": "Eight solutions, one supplier.",
+      "title": "Nine solutions, one supplier.",
       "intro": "Every solution is sourced from manufacturers we represent directly, with stock held in Iraq.",
       "cta": "All solutions"
     },
@@ -202,7 +205,7 @@
     "index": {
       "eyebrow": "Solutions",
       "title": "Complete systems, from the water main to the tap.",
-      "intro": "Our range is organised by what you are building: drinking water, drainage and grey water, water heating, networks, bathrooms, pumping and installation. Every product line comes from a manufacturer AtlasPlast represents, with stock held in Iraq."
+      "intro": "Our range is organised by what you are building: drinking water, drainage and grey water, water heating, networks, galvanized fittings, bathrooms, pumping and installation. Every product line comes from a manufacturer AtlasPlast represents, with stock held in Iraq."
     },
     "labels": {
       "lines": "Product lines",
@@ -234,7 +237,8 @@
       "weldRange": "Welding range",
       "power": "Power",
       "sizes": "Sizes",
-      "standards": "Standards"
+      "standards": "Standards",
+      "madeIn": "Made in"
     },
     "waterSupply": {
       "name": "Water supply pipes",
@@ -255,6 +259,11 @@
       "name": "Infrastructure networks",
       "text": "PE100 and U-PVC pressure pipes with compression, electrofusion and fabricated fittings up to Ø 2000 mm.",
       "intro": "Pressure pipe systems for water mains, city networks and project infrastructure: PE100 pipes in straight lengths and coils, U-PVC pressure pipes up to Ø 400 mm, compression fittings for drinking water and pressurised waste water, and PE fittings up to Ø 2000 mm."
+    },
+    "galvanizedFittings": {
+      "name": "Galvanized fittings",
+      "text": "Georg Fischer threaded fittings in galvanized malleable iron, made in Austria.",
+      "intro": "Threaded pipe fittings in galvanized malleable cast iron from Georg Fischer, produced in Austria to EN 10242."
     },
     "sanitaryware": {
       "name": "Sanitaryware and cisterns",
@@ -427,7 +436,10 @@
         "text": "PE and PVC-U pipe systems from Ø 8 to 1000 mm. AtlasPlast is the exclusive Bänninger agent for central and southern Iraq."
       }
     },
-    "photoAlt": "{name} by {brand}"
+    "photoAlt": "{name} by {brand}",
+    "photoSubjects": {
+      "gfBuilding": "Georg Fischer building"
+    }
   },
   "Projects": {
     "sectors": {
@@ -500,7 +512,23 @@
     "eyebrow": "About",
     "title": "Since 1975, supplying the systems Iraq builds with.",
     "intro": "AtlasPlast, trading as Ufuq Al-Atlas Ltd., began supplying construction materials in 1975 and opened its first showroom in Baghdad in 1990. Today it represents international manufacturers of piping, drainage, sanitaryware and pumps across Iraq.",
-    "historyTitle": "Milestones"
+    "historyTitle": "Milestones",
+    "purpose": {
+      "eyebrow": "Vision and mission",
+      "visionTitle": "Our vision",
+      "vision": "To make AtlasPlast products the first choice of consumers in Iraq, for water, drainage and sanitaryware.",
+      "missionTitle": "Our mission",
+      "mission": "To supply Iraq with durable, high-quality products for water and sewage networks, and sanitaryware that is functional and well designed.",
+      "valuesTitle": "Our values",
+      "values": {
+        "quality": "Quality without compromise",
+        "integrity": "Integrity",
+        "respect": "Respect for customers, employees and the environment",
+        "innovation": "Innovation",
+        "consistency": "Consistency",
+        "teamwork": "Teamwork"
+      }
+    }
   },
   "Locations": {
     "eyebrow": "Locations",
@@ -523,5 +551,16 @@
     "title": "Hundreds of projects built with AtlasPlast products.",
     "intro": "A selection of airports, stadiums, hotels, hospitals and housing supplied by AtlasPlast, and the contractors we work with.",
     "selected": "Selected projects"
+  },
+  "Media": {
+    "eyebrow": "Media",
+    "title": "AtlasPlast on video.",
+    "intro": "Videos from the AtlasPlast YouTube channel. New videos on the channel appear here automatically.",
+    "channel": "Visit our YouTube channel",
+    "videos": "{count, plural, one {# video} other {# videos}}",
+    "all": "All videos",
+    "play": "Play video: {title}",
+    "untitled": "AtlasPlast video",
+    "more": "Watch every video and subscribe on the channel:"
   }
 }

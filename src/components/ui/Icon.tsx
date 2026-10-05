@@ -56,6 +56,14 @@ const icons = {
     </>
   ),
   wrench: <path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z" />,
+  // Threaded elbow: two pipe walls turning 90 degrees, with a collar at each end.
+  fitting: (
+    <>
+      <path d="M3 6.5h8a7 7 0 0 1 7 7V21" />
+      <path d="M3 11.5h8a2 2 0 0 1 2 2V21" />
+      <path d="M5.5 5v8M11.5 18.5h8" />
+    </>
+  ),
   // Company facts and services
   users: (
     <>
@@ -113,6 +121,26 @@ const icons = {
     </>
   ),
   heart: <path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z" />,
+  // Vision, mission and values
+  eye: (
+    <>
+      <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" />
+      <circle cx="12" cy="12" r="3" />
+    </>
+  ),
+  target: (
+    <>
+      <circle cx="12" cy="12" r="8.5" />
+      <circle cx="12" cy="12" r="4.5" />
+      <circle cx="12" cy="12" r="0.8" />
+    </>
+  ),
+  bulb: (
+    <>
+      <path d="M9 17.5h6M10 21h4" />
+      <path d="M9 17.5c0-2-2.5-3.5-2.5-7a5.5 5.5 0 0 1 11 0c0 3.5-2.5 5-2.5 7" />
+    </>
+  ),
   // Contact
   phone: <path d="M5 3.5h4l2 5-2.5 1.5a11 11 0 0 0 5.5 5.5L15.5 13l5 2v4a2 2 0 0 1-2 2A16.5 16.5 0 0 1 3 5.5a2 2 0 0 1 2-2z" />,
   whatsapp: (
@@ -141,6 +169,13 @@ const icons = {
   ),
   building: <path d="M4 21V4h10v17M14 9h6v12M7 8h4M7 12h4M7 16h4M2 21h20" />,
   layers: <path d="M12 3l9 5-9 5-9-5zM3 13l9 5 9-5" />,
+  // Media
+  video: (
+    <>
+      <rect x="2.5" y="5" width="19" height="14" rx="3.5" />
+      <path d="M10 9.2v5.6l4.8-2.8z" />
+    </>
+  ),
   // Documents
   book: <path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H20v15H5.5A1.5 1.5 0 0 0 4 19.5zM4 19.5A1.5 1.5 0 0 0 5.5 21H20v-3" />,
   fileText: <path d="M6 3h8l5 5v13H6zM14 3v5h5M9 13h7M9 17h7" />,

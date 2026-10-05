@@ -2,15 +2,13 @@ import type { Metadata } from "next";
 import { Icon } from "@/components/ui/Icon";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
-import { company, whatsappHref } from "@/content/company";
+import { company, socialNames, whatsappHref } from "@/content/company";
 import { pageLd, pageMetadata } from "@/lib/site";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { contactPointLd } from "@/lib/structured-data";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Ltr } from "@/components/ui/Ltr";
 import { OfficeLines } from "@/components/company/OfficeLines";
-
-const socialNames = { facebook: "Facebook", instagram: "Instagram", linkedin: "LinkedIn" } as const;
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/contact">): Promise<Metadata> {
   const { locale } = await params;

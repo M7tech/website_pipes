@@ -3,6 +3,7 @@ export const primaryNav = [
   { key: "solutions", href: "/solutions" },
   { key: "brands", href: "/brands" },
   { key: "projects", href: "/projects" },
+  { key: "media", href: "/media" },
   { key: "about", href: "/about" },
   { key: "locations", href: "/locations" },
 ] as const;

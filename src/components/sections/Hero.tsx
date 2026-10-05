@@ -8,7 +8,7 @@ import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Ltr } from "@/components/ui/Ltr";
 import { brandBySlug } from "@/content/brands";
 import { cityNames, facts, offices, warehouses } from "@/content/company";
-import { milestones } from "@/content/timeline";
+import { keyMilestones } from "@/content/timeline";
 import { PipeSection } from "./PipeSection";
 import { IraqMap } from "./IraqMap";
 import { HeroCarousel } from "./HeroCarousel";
@@ -59,7 +59,7 @@ function YearScale() {
             style={{ left: `${((y - first) / span) * 100}%` }}
           />
         ))}
-        {milestones.map((m) => (
+        {keyMilestones.map((m) => (
           <span
             key={m.year}
             className={`absolute top-0 grid gap-2 ${

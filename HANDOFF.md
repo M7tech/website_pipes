@@ -777,4 +777,15 @@ Before making any changes:
 
 Added from the old atlasplast.iq (verified in the content audit): sales department line +964 780 288 0009 (WhatsApp; also a ContactPoint), Friday pickup/shipping note, warehouses 24/7 and round-the-clock delivery, Georg Fischer galvanized malleable-iron fittings (EN 10242, water supply), Bänninger PP-R · PP-RCT (water supply) and PE · PVC-U Ø 8–1000 mm (infrastructure).
 
-Still waiting on the owner: leadership team, vision/mission, testimonials (consent), NASSAR, the "up to 50 years" warranty, fuller pre-2009 history, the YouTube video, project photos.
+Still waiting on the owner: leadership team, testimonials (consent), NASSAR, the "up to 50 years" warranty, project photos. (Vision/mission, the fuller history and YouTube were added in §24.)
+
+## 24. Galvanized fittings, vision and mission, history, Media (2026-10-05)
+
+Owner request (MOhammed): galvanized fittings as their own solution under Georg Fischer, produced in Austria; vision and mission on About; the fuller history; a Media tab showing the YouTube channel's videos; YouTube in Follow us.
+
+- **Galvanized fittings:** new solution `galvanized-fittings` (9 solutions now, icon `fitting`). The `gfMalleable` line moved out of water supply. `ProductLine.madeIn` (country code) shows a "Made in" row; GF's brand country stays CH. No product photo exists: the header uses the GF building from profile p8 (`photoSubjects.gfBuilding` alt). Replace with a real photo of the fittings when the owner sends one.
+- **Vision, mission, values:** `components/sections/Purpose.tsx` on About, copy in `About.purpose`. The statements combine the old site's (water and sewage networks) with the profile's (sanitaryware, p6); the values are the profile's. Told to the owner as editable.
+- **History:** `timeline.ts` milestones can carry `until` (a period, shown "1990–2003") and `detail` (About only). Home and the hero year scale use `keyMilestones`; About shows all (`<Timeline full />`). Added 1990–2003 sanctions years (State Company for Construction Materials Trading), 2006–2007 move to Sulaymaniyah, 2007 ARBAK partnership, 2008 return to Baghdad, 2009 Al-Amir showroom with FABCO. Source: the old AR About page as summarised in the content audit (verbatim page could not be re-read); owner approved adding them.
+- **Media:** `/[locale]/media` (nav item after Projects, sitemap). `lib/youtube.ts` reads the channel's public feed (`youtube.com/feeds/videos.xml?channel_id=UCURwlrQZe8PnV7ZUzTme-AQ`, latest 15 uploads) with `next.revalidate` 3600, and the page has `revalidate = 3600`, so new uploads appear within the hour with no redeploy. If the feed is unreachable (as in the build sandbox) it falls back to the old site's video `xatuZC65KuM`. `VideoGallery` is click-to-load (thumbnail, then a youtube-nocookie embed). VideoObject JSON-LD only for feed items with title and date.
+- **YouTube** is in `company.social` (`socialNames` shared by footer and contact page) and the organization `sameAs`.
+- Tests: `/media` is in the template list; third-party YouTube requests and thumbnails are ignored by the request and broken-image checks (the sandbox cannot reach them).

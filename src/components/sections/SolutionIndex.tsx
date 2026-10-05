@@ -3,7 +3,7 @@ import { SectionHead } from "@/components/ui/SectionHead";
 import { TextLink } from "@/components/ui/TextLink";
 import { SolutionList } from "@/components/solutions/SolutionList";
 
-/** Home section: the eight solutions, each linking to its page. */
+/** Home section: every solution, each linking to its page. */
 export async function SolutionIndex() {
   const t = await getTranslations("Home.solutions");
 

@@ -17,8 +17,12 @@ export const company = {
     facebook: "https://www.facebook.com/AtlasPlast.llc/",
     instagram: "https://www.instagram.com/atlasplast.iq/",
     linkedin: "https://www.linkedin.com/company/atlas-plast",
+    youtube: "https://www.youtube.com/@atlasplast",
   },
 } as const;
+
+/** Network names as each network writes them, for the Follow us links. */
+export const socialNames = { facebook: "Facebook", instagram: "Instagram", linkedin: "LinkedIn", youtube: "YouTube" } as const;
 
 /**
  * WhatsApp chat link for a mobile number. Every mobile line on the site opens

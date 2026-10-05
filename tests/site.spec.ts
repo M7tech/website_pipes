@@ -19,17 +19,26 @@ const paths = [
   "/locations",
   "/contact",
   "/projects",
+  "/media",
 ];
 
 const widths = [375, 768, 1440];
 
+/** YouTube thumbnails load from YouTube itself, which the test sandbox may not reach. */
+const thirdParty = (url: string) => /^https:\/\/(i\.ytimg\.com|[\w.-]*youtube(-nocookie)?\.com)\//.test(url);
+
 /** Collects console errors and failed or 4xx/5xx requests while the page loads. */
 function watch(page: Page) {
   const problems: string[] = [];
-  page.on("console", (m) => m.type() === "error" && problems.push(`console: ${m.text()}`));
+  page.on("console", (m) => {
+    if (m.type() !== "error" || thirdParty(m.location().url)) return;
+    // A blocked third-party resource reports as a console error with no source location.
+    if (/Failed to load resource/.test(m.text()) && !m.location().url) return;
+    problems.push(`console: ${m.text()}`);
+  });
   page.on("pageerror", (e) => problems.push(`pageerror: ${e.message}`));
-  page.on("requestfailed", (r) => problems.push(`failed: ${r.url()}`));
-  page.on("response", (r) => r.status() >= 400 && problems.push(`${r.status()}: ${r.url()}`));
+  page.on("requestfailed", (r) => thirdParty(r.url()) || problems.push(`failed: ${r.url()}`));
+  page.on("response", (r) => r.status() >= 400 && !thirdParty(r.url()) && problems.push(`${r.status()}: ${r.url()}`));
   return problems;
 }
 
@@ -50,7 +59,9 @@ for (const { code, dir } of locales) {
           expect(overflow, "horizontal overflow").toBeLessThanOrEqual(0);
 
           const broken = await page.evaluate(() =>
-            [...document.images].filter((i) => i.complete && i.naturalWidth === 0).map((i) => i.src),
+            [...document.images]
+              .filter((i) => i.src.startsWith(location.origin) && i.complete && i.naturalWidth === 0)
+              .map((i) => i.src),
           );
           expect(broken, "broken images").toEqual([]);
           expect(problems).toEqual([]);
@@ -113,4 +124,42 @@ test("owner corrections: nine months of stock, KAS PPR only, solution photos", a
   // Product photos cross-fade behind the header text, with one dot per photo.
   await expect(page.locator("main header img").first()).toBeVisible();
   await expect(page.locator('main header [aria-roledescription="carousel"] button')).not.toHaveCount(0);
+});
+
+test("galvanized fittings are a Georg Fischer solution made in Austria", async ({ page }) => {
+  await page.goto("/en/solutions/galvanized-fittings");
+  await expect(page.locator("h1")).toHaveText("Galvanized fittings");
+  const main = page.locator("main");
+  await expect(main).toContainText("Georg Fischer");
+  await expect(main.locator("dl", { hasText: "Made in" })).toContainText("Austria");
+  await page.goto("/en/solutions/water-supply");
+  // The line moved out of water supply (the "other solutions" list below still links to it).
+  expect(await page.locator('section[aria-labelledby="lines-title"]').innerText()).not.toContain("malleable");
+  await page.goto("/ar/brands/georg-fischer");
+  await expect(page.locator("main")).toContainText("النمسا");
+});
+
+test("About carries vision, mission and the full history", async ({ page }) => {
+  await page.goto("/en/about");
+  const main = page.locator("main");
+  await expect(main.getByRole("heading", { name: "Our vision" })).toBeVisible();
+  await expect(main.getByRole("heading", { name: "Our mission" })).toBeVisible();
+  for (const text of ["1990–2003", "Sulaymaniyah", "ARBAK", "FABCO", "Management returns to Baghdad"]) {
+    await expect(main, text).toContainText(text);
+  }
+  // Home keeps the short list.
+  await page.goto("/en");
+  expect(await page.locator("main").innerText()).not.toContain("ARBAK");
+});
+
+test("media page lists the channel's videos and YouTube is in Follow us", async ({ page }) => {
+  await page.goto("/en/media");
+  await expect(page.getByLabel("Main navigation").getByRole("link", { name: "Media" })).toHaveAttribute("aria-current", "page");
+  // Click to load: nothing is embedded until a video is played.
+  await expect(page.locator("main iframe")).toHaveCount(0);
+  await page.locator("main figure button").click();
+  await expect(page.locator('main iframe[src^="https://www.youtube-nocookie.com/embed/"]')).toHaveCount(1);
+  await expect(page.locator('footer a[href="https://www.youtube.com/@atlasplast"]')).toHaveText("YouTube");
+  await page.goto("/ar/contact");
+  await expect(page.locator('main a[href="https://www.youtube.com/@atlasplast"]')).toHaveText("YouTube");
 });
