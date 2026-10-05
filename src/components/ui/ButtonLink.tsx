@@ -19,9 +19,11 @@ export function ButtonLink({ variant = "primary", className = "", children, ...p
   return (
     <Link
       {...props}
-      className={`group relative isolate inline-flex min-h-12 items-center gap-3 overflow-hidden px-6 text-[0.9375rem] font-medium transition-colors duration-(--duration-base) ${v.base} ${className}`}
+      className={`group relative isolate inline-flex min-h-12 items-center gap-3 overflow-hidden px-6 text-[0.9375rem] font-medium transition-[color,background-color,border-color,scale] duration-(--duration-base) ease-(--ease-out-expo) active:scale-[0.97] active:duration-(--duration-fast) ${v.base} ${className}`}
     >
-      <span aria-hidden="true" className={`liquid -z-10 ${v.liquid}`} />
+      <span aria-hidden="true" className="liquid-box -z-10">
+        <span className={`liquid ${v.liquid}`} />
+      </span>
       <span>{children}</span>
       <Arrow className="transition-transform duration-(--duration-base) ease-(--ease-out-expo) group-hover:translate-x-1 rtl:group-hover:-translate-x-1" />
     </Link>

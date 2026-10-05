@@ -94,9 +94,11 @@ export default async function MediaPage({ params }: PageProps<"/[locale]/media">
             href={youtube.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative isolate inline-flex min-h-12 items-center gap-3 overflow-hidden bg-paper px-6 text-[0.9375rem] font-medium text-atlas-navy"
+            className="group relative isolate inline-flex min-h-12 items-center gap-3 overflow-hidden bg-paper px-6 text-[0.9375rem] font-medium text-atlas-navy transition-[color,background-color,border-color,scale] duration-(--duration-base) ease-(--ease-out-expo) active:scale-[0.97] active:duration-(--duration-fast)"
           >
-            <span aria-hidden="true" className="liquid -z-10 bg-white" />
+            <span aria-hidden="true" className="liquid-box -z-10">
+              <span className="liquid bg-white" />
+            </span>
             <Icon name="video" className="size-5 text-atlas-blue" />
             <span>{t("channel")}</span>
             <Arrow className="transition-transform duration-(--duration-base) ease-(--ease-out-expo) group-hover:translate-x-1 rtl:group-hover:-translate-x-1" />

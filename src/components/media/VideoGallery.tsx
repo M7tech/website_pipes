@@ -22,7 +22,7 @@ function PlayBadge({ size = "lg" }: { size?: "lg" | "sm" }) {
   return (
     <span aria-hidden="true" className="absolute inset-0 grid place-items-center">
       <span
-        className={`play-ripple grid place-items-center rounded-full bg-atlas-blue/90 text-white transition-transform duration-(--duration-base) ease-(--ease-out-expo) group-hover:scale-110 group-focus-visible:scale-110 ${size === "lg" ? "size-20" : "size-12"}`}
+        className={`${size === "lg" ? "play-ripple " : ""}grid place-items-center rounded-full bg-atlas-blue/90 text-white transition-transform duration-(--duration-base) ease-(--ease-out-expo) group-hover:scale-110 group-focus-visible:scale-110 ${size === "lg" ? "size-20" : "size-12"}`}
       >
         <svg viewBox="0 0 24 24" className={`fill-current ${size === "lg" ? "size-8" : "size-5"}`} style={{ marginInlineStart: "0.15em" }}>
           <path d="M8 5.5v13l10.5-6.5z" />

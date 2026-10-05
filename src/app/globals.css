@@ -42,6 +42,7 @@
 
   /* Motion */
   --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1); /* strong ease-in-out for things that morph in place */
   --duration-fast: 160ms;
   --duration-base: 320ms;
   --duration-reveal: 700ms;
@@ -243,49 +244,78 @@ p {
   text-decoration: underline;
 }
 
-/* Play buttons pulse outwards like a drop on still water. */
+/* The featured play button sends out a ring like a drop on still water. */
 @keyframes play-ripple {
   from {
-    box-shadow: 0 0 0 0 rgb(255 255 255 / 0.45);
+    transform: scale(1);
+    opacity: 1;
   }
   to {
-    box-shadow: 0 0 0 22px rgb(255 255 255 / 0);
+    transform: scale(1.55);
+    opacity: 0;
   }
 }
 .play-ripple {
+  position: relative;
+}
+.play-ripple::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 2px solid rgb(255 255 255 / 0.5);
+  pointer-events: none;
   animation: play-ripple 2.4s ease-out infinite;
 }
 
-/* Liquid fill for buttons: a rounded "water" body rises and turns on hover. */
-@keyframes liquid-turn {
-  to {
-    transform: translateX(-50%) rotate(360deg);
-  }
+/* Liquid fill for buttons: a rounded "water" body rises and turns on hover.
+   The box only rises (translate) and the body only turns (rotate); the turn is
+   paused while the water is hidden, so idle buttons cost nothing. */
+.liquid-box {
+  position: absolute;
+  inset: 0;
+  translate: 0 150%;
+  transition: translate 520ms var(--ease-out-expo);
+  pointer-events: none;
 }
 .liquid {
   position: absolute;
   inset-inline-start: 50%;
-  top: 110%;
+  top: -40%;
   width: 220%;
   aspect-ratio: 1;
   border-radius: 42%;
-  transform: translateX(-50%);
-  transition: top 520ms var(--ease-out-expo);
-  animation: liquid-turn 7s linear infinite;
-  pointer-events: none;
+  translate: -50% 0;
+  animation: liquid-turn 7s linear infinite paused;
+}
+@keyframes liquid-turn {
+  to {
+    rotate: 360deg;
+  }
 }
 [dir="rtl"] .liquid {
-  transform: translateX(50%);
+  translate: 50% 0;
   animation-name: liquid-turn-rtl;
 }
 @keyframes liquid-turn-rtl {
   to {
-    transform: translateX(50%) rotate(-360deg);
+    rotate: -360deg;
   }
 }
-.group:hover > .liquid,
-.group:focus-visible > .liquid {
-  top: -40%;
+/* Hover raises the water only where a real pointer can hover; a tap must not leave it filled. */
+@media (hover: hover) {
+  .group:hover > .liquid-box {
+    translate: 0 0;
+  }
+  .group:hover > .liquid-box > .liquid {
+    animation-play-state: running;
+  }
+}
+.group:focus-visible > .liquid-box {
+  translate: 0 0;
+}
+.group:focus-visible > .liquid-box > .liquid {
+  animation-play-state: running;
 }
 
 /* Images surface from below with a soft rising edge as they scroll into view (where supported). */
@@ -325,7 +355,8 @@ p {
   animation-name: current-rtl;
 }
 .current:hover .current-track,
-.current:focus-within .current-track {
+.current:focus-within .current-track,
+.current[data-paused] .current-track {
   animation-play-state: paused;
 }
 
@@ -334,7 +365,6 @@ p {
   .ken-burns,
   .caustics,
   .ripple-ring,
-  .play-ripple,
   .liquid,
   .surface-in,
   .current-track {
@@ -343,7 +373,11 @@ p {
   .ripple-ring {
     opacity: 0;
   }
-  .liquid {
+  .play-ripple::after {
+    animation: none;
+    opacity: 0;
+  }
+  .liquid-box {
     transition: none;
   }
   .current {
@@ -354,15 +388,15 @@ p {
   }
 }
 
-/* Water running through the header's progress pipe. */
+/* Water running through the header's progress pipe: a two-tile strip slides one tile. */
 @keyframes water-flow {
   to {
-    background-position: 200% 0;
+    transform: translateX(-50%);
   }
 }
 .water-flow {
   background: linear-gradient(90deg, var(--color-atlas-blue), var(--color-atlas-sky), #9fd0f5, var(--color-atlas-sky), var(--color-atlas-blue));
-  background-size: 200% 100%;
+  background-size: 50% 100%;
   animation: water-flow 2.4s linear infinite;
 }
 @media (prefers-reduced-motion: reduce) {

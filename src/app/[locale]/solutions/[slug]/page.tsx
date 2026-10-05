@@ -47,6 +47,7 @@ export default async function SolutionPage({ params }: PageProps<"/[locale]/solu
   const t = await getTranslations("Solutions");
   const nav = await getTranslations("Nav");
   const common = await getTranslations("Common");
+  const hero = await getTranslations("Home.hero");
   const key = solutionKey(slug);
   const name = t(`${key}.name`);
   const position = solutions.indexOf(solution) + 1;
@@ -99,6 +100,8 @@ export default async function SolutionPage({ params }: PageProps<"/[locale]/solu
                 : name,
           })),
           photoOf: solution.photos.map((_, i) => t("labels.photoOf", { current: i + 1, total: solution.photos.length })),
+          pause: hero("pause"),
+          play: hero("play"),
         }}
       >
         <dl className="mt-2 flex flex-wrap gap-x-10 gap-y-4 border-t border-rule-dark pt-5 text-sm">

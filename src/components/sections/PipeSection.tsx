@@ -1,6 +1,7 @@
 "use client";
 
 import { m, useReducedMotion } from "motion/react";
+import { easeOutExpo } from "@/lib/motion";
 
 /**
  * Hero drawing: cross-section of a PE100 SDR 11 pressure pipe, Ø 110 mm,
@@ -13,7 +14,7 @@ export function PipeSection({ label }: { label: string }) {
   const draw = (delay: number) => ({
     initial: still ? false : { pathLength: 0, opacity: 0 },
     animate: { pathLength: 1, opacity: 1 },
-    transition: { duration: 1.6, ease: [0.22, 1, 0.36, 1] as const, delay },
+    transition: { duration: 1.6, ease: easeOutExpo, delay },
   });
   const fade = (delay: number) => ({
     initial: still ? false : { opacity: 0 },

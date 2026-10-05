@@ -3,6 +3,7 @@
 import { useId, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 import Image from "next/image";
 import { m, useReducedMotion } from "motion/react";
+import { easeOutExpo } from "@/lib/motion";
 import { useDirectionSign } from "@/components/motion/useDirection";
 import { Arrow } from "@/components/ui/Arrow";
 
@@ -20,8 +21,8 @@ type HeroCarouselProps = {
  * Tabbed hero carousel (WAI-ARIA APG pattern).
  * - Slides share one grid cell, so the hero keeps the height of the tallest slide.
  * - Autoplay is driven by the active tab's progress rule (a CSS animation): it pauses
- *   on hover, on keyboard focus and with the pause button, and never runs when the
- *   visitor prefers reduced motion.
+ *   on mouse hover, on keyboard focus and with the pause button (never on a tap), and
+ *   never runs when the visitor prefers reduced motion.
  * - Arrow keys follow the reading direction, so they swap in RTL.
  */
 export function HeroCarousel({ slides, labels, interval = 8000 }: HeroCarouselProps) {
@@ -56,9 +57,15 @@ export function HeroCarousel({ slides, labels, interval = 8000 }: HeroCarouselPr
     <section
       aria-roledescription="carousel"
       aria-label={labels.label}
-      onMouseEnter={() => setHeld(true)}
-      onMouseLeave={() => setHeld(false)}
-      onFocus={() => setHeld(true)}
+      onPointerEnter={(e) => {
+        if (e.pointerType === "mouse") setHeld(true);
+      }}
+      onPointerLeave={(e) => {
+        if (e.pointerType === "mouse") setHeld(false);
+      }}
+      onFocus={(e) => {
+        if (e.target.matches(":focus-visible")) setHeld(true);
+      }}
       onBlur={(e) => {
         if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setHeld(false);
       }}
@@ -105,7 +112,7 @@ export function HeroCarousel({ slides, labels, interval = 8000 }: HeroCarouselPr
               className={`flex flex-col justify-center [grid-area:1/1] ${active ? "z-10" : "pointer-events-none"}`}
               initial={false}
               animate={{ opacity: active ? 1 : 0 }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.6, ease: easeOutExpo }}
             >
               {slide.content}
             </m.div>
@@ -164,7 +171,7 @@ export function HeroCarousel({ slides, labels, interval = 8000 }: HeroCarouselPr
             type="button"
             onClick={() => go(index - 1)}
             aria-label={labels.prev}
-            className="inline-flex size-11 items-center justify-center border border-transparent hover:border-rule-dark"
+            className="inline-flex size-11 items-center justify-center border border-transparent transition-[scale] duration-(--duration-base) ease-(--ease-out-expo) hover:border-rule-dark active:scale-[0.95] active:duration-(--duration-fast)"
           >
             <Arrow className="rotate-180" />
           </button>
@@ -172,7 +179,7 @@ export function HeroCarousel({ slides, labels, interval = 8000 }: HeroCarouselPr
             type="button"
             onClick={() => go(index + 1)}
             aria-label={labels.next}
-            className="inline-flex size-11 items-center justify-center border border-transparent hover:border-rule-dark"
+            className="inline-flex size-11 items-center justify-center border border-transparent transition-[scale] duration-(--duration-base) ease-(--ease-out-expo) hover:border-rule-dark active:scale-[0.95] active:duration-(--duration-fast)"
           >
             <Arrow />
           </button>
@@ -181,7 +188,7 @@ export function HeroCarousel({ slides, labels, interval = 8000 }: HeroCarouselPr
               type="button"
               onClick={() => setPlaying((p) => !p)}
               aria-label={playing ? labels.pause : labels.play}
-              className="inline-flex size-11 items-center justify-center border border-transparent hover:border-rule-dark"
+              className="inline-flex size-11 items-center justify-center border border-transparent transition-[scale] duration-(--duration-base) ease-(--ease-out-expo) hover:border-rule-dark active:scale-[0.95] active:duration-(--duration-fast)"
             >
               {playing ? (
                 <svg aria-hidden="true" viewBox="0 0 20 20" className="size-4" fill="currentColor">
