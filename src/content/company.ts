@@ -11,7 +11,8 @@ export const company = {
   mainPhone: "6779",
   /** Al-Shaab branch WhatsApp, also the site's WhatsApp line (owner 2026-10-05; it was listed under Camp Sara before). */
   whatsapp: "+964 783 305 6475",
-  projectsPhone: "+964 772 267 1130",
+  /** Projects division. Source: confirmed:2026-10-05 (owner). */
+  projectsPhone: "+964 786 660 4002",
   /** Sales department. Source: site:/ar/اتصل-بنا/ (departments list). */
   salesPhone: "+964 780 288 0009",
   social: {

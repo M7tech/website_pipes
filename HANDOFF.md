@@ -289,7 +289,7 @@ Source files are in the shared project folder (not in the repo):
 **Confirmed and in use:**
 - Since 1975 (first showroom 1990).
 - "Hundreds of projects."
-- Main phone **6779** (a normal `tel:` link). Every mobile number opens WhatsApp (`wa.me`): the site's WhatsApp line +964 783 305 6475, which is **Al-Shaab's** (owner, 2026-10-05; it was listed under Camp Sara before), projects division +964 772 267 1130, sales department +964 780 288 0009 (old site). Email info@atlasplast.iq.
+- Main phone **6779** (a normal `tel:` link). Every mobile number opens WhatsApp (`wa.me`): the site's WhatsApp line +964 783 305 6475, which is **Al-Shaab's** (owner, 2026-10-05; it was listed under Camp Sara before), projects division +964 786 660 4002 (owner, 2026-10-05; it was +964 772 267 1130 before), sales department +964 780 288 0009 (old site). Email info@atlasplast.iq.
 - **Offices in Iraq** (each with an exact Google Maps place, `mapUrl` in `company.ts`):
   - Camp Sara (Baghdad) — HQ, +964 787 116 6604 (owner, 2026-10-05)
   - Al-Shaab (Baghdad) — +964 783 305 6475
