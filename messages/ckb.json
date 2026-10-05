@@ -479,7 +479,9 @@
   },
   "Brands": {
     "notes": {
-      "baenningerTerritory": "بریکاری تایبەت بۆ ناوەڕاست و باشووری عێراق"
+      "baenningerTerritory": "بریکاری تایبەت بۆ ناوەڕاست و باشووری عێراق",
+      "directOrder": "ڕاستەوخۆ لە بەرهەمهێنەرەوە لە ڕێگەی ئەتلەس پلاستەوە داوا دەکرێت",
+      "quarterbathSister": "براندێکی QuarterBathە: هەمان بەرهەم و پشتگیری"
     },
     "index": {
       "eyebrow": "براندەکان",

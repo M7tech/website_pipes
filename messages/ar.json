@@ -479,7 +479,9 @@
   },
   "Brands": {
     "notes": {
-      "baenningerTerritory": "وكيل حصري لوسط العراق وجنوبه"
+      "baenningerTerritory": "وكيل حصري لوسط العراق وجنوبه",
+      "directOrder": "يُطلب مباشرة من المصنّع عبر أطلس بلاست",
+      "quarterbathSister": "علامة من QuarterBath: التشكيلة والدعم نفسهما"
     },
     "index": {
       "eyebrow": "العلامات التجارية",
