@@ -280,9 +280,9 @@ export const faqs: Faq[] = [
     href: "/solutions",
     source: "profile:p4",
     q: {
-      en: "What products does AtlasPlast supply?",
-      ar: "ما المنتجات التي توفّرها أطلس بلاست؟",
-      ckb: "ئەتلەس پلاست چ بەرهەمێک دابین دەکات؟",
+      en: "What products does AtlasPlast distribute?",
+      ar: "ما هي المنتجات التي توزّعها شركة أطلس بلاست؟",
+      ckb: "کۆمپانیای ئەتلەس پلاست چ بەرهەمێک دابەش دەکات؟",
     },
     a: {
       en: "AtlasPlast supplies ten solutions: water supply pipes (PP-R, PP-RCT and multilayer), drainage and grey water systems, water heaters, infrastructure networks (PE100 and U-PVC), galvanized fittings, sanitaryware and cisterns, ceramic and porcelain tiles, pumps, faucets and valves, and installation tools and fixings.",
@@ -385,23 +385,6 @@ export const faqs: Faq[] = [
       en: "Yes. AtlasPlast supplies Georg Fischer threaded fittings in galvanized malleable cast iron, produced in Austria to EN 10242.",
       ar: "نعم. توفّر أطلس بلاست ملحقات Georg Fischer الملولبة من الحديد المطاوع المغلفن، المصنوعة في النمسا وفق المعيار EN 10242.",
       ckb: "بەڵێ. ئەتلەس پلاست پێکهاتەی بادراوی Georg Fischer لە ئاسنی نەرمی گەلڤانیزەکراو دابین دەکات، کە لە نەمسا بەپێی ستانداردی EN 10242 دروست دەکرێن.",
-    },
-  },
-  {
-    id: "en-10242",
-    topic: "products",
-    solutions: ["galvanized-fittings"],
-    href: "/solutions/galvanized-fittings",
-    source: "site:/ar/الوكالات/",
-    q: {
-      en: "What is EN 10242?",
-      ar: "ما هو المعيار EN 10242؟",
-      ckb: "ستانداردی EN 10242 چییە؟",
-    },
-    a: {
-      en: "EN 10242 is the European standard for threaded pipe fittings in malleable cast iron, covering their design, materials and threads. The Georg Fischer galvanized fittings that AtlasPlast supplies are made to it.",
-      ar: "EN 10242 هو المعيار الأوروبي لملحقات الأنابيب الملولبة من الحديد المطاوع، ويحدد تصميمها وموادها وأسنانها. وملحقات Georg Fischer المغلفنة التي توفّرها أطلس بلاست مصنوعة وفقه.",
-      ckb: "EN 10242 ستانداردی ئەورووپییە بۆ پێکهاتەی بادراوی بۆری لە ئاسنی نەرم، کە دیزاین، ماددە و باکانیان دیاری دەکات. ئەو پێکهاتە گەلڤانیزەکراوانەی Georg Fischer کە ئەتلەس پلاست دابینیان دەکات بەپێی ئەم ستانداردە دروست کراون.",
     },
   },
   // ── Water supply pipes ────────────────────────────────────────────
@@ -779,23 +762,6 @@ export const faqs: Faq[] = [
       en: "Turan Borfit PE fittings go up to Ø 2000 mm and Bänninger PE and PVC-U systems up to Ø 1000 mm. Pimtaş U-PVC pressure pipe reaches Ø 400 mm, Georg Fischer PE100 Ø 355 mm, and Turan Borfit butt welding machines weld PE and PP pipes up to Ø 1200 mm.",
       ar: "تصل ملحقات PE من Turan Borfit إلى قطر 2000 مم، وأنظمة PE وPVC-U من Bänninger إلى قطر 1000 مم. ويبلغ أنبوب الضغط U-PVC من Pimtaş قطر 400 مم، وPE100 من Georg Fischer قطر 355 مم، وتلحم مكائن اللحام التناكبي من Turan Borfit أنابيب PE وPP حتى قطر 1200 مم.",
       ckb: "پێکهاتەکانی PEی Turan Borfit تا تیرەی 2000 ملم و سیستەمی PE و PVC-Uی Bänninger تا تیرەی 1000 ملم دەگەن. بۆریی پەستانی U-PVCی Pimtaş دەگاتە 400 ملم، PE100ی Georg Fischer دەگاتە 355 ملم، و مەکینەی لکاندنی ڕووبەڕووی Turan Borfit بۆریی PE و PP تا تیرەی 1200 ملم دەلکێنێت.",
-    },
-  },
-  {
-    id: "pe-coils",
-    topic: "infrastructure",
-    solutions: ["infrastructure"],
-    href: "/solutions/infrastructure",
-    source: "profile:p11",
-    q: {
-      en: "Is PE100 pipe available in coils?",
-      ar: "هل تتوفر أنابيب PE100 بلفّات؟",
-      ckb: "ئایا بۆریی PE100 بە لوول بەردەستە؟",
-    },
-    a: {
-      en: "Yes. Pimtaş and Turan Borfit PE100 pipes come in straight lengths of 6 to 12 m and in 100 m coils. Georg Fischer PE100 comes in 6 to 12.5 m lengths.",
-      ar: "نعم. تأتي أنابيب PE100 من Pimtaş وTuran Borfit بأطوال مستقيمة من 6 إلى 12 م وبلفّات طولها 100 م. وتأتي PE100 من Georg Fischer بأطوال من 6 إلى 12.5 م.",
-      ckb: "بەڵێ. بۆرییەکانی PE100ی Pimtaş و Turan Borfit بە درێژیی ڕاستی 6 تا 12 م و بە لوولی 100 م هەن. PE100ی Georg Fischer بە درێژیی 6 تا 12.5 م هەیە.",
     },
   },
   {
@@ -1249,9 +1215,9 @@ export const faqs: Faq[] = [
     href: "/brands",
     source: "profile:p4",
     q: {
-      en: "Which brands does AtlasPlast represent in Iraq?",
-      ar: "ما العلامات التجارية التي تمثّلها أطلس بلاست في العراق؟",
-      ckb: "ئەتلەس پلاست نوێنەرایەتیی چ براندێک لە عێراق دەکات؟",
+      en: "Which agencies does AtlasPlast hold?",
+      ar: "ما هي وكالات شركة أطلس بلاست؟",
+      ckb: "بریکارایەتییەکانی کۆمپانیای ئەتلەس پلاست کامانەن؟",
     },
     a: {
       en: "Georg Fischer, Polymelt, Bänninger, Ostendorf, Poloplast, FV-Plast, Peštan, WISA, DAB Pumps, Saudi Ceramics, Aquapa, Pimtaş, Turan Borfit, KAS, Guarri, Asçelik Clamp, Polo Egypt, Shield, QuarterBath, Candan Makina and Alvit.",
@@ -1524,7 +1490,7 @@ export const faqs: Faq[] = [
     source: "confirmed:2026-10-04",
     q: {
       en: "How do I contact AtlasPlast?",
-      ar: "كيف أتواصل مع أطلس بلاست؟",
+      ar: "كيف يمكنني التواصل مع أطلس بلاست؟",
       ckb: "چۆن پەیوەندی بە ئەتلەس پلاستەوە بکەم؟",
     },
     a: {
@@ -1707,6 +1673,38 @@ export const faqs: Faq[] = [
       en: "AtlasPlast is on Facebook (AtlasPlast.llc), Instagram (@atlasplast.iq), LinkedIn (atlas-plast) and YouTube (@atlasplast). The Media page shows the YouTube videos.",
       ar: "أطلس بلاست على فيسبوك (AtlasPlast.llc) وإنستغرام (@atlasplast.iq) ولينكدإن (atlas-plast) ويوتيوب (@atlasplast). وتعرض صفحة الوسائط مقاطع يوتيوب.",
       ckb: "ئەتلەس پلاست لە فەیسبووک (AtlasPlast.llc)، ئینستاگرام (@atlasplast.iq)، لینکدئین (atlas-plast) و یوتیوب (@atlasplast) هەیە. پەڕەی میدیا ڤیدیۆکانی یوتیوب پیشان دەدات.",
+    },
+  },
+  {
+    id: "prices",
+    topic: "contact",
+    href: "/contact",
+    source: "confirmed:2026-10-05",
+    q: {
+      en: "What are AtlasPlast’s prices?",
+      ar: "ما هي الأسعار؟",
+      ckb: "نرخەکان چەندن؟",
+    },
+    a: {
+      en: "Please contact the sales team and tell them your governorate and what the purchase is for. Once we receive this information, we will send you a price quotation and the details of the distributor nearest to you as soon as possible. Call {mainPhone}, message WhatsApp {whatsapp} or email {email}.",
+      ar: "يرجى التواصل مع فريق المبيعات وإعلامهم بالمحافظة والغاية من الشراء. بمجرد أن نتلقى هذه المعلومات، سنقدّم لك عرض أسعار وأقرب موزّع إليك في أقرب وقت ممكن. اتصل على {mainPhone} أو راسلنا على واتساب {whatsapp} أو بالبريد الإلكتروني {email}.",
+      ckb: "تکایە پەیوەندی بە تیمی فرۆشتنەوە بکە و پارێزگاکەت و مەبەستی کڕینەکەیان پێ بڵێ. هەر کە ئەم زانیارییانەمان پێگەیشت، لە زووترین کاتدا نرخنامەیەک و نزیکترین دابەشکەرت پێ دەدەین. پەیوەندی بە {mainPhone} بکە، لە واتسئاپ {whatsapp} نامە بنێرە یان ئیمەیڵ بنێرە بۆ {email}.",
+    },
+  },
+  {
+    id: "where-to-buy",
+    topic: "contact",
+    href: "/locations",
+    source: "confirmed:2026-10-05",
+    q: {
+      en: "Where can I buy the products AtlasPlast distributes?",
+      ar: "أين يمكنني شراء المنتجات التي توزّعها شركة أطلس بلاست؟",
+      ckb: "لە کوێ دەتوانم ئەو بەرهەمانە بکڕم کە ئەتلەس پلاست دابەشیان دەکات؟",
+    },
+    a: {
+      en: "You can buy the products of AtlasPlast’s agencies through a wide network of authorised distributors across Iraq. Send us your phone number and the name of your city by WhatsApp to {whatsapp} or by email to {email}; once we receive this information, we will find the distributor nearest to you as soon as possible.",
+      ar: "يمكنك شراء منتجات وكالات شركة أطلس بلاست من خلال شبكة واسعة من الموزّعين المعتمدين في جميع أنحاء العراق. يرجى تزويدنا برقم هاتفك واسم المدينة عبر واتساب {whatsapp} أو البريد الإلكتروني {email}، وبمجرد أن نتلقى هذه المعلومات سنحدّد أقرب موزّع إليك في أقرب وقت ممكن.",
+      ckb: "دەتوانیت بەرهەمی بریکارایەتییەکانی ئەتلەس پلاست لە ڕێگەی تۆڕێکی فراوانی دابەشکەری ڕێگەپێدراو لە سەرانسەری عێراق بکڕیت. تکایە ژمارەی تەلەفۆن و ناوی شارەکەت بە واتسئاپ بۆ {whatsapp} یان بە ئیمەیڵ بۆ {email} بنێرە؛ هەر کە ئەم زانیارییانەمان پێگەیشت، لە زووترین کاتدا نزیکترین دابەشکەرت بۆ دیاری دەکەین.",
     },
   },
   {
