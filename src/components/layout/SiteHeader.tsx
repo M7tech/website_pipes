@@ -57,7 +57,11 @@ export function SiteHeader() {
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
   return (
-    <header ref={headerRef} className="on-dark sticky top-0 z-40 bg-atlas-navy text-on-dark">
+    <header ref={headerRef} className="on-dark sticky top-0 z-40 isolate -mb-[var(--header-h)] text-on-dark">
+      {/* The header overlaps the top of the page (negative margin), so content scrolls under
+          the glass. The glass sits on its own layer: backdrop-filter on the header itself
+          would trap the fixed mobile menu inside the header's box. */}
+      <div aria-hidden="true" className="glass-navy absolute inset-0 -z-10 border-b border-white/10" />
       <div className="container-page flex h-16 items-center justify-between gap-6 md:h-20">
         <Link href="/" className="shrink-0" aria-label={brand}>
           <Logo tone="white" label={brand} className="!h-11 !w-auto md:!h-14" />
@@ -83,7 +87,7 @@ export function SiteHeader() {
           <LanguageSwitcher />
           <Link
             href={contactHref}
-            className="group inline-flex min-h-11 items-center gap-2 border border-on-dark/50 px-4 text-sm transition-[color,background-color,border-color,scale] duration-(--duration-base) ease-(--ease-out-expo) hover:border-white hover:bg-white/10 active:scale-[0.97] active:duration-(--duration-fast)"
+            className="group inline-flex min-h-10 items-center gap-2 rounded-full bg-white px-4 text-sm font-medium text-atlas-navy transition-[background-color,scale] duration-(--duration-base) ease-(--ease-out-expo) hover:bg-atlas-mist active:scale-[0.96] active:duration-(--duration-fast)"
           >
             {t("contact")}
             <Arrow />
@@ -138,7 +142,7 @@ export function SiteHeader() {
                   </m.li>
                 ))}
               </ul>
-              <LanguageSwitcher className="mt-8 -ms-2.5" onNavigate={() => setOpen(false)} />
+              <LanguageSwitcher className="mt-8 self-start" onNavigate={() => setOpen(false)} />
             </nav>
           </m.div>
         ) : null}

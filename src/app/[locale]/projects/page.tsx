@@ -56,20 +56,22 @@ export default async function ProjectsPage({ params }: PageProps<"/[locale]/proj
 
       <section aria-labelledby="selected-title" className="section-space">
         <div className="container-page grid gap-10">
-          <h2 id="selected-title" className="eyebrow border-t-2 border-ink pt-5 text-steel">
+          <h2 id="selected-title" className="section-title">
             {t("selected")}
           </h2>
-          <div className="grid">
+          <div className="grid gap-3 md:gap-4">
             {sectorOrder.map((sector) => (
-              <div key={sector} className="grid gap-x-8 gap-y-3 border-b border-rule py-8 md:grid-cols-12">
-                <h3 className="eyebrow pt-1.5 text-atlas-blue md:col-span-3">{sectors(sector)}</h3>
+              <div key={sector} className="grid gap-x-8 gap-y-4 rounded-card bg-surface p-6 md:grid-cols-12 md:p-8">
+                <h3 className="md:col-span-3">
+                  <span className="inline-flex rounded-full bg-atlas-blue/8 px-3 py-1 text-sm font-semibold text-atlas-blue">{sectors(sector)}</span>
+                </h3>
                 <ul className="grid gap-x-8 gap-y-3 md:col-span-9 md:grid-cols-2">
                   {featuredProjects
                     .filter((p) => p.sector === sector)
                     .map((p) => (
                       <li
                         key={p.slug}
-                        className="font-display-latin text-[clamp(1.25rem,2vw,1.625rem)] font-medium leading-snug"
+                        className="font-display-latin text-[clamp(1.25rem,2vw,1.625rem)] font-semibold leading-snug"
                       >
                         {p.name[locale as Locale]}
                       </li>
@@ -82,14 +84,14 @@ export default async function ProjectsPage({ params }: PageProps<"/[locale]/proj
       </section>
 
       <section aria-labelledby="clients-title" className="section-space bg-surface">
-        <div className="container-page grid gap-6 md:grid-cols-12 md:gap-8">
-          <h2 id="clients-title" className="eyebrow border-t-2 border-ink pt-5 text-steel md:col-span-3">
+        <div className="container-page grid gap-10">
+          <h2 id="clients-title" className="section-title">
             {home("clientsTitle")}
           </h2>
-          <div className="grid gap-4 md:col-span-9 md:pt-5">
-            <ul lang="en" className="grid gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-5">
+            <ul lang="en" dir="ltr" className="flex flex-wrap gap-2 text-ink/85 rtl:justify-end">
               {clients.map((client) => (
-                <li key={client} className="border-b border-rule py-3 text-ink/85">
+                <li key={client} className="rounded-full bg-paper px-4 py-2">
                   {client}
                 </li>
               ))}

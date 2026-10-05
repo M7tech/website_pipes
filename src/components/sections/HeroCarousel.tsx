@@ -120,7 +120,7 @@ export function HeroCarousel({ slides, labels, interval = 8000 }: HeroCarouselPr
         })}
       </div>
 
-      <div className="mt-10 flex items-stretch justify-between gap-6 border-t border-rule-dark md:mt-14">
+      <div className="mt-10 flex items-stretch justify-between gap-6 md:mt-14">
         <div role="tablist" aria-label={labels.label} className="grid flex-1 grid-cols-4 gap-x-3 md:gap-x-6">
           {slides.map((slide, i) => {
             const active = i === index;
@@ -142,12 +142,12 @@ export function HeroCarousel({ slides, labels, interval = 8000 }: HeroCarouselPr
                   active ? "text-white" : "text-on-dark-muted hover:text-white"
                 }`}
               >
-                <span aria-hidden="true" className="absolute inset-x-0 top-0 h-px -translate-y-px bg-rule-dark" />
+                <span aria-hidden="true" className="absolute inset-x-0 top-0 h-1 rounded-full bg-white/15" />
                 <span
                   aria-hidden="true"
                   key={active ? `on-${index}` : "off"}
                   onAnimationEnd={active ? () => go(index + 1) : undefined}
-                  className="absolute inset-x-0 top-0 h-[3px] -translate-y-0.5 origin-left bg-on-dark rtl:origin-right"
+                  className="absolute inset-x-0 top-0 h-1 origin-left rounded-full bg-on-dark rtl:origin-right"
                   style={
                     active
                       ? reduce || !playing
@@ -159,7 +159,7 @@ export function HeroCarousel({ slides, labels, interval = 8000 }: HeroCarouselPr
                       : { transform: "scaleX(0)" }
                   }
                 />
-                <span className="font-mono text-xs tabular">{String(i + 1).padStart(2, "0")}</span>
+                <span className="text-xs font-medium tabular">{String(i + 1).padStart(2, "0")}</span>
                 <span className={`${active ? "" : "max-md:sr-only"}`}>{slide.tab}</span>
               </button>
             );
@@ -171,7 +171,7 @@ export function HeroCarousel({ slides, labels, interval = 8000 }: HeroCarouselPr
             type="button"
             onClick={() => go(index - 1)}
             aria-label={labels.prev}
-            className="inline-flex size-11 items-center justify-center border border-transparent transition-[scale] duration-(--duration-base) ease-(--ease-out-expo) hover:border-rule-dark active:scale-[0.95] active:duration-(--duration-fast)"
+            className="inline-flex size-11 items-center justify-center rounded-full transition-[scale,background-color] duration-(--duration-base) ease-(--ease-out-expo) hover:bg-white/10 active:scale-[0.95] active:duration-(--duration-fast)"
           >
             <Arrow className="rotate-180" />
           </button>
@@ -179,7 +179,7 @@ export function HeroCarousel({ slides, labels, interval = 8000 }: HeroCarouselPr
             type="button"
             onClick={() => go(index + 1)}
             aria-label={labels.next}
-            className="inline-flex size-11 items-center justify-center border border-transparent transition-[scale] duration-(--duration-base) ease-(--ease-out-expo) hover:border-rule-dark active:scale-[0.95] active:duration-(--duration-fast)"
+            className="inline-flex size-11 items-center justify-center rounded-full transition-[scale,background-color] duration-(--duration-base) ease-(--ease-out-expo) hover:bg-white/10 active:scale-[0.95] active:duration-(--duration-fast)"
           >
             <Arrow />
           </button>
@@ -188,7 +188,7 @@ export function HeroCarousel({ slides, labels, interval = 8000 }: HeroCarouselPr
               type="button"
               onClick={() => setPlaying((p) => !p)}
               aria-label={playing ? labels.pause : labels.play}
-              className="inline-flex size-11 items-center justify-center border border-transparent transition-[scale] duration-(--duration-base) ease-(--ease-out-expo) hover:border-rule-dark active:scale-[0.95] active:duration-(--duration-fast)"
+              className="inline-flex size-11 items-center justify-center rounded-full transition-[scale,background-color] duration-(--duration-base) ease-(--ease-out-expo) hover:bg-white/10 active:scale-[0.95] active:duration-(--duration-fast)"
             >
               {playing ? (
                 <svg aria-hidden="true" viewBox="0 0 20 20" className="size-4" fill="currentColor">

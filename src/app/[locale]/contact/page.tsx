@@ -85,7 +85,7 @@ export default async function ContactPage({ params }: PageProps<"/[locale]/conta
         <div className="mt-4 flex flex-wrap items-end gap-x-12 gap-y-8">
           <a href={`tel:${company.mainPhone}`} className="group grid gap-2">
             <span className="eyebrow flex items-center gap-2 text-on-dark-muted">
-              <Icon name="phone" className="size-5 text-atlas-sky" />
+              <Icon name="phone" className="size-5 text-atlas-mist" />
               {t("callLabel")}
             </span>
             <span className="font-display-latin text-[clamp(4rem,10vw,7.5rem)] font-semibold leading-[0.9] tabular transition-colors duration-(--duration-base) group-hover:text-atlas-sky">
@@ -96,10 +96,10 @@ export default async function ContactPage({ params }: PageProps<"/[locale]/conta
             href={whatsappHref(company.whatsapp)}
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative isolate mb-2 inline-flex min-h-12 items-center gap-3 overflow-hidden bg-paper px-6 text-[0.9375rem] font-medium text-atlas-navy transition-[scale] duration-(--duration-base) ease-(--ease-out-expo) active:scale-[0.97] active:duration-(--duration-fast)"
+            className="group relative isolate mb-2 inline-flex min-h-12 items-center gap-3 overflow-hidden rounded-full bg-white px-6 text-[0.9375rem] font-medium text-atlas-navy transition-[scale] duration-(--duration-base) ease-(--ease-out-expo) active:scale-[0.97] active:duration-(--duration-fast)"
           >
             <span aria-hidden="true" className="liquid-box -z-10">
-              <span className="liquid bg-white" />
+              <span className="liquid bg-atlas-mist" />
             </span>
             <Icon name="whatsapp" className="size-5 text-atlas-blue" />
             <span>{t("chat")}</span>
@@ -111,16 +111,16 @@ export default async function ContactPage({ params }: PageProps<"/[locale]/conta
       <section aria-labelledby="channels-title" className="section-space bg-surface">
         <div className="container-page grid gap-12">
           <SectionHead id="channels-title" eyebrow={t("channels")} title={t("channelsTitle")} />
-          <ul className="grid border-s border-t border-rule sm:grid-cols-2 xl:grid-cols-4">
+          <ul className="grid gap-3 sm:grid-cols-2 md:gap-4 xl:grid-cols-4">
             {channels.map((c) => (
-              <li key={c.label} className="border-e border-b border-rule">
+              <li key={c.label}>
                 <a
                   href={c.href}
                   {...(c.href.startsWith("https://") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                  className="group grid h-full min-h-44 content-between gap-8 p-6 sm:min-h-60 transition-colors duration-(--duration-base) hover:bg-paper md:p-8"
+                  className="group pressable lift grid h-full content-between gap-5 rounded-card bg-paper p-6 sm:min-h-60 sm:gap-8 md:p-8"
                 >
                   <span className="grid gap-5">
-                    <span className="inline-flex size-12 items-center justify-center rounded-full bg-atlas-blue/8 text-atlas-blue transition-colors duration-(--duration-base) group-hover:bg-atlas-blue group-hover:text-white">
+                    <span className="inline-flex size-12 items-center justify-center rounded-full bg-surface text-atlas-blue transition-colors duration-(--duration-base) group-hover:bg-atlas-blue group-hover:text-white">
                       <Icon name={c.icon} />
                     </span>
                     <span className="grid gap-2">
@@ -178,18 +178,18 @@ export default async function ContactPage({ params }: PageProps<"/[locale]/conta
       <section aria-labelledby="follow-title" className="on-dark section-space relative isolate overflow-hidden bg-atlas-navy text-on-dark">
         <div aria-hidden="true" className="caustics absolute -inset-[10%] -z-10 mix-blend-screen" />
         <div className="container-page grid gap-10 md:grid-cols-12 md:gap-8">
-          <h2 id="follow-title" className="eyebrow border-t-2 border-on-dark pt-5 text-on-dark-muted md:col-span-3">
+          <h2 id="follow-title" className="eyebrow text-atlas-mist md:col-span-3 md:pt-6">
             {t("follow")}
           </h2>
-          <ul className="grid grid-cols-2 border-t border-rule-dark md:col-span-9 lg:grid-cols-4">
+          <ul className="grid grid-cols-2 gap-3 md:col-span-9 md:gap-4 lg:grid-cols-4">
             {(Object.keys(company.social) as (keyof typeof company.social)[]).map((key) => (
-              <li key={key} className="border-b border-rule-dark">
+              <li key={key}>
                 <a
                   href={company.social[key]}
                   target="_blank"
                   rel="noopener noreferrer"
                   lang="en"
-                  className="group flex min-h-28 items-end justify-between gap-4 py-6 pe-6 font-display-latin text-2xl font-semibold transition-colors duration-(--duration-base) hover:text-atlas-sky"
+                  className="glass-on-dark group pressable flex min-h-28 items-end justify-between gap-4 rounded-card p-6 font-display-latin text-xl font-semibold hover:bg-white/12 md:text-2xl"
                 >
                   {socialNames[key]}
                   <Arrow className="-rotate-45 transition-transform duration-(--duration-base) ease-(--ease-out-expo) group-hover:-translate-y-1" />

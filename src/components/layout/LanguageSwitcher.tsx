@@ -13,7 +13,7 @@ export function LanguageSwitcher({ className = "", onNavigate }: { className?: s
 
   return (
     <nav aria-label={t("language")} className={className}>
-      <ul className="flex items-center gap-1">
+      <ul className="flex items-center gap-0.5 rounded-full bg-white/8 p-1">
         {routing.locales.map((l) => (
           <li key={l}>
             <Link
@@ -23,8 +23,8 @@ export function LanguageSwitcher({ className = "", onNavigate }: { className?: s
               hrefLang={l}
               aria-current={l === locale ? "true" : undefined}
               onClick={onNavigate}
-              className={`block px-2.5 py-1.5 text-sm transition-colors ${
-                l === locale ? "text-white underline underline-offset-[6px]" : "text-on-dark-muted hover:text-white"
+              className={`block rounded-full px-3 py-1 text-sm transition-colors duration-(--duration-base) ${
+                l === locale ? "bg-white/16 text-white" : "text-on-dark-muted hover:text-white"
               } ${l === "en" ? "font-sans" : "font-arabic"}`}
             >
               {languageNames[l]}

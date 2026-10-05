@@ -24,7 +24,7 @@ export async function ProductLineRow({
 
   return (
     <li
-      className={`grid gap-x-8 gap-y-5 border-b border-rule py-8 first:pt-2 md:py-10 ${lead ? "md:grid-cols-12" : "md:grid-cols-9"}`}
+      className={`grid gap-x-8 gap-y-5 rounded-card bg-surface p-6 md:p-8 ${lead ? "md:grid-cols-12" : "md:grid-cols-9"}`}
     >
       {lead ? <div className="flex items-start gap-4 md:col-span-3 md:flex-col md:gap-3">{lead}</div> : null}
       <div className="grid content-start gap-3 md:col-span-4">
@@ -37,11 +37,11 @@ export async function ProductLineRow({
         <p className="text-steel">{t(`lines.${line.id}.text`)}</p>
       </div>
       {line.specs.length || line.madeIn ? (
-        <dl aria-label={t("labels.specs")} className="grid content-start md:col-span-5">
+        <dl aria-label={t("labels.specs")} className="grid content-start divide-y divide-rule/70 self-start rounded-tile bg-paper px-4 md:col-span-5">
           {line.specs.map((spec) => (
             <div
               key={spec.key}
-              className="grid grid-cols-[minmax(7rem,2fr)_3fr] gap-4 border-t border-rule py-2.5 text-sm last:border-b"
+              className="grid grid-cols-[minmax(7rem,2fr)_3fr] gap-4 py-2.5 text-sm"
             >
               <dt className="text-steel">{t(`specs.${spec.key}`)}</dt>
               <dd className="font-mono text-ink">
@@ -50,7 +50,7 @@ export async function ProductLineRow({
             </div>
           ))}
           {line.madeIn ? (
-            <div className="grid grid-cols-[minmax(7rem,2fr)_3fr] gap-4 border-t border-rule py-2.5 text-sm last:border-b">
+            <div className="grid grid-cols-[minmax(7rem,2fr)_3fr] gap-4 py-2.5 text-sm">
               <dt className="text-steel">{t("specs.madeIn")}</dt>
               <dd className="text-ink">{countries(line.madeIn)}</dd>
             </div>

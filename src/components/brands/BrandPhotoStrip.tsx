@@ -6,8 +6,8 @@ import { CurrentStrip } from "./CurrentStrip";
 
 function Card({ brand, alt }: { brand: Brand; alt: string }) {
   return (
-    <Link href={`/brands/${brand.slug}`} className="group grid w-64 shrink-0 gap-3 md:w-80">
-      <span className="relative block aspect-[16/10] overflow-hidden bg-atlas-navy">
+    <Link href={`/brands/${brand.slug}`} className="group pressable grid w-64 shrink-0 gap-3 md:w-80">
+      <span className="relative block aspect-[16/10] overflow-hidden rounded-card bg-atlas-navy">
         <Image
           src={brand.photo!.src}
           alt={alt}

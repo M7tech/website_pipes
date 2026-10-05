@@ -57,10 +57,10 @@ export default async function LocationsPage({ params }: PageProps<"/[locale]/loc
       <Presence cta={false} />
       <section aria-labelledby="branches-title" className="section-space bg-surface">
         <div className="container-page grid gap-10">
-          <h2 id="branches-title" className="eyebrow border-t-2 border-ink pt-5 text-steel">
+          <h2 id="branches-title" className="section-title">
             {c("branches")}
           </h2>
-          <OfficeLines />
+          <OfficeLines tone="paper" />
         </div>
       </section>
       <ContactBand />

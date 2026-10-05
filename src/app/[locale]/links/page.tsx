@@ -35,7 +35,7 @@ type Row = { label: string; value?: string; href: string; icon?: IconName; lang?
 
 function LinkRows({ rows }: { rows: Row[] }) {
   return (
-    <ul className="grid border-b border-rule">
+    <ul className="divide-y divide-rule/70 overflow-hidden rounded-card bg-surface">
       {rows.map((row) => {
         const external = row.href.startsWith("https://");
         return (
@@ -43,7 +43,7 @@ function LinkRows({ rows }: { rows: Row[] }) {
             <a
               href={row.href}
               {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-              className="group flex min-h-16 items-center justify-between gap-x-6 border-t border-rule py-4 text-lg hover:text-atlas-blue"
+              className="group flex min-h-16 items-center justify-between gap-x-6 px-5 py-4 text-lg transition-colors duration-(--duration-base) hover:bg-atlas-blue/5 hover:text-atlas-blue active:bg-atlas-blue/10"
             >
               <span className="flex items-center gap-3">
                 {row.icon ? <Icon name={row.icon} className="size-5 shrink-0 text-atlas-blue" /> : null}
@@ -67,11 +67,11 @@ function LinkRows({ rows }: { rows: Row[] }) {
 
 function Group({ id, title, children }: { id: string; title: string; children: ReactNode }) {
   return (
-    <section aria-labelledby={id} className="grid gap-y-6 lg:grid-cols-12 lg:gap-x-8">
-      <h2 id={id} className="eyebrow border-t-2 border-ink pt-5 text-steel lg:col-span-4">
+    <section aria-labelledby={id} className="grid w-full max-w-2xl gap-3">
+      <h2 id={id} className="eyebrow ps-5 text-steel">
         {title}
       </h2>
-      <div className="lg:col-span-7 lg:col-start-6">{children}</div>
+      {children}
     </section>
   );
 }
@@ -111,7 +111,7 @@ export default async function LinksPage({ params }: PageProps<"/[locale]/links">
       />
 
       <div className="section-space">
-        <div className="container-page grid gap-16">
+        <div className="container-page grid gap-12">
           <Group id="service-title" title={t("service")}>
             <LinkRows rows={service} />
           </Group>
@@ -123,10 +123,10 @@ export default async function LinksPage({ params }: PageProps<"/[locale]/links">
 
       <section aria-labelledby="branches-title" className="section-space bg-surface">
         <div className="container-page grid gap-10">
-          <h2 id="branches-title" className="eyebrow border-t-2 border-ink pt-5 text-steel">
+          <h2 id="branches-title" className="section-title">
             {t("branches")}
           </h2>
-          <OfficeLines />
+          <OfficeLines tone="paper" />
         </div>
       </section>
 

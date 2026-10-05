@@ -62,7 +62,7 @@ export function VideoGallery({
   return (
     <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
       <figure className="grid content-start gap-5 lg:sticky lg:top-28 lg:col-span-8 lg:self-start">
-        <div ref={player} className="relative aspect-video overflow-hidden bg-atlas-navy-deep">
+        <div ref={player} className="relative aspect-video overflow-hidden rounded-card bg-atlas-navy-deep">
           {playing ? (
             <iframe
               key={current.id}
@@ -112,9 +112,9 @@ export function VideoGallery({
                 onClick={() => play(i)}
                 aria-label={video.playLabel}
                 aria-current={i === active ? "true" : undefined}
-                className="group grid w-full gap-3 text-start lg:grid-cols-[44%_1fr] lg:items-start lg:gap-4"
+                className="group pressable grid w-full gap-3 text-start lg:grid-cols-[44%_1fr] lg:items-start lg:gap-4"
               >
-                <span className="relative block aspect-video overflow-hidden bg-atlas-navy-deep">
+                <span className="relative block aspect-video overflow-hidden rounded-tile bg-atlas-navy-deep">
                   <Image
                     src={videoThumbnail(video.id)}
                     alt=""

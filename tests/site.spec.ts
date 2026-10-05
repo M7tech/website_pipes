@@ -295,4 +295,31 @@ test.describe("on a phone", () => {
       timeout: 8000,
     });
   });
+
+  test("solution cards form a sideways shelf, in both reading directions", async ({ page }) => {
+    for (const code of ["en", "ar"]) {
+      await page.goto(`/${code}`);
+      const shelf = page.locator('section[aria-labelledby="solutions-title"] ul').first();
+      await expect(shelf).toHaveCSS("display", "flex");
+      await expect(shelf).toHaveCSS("overflow-x", "auto");
+      // The second card peeks in from the edge, so the shelf reads as swipeable.
+      const second = await shelf.locator("li").nth(1).boundingBox();
+      expect(second!.width).toBeGreaterThan(200);
+      if (code === "en") expect(second!.x).toBeLessThan(390);
+      else expect(second!.x + second!.width).toBeGreaterThan(0);
+      expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(390);
+    }
+  });
+});
+
+test("the header is glass floating over the page, and the page band starts under it", async ({ page }) => {
+  await page.goto("/en/solutions");
+  const main = await page.locator("main").boundingBox();
+  expect(main!.y).toBe(0);
+  await expect(page.locator("header.sticky > div.glass-navy")).toHaveCSS("backdrop-filter", /blur/);
+  // The mobile menu is fixed to the viewport, not trapped in the header's box.
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.locator('button[aria-controls="mobile-menu"]').click();
+  const menu = await page.locator("#mobile-menu").boundingBox();
+  expect(menu!.height).toBeGreaterThan(700);
 });

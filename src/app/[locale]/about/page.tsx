@@ -61,12 +61,9 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
         breadcrumbLabel={common("breadcrumb")}
         crumbs={[{ label: nav("home"), href: "/" }, { label: nav("about") }]}
       >
-        <dl aria-label={f("label")} className="mt-4 grid grid-cols-2 border-t border-rule-dark lg:grid-cols-4">
-          {facts.map((fact, i) => (
-            <div
-              key={fact.key}
-              className={`flex flex-col-reverse justify-end gap-2 border-rule-dark py-6 pe-4 ${i % 2 === 1 ? "border-s ps-4" : ""} ${i >= 2 ? "border-t lg:border-t-0" : ""} ${i === 2 ? "lg:border-s lg:ps-4" : ""}`}
-            >
+        <dl aria-label={f("label")} className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-4">
+          {facts.map((fact) => (
+            <div key={fact.key} className="glass-on-dark flex flex-col-reverse justify-end gap-2 rounded-card p-5">
               <dt className="max-w-[22ch] text-sm text-on-dark-muted">{f(fact.key)}</dt>
               <dd className="font-display-latin text-[clamp(1.75rem,3vw,2.5rem)] font-semibold leading-none tabular">
                 <Ltr>{fact.value}</Ltr>
@@ -85,10 +82,10 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
             height={chairman.photo.height}
             alt={chairman.name[locale as Locale]}
             sizes="(min-width: 768px) 20vw, 14rem"
-            className="aspect-[4/5] w-full max-w-56 bg-surface object-cover object-top md:col-span-3 md:max-w-none"
+            className="aspect-[4/5] w-full max-w-56 rounded-card bg-surface object-cover object-top md:col-span-3 md:max-w-none"
           />
           <div className="grid content-start gap-6 md:col-span-8 md:col-start-5">
-            <h2 id="chairman-title" className="eyebrow border-t-2 border-ink pt-5 text-steel">
+            <h2 id="chairman-title" className="eyebrow text-atlas-blue">
               {board("title")}
             </h2>
             <blockquote className="font-display-latin max-w-[34ch] text-[clamp(1.5rem,2.6vw,2.25rem)] font-semibold leading-[1.2] [:lang(ar)_&]:leading-[1.55] [:lang(ckb)_&]:leading-[1.55]">

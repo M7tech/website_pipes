@@ -6,7 +6,7 @@ export function TextLink({ className = "", children, ...props }: ComponentProps<
   return (
     <Link
       {...props}
-      className={`group inline-flex items-center gap-2 font-medium underline decoration-1 underline-offset-[6px] hover:decoration-2 ${className}`}
+      className={`group inline-flex items-center gap-1.5 font-medium text-atlas-blue underline-offset-[5px] hover:underline ${className}`}
     >
       {children}
       <Arrow className="transition-transform duration-(--duration-base) ease-(--ease-out-expo) group-hover:translate-x-1 rtl:group-hover:-translate-x-1" />

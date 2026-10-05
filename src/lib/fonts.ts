@@ -1,17 +1,13 @@
-import { Archivo, IBM_Plex_Mono, IBM_Plex_Sans, IBM_Plex_Sans_Arabic } from "next/font/google";
+import { IBM_Plex_Mono, IBM_Plex_Sans_Arabic, Inter } from "next/font/google";
 
-/** English display face; the wdth axis gives headings their expanded, engineered stance. */
-export const archivo = Archivo({
+/**
+ * English display and text face. The opsz axis redraws it for its size, like a
+ * system font: open and sturdy in body copy, tighter and finer in headlines.
+ */
+export const inter = Inter({
   subsets: ["latin"],
-  axes: ["wdth"],
-  variable: "--font-archivo",
-  display: "swap",
-});
-
-/** English text face. */
-export const plexSans = IBM_Plex_Sans({
-  subsets: ["latin"],
-  variable: "--font-plex",
+  axes: ["opsz"],
+  variable: "--font-inter",
   display: "swap",
 });
 
@@ -26,8 +22,7 @@ export const plexMono = IBM_Plex_Mono({
 });
 
 /**
- * Arabic and Sorani Kurdish. Verified to include the Sorani letters ڕ ڵ ێ ۆ ە ڤ;
- * drawn as a companion to IBM Plex Sans, so the scripts share one voice.
+ * Arabic and Sorani Kurdish. Verified to include the Sorani letters ڕ ڵ ێ ۆ ە ڤ.
  */
 export const plexArabic = IBM_Plex_Sans_Arabic({
   subsets: ["arabic"],
@@ -37,6 +32,6 @@ export const plexArabic = IBM_Plex_Sans_Arabic({
   display: "swap",
 });
 
-export const fontVariables = [archivo, plexSans, plexMono, plexArabic]
+export const fontVariables = [inter, plexMono, plexArabic]
   .map((f) => f.variable)
   .join(" ");

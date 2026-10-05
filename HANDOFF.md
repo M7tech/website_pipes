@@ -46,7 +46,7 @@ Versions from `package.json` / `npm ls --depth=0`:
 | @playwright/test / playwright-core | 1.56.1 | site checks in `tests/site.spec.ts` |
 | @axe-core/playwright | 4.13 | WCAG 2.1 AA checks inside the Playwright suite |
 
-- **Fonts:** loaded with `next/font/google` in `src/lib/fonts.ts`, so they are self-hosted at build time with no runtime Google requests. The families are Archivo (wdth axis), IBM Plex Sans, IBM Plex Mono (400/500) and IBM Plex Sans Arabic (400/500/600).
+- **Fonts:** loaded with `next/font/google` in `src/lib/fonts.ts`, so they are self-hosted at build time with no runtime Google requests. The families are Inter (opsz axis, English display and text), IBM Plex Mono (400/500, spec values) and IBM Plex Sans Arabic (400/500/600).
 - **No icon library:** icons are inline SVG in `src/components/ui/Icon.tsx`, `Arrow.tsx` and `PinIcon.tsx`.
 - **Scripts** (`package.json`): `dev`, `build`, `start`, `lint`, `typecheck` (`next typegen && tsc --noEmit`) and `test:e2e` (`playwright test`).
 - **Engines:** `node >= 20.9.0`. The Docker image uses Node 22.
@@ -63,7 +63,7 @@ Versions from `package.json` / `npm ls --depth=0`:
 ├── .env.example              NEXT_PUBLIC_SITE_URL and the optional YOUTUBE_API_KEY (allowed by .gitignore `!.env.example`)
 ├── next.config.ts            next-intl plugin, standalone output, image formats, security headers, the روابط redirects
 ├── playwright.config.ts      site checks; uses BASE_URL when set, otherwise builds and serves on :3100
-├── tests/site.spec.ts        every template × locale × width, axe, and feature tests (170 tests)
+├── tests/site.spec.ts        every template × locale × width, axe, and feature tests (172 tests)
 ├── scripts/og-image.js       renders public/og.png from a running production server
 ├── messages/                 en.json, ar.json, ckb.json — ALL user-facing UI copy
 ├── public/
@@ -142,7 +142,7 @@ The repo has an empty, untracked `.claude/` folder and no `.github/` (no CI work
 
 All tokens are in `src/app/globals.css`, in `@theme` and `:root`.
 
-**Style:** editorial and architectural. Square geometry, hairline rules, 2px section rules, a 12-column grid, no decorative shadows or gradients, and navy bands for emphasis. Technical-drawing motifs (the hero pipe section) and a water theme (§14) carry the identity.
+**Style:** modern and Apple-like since 2026-10-05 (owner asked for an apple-design review, "make it look modern"). Content sits on rounded cards and grouped lists instead of hairline rules; buttons and chips are pills; chrome that floats over content is translucent glass; type is Inter with tight display tracking. Navy bands, technical-drawing motifs (the hero pipe section) and the water theme (§14) still carry the identity.
 
 **Colours:**
 - Brand colours were sampled from the vector logo:
@@ -152,25 +152,27 @@ All tokens are in `src/app/globals.css`, in `@theme` and `:root`.
   - `--color-atlas-navy: #14284a`. Derived; used for the header, hero, page headers, contact band and theme-color.
   - `--color-atlas-navy-deep: #0e1c35`. Footer.
 - Neutrals:
-  - `--color-paper: #f3f4f2`. Page background.
+  - `--color-paper: #f4f5f7`. Page background.
   - `--color-surface: #ffffff`. Alternate sections.
-  - `--color-rule: #d3d7d5` and `--color-rule-strong: #9aa2a8`.
+  - `--color-rule: #dcdfe4` (list dividers, used at /70) and `--color-rule-strong: #9aa2a8`.
+- `--color-atlas-mist: #9fd0f5`: light sky for eyebrows, icons and small text on navy (9:1). Use it instead of `atlas-sky` on dark.
   - `--color-steel: #59626b`. Secondary text.
   - `--color-ink: #15181b`.
 - On dark backgrounds: `--color-on-dark: #f3f4f2`, `--color-on-dark-muted: #b9c3d3`, `--color-rule-dark: #2c4063`.
 
 **Typography:**
-- `--font-display` is Archivo (`font-display-latin` utility: `font-stretch: 112%`, `letter-spacing: -0.02em`).
-- `--font-sans` is IBM Plex Sans (body, 1rem / 1.6).
-- `--font-mono` is IBM Plex Mono (specs, labels, the `eyebrow` utility).
+- `--font-display` and `--font-sans` are both Inter with optical sizing (`font-display-latin` utility: `letter-spacing: -0.028em`; body text `-0.011em`, Inter's own tracking at 16px).
+- `--font-mono` is IBM Plex Mono, now only for spec values and phone numbers.
 - `--font-arabic` is IBM Plex Sans Arabic.
-- For `ar`/`ckb`, `:lang()` rules swap the display, eyebrow and body fonts to Plex Arabic. They also remove letter-spacing and uppercase.
+- `eyebrow` is a semibold sentence-case label (0.9375rem), coloured where it is used: `text-atlas-blue` on light, `text-atlas-mist` on navy.
+- `section-title` is the heading that opens a section below the page header ("11 product lines", "Other brands").
+- For `ar`/`ckb`, `:lang()` rules swap the display, eyebrow, section-title and body fonts to Plex Arabic and remove all letter-spacing.
 - Body line-height in ar/ckb is 1.8. It is set on `html:lang(..) body` so that `leading-*` utilities can still tighten headings.
 - Weights in use: 400/500/600; headings are mostly `font-semibold`.
 
 **Heading scale:**
 - Hero h1: `clamp(2.4rem, 6.2vw, 5.6rem)`, leading 0.98 (1.28 in ar/ckb).
-- Section h2 via `SectionHead`: `clamp(2rem, 4.4vw, 3.75rem)`, leading 1.02 (1.3 in ar/ckb), max 22ch.
+- Section h2 via `SectionHead`: `clamp(2.25rem, 5vw, 4.25rem)`, leading 1.04 (1.3 in ar/ckb), max 22ch, with the eyebrow stacked above it.
 - Inner-page h1 (`PageHeader`): `clamp(2.4rem, 6vw, 5.25rem)`.
 - Figures: `clamp(2rem, 4vw, 3.25rem)`. Contact number: `clamp(3.5rem, 9vw, 7rem)`.
 
@@ -179,24 +181,31 @@ All tokens are in `src/app/globals.css`, in `@theme` and `:root`.
 - Utilities: `container-page` (max-width `--container-wide` 95rem / 1520px, with inline padding of `--gutter`) and `section-space`.
 - `--container-content` is 80rem and `--container-text` is 42rem.
 
-**Grid:** `md:grid-cols-12`, with the label in 3 columns and content in 9. This pattern comes from `SectionHead`. Inner pages often use a 4 + 7 split (label, then content from column 6).
+**Grid:** `md:grid-cols-12` where a section needs columns. `SectionHead` stacks eyebrow, heading, intro and link at the start of the container. Card grids use `gap-3`/`gap-4`.
 
-**Radius:** square everywhere. `--radius-input: 2px` is reserved for future form fields.
+**Radius:** `rounded-card` (1.5rem) for cards, photos and grouped lists, `rounded-tile` (1rem) for small tiles and spec panels, `rounded-panel` (2rem) for large panels (enquiry card, glass contact panel), `rounded-full` for buttons, chips and the language switch. `--radius-input: 0.75rem` for future form fields.
 
 **Buttons:**
-- `ButtonLink` variants: `primary` (blue), `secondary` (ink outline), `inverse` (paper on navy) and `inverseOutline`.
-- All are 48px min height, square, with an arrow that nudges in the reading direction on hover, a water fill on hover or keyboard focus, and a press to `scale(0.97)`.
-- `TextLink` is an underlined link with an arrow.
+- `ButtonLink` variants: `primary` (blue), `secondary` (light ink pill), `inverse` (white on navy) and `inverseOutline` (glass on navy).
+- All are 48px min height pills, with an arrow that nudges in the reading direction on hover, a water fill on hover or keyboard focus, and a press to `scale(0.97)`.
+- `TextLink` is an Apple-style blue link with an arrow, underlined on hover.
 
-**Cards:** there are no rounded cards. Brand tiles form a hairline-bordered grid. Product and project rows are rule-separated lists.
+**Cards and lists:**
+- Cards are `rounded-card` on the opposite neutral (white cards on paper sections, paper cards on white sections); components that can sit on either take `tone="paper" | "surface"` (`SolutionList`, `BrandGrid`, `OfficeLines`).
+- Short lists (offices, warehouses, documents, links, board values) are iOS-style grouped lists: one rounded container with `divide-y divide-rule/70` rows.
+- `pressable` scales a card to 0.98 the moment it is pressed; `lift` adds a soft shadow and a 2px rise under a hovering pointer (`--shadow-lift`).
+- `shelf`: below 40rem a card grid becomes a horizontal scroll-snap shelf with the next card peeking in (solutions, projects, timeline, services). It uses `contain: inline-size` so it can never widen the page. Give the element `sm:grid` and its columns for wider screens.
+- `SolutionList` cards show the solution's first photo with `mix-blend-multiply`, because most photos are cut-outs on white: they sit on the card's own colour. Wide cards (to close the grid) lay out side by side.
 
-**Images:** partner logos appear in grayscale and switch to colour on hover. Photos sit in square frames; page headers cross-fade them behind the navy (`HeaderSlides`).
+**Materials:** `glass-navy` (site header) and `glass-on-dark` (hero and About stats, contact panel, vision and values, social tiles, header fact panels, slide dots) are translucent with `backdrop-filter`; both fall back to solid under `prefers-reduced-transparency` and `glass-on-dark` gets a solid border under `prefers-contrast: more`.
+
+**Images:** partner logos appear in grayscale and switch to colour on hover. Photos have rounded corners; page headers cross-fade them behind the navy (`HeaderSlides`).
 
 **Icons:** `Icon` (line icons on a 24px grid, 1.5 stroke, always decorative next to text), `Arrow` (mirrored in RTL) and `PinIcon` (on links that open Google Maps).
 
 **Motion tokens:** `--ease-out-expo: cubic-bezier(0.22,1,0.36,1)`, `--ease-in-out: cubic-bezier(0.77,0,0.175,1)`, `--duration-fast: 160ms`, `--duration-base: 320ms`, `--duration-reveal: 700ms`. Motion (JS) uses `easeOutExpo` from `src/lib/motion.ts`, which mirrors `--ease-out-expo`; change both together.
 
-**Header:** a solid navy sticky bar, 64px tall (80px at `md`), with the water progress pipe along its foot. See §11.
+**Header:** a sticky navy glass bar, 64px tall (80px at `md`, `--header-h`), with a pill Contact button, a segmented language switch and the water progress pipe along its foot. It overlaps the page (`-mb-[var(--header-h)]`), so content scrolls under the glass; `Hero` and `PageHeader` add `--header-h` to their top padding, and any page that does not open with one must add `mt-[var(--header-h)]` (see `not-found.tsx`). The glass is on a child layer: `backdrop-filter` on the header itself would trap the fixed mobile menu in the header's box. See §11.
 
 **Footer:** deep-navy, 12-column. See §12.
 
@@ -217,7 +226,7 @@ The site should feel premium, sophisticated, modern, architectural, industrial, 
 **Decisions already made:**
 - The **technical-drawing language**: the hero PE100 SDR11 Ø110 pipe section. Product data is set in mono with real specs (e.g. "PP-R · PP-RCT · Ø 20–200").
 - **Navy bands** for the hero, page headers and contact, with paper and white alternating between other sections.
-- **Lists and indexes instead of cards** for products, projects and clients. The **brand wall** is a hairline grid.
+- **Cards, grouped lists and pills** (2026-10-05, replacing the earlier lists-and-hairlines look): solutions are photo cards, brands are logo tiles, projects are cards with sector chips, clients are chips.
 - **Water theme** (owner, 2026-10-04: "fully animated with a water theme"): waves, caustic light, ripples, water-fill buttons and a water progress pipe. It stays restrained and is off under reduced motion.
 - The logo lockup reads "PIPE SYSTEMS · SINCE 1990". This is the official artwork and must not be edited; the copy uses "Since 1975" (see §9).
 
@@ -241,7 +250,7 @@ The site should feel premium, sophisticated, modern, architectural, industrial, 
 - **Navigation:** the language switcher keeps the current path (`usePathname` + `locale` prop).
 - **Known RTL issues:**
   - Arabic and Sorani pages repaint continuously while the header water and the caustic light both run (performance only, nothing visible). Pre-existing; see §25.
-  - Brand names in mono-styled country labels need `[:lang(ar)_&]:font-arabic`, because Plex Mono has no Arabic glyphs. Remember this for any new mono text that may contain Arabic script.
+  - Plex Mono has no Arabic glyphs, so never put text that may be Arabic script in `font-mono` (country labels are now sans for this reason).
 
 ## 8. Translation Status
 
@@ -357,12 +366,12 @@ Source files are in the shared project folder (not in the repo):
 
 `src/components/layout/SiteHeader.tsx` (client).
 
-- **Bar:** sticky, solid navy, z-40. There is no transparent state. It is `h-16`, or `md:h-20`. Along its foot runs the reading-progress water pipe (`water/ScrollWater.tsx`).
+- **Bar:** sticky navy glass (`glass-navy` on a child layer), z-40, overlapping the page top so content scrolls under it (see §5 Header). It is `h-16`, or `md:h-20` (`--header-h`). Along its foot runs the reading-progress water pipe (`water/ScrollWater.tsx`). A test guards the overlap, the blur and the full-height mobile menu.
 - **Logo:** the white lockup, sized by height (`!h-11 md:!h-14`). It links to `/`.
 - **Nav items** (`src/lib/nav.ts`): Solutions, Brands, Projects, Media, About, Locations. Contact is a separate button. `/about/board` keeps About marked as current.
 - **Desktop (≥ lg):**
   - An underline grows on hover and on `aria-current="page"`. Its origin flips in RTL.
-  - On the end side: `LanguageSwitcher` (English / العربية / کوردی) and a bordered Contact button.
+  - On the end side: `LanguageSwitcher` as a segmented pill (English / العربية / کوردی) and a white pill Contact button.
 - **Mobile (< lg):**
   - A two-line burger opens a full-screen navy menu under the bar.
   - The menu has large links with arrows (rows fade and rise in, staggered), plus the language switcher.
@@ -386,7 +395,7 @@ Source files are in the shared project folder (not in the repo):
 
 | Component | File | Purpose / where used | Notes |
 |---|---|---|---|
-| `SectionHead` | `ui/SectionHead.tsx` | Section opener: 2px rule, eyebrow (3 cols), h2 + intro + action (9 cols) | props `eyebrow, title, intro?, id, action?, tone` (light/dark). Arabic leading override built in |
+| `SectionHead` | `ui/SectionHead.tsx` | Section opener: coloured eyebrow stacked over a large h2, intro and action | props `eyebrow, title, intro?, id, action?, tone` (light/dark). Arabic leading override built in |
 | `PageHeader` | `ui/PageHeader.tsx` | Navy opening band for inner pages: breadcrumb, eyebrow, h1, intro, optional `icon`, `aside`, children, and a backdrop: one `image` or cross-fading `slides` | use it on every new inner page |
 | `HeaderSlides` | `ui/HeaderSlides.tsx` | Photo backdrop for a page header that cross-fades like the hero, with a pause button and dots | client; holds on mouse hover and keyboard focus, never after a tap |
 | `ButtonLink` | `ui/ButtonLink.tsx` | CTA links (next-intl `Link`) | `variant`: primary/secondary/inverse/inverseOutline; water fill, arrow nudge (flips in RTL), press scale |
@@ -402,9 +411,9 @@ Source files are in the shared project folder (not in the repo):
 | `IraqMap` | `sections/IraqMap.tsx` | Map with office and warehouse markers; office dots link to Google Maps | props `locale, label, officeCities, warehouseCities, cityNames, tone`, `className`; never mirrored |
 | `Purpose` | `sections/Purpose.tsx` | About: vision, mission, values | copy in `About.purpose` |
 | `Timeline` | `sections/Timeline.tsx` | Milestones with `ScrollRule` | `full` shows all (About); otherwise `keyMilestones` |
-| `SolutionList` | `solutions/SolutionList.tsx` | Rule-separated solution rows | props `only?` (slugs), `headingLevel`; also exports `solutionBrands()` |
+| `SolutionList` | `solutions/SolutionList.tsx` | Solution photo cards; a shelf on phones | props `only?` (slugs), `headingLevel`, `tone`; also exports `solutionBrands()` |
 | `ProductLineRow`, `EnquiryBand` | `solutions/` | Product-line row and sales band, shared by solution and brand pages | |
-| `BrandGrid` | `brands/BrandGrid.tsx` | Hairline logo grid | Brands index and Home |
+| `BrandGrid` | `brands/BrandGrid.tsx` | Rounded logo tiles | Brands index, Home and brand pages; prop `tone` |
 | `BrandDocuments` | `brands/BrandDocuments.tsx` | Technical documents on brand pages | renders when `documents` is set in `brands.ts` |
 | `BrandPhotoStrip` + `CurrentStrip` | `brands/` | Manufacturer photos drifting past; `CurrentStrip` (client) adds the pause button | the list renders twice for a seamless loop; the copy is hidden from assistive tech |
 | `OfficeLines` | `company/OfficeLines.tsx` | Branch phone lines and map links | Locations, Contact (`narrow`, two columns beside the map), Links |
@@ -592,6 +601,8 @@ Full SEO pass done 2026-10-04 at the owner's request ("make sure SEO is the best
 
 - **Current branch:** `feat/home-page`, which tracks `origin/feat/home-page`. Clean apart from this HANDOFF update, which is committed right after it is written.
 - **Recent commits** (newest first; `git log --oneline --first-parent` for the rest):
+  - Modern design pass (2026-10-05, branch `design/modern` merged in): Inter, glass header, rounded cards, grouped lists, pills, phone shelves
+  - `fcb0c65` docs: handoff notes for tiles, Board and Contact redesigns, branch numbers
   - `f43cc92` feat: tiles solution, livelier Board and Contact pages, branch number fixes
   - `181b5f1` docs: bring the handoff notes up to date
   - `002e3a5` docs: handoff notes for the merged animation fixes
@@ -636,7 +647,7 @@ Full SEO pass done 2026-10-04 at the owner's request ("make sure SEO is the best
 - [x] Animation audit and all ten fix plans, merged
 - [x] SEO: metadata, canonical, hreflang + x-default, OG image, sitemap, robots, JSON-LD on every page
 - [x] Board and Contact pages redesigned (2026-10-05)
-- [x] Playwright + axe suite in the repo (170 tests, all passing on `f43cc92`)
+- [x] Playwright + axe suite in the repo (172 tests, all passing after the modern design pass)
 - [x] Dockerfile, security headers and Coolify preview deployment
 - [x] README with Coolify notes, plus `.env.example`
 - [x] HANDOFF.md
@@ -691,10 +702,10 @@ No layout, RTL or accessibility bugs are open: the full suite passes.
 - **Locales and routing:** en/ar/ckb with an always-present prefix; the ckb code is used for Sorani. One component tree serves all languages, and direction comes from `dir` plus logical properties. There are no separate RTL layouts.
 - **Fonts:**
   - IBM Plex Sans Arabic for ar and ckb. It is one of the few families verified to render ڕ ڵ ێ ۆ ە ڤ; Cairo, Tajawal, Rubik, Alexandria and Readex fail Sorani.
-  - Archivo + Plex for English.
+  - Inter (optical sizing) for English since 2026-10-05; Archivo + Plex Sans before.
 - **Colours:** Atlas Blue is the text-safe accent. Atlas Sky is decorative only. Navy is derived from the brand blue.
 - **Never mirrored:** the logo, the map and the technical drawings.
-- **Design language:** square, editorial, hairline rules, technical drawings, lists over cards, a restrained water theme. The Home page is the benchmark for every new page; reuse `SectionHead`, `PageHeader`, `ButtonLink`, `TextLink` and `container-page`/`section-space`.
+- **Design language:** modern and Apple-like: rounded cards and grouped lists, pills, glass over navy, Inter, technical drawings and a restrained water theme. The Home page is the benchmark for every new page; reuse `SectionHead`, `PageHeader`, `ButtonLink`, `TextLink`, the `pressable`/`lift`/`shelf` utilities and `container-page`/`section-space`.
 - **Server Components by default.** Client components only for interaction and animation. `LazyMotion strict` with `m.*`.
 - **Copy:** never hard-code UI copy; add keys to all three message files together.
 - **Calpeda/Vitra:** not partners. **Hussein Raad / Hassan Al-Oreibi:** not published. No other people than the three on the board page.
@@ -720,7 +731,7 @@ No layout, RTL or accessibility bugs are open: the full suite passes.
 - Do not do large refactors before understanding dependencies.
 - Do not use `next/link` for internal links (use `@/i18n/navigation`), and do not use `motion.*` (strict LazyMotion requires `m.*`).
 - Do not split headings inside words (it breaks Arabic and Sorani letter joining).
-- Do not put Arabic-script text in Plex Mono without a font override.
+- Do not put Arabic-script text in Plex Mono.
 - Do not edit the logo SVGs or recolour partner logos beyond the grayscale hover treatment.
 - Do not publish the REQUIRES REVIEW items in §9.
 - Do not use سيفونات or فنيين in Arabic copy.

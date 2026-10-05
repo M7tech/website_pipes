@@ -20,29 +20,29 @@ export async function ProjectIndex() {
           action={<TextLink href="/projects">{t("cta")}</TextLink>}
         />
 
-        <ol className="grid border-t border-ink md:grid-cols-2 md:gap-x-8">
+        <ol className="shelf gap-3 sm:grid sm:grid-cols-2 md:gap-4 lg:grid-cols-3">
           {featuredProjects.map((project) => (
-            <li key={project.slug} className="flex items-baseline justify-between gap-6 border-b border-rule py-5">
-              <span className="font-display-latin text-[clamp(1.25rem,2vw,1.625rem)] font-medium leading-snug">
+            <li key={project.slug} className="grid min-h-36 content-between gap-6 rounded-card bg-paper p-6 md:min-h-40">
+              <span className="inline-flex justify-self-start rounded-full bg-surface px-3 py-1 text-sm font-medium text-atlas-blue">
+                {sectors(project.sector)}
+              </span>
+              <span className="font-display-latin text-[clamp(1.25rem,1.9vw,1.5rem)] font-semibold leading-snug">
                 {project.name[locale]}
               </span>
-              <span className="eyebrow shrink-0 text-steel">{sectors(project.sector)}</span>
             </li>
           ))}
         </ol>
 
-        <div className="grid gap-6 md:grid-cols-12 md:gap-8">
-          <h3 className="eyebrow text-steel md:col-span-3 md:pt-1">{t("clientsTitle")}</h3>
-          <div className="grid gap-4 md:col-span-9">
-          <ul lang="en" dir="ltr" className="flex flex-wrap gap-x-2 gap-y-2 text-[0.9375rem] text-ink/80 rtl:justify-end">
+        <div className="grid gap-5">
+          <h3 className="eyebrow text-steel">{t("clientsTitle")}</h3>
+          <ul lang="en" dir="ltr" className="flex flex-wrap gap-2 text-[0.9375rem] text-ink/80 rtl:justify-end">
             {clients.map((client) => (
-              <li key={client} className="after:ms-2 after:text-rule-strong after:content-['/'] last:after:content-none">
+              <li key={client} className="rounded-full bg-paper px-3.5 py-1.5">
                 {client}
               </li>
             ))}
           </ul>
           <p className="text-steel">{t("more")}</p>
-          </div>
         </div>
       </div>
     </section>

@@ -4,9 +4,9 @@ import { ButtonLink } from "@/components/ui/ButtonLink";
 export default async function NotFound() {
   const t = await getTranslations("NotFound");
   return (
-    <section className="section-space">
+    <section className="section-space mt-[var(--header-h)]">
       <div className="container-page grid max-w-3xl gap-6">
-        <p className="eyebrow font-mono text-steel">404</p>
+        <p className="eyebrow text-atlas-blue">404</p>
         <h1 className="font-display-latin text-5xl font-semibold">{t("title")}</h1>
         <p className="text-lg text-steel">{t("body")}</p>
         <div>

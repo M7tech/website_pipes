@@ -14,7 +14,7 @@ const layers = [
 
 export function Waves({ fillClass = "fill-paper", className = "" }: { fillClass?: string; className?: string }) {
   return (
-    <div aria-hidden="true" className={`pointer-events-none absolute inset-x-0 bottom-0 h-12 overflow-hidden md:h-20 ${className}`} style={{ direction: "ltr" }}>
+    <div aria-hidden="true" className={`pointer-events-none absolute inset-x-0 -bottom-px h-12 overflow-hidden md:h-20 ${className}`} style={{ direction: "ltr" }}>
       {layers.map((l, i) => (
         <svg
           key={i}

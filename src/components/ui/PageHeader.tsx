@@ -46,7 +46,7 @@ export function PageHeader({ eyebrow, icon, title, titleLang, intro, crumbs, bre
         <div aria-hidden="true" className="caustics absolute -inset-[10%] mix-blend-screen" />
       </div>
       {slides ? <HeaderSlides {...slides} /> : null}
-      <div className={`container-page grid gap-10 pt-8 md:pb-28 lg:grid-cols-12 lg:gap-8 ${slides ? "pb-32" : "pb-20"}`}>
+      <div className={`container-page grid gap-10 pt-[calc(var(--header-h)+2rem)] md:pb-28 lg:grid-cols-12 lg:gap-8 ${slides ? "pb-32" : "pb-20"}`}>
         <nav aria-label={breadcrumbLabel} className="lg:col-span-12">
           <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-on-dark-muted">
             {crumbs.map((c, i) => (
@@ -66,8 +66,8 @@ export function PageHeader({ eyebrow, icon, title, titleLang, intro, crumbs, bre
           </ol>
         </nav>
         <div className={`grid content-start gap-6 ${aside ? "lg:col-span-8" : slides ? "lg:col-span-7" : "lg:col-span-10"}`}>
-          <p className="eyebrow flex items-center gap-3 text-on-dark-muted">
-            {icon ? <Icon name={icon} className="size-8 text-atlas-sky" /> : null}
+          <p className="eyebrow flex items-center gap-3 text-atlas-mist">
+            {icon ? <Icon name={icon} className="size-8" /> : null}
             {eyebrow}
           </p>
           <h1 lang={titleLang} className="font-display-latin max-w-[20ch] text-[clamp(2.4rem,6vw,5.25rem)] font-semibold leading-[1] [:lang(ar)_&]:leading-[1.3] [:lang(ckb)_&]:leading-[1.3]">
