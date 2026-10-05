@@ -24,7 +24,7 @@ const heroBrands = [
   "poloplast",
   "ostendorf",
   "wisa",
-  "dab",
+  "aquapa",
   "saudi-ceramics",
   "fv-plast",
 ];
