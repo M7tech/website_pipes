@@ -20,6 +20,7 @@ const paths = [
   "/contact",
   "/projects",
   "/media",
+  "/links",
 ];
 
 const widths = [375, 768, 1440];
@@ -101,7 +102,8 @@ test("mobile menu keeps focus inside and returns it on Escape", async ({ page })
 
 test("every office opens in Google Maps", async ({ page }) => {
   await page.goto("/en/locations");
-  const links = page.locator('main a[href^="https://www.google.com/maps/"]');
+  // An exact place pin where the old site had one, a map search otherwise.
+  const links = page.locator('main a[href^="https://maps.google.com/?cid="], main a[href^="https://www.google.com/maps/search/"]');
   // Six offices in the branch list, six in the presence list and one per office city on the map.
   expect(await links.count()).toBeGreaterThanOrEqual(12);
   await expect(links.first()).toHaveAttribute("target", "_blank");
@@ -162,4 +164,28 @@ test("media page lists the channel's videos and YouTube is in Follow us", async 
   await expect(page.locator('footer a[href="https://www.youtube.com/@atlasplast"]')).toHaveText("YouTube");
   await page.goto("/ar/contact");
   await expect(page.locator('main a[href="https://www.youtube.com/@atlasplast"]')).toHaveText("YouTube");
+});
+
+test("the unlisted links page keeps the old address, the office pins and stays out of menus", async ({ page, request }) => {
+  // The old site's /روابط/ and /ar/روابط/ land on the Arabic page.
+  for (const old of ["/%D8%B1%D9%88%D8%A7%D8%A8%D8%B7/", "/ar/%D8%B1%D9%88%D8%A7%D8%A8%D8%B7"]) {
+    await page.goto(old);
+    await expect(page, old).toHaveURL(/\/ar\/links$/);
+  }
+  await expect(page.locator("h1")).toHaveText("روابط");
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
+  const main = page.locator("main");
+  await expect(main.locator('a[href="tel:6779"]')).toHaveCount(1);
+  await expect(main.locator('a[href="https://www.youtube.com/@atlasplast"]')).toHaveCount(1);
+  await expect(main.locator('a[href^="https://play.google.com/"]')).toHaveCount(1);
+  await expect(main.locator('a[href^="https://apps.apple.com/"]')).toHaveCount(1);
+  // Each office opens the pin the old page showed for it; Basra had none of its own there.
+  await expect(main.locator('a[href^="https://maps.google.com/?cid="]')).toHaveCount(5);
+  await expect(main.locator('a[href^="https://www.google.com/maps/search/"]')).toHaveCount(1);
+
+  for (const path of ["/ar", "/en/contact"]) {
+    await page.goto(path);
+    await expect(page.locator('a[href$="/links"]'), path).toHaveCount(0);
+  }
+  expect(await (await request.get("/sitemap.xml")).text()).not.toContain("/links");
 });

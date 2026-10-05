@@ -25,6 +25,15 @@ export const company = {
 export const socialNames = { facebook: "Facebook", instagram: "Instagram", linkedin: "LinkedIn", youtube: "YouTube" } as const;
 
 /**
+ * Craftsmen app, as linked from the old site's روابط page. These are the store pages its
+ * goo.gl and apple.co short links led to on 2026-10-05; both stores now list the app as SAWA.
+ */
+export const craftsmenApp = {
+  googlePlay: "https://play.google.com/store/apps/details?id=com.ufuqatlas.atlasclub",
+  appStore: "https://apps.apple.com/app/id1258596767",
+} as const;
+
+/**
  * WhatsApp chat link for a mobile number. Every mobile line on the site opens
  * WhatsApp (owner decision 2026-10-04); only the short main line is a phone call.
  */
@@ -48,8 +57,9 @@ export type Office = {
   name: Localized;
   hq?: boolean;
   phone?: string;
-  /** Place searched in Google Maps until the owner supplies an exact pin (`mapUrl`). */
+  /** Place searched in Google Maps when there is no exact pin (`mapUrl`). */
   mapQuery: string;
+  /** Exact Google Maps place, from the pin the old site's روابط page shows for this office. */
   mapUrl?: string;
   source: Source;
 };
@@ -63,6 +73,7 @@ export const offices: Office[] = [
   {
     id: "camp-sara",
     mapQuery: "Al-Riyadh Street, Camp Sara, Baghdad, Iraq",
+    mapUrl: "https://maps.google.com/?cid=6097986121788672144",
     city: "baghdad",
     hq: true,
     name: { en: "Camp Sara, Baghdad", ar: "كمب سارة، بغداد", ckb: "کەمپ سارە، بەغدا" },
@@ -72,6 +83,7 @@ export const offices: Office[] = [
   {
     id: "al-shaab",
     mapQuery: "Al-Shaab, Baghdad, Iraq",
+    mapUrl: "https://maps.google.com/?cid=12315681913268910686",
     city: "baghdad",
     name: { en: "Al-Shaab, Baghdad", ar: "الشعب، بغداد", ckb: "شەعب، بەغدا" },
     source: "confirmed:2026-10-04",
@@ -79,6 +91,7 @@ export const offices: Office[] = [
   {
     id: "najaf",
     mapQuery: "Al-Madina Street, Najaf, Iraq",
+    mapUrl: "https://maps.google.com/?cid=14215689635316559878",
     city: "najaf",
     name: { en: "Najaf", ar: "النجف", ckb: "نەجەف" },
     phone: "+964 783 700 6314",
@@ -86,6 +99,7 @@ export const offices: Office[] = [
   },
   {
     id: "basra",
+    // No exact pin: the old روابط page shows the Najaf pin under Basra.
     mapQuery: "Al-Watan Street, Basra, Iraq",
     city: "basra",
     name: { en: "Basra", ar: "البصرة", ckb: "بەسرە" },
@@ -95,6 +109,7 @@ export const offices: Office[] = [
   {
     id: "erbil",
     mapQuery: "Gulan Street, Shorish, Erbil, Iraq",
+    mapUrl: "https://maps.google.com/?cid=17920249688180889201",
     city: "erbil",
     name: { en: "Erbil", ar: "أربيل", ckb: "هەولێر" },
     phone: "+964 787 803 0001",
@@ -103,6 +118,7 @@ export const offices: Office[] = [
   {
     id: "duhok",
     mapQuery: "Qazi Mohammed Street, Duhok, Iraq",
+    mapUrl: "https://maps.google.com/?cid=5212968092964585088",
     city: "duhok",
     name: { en: "Duhok", ar: "دهوك", ckb: "دهۆک" },
     phone: "+964 750 991 0065",

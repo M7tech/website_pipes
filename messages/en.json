@@ -22,7 +22,9 @@
     "solutionDescription": "{text} Supplied across Iraq by AtlasPlast.",
     "brandDescription": "{brand} in Iraq from AtlasPlast: {lines}.",
     "brandDescriptionOnRequest": "{brand} products in Iraq from AtlasPlast. Ask our sales team on {phone} for the current range.",
-    "ogImageAlt": "AtlasPlast logo"
+    "ogImageAlt": "AtlasPlast logo",
+    "linksTitle": "Links",
+    "linksDescription": "AtlasPlast in one place: main line {phone}, WhatsApp, email, social channels, branch maps and the craftsmen app."
   },
   "Common": {
     "skipToContent": "Skip to content",
@@ -562,5 +564,12 @@
     "play": "Play video: {title}",
     "untitled": "AtlasPlast video",
     "more": "Watch every video and subscribe on the channel:"
+  },
+  "Links": {
+    "title": "Links",
+    "intro": "Call or message us, follow AtlasPlast, find a branch on the map, or get the craftsmen app.",
+    "service": "Customer service",
+    "branches": "Branches",
+    "app": "Iraqi Craftsmen App"
   }
 }

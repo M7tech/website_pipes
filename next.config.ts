@@ -18,6 +18,14 @@ const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
   },
+  async redirects() {
+    return [
+      // The old site's unlisted links page, /روابط/; Arabic was its default language.
+      // Sources match the percent-encoded path that browsers send.
+      { source: `/${encodeURIComponent("روابط")}`, destination: "/ar/links", permanent: true },
+      { source: `/ar/${encodeURIComponent("روابط")}`, destination: "/ar/links", permanent: true },
+    ];
+  },
   async headers() {
     return [
       { source: "/:path*", headers: securityHeaders },
