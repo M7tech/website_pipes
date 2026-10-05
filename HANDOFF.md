@@ -1,6 +1,6 @@
 # ATLASPLAST WEBSITE — PROJECT HANDOFF
 
-Last updated: 2026-10-05. Written from the repository state at commit `002e3a5` on branch `feat/home-page`. This revision brings every section up to date after the Media, Links and Board pages, the exact office map pins, and the merge of the ten animation fixes. It also folds the dated notes that used to be appended at the end into the sections they belong to.
+Last updated: 2026-10-05. Written from the repository state at commit `f43cc92` on branch `feat/home-page`. Latest changes: the tenth solution (ceramic and porcelain tiles), the redesigned Board and Contact pages, corrected Camp Sara and Al-Shaab numbers, the owner's Duhok pin, and optional full-channel listing on Media.
 
 A copy of this file is kept at `/mnt/project-files/atlas/HANDOFF.md`. Keep the two identical.
 
@@ -13,7 +13,7 @@ A copy of this file is kept at `/mnt/project-files/atlas/HANDOFF.md`. Keep the t
 - **Purpose:** present AtlasPlast as an established, technically capable national supplier. It should help contractors, installers and project owners find solutions and brands, see projects, and contact sales.
 - **Stage:** the full multipage site is built in three languages and runs on the preview domain **https://new.atlasplast.iq** (see §20).
   - Home (the approved visual benchmark, with a four-slide hero).
-  - Solutions: an index plus **9** solution pages.
+  - Solutions: an index plus **10** solution pages.
   - Brands: an index plus **21** brand pages.
   - Projects, Media, About (with a Board of Directors page), Locations and Contact.
   - An unlisted links page (روابط) that keeps the old site's address.
@@ -60,10 +60,10 @@ Versions from `package.json` / `npm ls --depth=0`:
 ├── HANDOFF.md                this file
 ├── README.md                 setup, checks, env vars, Coolify deploy steps, structure
 ├── Dockerfile, .dockerignore production image for Coolify (standalone output, Node 22 Alpine)
-├── .env.example              NEXT_PUBLIC_SITE_URL only (allowed by .gitignore `!.env.example`)
+├── .env.example              NEXT_PUBLIC_SITE_URL and the optional YOUTUBE_API_KEY (allowed by .gitignore `!.env.example`)
 ├── next.config.ts            next-intl plugin, standalone output, image formats, security headers, the روابط redirects
 ├── playwright.config.ts      site checks; uses BASE_URL when set, otherwise builds and serves on :3100
-├── tests/site.spec.ts        every template × locale × width, axe, and feature tests (167 tests)
+├── tests/site.spec.ts        every template × locale × width, axe, and feature tests (170 tests)
 ├── scripts/og-image.js       renders public/og.png from a running production server
 ├── messages/                 en.json, ar.json, ckb.json — ALL user-facing UI copy
 ├── public/
@@ -94,7 +94,7 @@ Versions from `package.json` / `npm ls --depth=0`:
             ├── layout.tsx    <html lang dir>, fonts, providers, header/footer, skip link
             ├── page.tsx      Home page with Organization JSON-LD
             ├── not-found.tsx
-            ├── solutions/        index + [slug] (9 pages)
+            ├── solutions/        index + [slug] (10 pages)
             ├── brands/           index + [slug] (21 pages)
             ├── about/            About + board/ (Board of Directors)
             ├── projects/, media/, locations/, contact/   single pages
@@ -108,7 +108,7 @@ The repo has an empty, untracked `.claude/` folder and no `.github/` (no CI work
 - **Static generation:**
   - `generateStaticParams` builds every locale.
   - The `[slug]` routes use `dynamicParams = false`, so unknown slugs return 404.
-  - The build produces **127** static pages. Media also revalidates hourly (§10).
+  - The build produces **130** static pages. Media also revalidates hourly (§10).
 - **Server vs client components:** Server Components by default. Client components are only for interaction and animation: `SiteHeader`, `LanguageSwitcher`, `HeroCarousel`, `PipeSection`, `HeaderSlides`, `CurrentStrip`, `VideoGallery`, `ScrollWater` and the motion components. Section components fetch copy with `getTranslations` on the server.
 - **Content:**
   - Facts (phones, offices, brands, solutions, projects, timeline, leadership, map points) live in typed modules in `src/content/`, with `Localized<T> = Record<Locale, T>` for names.
@@ -123,20 +123,20 @@ The repo has an empty, untracked `.claude/` folder and no `.github/` (no CI work
 |---|---|---|
 | `/` | DONE | redirects to `/en` (next-intl proxy) |
 | `/en`, `/ar`, `/ckb` (Home) | DONE | approved benchmark, with a four-slide hero |
-| `/{locale}/solutions` | DONE | index of the 9 solutions |
-| `/{locale}/solutions/{slug}` | DONE | water-supply, drainage, water-heaters, infrastructure, sanitaryware, pumps, faucets-valves, installation-tools, galvanized-fittings. 43 product lines in all |
+| `/{locale}/solutions` | DONE | index of the 10 solutions |
+| `/{locale}/solutions/{slug}` | DONE | water-supply, drainage, water-heaters, infrastructure, galvanized-fittings, sanitaryware, tiles, pumps, faucets-valves, installation-tools. 44 product lines in all |
 | `/{locale}/products` | REMOVED | returns 404; replaced by Solutions |
 | `/{locale}/brands` | DONE | logo grid with country and product-line count per brand, plus the photo strip |
 | `/{locale}/brands/{slug}` | DONE | 21 brands; product lines grouped by solution, or "range on request" for FV-Plast, Peštan and Alvit; technical documents for 14 brands |
 | `/{locale}/projects` | DONE | featured projects grouped by sector, plus the contractor list |
-| `/{locale}/media` | DONE | the YouTube channel's latest videos, click to load; revalidates hourly |
+| `/{locale}/media` | DONE | the YouTube channel's videos, click to load; revalidates hourly. Every public video when `YOUTUBE_API_KEY` is set, otherwise the feed's latest 15 |
 | `/{locale}/about` | DONE | intro, figures, statement, vision/mission/values, a chairman teaser linking to the board page, the full history, services |
-| `/{locale}/about/board` | DONE | Board of Directors: the chairman's message (owner's text 2026-10-05; ar/ckb are Claude's translations, pending review) signed Jaafar Almusawi, Chairman of the Board, Atlas Group; then board members Omer Ibrahim and Mohammed Bajalan with portraits. About stays active in the nav |
+| `/{locale}/about/board` | DONE | Board of Directors: the chairman's message (owner's text 2026-10-05; ar/ckb are Claude's translations, pending review) signed Jaafar Almusawi, Chairman of the Board, Atlas Group. Header: his portrait (the owner's photo, 286×401, a larger original is wanted) standing in the wave edge with the pull quote; then the message with the three values he names (excellence, integrity, progress); then board members Omer Ibrahim and Mohammed Bajalan as photo cards; then the contact band. About stays active in the nav |
 | `/{locale}/locations` | DONE | map, offices, warehouses, regional offices, branch phone lines; every office opens its exact Google Maps place |
-| `/{locale}/contact` | DONE | main line, WhatsApp, projects and sales lines, email, hours, social, branch lines; no form yet |
+| `/{locale}/contact` | DONE | header with the main line 6779 and a WhatsApp button; tiles for WhatsApp (Al-Shaab), projects, sales and email; hours; branch lines beside the Iraq map; a Follow band. No form yet |
 | `/{locale}/links` | DONE | unlisted روابط page (old site's `/روابط/`): main line, WhatsApp, email, social, branch maps, craftsmen app. In no menu or sitemap, `noindex`. `/روابط` and `/ar/روابط` redirect (308) to `/ar/links` via `redirects()` in `next.config.ts`, with percent-encoded sources because Next matches the encoded path |
 | `/{locale}/<unknown>` | DONE | localized 404 (`not-found.tsx`) |
-| `/sitemap.xml`, `/robots.txt`, `/icon.svg`, `/manifest.webmanifest` | DONE | sitemap lists 39 public pages in every locale (117 URLs) |
+| `/sitemap.xml`, `/robots.txt`, `/icon.svg`, `/manifest.webmanifest` | DONE | sitemap lists 40 public pages in every locale (120 URLs) |
 
 ## 5. Design System
 
@@ -249,7 +249,7 @@ The site should feel premium, sophisticated, modern, architectural, industrial, 
 |---|---|---|---|
 | Meta, Common, Nav, Footer | complete | complete | complete |
 | Home (all 10 namespaces) and hero slides | complete | complete | complete |
-| Solutions (index, 9 solutions, 43 product lines, spec labels) | complete | complete | complete |
+| Solutions (index, 10 solutions, 44 product lines, spec labels) | complete | complete | complete |
 | Brands, Projects, About (incl. vision/mission/values), Locations, Contact, Media, NotFound | complete | complete | complete |
 | Links | complete | complete | complete |
 | Board (chairman's message) | owner's text | Claude's translation | Claude's translation |
@@ -280,15 +280,15 @@ Source files are in the shared project folder (not in the repo):
 **Confirmed and in use:**
 - Since 1975 (first showroom 1990).
 - "Hundreds of projects."
-- Main phone **6779** (a normal `tel:` link). Every mobile number opens WhatsApp (`wa.me`): WhatsApp/HQ +964 783 305 6475, projects division +964 772 267 1130, sales department +964 780 288 0009 (old site). Email info@atlasplast.iq.
+- Main phone **6779** (a normal `tel:` link). Every mobile number opens WhatsApp (`wa.me`): the site's WhatsApp line +964 783 305 6475, which is **Al-Shaab's** (owner, 2026-10-05; it was listed under Camp Sara before), projects division +964 772 267 1130, sales department +964 780 288 0009 (old site). Email info@atlasplast.iq.
 - **Offices in Iraq** (each with an exact Google Maps place, `mapUrl` in `company.ts`):
-  - Camp Sara (Baghdad) — HQ
-  - Al-Shaab (Baghdad)
+  - Camp Sara (Baghdad) — HQ, +964 787 116 6604 (owner, 2026-10-05)
+  - Al-Shaab (Baghdad) — +964 783 305 6475
   - Najaf — +964 783 700 6314
   - Basra — Al-Watan St, +964 787 116 6601
   - Erbil — Gulan St, +964 787 803 0001
   - Duhok — +964 750 991 0065
-- **Map pins:** all six use `https://maps.google.com/?cid=<decimal CID>`. Camp Sara, Al-Shaab, Najaf, Erbil and Duhok are the places pinned on the old site's روابط page (its "Headquarter" pin is in Al-Shaab). Basra is the "Atlas plast" place the owner sent on 2026-10-05, because the old page showed the Najaf pin under Basra.
+- **Map pins:** all six use `https://maps.google.com/?cid=<decimal CID>`. Camp Sara, Al-Shaab, Najaf and Erbil are the places pinned on the old site's روابط page (its "Headquarter" pin is in Al-Shaab). Basra ("Atlas plast") and Duhok ("شركة اطلس بلاست", 36.8691, 42.9351) are places the owner sent on 2026-10-05. To add one: resolve the short link (WebFetch reports the redirect), take the second hex of `!1s0x…:0x…` and convert it to decimal.
 - **Warehouses:** Baghdad, Basra, Erbil, Duhok, Zakho. Open 24/7 with round-the-clock delivery, plus a Friday pickup/shipping note (old site).
 - **Regional offices:** Saudi Arabia, Turkey, Syria, Egypt.
 - **Hours:** Saturday to Thursday, 07:00 to 15:00 (old site).
@@ -297,6 +297,7 @@ Source files are in the shared project folder (not in the repo):
 - **Polymelt** lines: POLO-Polymutan, Polo-Ecosan, Polo-UV, Polo-Polymutan ML5. **Poloplast:** Polo-Kal NG and Polo-Kal 3S only.
 - **KAS** = kas.com.tr, supplied as **PP-R only** (not PPR-C).
 - **Georg Fischer galvanized malleable-iron fittings** (EN 10242) are their own solution, made in Austria (owner, 2026-10-05).
+- **Ceramic and porcelain tiles** are their own solution, the tenth (owner, 2026-10-05): Saudi Ceramics porcelain and ceramic tiles, specs from profile p10 (sizes, thickness, water absorption, R9–R11 slip, ISO 9001:2015 · SASO QM · CE · ESMA · G-Mark). Photos `tiles-1/2.jpg` from the same page.
 - **Calpeda and Vitra are no longer partners.** Do not show them.
 - Hussein Raad and Hassan Al-Oreibi have left; do not publish them.
 - Client names: approved for publication.
@@ -336,7 +337,7 @@ Source files are in the shared project folder (not in the repo):
    - Each slide's visual is hidden below `md` to keep the hero short on phones.
    - Below the carousel is a `dl` of 4 figures.
 2. **Statement**: `Statement.tsx`.
-3. **Solutions**: `SolutionIndex.tsx` (SectionHead + `solutions/SolutionList.tsx`), the 9 solutions with icons.
+3. **Solutions**: `SolutionIndex.tsx` (SectionHead + `solutions/SolutionList.tsx`), "Ten solutions, one supplier.", the 10 solutions with icons.
 4. **Brands**: `BrandWall.tsx`, 21 logos and the manufacturer photo strip (`BrandPhotoStrip` inside `CurrentStrip`, with a pause button).
 5. **Projects**: `ProjectIndex.tsx`.
 6. **Timeline**: `Timeline.tsx` with `ScrollRule` (key milestones only).
@@ -346,8 +347,8 @@ Source files are in the shared project folder (not in the repo):
 
 **Inner pages:**
 - Every inner page opens with `PageHeader` (navy, breadcrumb, eyebrow, h1, intro). The `image` prop puts one photo under a navy wash with a slow Ken Burns (warehouse photos on About, Locations and the Solutions index; manufacturer photos on brand pages). The `slides` prop cross-fades several photos instead (`HeaderSlides`, with a pause button and dots); each solution page uses it for its product photos.
-- `/solutions/[slug]`: the "01 / 09" eyebrow, intro, line count and brand names; product line rows (brand logo or the Aquahot mark, name, description, a spec `dl` in mono wrapped in `<Ltr>`, and "Made in" when `madeIn` differs from the brand's country); a navy "Need help choosing?" band; an "Other solutions" list; `BreadcrumbList` and `ItemList` JSON-LD.
-- `/media`: `lib/youtube.ts` reads the channel's public feed (latest 15 uploads) with `next.revalidate` 3600, and the page has `revalidate = 3600`, so new uploads appear within the hour without a redeploy. If the feed is unreachable (as in the build sandbox) it falls back to the old site's video `xatuZC65KuM`. `VideoGallery` is click-to-load (thumbnail first, then a youtube-nocookie embed). VideoObject JSON-LD only for feed items with a title and date.
+- `/solutions/[slug]`: the "01 / 10" eyebrow, intro, line count and brand names; product line rows (brand logo or the Aquahot mark, name, description, a spec `dl` in mono wrapped in `<Ltr>`, and "Made in" when `madeIn` differs from the brand's country); a navy "Need help choosing?" band; an "Other solutions" list; `BreadcrumbList` and `ItemList` JSON-LD.
+- `/media`: `lib/youtube.ts` lists every public upload through the YouTube Data API when `YOUTUBE_API_KEY` is set (uploads playlist, 50 per page, up to 500), otherwise the channel's public feed (latest 15 uploads). Both use `next.revalidate` 3600, and the page has `revalidate = 3600`, so new uploads appear within the hour without a redeploy. If the feed is unreachable (as in the build sandbox) it falls back to the old site's video `xatuZC65KuM`. `VideoGallery` is click-to-load (thumbnail first, then a youtube-nocookie embed). VideoObject JSON-LD only for feed items with a title and date.
 - `/about/board` and `/links`: see §4.
 
 **Responsive:** sections stack below `md`/`lg`. The Playwright suite checks every template at 375, 768 and 1440px in all 3 locales.
@@ -406,7 +407,7 @@ Source files are in the shared project folder (not in the repo):
 | `BrandGrid` | `brands/BrandGrid.tsx` | Hairline logo grid | Brands index and Home |
 | `BrandDocuments` | `brands/BrandDocuments.tsx` | Technical documents on brand pages | renders when `documents` is set in `brands.ts` |
 | `BrandPhotoStrip` + `CurrentStrip` | `brands/` | Manufacturer photos drifting past; `CurrentStrip` (client) adds the pause button | the list renders twice for a seamless loop; the copy is hidden from assistive tech |
-| `OfficeLines` | `company/OfficeLines.tsx` | Branch phone lines and map links | Locations, Contact, Links |
+| `OfficeLines` | `company/OfficeLines.tsx` | Branch phone lines and map links | Locations, Contact (`narrow`, two columns beside the map), Links |
 | `VideoGallery` | `media/VideoGallery.tsx` | Featured player plus the video list, click to load | client |
 | `Waves`, `ScrollWater` | `water/` | Wave edge at the foot of dark bands; header water progress pipe | CSS motion, off under reduced motion |
 | `JsonLd` | `seo/JsonLd.tsx` | Renders one `@graph` per page | builders in `lib/structured-data.ts` and `pageLd()` in `lib/site.ts` |
@@ -424,10 +425,10 @@ Source files are in the shared project folder (not in the repo):
   - `PipeSection` strokes draw via `pathLength` (1.6s, staggered 0.3–1.1s), then labels fade in.
   - Slides crossfade over 0.6s (opacity only). The active tab's 3px rule fills over 8s via the CSS keyframes `hero-progress`; when it ends, the next slide shows.
 - **Scroll:**
-  - `SectionWipe` on the map (1.1s, `whileInView`, once, at 25% visibility).
+  - `SectionWipe` on the maps (1.1s, once, at 20% visibility). Its reduced-motion fallback is CSS (`.section-wipe`), because a JS branch left the server's clip-path in place after hydration and hid the maps.
   - `ScrollRule` on the timeline (spring with stiffness 120, damping 30).
   - `ScrollWater`: the header pipe scales with the scroll; inside it the `water-flow` strip slides on `transform`.
-- **Water motion** (CSS in `globals.css`): wave edge on dark bands (`Waves`), caustic light, slow Ken Burns on photos, ripples on map offices, water-fill buttons and the header pipe.
+- **Water motion** (CSS in `globals.css`): wave edge on dark bands (`Waves`), caustic light, slow Ken Burns on photos, ripples on map offices, water-fill buttons and the header pipe. The Board portrait rises out of the wave edge once on load (`.rise-from-water`, transform only).
 - **Photos:** the brand photo strip drifts continuously; page header photos cross-fade. Both have pause buttons (WCAG 2.2.2), hold on mouse hover and keyboard focus, and resume straight after Play on touch screens. The header dots grow with `scale` over 200ms on `--ease-in-out`.
 - **Hover and press:**
   - Underline grow (320ms), the button arrow nudge, solution rows tinting with their icon filling blue, and brand logos changing from grayscale to colour.
@@ -518,7 +519,7 @@ Full SEO pass done 2026-10-04 at the owner's request ("make sure SEO is the best
 - Board: a `Person` per leader (name, jobTitle, image, worksFor the organization).
 
 **Other:**
-- `src/app/sitemap.ts` lists 39 pages × 3 locales (117 URLs) with hreflang alternates and a build-time `lastModified`. Add every new public page to `paths`; `/links` stays out on purpose.
+- `src/app/sitemap.ts` lists 40 pages × 3 locales (120 URLs) with hreflang alternates and a build-time `lastModified`. Add every new public page to `paths`; `/links` stays out on purpose.
 - `src/app/robots.ts` allows all and points to the sitemap.
 - `viewport.themeColor` is `#14284a`.
 
@@ -577,6 +578,7 @@ Full SEO pass done 2026-10-04 at the owner's request ("make sure SEO is the best
 - **Production:** `main` holds only the scaffold. The site is on `feat/home-page` in **draft PR #1** (https://github.com/M7tech/website_pipes/pull/1). After the owner merges it, switch Coolify to `main` and point the live domain at it.
 - **Build method: Dockerfile** (repo root, not Railpack). It is multi-stage on `node:22-alpine`, uses `output: "standalone"`, runs as a non-root user, and has a built-in `HEALTHCHECK` on `/en`. `.dockerignore` keeps tests, `.git`, env files and Markdown (except README) out of the image.
 - **Build argument:** `NEXT_PUBLIC_SITE_URL=https://atlasplast.iq`, set as a build-time variable because it is inlined during the build. It defaults to `https://atlasplast.iq`.
+- **Optional runtime variable:** `YOUTUBE_API_KEY` (YouTube Data API v3, server-only) makes Media list every video. Not set yet; never commit it.
 - **Port:** 3000. **Health check:** host `127.0.0.1` (the server is IPv4 only; `HOSTNAME=::` crashes without IPv6 and `localhost` may resolve to `::1`), port 3000, path `/en` (`/` returns a 307 redirect), return code 200. The image includes `curl` for Coolify's check.
 - **Headers** (`next.config.ts`):
   - `X-Content-Type-Options`, `Referrer-Policy`, `X-Frame-Options: SAMEORIGIN` and `Permissions-Policy` on every response.
@@ -590,6 +592,8 @@ Full SEO pass done 2026-10-04 at the owner's request ("make sure SEO is the best
 
 - **Current branch:** `feat/home-page`, which tracks `origin/feat/home-page`. Clean apart from this HANDOFF update, which is committed right after it is written.
 - **Recent commits** (newest first; `git log --oneline --first-parent` for the rest):
+  - `f43cc92` feat: tiles solution, livelier Board and Contact pages, branch number fixes
+  - `181b5f1` docs: bring the handoff notes up to date
   - `002e3a5` docs: handoff notes for the merged animation fixes
   - `b4a5ed1` merge: animation fixes 001-010 into the preview branch
   - `5b6f973` feat: Board of Directors page under About
@@ -620,7 +624,7 @@ Full SEO pass done 2026-10-04 at the owner's request ("make sure SEO is the best
 - [x] Header with desktop nav, language switcher and an accessible mobile menu (focus kept inside, inert page)
 - [x] Footer with YouTube in Follow us
 - [x] Home page, all 9 sections, with a four-slide accessible hero carousel
-- [x] Solutions: index and 9 solution pages, 43 sourced product lines, photo headers
+- [x] Solutions: index and 10 solution pages (tiles added 2026-10-05), 44 sourced product lines, photo headers
 - [x] Brands: index and 21 brand pages, technical documents for 14 brands
 - [x] Projects, Media (YouTube feed), About (vision/mission/values, full history), Locations and Contact
 - [x] Board of Directors page under About: the chairman's message and two board members with portraits
@@ -631,7 +635,8 @@ Full SEO pass done 2026-10-04 at the owner's request ("make sure SEO is the best
 - [x] Water-themed motion with reduced-motion fallbacks
 - [x] Animation audit and all ten fix plans, merged
 - [x] SEO: metadata, canonical, hreflang + x-default, OG image, sitemap, robots, JSON-LD on every page
-- [x] Playwright + axe suite in the repo (167 tests, all passing on `b4a5ed1`)
+- [x] Board and Contact pages redesigned (2026-10-05)
+- [x] Playwright + axe suite in the repo (170 tests, all passing on `f43cc92`)
 - [x] Dockerfile, security headers and Coolify preview deployment
 - [x] README with Coolify notes, plus `.env.example`
 - [x] HANDOFF.md
@@ -641,6 +646,8 @@ Full SEO pass done 2026-10-04 at the owner's request ("make sure SEO is the best
 Nothing is half-done in the code. These are waiting on the owner:
 - **Craftsmen app:** both store links now show the app as "SAWA". Keep the links on the روابط page or remove them?
 - **Chairman's message:** review of the Arabic and Sorani translations.
+- **Chairman's photo:** the one the owner sent is 286×401 px, soft on large screens; a larger original would sharpen the Board header.
+- **YouTube key (optional):** Media already shows the whole channel (11 videos on 2026-10-05) because the feed holds the latest 15. A `YOUTUBE_API_KEY` in Coolify keeps every video once the channel passes 15.
 
 ## 24. Remaining Tasks
 
@@ -692,7 +699,7 @@ No layout, RTL or accessibility bugs are open: the full suite passes.
 - **Copy:** never hard-code UI copy; add keys to all three message files together.
 - **Calpeda/Vitra:** not partners. **Hussein Raad / Hassan Al-Oreibi:** not published. No other people than the three on the board page.
 - **Wording:** "Since 1975" in copy; the logo artwork keeps "since 1990". "Hundreds of projects", not a number. Main phone 6779. Nine months of stock. The owner's Arabic trade terms (§8).
-- **Phones:** only 6779 is `tel:`; every mobile number opens WhatsApp.
+- **Phones:** only 6779 is `tel:`; every mobile number opens WhatsApp. +964 783 305 6475 is Al-Shaab's, +964 787 116 6604 is Camp Sara's.
 - **Maps:** offices open their exact Google Maps place (`?cid=`), never a search.
 - **Unlisted روابط page:** stays out of menus and the sitemap, `noindex`, with the old address redirected.
 - **Brand documents:** English, from the manufacturers' official sites, linked not re-hosted.
