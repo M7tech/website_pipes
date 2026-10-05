@@ -1103,9 +1103,9 @@ export const faqs: Faq[] = [
       ckb: "ئەتلەس پلاست چ حەنەفیە و تێکەڵکەرێک دابین دەکات؟",
     },
     a: {
-      en: "KAS basin, kitchen, wall-mounted, shower, bidet and industrial kitchen mixers, including a sensor series, with spare parts; Guarri brass bathroom and kitchen faucets; and Shield faucet sets.",
-      ar: "خلاطات KAS للمغاسل والمطابخ والجدار والدوش والشطافات والمطابخ الصناعية، ومنها سلسلة بحساس، مع توفّر قطع الغيار؛ وحنفيات Guarri النحاسية للحمامات والمطابخ؛ وأطقم حنفيات Shield.",
-      ckb: "تێکەڵکەری KAS بۆ دەستشۆر، چێشتخانە، دیوار، دووش، بیدێ و چێشتخانەی پیشەسازی، لەوانە زنجیرەی هەستەوەر، لەگەڵ پارچەی یەدەگ؛ حەنەفیەی مسی زەردی Guarri بۆ حەمام و چێشتخانە؛ و کۆمەڵەی حەنەفیەی Shield.",
+      en: "KAS basin, kitchen, wall-mounted, shower, bidet and industrial kitchen mixers, including a sensor series, with spare parts; Guarri brass bathroom and kitchen faucets; Topsan mixers, classic and industrial faucets, built-in valves and shower sets; and Shield faucet sets.",
+      ar: "خلاطات KAS للمغاسل والمطابخ والجدار والدوش والشطافات والمطابخ الصناعية، ومنها سلسلة بحساس، مع توفّر قطع الغيار؛ وحنفيات Guarri النحاسية للحمامات والمطابخ؛ وخلاطات Topsan وحنفياتها الكلاسيكية والصناعية وخلاطات الدفن وأطقم الدوش؛ وأطقم حنفيات Shield.",
+      ckb: "تێکەڵکەری KAS بۆ دەستشۆر، چێشتخانە، دیوار، دووش، بیدێ و چێشتخانەی پیشەسازی، لەوانە زنجیرەی هەستەوەر، لەگەڵ پارچەی یەدەگ؛ حەنەفیەی مسی زەردی Guarri بۆ حەمام و چێشتخانە؛ تێکەڵکەر، حەنەفیەی کلاسیک و پیشەسازی، ڤاڵڤی ناودیوار و کۆمەڵەی دووشی Topsan؛ و کۆمەڵەی حەنەفیەی Shield.",
     },
   },
   {
@@ -1120,9 +1120,9 @@ export const faqs: Faq[] = [
       ckb: "ئایا ئەتلەس پلاست ڤاڵڤی گۆشەیی و تۆپی دابین دەکات؟",
     },
     a: {
-      en: "Yes. Shield supplies brass angle valves, ball valves, faucet sets and accessories for laundries, bathrooms and kitchens.",
-      ar: "نعم. توفّر Shield محابس زاوية ومحابس كروية وأطقم حنفيات وملحقات من النحاس لغرف الغسيل والحمامات والمطابخ.",
-      ckb: "بەڵێ. Shield ڤاڵڤی گۆشەیی و تۆپی، کۆمەڵەی حەنەفیە و پێداویستی لە مسی زەرد بۆ جلشۆرخانە، حەمام و چێشتخانە دابین دەکات.",
+      en: "Yes. Shield supplies brass angle valves, ball valves, faucet sets and accessories for laundries, bathrooms and kitchens. Topsan supplies valves and built-in valves.",
+      ar: "نعم. توفّر Shield محابس زاوية ومحابس كروية وأطقم حنفيات وملحقات من النحاس لغرف الغسيل والحمامات والمطابخ. وتوفّر Topsan محابس وخلاطات دفن.",
+      ckb: "بەڵێ. Shield ڤاڵڤی گۆشەیی و تۆپی، کۆمەڵەی حەنەفیە و پێداویستی لە مسی زەرد بۆ جلشۆرخانە، حەمام و چێشتخانە دابین دەکات. Topsan ڤاڵڤ و ڤاڵڤی ناودیوار دابین دەکات.",
     },
   },
   {
@@ -1222,9 +1222,9 @@ export const faqs: Faq[] = [
       ckb: "بریکارایەتییەکانی کۆمپانیای ئەتلەس پلاست کامانەن؟",
     },
     a: {
-      en: "Georg Fischer, Polymelt, Bänninger, Ostendorf, Poloplast, FV-Plast, Peštan, WISA, DAB Pumps, Saudi Ceramics, Aquapa, Pimtaş, Turan Borfit, KAS, Guarri, Asçelik Clamp, Polo Egypt, Shield, QuarterBath, Candan Makina and Alvit.",
-      ar: "Georg Fischer وPolymelt وBänninger وOstendorf وPoloplast وFV-Plast وPeštan وWISA وDAB Pumps والخزف السعودي (Saudi Ceramics) وAquapa وPimtaş وTuran Borfit وKAS وGuarri وAsçelik Clamp وPolo Egypt وShield وQuarterBath وCandan Makina وAlvit.",
-      ckb: "Georg Fischer، Polymelt، Bänninger، Ostendorf، Poloplast، FV-Plast، Peštan، WISA، DAB Pumps، سعوودی سێرامیکس (Saudi Ceramics)، Aquapa، Pimtaş، Turan Borfit، KAS، Guarri، Asçelik Clamp، Polo Egypt، Shield، QuarterBath، Candan Makina و Alvit.",
+      en: "Georg Fischer, Polymelt, Bänninger, Ostendorf, Poloplast, FV-Plast, Peštan, WISA, DAB Pumps, Saudi Ceramics, Aquapa, Pimtaş, Turan Borfit, KAS, Guarri, Topsan, Asçelik Clamp, Polo Egypt, Shield, QuarterBath, Candan Makina and Alvit.",
+      ar: "Georg Fischer وPolymelt وBänninger وOstendorf وPoloplast وFV-Plast وPeštan وWISA وDAB Pumps والخزف السعودي (Saudi Ceramics) وAquapa وPimtaş وTuran Borfit وKAS وGuarri وTopsan وAsçelik Clamp وPolo Egypt وShield وQuarterBath وCandan Makina وAlvit.",
+      ckb: "Georg Fischer، Polymelt، Bänninger، Ostendorf، Poloplast، FV-Plast، Peštan، WISA، DAB Pumps، سعوودی سێرامیکس (Saudi Ceramics)، Aquapa، Pimtaş، Turan Borfit، KAS، Guarri، Topsan، Asçelik Clamp، Polo Egypt، Shield، QuarterBath، Candan Makina و Alvit.",
     },
   },
   {
@@ -1318,9 +1318,9 @@ export const faqs: Faq[] = [
       ckb: "ئەتلەس پلاست نوێنەرایەتیی چ براندێکی تورکی دەکات؟",
     },
     a: {
-      en: "Aquapa (PP-R pipes and Aqua Silent PP drainage), Pimtaş (PE100, U-PVC and compression fittings), Turan Borfit (PE pipes, fittings and butt welding machines), KAS (PPR pipes and faucets), Guarri (faucets, chemical anchors and sealants) and Asçelik Clamp (pipe clamps and profiles).",
-      ar: "Aquapa (أنابيب PP-R وصرف Aqua Silent PP)، وPimtaş (PE100 وU-PVC وملحقات الضغط)، وTuran Borfit (أنابيب وملحقات PE ومكائن اللحام التناكبي)، وKAS (أنابيب PPR وخلاطات)، وGuarri (حنفيات ومثبتات كيميائية ومواد منع التسرب)، وAsçelik Clamp (مرابط الأنابيب والمقاطع).",
-      ckb: "Aquapa (بۆریی PP-R و ئاوەڕۆی Aqua Silent PP)، Pimtaş (PE100، U-PVC و پێکهاتەی کۆمپرێشن)، Turan Borfit (بۆری و پێکهاتەی PE و مەکینەی لکاندنی ڕووبەڕوو)، KAS (بۆریی PPR و حەنەفیە)، Guarri (حەنەفیە، ئەنکەری کیمیایی و مادەی ڕێگرتن لە دزە) و Asçelik Clamp (گیرەی بۆری و پرۆفایل).",
+      en: "Aquapa (PP-R pipes and Aqua Silent PP drainage), Pimtaş (PE100, U-PVC and compression fittings), Turan Borfit (PE pipes, fittings and butt welding machines), KAS (PPR pipes and faucets), Guarri (faucets, chemical anchors and sealants), Topsan (faucets, built-in valves, shower sets and valves) and Asçelik Clamp (pipe clamps and profiles).",
+      ar: "Aquapa (أنابيب PP-R وصرف Aqua Silent PP)، وPimtaş (PE100 وU-PVC وملحقات الضغط)، وTuran Borfit (أنابيب وملحقات PE ومكائن اللحام التناكبي)، وKAS (أنابيب PPR وخلاطات)، وGuarri (حنفيات ومثبتات كيميائية ومواد منع التسرب)، وTopsan (خلاطات وخلاطات دفن وأطقم دوش ومحابس)، وAsçelik Clamp (مرابط الأنابيب والمقاطع).",
+      ckb: "Aquapa (بۆریی PP-R و ئاوەڕۆی Aqua Silent PP)، Pimtaş (PE100، U-PVC و پێکهاتەی کۆمپرێشن)، Turan Borfit (بۆری و پێکهاتەی PE و مەکینەی لکاندنی ڕووبەڕوو)، KAS (بۆریی PPR و حەنەفیە)، Guarri (حەنەفیە، ئەنکەری کیمیایی و مادەی ڕێگرتن لە دزە)، Topsan (حەنەفیە، ڤاڵڤی ناودیوار، کۆمەڵەی دووش و ڤاڵڤ) و Asçelik Clamp (گیرەی بۆری و پرۆفایل).",
     },
   },
   {

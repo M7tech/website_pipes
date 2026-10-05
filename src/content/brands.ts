@@ -141,6 +141,12 @@ const brandList: Brand[] = [
     ],
   },
   { slug: "guarri", name: "Guarri", logo: "/brands/guarri.svg", country: "TR", source: "profile:p18" },
+  { slug: "topsan", name: "Topsan", logo: "/brands/topsan.svg", country: "TR",
+    source: "confirmed:2026-10-05",
+    documents: [
+      { kind: "catalogue", title: "Topsan Product Catalogue 2022", href: "https://topsanmusluk.com.tr/wp-content/uploads/2021/12/topsan_2022_katalog.pdf", source: "manufacturer:2026-10-05" },
+    ],
+  },
   { slug: "ascelik", name: "Asçelik Clamp", logo: "/brands/ascelik.svg", country: "TR", source: "profile:p19" },
   { slug: "polo-egypt", name: "Polo Egypt", country: "EG", source: "profile:p17" },
   { slug: "shield", name: "Shield", logo: "/brands/shield.svg", country: "EG", source: "profile:p18" },
