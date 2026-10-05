@@ -16,6 +16,7 @@ const paths = [
   "/brands/polymelt",
   "/brands/fv-plast",
   "/about",
+  "/about/board",
   "/locations",
   "/contact",
   "/projects",
@@ -188,4 +189,25 @@ test("the unlisted links page keeps the old address, the office pins and stays o
     await expect(page.locator('a[href$="/links"]'), path).toHaveCount(0);
   }
   expect(await (await request.get("/sitemap.xml")).text()).not.toContain("/links");
+});
+
+test("About leads to the Chairman's message and the board members", async ({ page }) => {
+  await page.goto("/ar/about");
+  await page.locator('main a[href="/ar/about/board"]').click();
+  await expect(page).toHaveURL(/\/ar\/about\/board$/);
+  await expect(page.locator("h1")).toHaveText("كلمة رئيس مجلس الإدارة");
+  await expect(page.getByLabel("القائمة الرئيسية").getByRole("link", { name: "من نحن" })).toHaveAttribute("aria-current", "page");
+  const main = page.locator("main");
+  await expect(main).toContainText("جعفر الموسوي");
+  await expect(main).toContainText("رئيس مجلس إدارة مجموعة أطلس");
+
+  await page.goto("/en/about/board");
+  await expect(page.locator("main")).toContainText("over four decades");
+  for (const name of ["Jaafar Almusawi", "Omer Ibrahim", "Mohammed Bajalan"]) {
+    const photo = page.getByRole("img", { name, exact: true }).first();
+    await photo.scrollIntoViewIfNeeded();
+    await expect(photo).toBeVisible();
+    expect(await photo.evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0), name).toBe(true);
+  }
+  await expect(page.locator('section[aria-labelledby="board-title"] li')).toHaveCount(2);
 });

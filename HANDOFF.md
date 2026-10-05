@@ -120,6 +120,7 @@ There is no `.claude/` directory in the repo.
 | `/{locale}/about` | DONE | intro, figures, statement, full timeline, services; vision/mission pending owner approval |
 | `/{locale}/locations` | DONE | map, offices, warehouses, regional offices, branch phone lines |
 | `/{locale}/contact` | DONE | main line, WhatsApp, projects line, email, social, branch lines; no form yet |
+| `/{locale}/about/board` | DONE | Board of Directors: the chairman's message (text from the owner 2026-10-05, matching the profile's CEO message; ar/ckb are translations) signed Jaafar Almusawi, Chairman of the Board, Atlas Group; then board members Omer Ibrahim and Mohammed Bajalan. Portraits from the profile's management page (p5), confirmed by the owner. Linked from an About section; About stays active in the nav |
 | `/{locale}/links` | DONE | unlisted روابط page (old site's `/روابط/`): main line, WhatsApp, email, social, branch maps, craftsmen app. In no menu or sitemap, `noindex`. `/روابط` and `/ar/روابط` redirect (308) to `/ar/links` via `redirects()` in `next.config.ts`, with percent-encoded sources because Next matches the encoded path |
 | `/{locale}/<unknown>` | DONE | localized 404 (`not-found.tsx`) |
 | `/sitemap.xml`, `/robots.txt`, `/icon.svg` | DONE | sitemap lists all 36 public pages in every locale (108 URLs) |
@@ -300,7 +301,7 @@ Source files are in the shared project folder (not in the repo):
 - **Warehouse area:** the profile gives 40,000 m² + 16,000+ m² vs a 76,000 m² total, and the old site said 20,000 m². None of these is published.
 - **Office count:** the profile contradicts itself (14 vs 10). Not published.
 - **Financial and growth figures, market-share bars, the unnamed ISO certificate:** do not publish.
-- **Leadership:** not shown. Whether to publish people is unconfirmed, and Deniz Yilmaz's status is unknown.
+- **Leadership:** since 2026-10-05 the owner asked for the chairman's message and two board members (`src/content/leadership.ts`, `/about/board`). Nobody else from the profile's management page is published; Hussein Raad has left.
 - **Profile main number +964 790 135 0331:** not used, because the owner chose 6779.
 - **Boroug UPVC:** it may be a private label. It appears on the Polo Egypt page of the profile and in the logo pack (unconfirmed).
 - **Partner-company founding years:** these are the manufacturers' facts. Use them sparingly.
@@ -600,6 +601,7 @@ Full SEO pass done 2026-10-04 at the owner's request ("make sure SEO is the best
 - [x] Pushed `main` + `feat/home-page`; draft PR #1 opened
 - [x] HANDOFF.md
 - [x] Unlisted روابط links page (`/{locale}/links`) and exact office map pins from the old site
+- [x] Board of Directors page under About: chairman's message and board members with portraits
 - [x] Products renamed to Solutions (nav, Home, CTAs, sitemap); `/products` removed
 - [x] Solutions data (`src/content/solutions.ts`): 8 solutions and 41 product lines, every line sourced
 - [x] `/solutions` index and 8 `/solutions/[slug]` pages in en/ar/ckb, with breadcrumb JSON-LD

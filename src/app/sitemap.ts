@@ -14,6 +14,7 @@ const paths: { path: string; priority: number }[] = [
   { path: "/projects", priority: 0.7 },
   { path: "/media", priority: 0.6 },
   { path: "/about", priority: 0.7 },
+  { path: "/about/board", priority: 0.6 },
   { path: "/locations", priority: 0.7 },
   { path: "/contact", priority: 0.8 },
 ];

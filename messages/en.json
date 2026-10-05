@@ -24,7 +24,9 @@
     "brandDescriptionOnRequest": "{brand} products in Iraq from AtlasPlast. Ask our sales team on {phone} for the current range.",
     "ogImageAlt": "AtlasPlast logo",
     "linksTitle": "Links",
-    "linksDescription": "AtlasPlast in one place: main line {phone}, WhatsApp, email, social channels, branch maps and the craftsmen app."
+    "linksDescription": "AtlasPlast in one place: main line {phone}, WhatsApp, email, social channels, branch maps and the craftsmen app.",
+    "boardTitle": "Message from the Chairman",
+    "boardDescription": "A message from Jaafar Almusawi, Chairman of the Board of Atlas Group, and the AtlasPlast board members."
   },
   "Common": {
     "skipToContent": "Skip to content",
@@ -571,5 +573,18 @@
     "service": "Customer service",
     "branches": "Branches",
     "app": "Iraqi Craftsmen App"
+  },
+  "Board": {
+    "eyebrow": "Board of Directors",
+    "title": "A message from our Chairman",
+    "message": {
+      "p1": "Since its founding, AtlasPlast has grown into a leading provider of piping and sanitary solutions in Iraq, driven by excellence, innovation, and trust. Today, we continue to expand across the Middle East and North Africa.",
+      "p2": "At AtlasPlast, we believe that sustainable growth is built on vision, dedication, and trust. From our early beginnings to becoming a key player in Iraq’s infrastructure and sanitary ware sector, our mission has always been to serve communities, empower professionals, and contribute to building a better future.",
+      "p3": "Our continued success is driven by innovation, reliable service, and long-standing partnerships. As we expand across the region, we remain committed to the values that have guided us for over four decades—excellence, integrity, and progress.",
+      "p4": "Our achievements are not just the result of strategy and vision, but of the commitment and trust of the people who make up the AtlasPlast family."
+    },
+    "quote": "At AtlasPlast, we believe that sustainable growth is built on vision, dedication, and trust.",
+    "membersTitle": "Board members",
+    "read": "Read the Chairman’s message"
   }
 }
