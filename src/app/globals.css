@@ -243,16 +243,27 @@ p {
   text-decoration: underline;
 }
 
-/* Play buttons pulse outwards like a drop on still water. */
+/* The featured play button sends out a ring like a drop on still water. */
 @keyframes play-ripple {
   from {
-    box-shadow: 0 0 0 0 rgb(255 255 255 / 0.45);
+    transform: scale(1);
+    opacity: 1;
   }
   to {
-    box-shadow: 0 0 0 22px rgb(255 255 255 / 0);
+    transform: scale(1.55);
+    opacity: 0;
   }
 }
 .play-ripple {
+  position: relative;
+}
+.play-ripple::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 2px solid rgb(255 255 255 / 0.5);
+  pointer-events: none;
   animation: play-ripple 2.4s ease-out infinite;
 }
 
@@ -340,13 +351,16 @@ p {
   .ken-burns,
   .caustics,
   .ripple-ring,
-  .play-ripple,
   .liquid,
   .surface-in,
   .current-track {
     animation: none !important;
   }
   .ripple-ring {
+    opacity: 0;
+  }
+  .play-ripple::after {
+    animation: none;
     opacity: 0;
   }
   .liquid {
