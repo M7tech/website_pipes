@@ -102,11 +102,11 @@ test("mobile menu keeps focus inside and returns it on Escape", async ({ page })
 
 test("every office opens in Google Maps", async ({ page }) => {
   await page.goto("/en/locations");
-  // An exact place pin where the old site had one, a map search otherwise.
-  const links = page.locator('main a[href^="https://maps.google.com/?cid="], main a[href^="https://www.google.com/maps/search/"]');
+  const links = page.locator('main a[href^="https://maps.google.com/?cid="]');
   // Six offices in the branch list, six in the presence list and one per office city on the map.
   expect(await links.count()).toBeGreaterThanOrEqual(12);
   await expect(links.first()).toHaveAttribute("target", "_blank");
+  await expect(page.locator('main a[href^="https://www.google.com/maps/search/"]')).toHaveCount(0);
 });
 
 test("Arabic copy uses the owner's trade terms", async ({ page }) => {
@@ -179,9 +179,9 @@ test("the unlisted links page keeps the old address, the office pins and stays o
   await expect(main.locator('a[href="https://www.youtube.com/@atlasplast"]')).toHaveCount(1);
   await expect(main.locator('a[href^="https://play.google.com/"]')).toHaveCount(1);
   await expect(main.locator('a[href^="https://apps.apple.com/"]')).toHaveCount(1);
-  // Each office opens the pin the old page showed for it; Basra had none of its own there.
-  await expect(main.locator('a[href^="https://maps.google.com/?cid="]')).toHaveCount(5);
-  await expect(main.locator('a[href^="https://www.google.com/maps/search/"]')).toHaveCount(1);
+  // Every office opens its exact Google Maps place, not a search.
+  await expect(main.locator('a[href^="https://maps.google.com/?cid="]')).toHaveCount(6);
+  await expect(main.locator('a[href^="https://www.google.com/maps/search/"]')).toHaveCount(0);
 
   for (const path of ["/ar", "/en/contact"]) {
     await page.goto(path);

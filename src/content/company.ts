@@ -59,7 +59,7 @@ export type Office = {
   phone?: string;
   /** Place searched in Google Maps when there is no exact pin (`mapUrl`). */
   mapQuery: string;
-  /** Exact Google Maps place, from the pin the old site's روابط page shows for this office. */
+  /** Exact Google Maps place: the old site's روابط page pin, or one the owner sent. */
   mapUrl?: string;
   source: Source;
 };
@@ -99,8 +99,9 @@ export const offices: Office[] = [
   },
   {
     id: "basra",
-    // No exact pin: the old روابط page shows the Najaf pin under Basra.
     mapQuery: "Al-Watan Street, Basra, Iraq",
+    // Sent by the owner 2026-10-05 (the old روابط page showed the Najaf pin under Basra).
+    mapUrl: "https://maps.google.com/?cid=8292506104591980431",
     city: "basra",
     name: { en: "Basra", ar: "البصرة", ckb: "بەسرە" },
     phone: "+964 787 116 6601",
