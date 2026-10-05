@@ -68,9 +68,13 @@ function brandList() {
       const groups = brandSolutions(b.slug);
       const supplied = groups.flatMap((g) => g.lines.map((l) => lineName(l.id, l.name)));
       const origin = country(b.country);
-      return `- [${b.name}](${localeUrl("en", `/brands/${b.slug}`)}):${origin ? ` ${origin}.` : ""} ${
-        supplied.length ? `${supplied.join(", ")}.` : "Range on request."
-      }`;
+      const sister = b.sisterOf ? brands.find((s) => s.slug === b.sisterOf)?.name : undefined;
+      const range = supplied.length
+        ? `${supplied.join(", ")}.`
+        : `Range on request.${b.note === "directOrder" ? " Ordered direct from the manufacturer through AtlasPlast." : ""}`;
+      return `- [${b.name}](${localeUrl("en", `/brands/${b.slug}`)}):${origin ? ` ${origin}.` : ""}${
+        sister ? ` A ${sister} brand with the same range.` : ""
+      } ${range}`;
     })
     .join("\n");
 }

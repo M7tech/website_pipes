@@ -1,5 +1,5 @@
 import type { Source } from "./types";
-import type { Country } from "./brands";
+import { brands, type Country } from "./brands";
 import type { IconName } from "@/components/ui/Icon";
 
 /**
@@ -78,7 +78,7 @@ export const solutions: Solution[] = [
       { src: "/images/solutions/water-supply-2.jpg", brand: "polymelt" },
       { src: "/images/solutions/water-supply-3.jpg", brand: "aquapa" },
       { src: "/images/solutions/water-supply-4.jpg", brand: "georg-fischer" },
-      { src: "/images/solutions/water-supply-5.jpg", brand: "polo-egypt" },
+      { src: "/images/solutions/water-supply-5.jpg", brand: "boroug" },
     ],
     wall: 2.5,
     spec: "PP-R · PP-RCT · ML5 · Ø 20–200",
@@ -152,7 +152,7 @@ export const solutions: Solution[] = [
       {
         id: "poloEgy",
         name: "POLO EGY PP-R",
-        brand: "polo-egypt",
+        brand: "boroug",
         specs: [
           { key: "diameter", value: "Ø 20–110 mm" },
           { key: "length", value: "4–6 m" },
@@ -184,19 +184,8 @@ export const solutions: Solution[] = [
     ],
     wall: 4,
     spec: "PVC-U · PP · Silent · Ø 25–500",
+    // Owner 2026-10-05: Georg Fischer first, Boroug last.
     lines: [
-      {
-        id: "boroug",
-        name: "Boroug UPVC",
-        brand: "polo-egypt",
-        specs: [
-          { key: "diameter", value: "Ø 25–160 mm" },
-          { key: "length", value: "6–12 m" },
-          { key: "material", value: "PVC-U" },
-          { key: "standards", value: "DIN 8061 · ISO/R 1183 · ISO/R 527 · DIN 52612" },
-        ],
-        source: "profile:p17",
-      },
       {
         id: "silentaPremium",
         name: "Silenta Premium",
@@ -291,6 +280,18 @@ export const solutions: Solution[] = [
           { key: "standards", value: "DIN EN 13476-2 · DIN EN 1401-1" },
         ],
         source: "profile:p16",
+      },
+      {
+        id: "boroug",
+        name: "Boroug UPVC",
+        brand: "boroug",
+        specs: [
+          { key: "diameter", value: "Ø 25–160 mm" },
+          { key: "length", value: "6–12 m" },
+          { key: "material", value: "PVC-U" },
+          { key: "standards", value: "DIN 8061 · ISO/R 1183 · ISO/R 527 · DIN 52612" },
+        ],
+        source: "profile:p17",
       },
     ],
   },
@@ -664,7 +665,9 @@ export function solutionKey(slug: string) {
 }
 
 /** A brand's product lines grouped by the solution they belong to, in solution order. */
-export function brandSolutions(brand: string) {
+/** Solutions and lines for a brand; a sister brand (see Brand.sisterOf) shows its sister's range. */
+export function brandSolutions(slug: string) {
+  const brand = brands.find((b) => b.slug === slug)?.sisterOf ?? slug;
   return solutions
     .map((solution) => ({ solution, lines: solution.lines.filter((l) => l.brand === brand) }))
     .filter((group) => group.lines.length > 0);

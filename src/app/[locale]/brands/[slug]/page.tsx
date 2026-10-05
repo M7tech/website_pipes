@@ -86,8 +86,12 @@ export default async function BrandPage({ params }: PageProps<"/[locale]/brands/
       { name: brand.name, path },
     ],
     props: { mainEntity: { "@id": `${SITE_URL}/#brand-${brand.slug}` } },
+    // A sister brand's lines carry its sister's brand node, so its own node is added for mainEntity.
     extra: groups.length
-      ? await productLinesLd(locale as Locale, `${url}#lines`, groups)
+      ? [
+          ...(await productLinesLd(locale as Locale, `${url}#lines`, groups)),
+          ...(brand.sisterOf ? [brandLd(brand, locale as Locale)] : []),
+        ]
       : [brandLd(brand, locale as Locale)],
   });
 
