@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
-import { clients, featuredProjects, type Sector } from "@/content/projects";
+import { brandBySlug } from "@/content/brands";
+import { clients, governorateNames, projects, sectorOrder } from "@/content/projects";
 import { pageLd, pageMetadata } from "@/lib/site";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { PageHeader } from "@/components/ui/PageHeader";
@@ -29,7 +30,7 @@ export default async function ProjectsPage({ params }: PageProps<"/[locale]/proj
   const nav = await getTranslations("Nav");
   const meta = await getTranslations("Meta");
   const common = await getTranslations("Common");
-  const sectorOrder = [...new Set(featuredProjects.map((p) => p.sector))] as Sector[];
+  const sectorsShown = sectorOrder.filter((sector) => projects.some((p) => p.sector === sector));
 
   return (
     <>
@@ -60,20 +61,29 @@ export default async function ProjectsPage({ params }: PageProps<"/[locale]/proj
             {t("selected")}
           </h2>
           <div className="grid gap-3 md:gap-4">
-            {sectorOrder.map((sector) => (
+            {sectorsShown.map((sector) => (
               <div key={sector} className="grid gap-x-8 gap-y-4 rounded-card bg-surface p-6 md:grid-cols-12 md:p-8">
                 <h3 className="md:col-span-3">
                   <span className="inline-flex rounded-full bg-atlas-blue/8 px-3 py-1 text-sm font-semibold text-atlas-blue">{sectors(sector)}</span>
                 </h3>
                 <ul className="grid gap-x-8 gap-y-3 md:col-span-9 md:grid-cols-2">
-                  {featuredProjects
+                  {projects
                     .filter((p) => p.sector === sector)
                     .map((p) => (
-                      <li
-                        key={p.slug}
-                        className="font-display-latin text-[clamp(1.25rem,2vw,1.625rem)] font-semibold leading-snug"
-                      >
-                        {p.name[locale as Locale]}
+                      <li key={p.slug} className="grid content-start gap-1">
+                        <span className="font-display-latin text-[clamp(1.25rem,2vw,1.625rem)] font-semibold leading-snug">
+                          {p.name[locale as Locale]}
+                        </span>
+                        {p.governorate || p.brands?.length ? (
+                          <span className="flex flex-wrap gap-x-2 text-sm text-steel">
+                            {p.governorate ? <span>{governorateNames[p.governorate][locale as Locale]}</span> : null}
+                            {p.brands?.map((b) => (
+                              <span key={b} lang="en" className="before:me-2 before:content-['·'] first:before:hidden">
+                                {brandBySlug(b).name}
+                              </span>
+                            ))}
+                          </span>
+                        ) : null}
                       </li>
                     ))}
                 </ul>

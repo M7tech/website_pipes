@@ -4,7 +4,7 @@ import { brands, type Country } from "@/content/brands";
 import { company, offices, regionalOffices, warehouses } from "@/content/company";
 import { faqAnswer, faqTopics, faqs } from "@/content/faq";
 import { chairman, boardMembers } from "@/content/leadership";
-import { featuredProjects } from "@/content/projects";
+import { governorateNames, projects } from "@/content/projects";
 import { brandSolutions, solutionKey, solutions } from "@/content/solutions";
 import { SITE_URL, localeUrl } from "@/lib/site";
 import en from "../../messages/en.json";
@@ -111,7 +111,7 @@ ${pages.map(([name, path, text]) => `- [${name}](${localeUrl("en", path)}): ${te
 
 ## Selected projects
 
-${featuredProjects.map((p) => `- ${p.name.en}`).join("\n")}
+${projects.map((p) => `- ${p.name.en}${p.governorate ? ` (${governorateNames[p.governorate].en})` : ""}`).join("\n")}
 
 ## Optional
 

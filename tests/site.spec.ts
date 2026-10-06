@@ -231,6 +231,23 @@ test("the footer's Follow links are icons named for screen readers, in every lan
   }
 });
 
+test("Projects lists the owner's projects with governorate and brands; Home keeps its selection", async ({ page }) => {
+  await page.goto("/en/projects");
+  const selected = page.locator('section[aria-labelledby="selected-title"]');
+  await expect(selected.locator("li")).toHaveCount(56);
+  const zagros = selected.locator("li", { hasText: "Zagros Towers" });
+  await expect(zagros).toContainText("Erbil");
+  await expect(zagros).toContainText("Georg Fischer");
+  await expect(selected.locator("h3", { hasText: "Commercial" })).toHaveCount(1);
+  await page.goto("/ar/projects");
+  await expect(page.locator("main")).toContainText("مجمع جواهر دجلة");
+  await expect(page.locator("main li", { hasText: "فنادق ريكسوس" })).toContainText("بغداد");
+  await page.goto("/ckb/projects");
+  await expect(page.locator("main")).toContainText("زاگرۆس تاوەرز");
+  await page.goto("/en");
+  await expect(page.locator('section[aria-labelledby="projects-title"] ol > li')).toHaveCount(14);
+});
+
 test("the old site's addresses land on the matching new pages", async ({ request }) => {
   // As the old WordPress site linked them: lowercase percent-encoding and a trailing slash.
   const enc = (path: string) => path.split("/").map((s) => encodeURIComponent(s).toLowerCase()).join("/");

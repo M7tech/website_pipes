@@ -63,7 +63,7 @@ Versions from `package.json` / `npm ls --depth=0`:
 ├── .env.example              NEXT_PUBLIC_SITE_URL and the optional YOUTUBE_API_KEY (allowed by .gitignore `!.env.example`)
 ├── next.config.ts            next-intl plugin, standalone output, image formats, security headers, old-site redirects
 ├── playwright.config.ts      site checks; uses BASE_URL when set, otherwise builds and serves on :3100
-├── tests/site.spec.ts        every template × locale × width, axe, and feature tests (188 tests)
+├── tests/site.spec.ts        every template × locale × width, axe, and feature tests (189 tests)
 ├── scripts/og-image.js       renders public/og.png from a running production server
 ├── messages/                 en.json, ar.json, ckb.json — ALL user-facing UI copy
 ├── public/
@@ -128,7 +128,7 @@ The repo has an empty, untracked `.claude/` folder and no `.github/` (no CI work
 | `/{locale}/products` | REMOVED | returns 404; replaced by Solutions |
 | `/{locale}/brands` | DONE | logo grid with country and product-line count per brand, plus the photo strip |
 | `/{locale}/brands/{slug}` | DONE | 22 brands; product lines grouped by solution, "range on request" for FV-Plast and Peštan (FV-Plast also notes it is ordered direct from the manufacturer); Alvit is a QuarterBath brand and shows QuarterBath's range, documents and photo (`sisterOf`, owner 2026-10-05); technical documents for 15 brands. Topsan (Turkey, faucets, built-in valves, shower sets, valves) added 2026-10-05 at the owner's request, facts from topsanmusluk.com.tr |
-| `/{locale}/projects` | DONE | featured projects grouped by sector, plus the contractor list |
+| `/{locale}/projects` | DONE | all 56 projects grouped by sector (`sectorOrder`), each with its governorate and the brands supplied where known, plus the contractor list. 42 come from the owner's sheet of 2026-10-06 (`atlas/sources/projects-owner-2026-10-06.xlsx`, source `confirmed:2026-10-06`); English and Sorani names of those are transliterations to check with the owner. NASSAR, on three of them, is left out until it is a brand. Home shows the 14 marked `featured` |
 | `/{locale}/media` | DONE | the YouTube channel's videos, click to load; revalidates hourly. Every public video when `YOUTUBE_API_KEY` is set, otherwise the feed's latest 15 |
 | `/{locale}/about` | DONE | intro, figures, statement, vision/mission/values, a chairman teaser linking to the board page, the full history, services |
 | `/{locale}/about/board` | DONE | Board of Directors: the chairman's message (owner's text 2026-10-05; ar/ckb are Claude's translations, pending review) signed Jaafar Almusawi, Chairman of the Board, Atlas Group. Header: his portrait (the owner's photo, 286×401, a larger original is wanted) standing in the wave edge with the pull quote; then the message with the three values he names (excellence, integrity, progress); then board members Omer Ibrahim and Mohammed Bajalan as photo cards; then the contact band. About stays active in the nav |
@@ -656,7 +656,7 @@ Full SEO pass done 2026-10-04 at the owner's request ("make sure SEO is the best
 - [x] SEO: metadata, canonical, hreflang + x-default, OG image, sitemap, robots, JSON-LD on every page
 - [x] SEO/GEO pass (2026-10-05): FAQ page with 100 questions in three languages, Product/Brand/FAQPage schema, AI crawlers named in robots.txt, llms.txt and llms-full.txt, image sitemap, IndexNow, Search Console/Bing verification hooks
 - [x] Board and Contact pages redesigned (2026-10-05)
-- [x] Playwright + axe suite in the repo (188 tests, all passing)
+- [x] Playwright + axe suite in the repo (189 tests, all passing)
 - [x] Dockerfile, security headers and Coolify preview deployment
 - [x] README with Coolify notes, plus `.env.example`
 - [x] HANDOFF.md
