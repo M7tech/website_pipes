@@ -11,7 +11,8 @@ export const company = {
   mainPhone: "6779",
   /** Al-Shaab branch WhatsApp, also the site's WhatsApp line (owner 2026-10-05; it was listed under Camp Sara before). */
   whatsapp: "+964 783 305 6475",
-  projectsPhone: "+964 772 267 1130",
+  /** Projects division. Source: confirmed:2026-10-05 (owner). */
+  projectsPhone: "+964 786 660 4002",
   /** Sales department. Source: site:/ar/اتصل-بنا/ (departments list). */
   salesPhone: "+964 780 288 0009",
   social: {
@@ -58,6 +59,8 @@ export type Office = {
   name: Localized;
   hq?: boolean;
   phone?: string;
+  /** Street address as the owner gave it (2026-10-05). */
+  street?: Localized;
   /** Place searched in Google Maps when there is no exact pin (`mapUrl`). */
   mapQuery: string;
   /** Exact Google Maps place: the old site's روابط page pin, or one the owner sent. */
@@ -73,21 +76,23 @@ export function mapsHref(office: Office) {
 export const offices: Office[] = [
   {
     id: "camp-sara",
-    mapQuery: "Al-Riyadh Street, Camp Sara, Baghdad, Iraq",
+    mapQuery: "Al-Jamiya Al-Fallahiya Street, Camp Sara, Baghdad, Iraq",
     mapUrl: "https://maps.google.com/?cid=6097986121788672144",
     city: "baghdad",
     hq: true,
     name: { en: "Camp Sara, Baghdad", ar: "كمب سارة، بغداد", ckb: "کەمپ سارە، بەغدا" },
     phone: "+964 787 116 6604",
+    street: { en: "Al-Jamiya Al-Fallahiya Street, opposite Al-Shakireen Mosque", ar: "شارع الجمعية الفلاحية، مقابل جامع الشاكرين", ckb: "شەقامی جەمعیەی فەلاحی، بەرامبەر مزگەوتی شاکرین" },
     source: "confirmed:2026-10-05",
   },
   {
     id: "al-shaab",
-    mapQuery: "Al-Shaab, Baghdad, Iraq",
+    mapQuery: "Al-Jamiya Street, Al-Shaab, Baghdad, Iraq",
     mapUrl: "https://maps.google.com/?cid=12315681913268910686",
     city: "baghdad",
     name: { en: "Al-Shaab, Baghdad", ar: "الشعب، بغداد", ckb: "شەعب، بەغدا" },
     phone: "+964 783 305 6475",
+    street: { en: "Al-Jamiya Street", ar: "شارع الجمعية", ckb: "شەقامی جەمعیە" },
     source: "confirmed:2026-10-05",
   },
   {
@@ -97,6 +102,7 @@ export const offices: Office[] = [
     city: "najaf",
     name: { en: "Najaf", ar: "النجف", ckb: "نەجەف" },
     phone: "+964 783 700 6314",
+    street: { en: "Al-Madina Street", ar: "شارع المدينة", ckb: "شەقامی مەدینە" },
     source: "profile:p29",
   },
   {
@@ -107,6 +113,7 @@ export const offices: Office[] = [
     city: "basra",
     name: { en: "Basra", ar: "البصرة", ckb: "بەسرە" },
     phone: "+964 787 116 6601",
+    street: { en: "Al-Watan Street", ar: "شارع الوطن", ckb: "شەقامی وەتەن" },
     source: "confirmed:2026-10-04",
   },
   {
@@ -116,6 +123,7 @@ export const offices: Office[] = [
     city: "erbil",
     name: { en: "Erbil", ar: "أربيل", ckb: "هەولێر" },
     phone: "+964 787 803 0001",
+    street: { en: "Gulan Street, opposite Cihan Bank", ar: "شارع كولان، مقابل بنك جيهان", ckb: "شەقامی گوڵان، بەرامبەر بانکی جیهان" },
     source: "confirmed:2026-10-04",
   },
   {
@@ -126,6 +134,7 @@ export const offices: Office[] = [
     city: "duhok",
     name: { en: "Duhok", ar: "دهوك", ckb: "دهۆک" },
     phone: "+964 750 991 0065",
+    street: { en: "Qazi Mohammed Street", ar: "شارع قاضي محمد", ckb: "شەقامی قازی محەممەد" },
     source: "profile:p29",
   },
 ];

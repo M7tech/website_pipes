@@ -20,8 +20,13 @@ export type Brand = {
   /** Path under /public, or undefined when no approved artwork exists yet. */
   logo?: string;
   country?: Country;
-  /** Message key under Brands.notes for an agency note, e.g. territory. */
-  note?: "baenningerTerritory";
+  /** Message key under Brands.notes for an agency note, e.g. territory or how the range is ordered. */
+  note?: "baenningerTerritory" | "directOrder" | "quarterbathSister";
+  /**
+   * Slug of a sister brand from the same manufacturer whose range, documents and photo this
+   * brand shares (owner 2026-10-05: Alvit is a QuarterBath brand with the same information).
+   */
+  sisterOf?: string;
   /** English technical documents (owner decision 2026-10-04: English files only). */
   documents?: BrandDocument[];
   /** Manufacturer site photo from the company profile; `subject` names the company shown when it differs. */
@@ -40,7 +45,7 @@ const photos: Record<string, Brand["photo"]> = {
   wisa: { src: "/images/brands/wisa.jpg", subject: "Fluidmaster" },
   quarterbath: { src: "/images/brands/quarterbath.jpg" },
   ostendorf: { src: "/images/brands/ostendorf.jpg" },
-  "polo-egypt": { src: "/images/brands/polo-egypt.jpg" },
+  boroug: { src: "/images/brands/boroug.jpg" },
 };
 
 const brandList: Brand[] = [
@@ -85,8 +90,9 @@ const brandList: Brand[] = [
       { kind: "datasheet", title: "Fitting guide POLO-KAL NG Qmax", href: "https://www.poloplast.com/fileadmin/downloads/downloads_gesamt/Gebaudeentwasserung_POLO-KAL/Fitting_guide_POLO-KAL_NG_Qmax_EN_09_2019.pdf", source: "manufacturer:2026-10-04" },
     ],
   },
-  { slug: "fv-plast", name: "FV-Plast", logo: "/brands/fv-plast.svg", country: "CZ",
-    source: "confirmed:2026-10-04",
+  // Owner 2026-10-05: FV-Plast is ordered direct from the manufacturer through AtlasPlast.
+  { slug: "fv-plast", name: "FV-Plast", logo: "/brands/fv-plast.svg", country: "CZ", note: "directOrder",
+    source: "confirmed:2026-10-05",
     documents: [
       { kind: "catalogue", title: "Catalogue of Products 2018", href: "https://www.fv-plast.cz/media/cache/file/9a/ENG-katalog-2018.pdf", source: "manufacturer:2026-10-04" },
     ],
@@ -141,8 +147,15 @@ const brandList: Brand[] = [
     ],
   },
   { slug: "guarri", name: "Guarri", logo: "/brands/guarri.svg", country: "TR", source: "profile:p18" },
+  { slug: "topsan", name: "Topsan", logo: "/brands/topsan.svg", country: "TR",
+    source: "confirmed:2026-10-05",
+    documents: [
+      { kind: "catalogue", title: "Topsan Product Catalogue 2022", href: "https://topsanmusluk.com.tr/wp-content/uploads/2021/12/topsan_2022_katalog.pdf", source: "manufacturer:2026-10-05" },
+    ],
+  },
   { slug: "ascelik", name: "Asçelik Clamp", logo: "/brands/ascelik.svg", country: "TR", source: "profile:p19" },
-  { slug: "polo-egypt", name: "Polo Egypt", country: "EG", source: "profile:p17" },
+  // Owner 2026-10-05: shown as Boroug, with its logo, in place of Polo Egypt (profile p17).
+  { slug: "boroug", name: "Boroug", logo: "/brands/boroug.svg", country: "EG", source: "confirmed:2026-10-05" },
   { slug: "shield", name: "Shield", logo: "/brands/shield.svg", country: "EG", source: "profile:p18" },
   { slug: "quarterbath", name: "QuarterBath", logo: "/brands/quarterbath.svg",
     source: "profile:p15",
@@ -156,10 +169,19 @@ const brandList: Brand[] = [
       { kind: "catalogue", title: "Candan Catalogue 2023", href: "https://www.candanmakina.com/images/candan_katalog_2023.pdf", source: "manufacturer:2026-10-04" },
     ],
   },
-  { slug: "alvit", name: "Alvit", logo: "/brands/alvit.svg", source: "profile:p4" },
+  { slug: "alvit", name: "Alvit", logo: "/brands/alvit.svg", note: "quarterbathSister", sisterOf: "quarterbath",
+    source: "confirmed:2026-10-05" },
 ];
 
-export const brands: Brand[] = brandList.map((b) => (photos[b.slug] ? { ...b, photo: photos[b.slug] } : b));
+const withPhotos = brandList.map((b) => (photos[b.slug] ? { ...b, photo: photos[b.slug] } : b));
+
+/** A sister brand takes the country, documents and photo of the brand it shares a range with. */
+export const brands: Brand[] = withPhotos.map((b) => {
+  const sister = b.sisterOf ? withPhotos.find((s) => s.slug === b.sisterOf) : undefined;
+  return sister
+    ? { ...b, country: b.country ?? sister.country, documents: b.documents ?? sister.documents, photo: b.photo ?? sister.photo }
+    : b;
+});
 
 export function brandBySlug(slug: string) {
   const brand = brands.find((b) => b.slug === slug);

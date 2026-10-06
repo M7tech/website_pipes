@@ -26,7 +26,9 @@
     "linksTitle": "Links",
     "linksDescription": "AtlasPlast in one place: main line {phone}, WhatsApp, email, social channels, branch maps and the craftsmen app.",
     "boardTitle": "Message from the Chairman",
-    "boardDescription": "A message from Jaafar Almusawi, Chairman of the Board of Atlas Group, and the AtlasPlast board members."
+    "boardDescription": "A message from Jaafar Almusawi, Chairman of the Board of Atlas Group, and the AtlasPlast board members.",
+    "faqTitle": "Frequently asked questions about AtlasPlast",
+    "faqDescription": "Answers to 100 questions about AtlasPlast in Iraq: PP-R and PE pipes, drainage, sanitaryware, tiles, pumps, brands, projects, delivery and contact."
   },
   "Common": {
     "skipToContent": "Skip to content",
@@ -45,6 +47,7 @@
     "about": "About",
     "locations": "Locations",
     "contact": "Contact",
+    "faq": "FAQ",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "language": "Language"
@@ -245,7 +248,8 @@
       "absorption": "Water absorption",
       "slip": "Slip resistance",
       "standards": "Standards",
-      "madeIn": "Made in"
+      "madeIn": "Made in",
+      "cartridge": "Cartridge"
     },
     "waterSupply": {
       "name": "Water supply pipes",
@@ -289,8 +293,8 @@
     },
     "faucetsValves": {
       "name": "Faucets and valves",
-      "text": "Basin, kitchen, shower and sensor mixers, with brass angle and ball valves.",
-      "intro": "Mixers and valves for bathrooms, kitchens and laundries: basin, kitchen, shower and bidet mixers including sensor series, and brass angle valves, ball valves and faucet sets."
+      "text": "Basin, kitchen, shower and sensor mixers, built-in valves and shower sets, with brass angle and ball valves.",
+      "intro": "Mixers and valves for bathrooms, kitchens and laundries: basin, kitchen, shower and bidet mixers including sensor series, built-in valves and shower sets, and brass angle valves, ball valves and faucet sets."
     },
     "installationTools": {
       "name": "Installation tools and fixings",
@@ -425,6 +429,14 @@
         "name": "Guarri faucets",
         "text": "Brass bathroom and kitchen faucets."
       },
+      "topsanFaucets": {
+        "name": "Topsan faucets",
+        "text": "Mixers with 35 and 40 mm cartridges, classic, single and industrial faucets, made in Istanbul since 1979."
+      },
+      "topsanShower": {
+        "name": "Built-in valves, shower sets and valves",
+        "text": "Built-in (concealed) valves, robot, sliding and articulated shower sets, shattaf sets, and valves."
+      },
       "turanWelding": {
         "name": "Butt welding machines",
         "text": "Manual and automatic machines for PE and PP pipes from Ø 20 to 1200 mm."
@@ -467,7 +479,9 @@
   },
   "Brands": {
     "notes": {
-      "baenningerTerritory": "Exclusive agent, central and southern Iraq"
+      "baenningerTerritory": "Exclusive agent, central and southern Iraq",
+      "directOrder": "Ordered direct from the manufacturer through AtlasPlast",
+      "quarterbathSister": "A QuarterBath brand: same range and support"
     },
     "index": {
       "eyebrow": "Brands",
@@ -502,7 +516,8 @@
       "opensNewTab": "opens in a new tab"
     },
     "photoAlt": "{subject} production site",
-    "photoStrip": "Our manufacturers"
+    "photoStrip": "Our manufacturers",
+    "logoAlt": "{brand} logo"
   },
   "Countries": {
     "CH": "Switzerland",
@@ -607,5 +622,27 @@
     },
     "membersTitle": "Board members",
     "read": "Read the Chairman’s message"
+  },
+  "Faq": {
+    "eyebrow": "FAQ",
+    "title": "Questions and answers.",
+    "intro": "Clear answers about AtlasPlast, our products and brands, technical choices, projects, delivery and how to reach us. If your question is not here, call {phone}.",
+    "topicsLabel": "Topics",
+    "count": "{count, plural, one {# question} other {# questions}}",
+    "learnMore": "Read more",
+    "solutionTitle": "Questions about {name}",
+    "all": "All questions",
+    "topics": {
+      "company": "About AtlasPlast",
+      "products": "Products and solutions",
+      "waterSupply": "Water supply pipes",
+      "drainage": "Drainage and grey water",
+      "infrastructure": "Infrastructure networks",
+      "bathrooms": "Sanitaryware, tiles and water heaters",
+      "equipment": "Pumps, faucets and installation tools",
+      "brands": "Brands and agencies",
+      "services": "Projects and services",
+      "contact": "Ordering, delivery and contact"
+    }
   }
 }

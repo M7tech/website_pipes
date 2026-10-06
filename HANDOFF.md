@@ -14,7 +14,7 @@ A copy of this file is kept at `/mnt/project-files/atlas/HANDOFF.md`. Keep the t
 - **Stage:** the full multipage site is built in three languages and runs on the preview domain **https://new.atlasplast.iq** (see §20).
   - Home (the approved visual benchmark, with a four-slide hero).
   - Solutions: an index plus **10** solution pages.
-  - Brands: an index plus **21** brand pages.
+  - Brands: an index plus **22** brand pages.
   - Projects, Media, About (with a Board of Directors page), Locations and Contact.
   - An unlisted links page (روابط) that keeps the old site's address.
 - **Not yet production:** the site lives on branch `feat/home-page` in draft PR #1. `main` still holds only the scaffold.
@@ -63,7 +63,7 @@ Versions from `package.json` / `npm ls --depth=0`:
 ├── .env.example              NEXT_PUBLIC_SITE_URL and the optional YOUTUBE_API_KEY (allowed by .gitignore `!.env.example`)
 ├── next.config.ts            next-intl plugin, standalone output, image formats, security headers, old-site redirects
 ├── playwright.config.ts      site checks; uses BASE_URL when set, otherwise builds and serves on :3100
-├── tests/site.spec.ts        every template × locale × width, axe, and feature tests (174 tests)
+├── tests/site.spec.ts        every template × locale × width, axe, and feature tests (188 tests)
 ├── scripts/og-image.js       renders public/og.png from a running production server
 ├── messages/                 en.json, ar.json, ckb.json — ALL user-facing UI copy
 ├── public/
@@ -89,13 +89,13 @@ Versions from `package.json` / `npm ls --depth=0`:
     │   └── ui/               ButtonLink, TextLink, Arrow, Icon, PinIcon, SectionHead, PageHeader, HeaderSlides (client), Ltr
     └── app/
         ├── globals.css       design tokens (@theme), base styles, utilities, water motion keyframes
-        ├── icon.svg, apple-icon.png, manifest.ts, robots.ts, sitemap.ts
+        ├── icon.svg, apple-icon.png, manifest.ts, robots.ts, sitemap.ts, llms.txt/ and llms-full.txt/ (route handlers)
         └── [locale]/
             ├── layout.tsx    <html lang dir>, fonts, providers, header/footer, skip link
             ├── page.tsx      Home page with Organization JSON-LD
             ├── not-found.tsx
             ├── solutions/        index + [slug] (10 pages)
-            ├── brands/           index + [slug] (21 pages)
+            ├── brands/           index + [slug] (22 pages)
             ├── about/            About + board/ (Board of Directors)
             ├── projects/, media/, locations/, contact/   single pages
             └── links/            unlisted روابط page
@@ -108,7 +108,7 @@ The repo has an empty, untracked `.claude/` folder and no `.github/` (no CI work
 - **Static generation:**
   - `generateStaticParams` builds every locale.
   - The `[slug]` routes use `dynamicParams = false`, so unknown slugs return 404.
-  - The build produces **130** static pages. Media also revalidates hourly (§10).
+  - The build produces **138** static pages. Media also revalidates hourly (§10).
 - **Server vs client components:** Server Components by default. Client components are only for interaction and animation: `SiteHeader`, `LanguageSwitcher`, `HeroCarousel`, `PipeSection`, `HeaderSlides`, `CurrentStrip`, `VideoGallery`, `ScrollWater` and the motion components. Section components fetch copy with `getTranslations` on the server.
 - **Content:**
   - Facts (phones, offices, brands, solutions, projects, timeline, leadership, map points) live in typed modules in `src/content/`, with `Localized<T> = Record<Locale, T>` for names.
@@ -124,19 +124,20 @@ The repo has an empty, untracked `.claude/` folder and no `.github/` (no CI work
 | `/` | DONE | redirects to `/en` (next-intl proxy) |
 | `/en`, `/ar`, `/ckb` (Home) | DONE | approved benchmark, with a four-slide hero |
 | `/{locale}/solutions` | DONE | index of the 10 solutions |
-| `/{locale}/solutions/{slug}` | DONE | water-supply, drainage, water-heaters, infrastructure, galvanized-fittings, sanitaryware, tiles, pumps, faucets-valves, installation-tools. 44 product lines in all |
+| `/{locale}/solutions/{slug}` | DONE | water-supply, drainage, water-heaters, infrastructure, galvanized-fittings, sanitaryware, tiles, pumps, faucets-valves, installation-tools. 46 product lines in all |
 | `/{locale}/products` | REMOVED | returns 404; replaced by Solutions |
 | `/{locale}/brands` | DONE | logo grid with country and product-line count per brand, plus the photo strip |
-| `/{locale}/brands/{slug}` | DONE | 21 brands; product lines grouped by solution, or "range on request" for FV-Plast, Peštan and Alvit; technical documents for 14 brands |
+| `/{locale}/brands/{slug}` | DONE | 22 brands; product lines grouped by solution, "range on request" for FV-Plast and Peštan (FV-Plast also notes it is ordered direct from the manufacturer); Alvit is a QuarterBath brand and shows QuarterBath's range, documents and photo (`sisterOf`, owner 2026-10-05); technical documents for 15 brands. Topsan (Turkey, faucets, built-in valves, shower sets, valves) added 2026-10-05 at the owner's request, facts from topsanmusluk.com.tr |
 | `/{locale}/projects` | DONE | featured projects grouped by sector, plus the contractor list |
 | `/{locale}/media` | DONE | the YouTube channel's videos, click to load; revalidates hourly. Every public video when `YOUTUBE_API_KEY` is set, otherwise the feed's latest 15 |
 | `/{locale}/about` | DONE | intro, figures, statement, vision/mission/values, a chairman teaser linking to the board page, the full history, services |
 | `/{locale}/about/board` | DONE | Board of Directors: the chairman's message (owner's text 2026-10-05; ar/ckb are Claude's translations, pending review) signed Jaafar Almusawi, Chairman of the Board, Atlas Group. Header: his portrait (the owner's photo, 286×401, a larger original is wanted) standing in the wave edge with the pull quote; then the message with the three values he names (excellence, integrity, progress); then board members Omer Ibrahim and Mohammed Bajalan as photo cards; then the contact band. About stays active in the nav |
 | `/{locale}/locations` | DONE | map, offices, warehouses, regional offices, branch phone lines; every office opens its exact Google Maps place |
-| `/{locale}/contact` | DONE | header with the main line 6779 and a WhatsApp button; tiles for WhatsApp (Al-Shaab), projects, sales and email; hours; branch lines beside the Iraq map; a Follow band. No form yet |
+| `/{locale}/contact` | DONE | header with the main line 6779 and a WhatsApp button; tiles for sales, projects and email (owner, 2026-10-05: the Al-Shaab WhatsApp tile is removed and the order is 6779, sales, projects, email, as in the Home contact card); hours; branch lines beside the Iraq map; a Follow band. No form yet |
 | `/{locale}/links` | DONE | unlisted روابط page (old site's `/روابط/`): main line, WhatsApp, email, social, branch maps, craftsmen app. In no menu or sitemap, `noindex`. `/روابط` and `/ar/روابط` redirect (308) to `/ar/links` via `redirects()` in `next.config.ts` (see §20, old-site redirects) |
 | `/{locale}/<unknown>` | DONE | localized 404 (`not-found.tsx`) |
-| `/sitemap.xml`, `/robots.txt`, `/icon.svg`, `/manifest.webmanifest` | DONE | sitemap lists 40 public pages in every locale (120 URLs) |
+| `/{locale}/faq` | DONE | 100 questions and answers in ten topics (`src/content/faq.ts`), FAQPage JSON-LD; linked from the footer. Solution pages show their own questions |
+| `/sitemap.xml`, `/robots.txt`, `/llms.txt`, `/llms-full.txt`, `/icon.svg`, `/manifest.webmanifest` | DONE | sitemap lists 42 public pages in every locale (126 URLs) with image entries |
 
 ## 5. Design System
 
@@ -258,7 +259,7 @@ The site should feel premium, sophisticated, modern, architectural, industrial, 
 |---|---|---|---|
 | Meta, Common, Nav, Footer | complete | complete | complete |
 | Home (all 10 namespaces) and hero slides | complete | complete | complete |
-| Solutions (index, 10 solutions, 44 product lines, spec labels) | complete | complete | complete |
+| Solutions (index, 10 solutions, 46 product lines, spec labels) | complete | complete | complete |
 | Brands, Projects, About (incl. vision/mission/values), Locations, Contact, Media, NotFound | complete | complete | complete |
 | Links | complete | complete | complete |
 | Board (chairman's message) | owner's text | Claude's translation | Claude's translation |
@@ -289,7 +290,7 @@ Source files are in the shared project folder (not in the repo):
 **Confirmed and in use:**
 - Since 1975 (first showroom 1990).
 - "Hundreds of projects."
-- Main phone **6779** (a normal `tel:` link). Every mobile number opens WhatsApp (`wa.me`): the site's WhatsApp line +964 783 305 6475, which is **Al-Shaab's** (owner, 2026-10-05; it was listed under Camp Sara before), projects division +964 772 267 1130, sales department +964 780 288 0009 (old site). Email info@atlasplast.iq.
+- Main phone **6779** (a normal `tel:` link). Every mobile number opens WhatsApp (`wa.me`): the site's WhatsApp line +964 783 305 6475, which is **Al-Shaab's** (owner, 2026-10-05; it was listed under Camp Sara before), projects division +964 786 660 4002 (owner, 2026-10-05; it was +964 772 267 1130 before), sales department +964 780 288 0009 (old site). Email info@atlasplast.iq.
 - **Offices in Iraq** (each with an exact Google Maps place, `mapUrl` in `company.ts`):
   - Camp Sara (Baghdad) — HQ, +964 787 116 6604 (owner, 2026-10-05)
   - Al-Shaab (Baghdad) — +964 783 305 6475
@@ -302,7 +303,7 @@ Source files are in the shared project folder (not in the repo):
 - **Regional offices:** Saudi Arabia, Turkey, Syria, Egypt.
 - **Hours:** Saturday to Thursday, 07:00 to 15:00 (old site).
 - **Bänninger:** AtlasPlast is the exclusive agent for **central and southern Iraq**; Massary holds Kurdistan. Ranges: PP-R · PP-RCT (water supply) and PE · PVC-U Ø 8–1000 mm (infrastructure).
-- The Czech agency is **FV-Plast**; the Serbian agency is **Pestan**.
+- The Czech agency is **FV-Plast** (ordered direct from the manufacturer through AtlasPlast, owner 2026-10-05); the Serbian agency is **Pestan**.
 - **Polymelt** lines: POLO-Polymutan, Polo-Ecosan, Polo-UV, Polo-Polymutan ML5. **Poloplast:** Polo-Kal NG and Polo-Kal 3S only.
 - **KAS** = kas.com.tr, supplied as **PP-R only** (not PPR-C).
 - **Georg Fischer galvanized malleable-iron fittings** (EN 10242) are their own solution, made in Austria (owner, 2026-10-05).
@@ -322,13 +323,13 @@ Source files are in the shared project folder (not in the repo):
 - **Craftsmen app:** the old روابط page linked an "Iraqi Craftsmen" app. The links (`craftsmenApp` in `company.ts`) are the store pages it led to, but both stores now list the app as **SAWA**. The owner has been asked whether to keep it.
 
 **REQUIRES REVIEW:**
-- **"23 international brands" vs 21 brands shown.** The profile says 23. After Calpeda and Vitra were removed, the brand wall shows 21. Ask the owner whether the figure should change; do not change it on a guess.
+- **"23 international brands" vs 22 brands shown.** The profile says 23. After Calpeda and Vitra were removed and Topsan was added, the brand wall shows 22. Ask the owner whether the figure should change; do not change it on a guess.
 - **Projects completed:** the profile says 700+ (p6) and 800+ (p23). Only "hundreds" is used.
 - **Warehouse area:** the profile gives 40,000 m² + 16,000+ m² vs a 76,000 m² total, and the old site said 20,000 m². None of these is published.
 - **Office count:** the profile contradicts itself (14 vs 10). Not published.
 - **Financial and growth figures, market-share bars, the unnamed ISO certificate:** do not publish.
 - **Profile main number +964 790 135 0331:** not used, because the owner chose 6779.
-- **Boroug UPVC:** it may be a private label. It appears on the Polo Egypt page of the profile and in the logo pack (unconfirmed).
+- **Boroug:** the owner supplied the Boroug logo on 2026-10-05 and asked for it in place of Polo Egypt, so the profile's Polo Egypt brand (p17) is now the Boroug brand at `/brands/boroug` (Boroug UPVC and POLO EGY PP-R). `/brands/polo-egypt` redirects there.
 - **Partner-company founding years:** these are the manufacturers' facts. Use them sparingly.
 - **Still waiting on the owner:** testimonials (with consent), NASSAR, the "up to 50 years" warranty, project photos.
 
@@ -347,12 +348,12 @@ Source files are in the shared project folder (not in the repo):
    - Below the carousel is a `dl` of 4 figures.
 2. **Statement**: `Statement.tsx`.
 3. **Solutions**: `SolutionIndex.tsx` (SectionHead + `solutions/SolutionList.tsx`), "Ten solutions, one supplier.", the 10 solutions with icons.
-4. **Brands**: `BrandWall.tsx`, 21 logos and the manufacturer photo strip (`BrandPhotoStrip` inside `CurrentStrip`, with a pause button).
+4. **Brands**: `BrandWall.tsx`, 22 logos and the manufacturer photo strip (`BrandPhotoStrip` inside `CurrentStrip`, with a pause button).
 5. **Projects**: `ProjectIndex.tsx`.
 6. **Timeline**: `Timeline.tsx` with `ScrollRule` (key milestones only).
 7. **Service model**: `ServiceModel.tsx`.
 8. **Presence**: `Presence.tsx` + `IraqMap`; offices link to Google Maps.
-9. **Contact band**: `ContactBand.tsx`.
+9. **Contact band**: `ContactBand.tsx`. The card lists the main line 6779, then sales, projects and email (owner, 2026-10-05).
 
 **Inner pages:**
 - Every inner page opens with `PageHeader` (navy, breadcrumb, eyebrow, h1, intro). The `image` prop puts one photo under a navy wash with a slow Ken Burns (warehouse photos on About, Locations and the Solutions index; manufacturer photos on brand pages). The `slides` prop cross-fades several photos instead (`HeaderSlides`, with a pause button and dots); each solution page uses it for its product photos.
@@ -495,7 +496,7 @@ Breakpoints are Tailwind defaults (sm 640, md 768, lg 1024, xl 1280). QA viewpor
 - **Partner logos:** in `public/brands/`.
   - alvit, aquapa, ascelik, baenninger, candan, dab, fv-plast, georg-fischer, guarri, kas, ostendorf, pestan, pimtas, poloplast, polymelt, quarterbath, saudi-ceramics, shield, turan-borfit and wisa (all used).
   - `aquahot.svg` is used on the Water heaters solution page as the Aquahot line's mark.
-  - **Polo Egypt has no logo** (renders as text).
+  - **Boroug** (formerly Polo Egypt) was traced from the owner's PNG on 2026-10-05 into a two-colour SVG.
 - **Photography** (all from the company profile PDF; no original photos yet):
   - `public/images/brands/<slug>.jpg`: 10 manufacturer-site photos (`photos` map in `brands.ts`). Used as brand page header backdrops, in the photo strip and as hero backdrops.
   - `public/images/hero/`: `landmark.jpg` (p21) and AtlasPlast's own warehouse photos `warehouse-*.jpg` (p23), used on the hero "reach" slide and the About, Locations and Solutions headers.
@@ -521,24 +522,30 @@ Full SEO pass done 2026-10-04 at the owner's request ("make sure SEO is the best
 **Structured data** (`src/lib/structured-data.ts`, `pageLd()` in `src/lib/site.ts`, `JsonLd`; one `@graph` per page):
 - Home: `Organization` (@id `SITE_URL/#organization`, logo, founding 1975, contact points, `sameAs` including YouTube) and `WebSite`, plus `WebPage`.
 - Every inner page: a typed page node (`CollectionPage`, `AboutPage`, `ContactPage` or `WebPage`) and `BreadcrumbList`.
-- Solution and brand pages: an `ItemList` of product lines. Deliberately not `Product`, because there are no prices or reviews.
-- Locations: one `LocalBusiness` per Iraqi office (city, phone, parentOrganization).
+- Every page: a compact `Organization` node (same `@id`), so each page names the entity it is about.
+- Solution and brand pages: an `ItemList` of `Product` nodes (name, description, brand, category, photo, specs as `additionalProperty`, country of origin when known) and a `Brand` node per manufacturer (`SITE_URL/#brand-<slug>`). Owner asked for Product schema on 2026-10-05. There are still no prices or reviews, so Search Console may list the products under "Product snippets" as missing `offers`/`review`; that is expected and only affects price/star rich results.
+- Locations: one `LocalBusiness` per Iraqi office (city, phone, email, opening hours Sat–Thu 07:00–15:00, parentOrganization).
+- FAQ: `FAQPage` on `/faq` (all 100) and a `FAQPage` node on each solution page with its questions. Question `@id`s point at `/faq#faq-<id>`.
 - Contact: Organization `contactPoint`s (main line, projects line, sales line, WhatsApp).
 - Media: `VideoObject` per feed video with a title and date.
 - Board: a `Person` per leader (name, jobTitle, image, worksFor the organization).
 
 **Other:**
-- `src/app/sitemap.ts` lists 40 pages × 3 locales (120 URLs) with hreflang alternates and a build-time `lastModified`. Add every new public page to `paths`; `/links` stays out on purpose.
-- `src/app/robots.ts` allows all and points to the sitemap.
+- `src/app/sitemap.ts` lists 42 pages × 3 locales (126 URLs) with hreflang alternates, image entries (solution photos, brand photos and logos) and a build-time `lastModified`. Add every new public page to `paths`; `/links` stays out on purpose.
+- `src/app/robots.ts` allows all and names the search and AI crawlers (OAI-SearchBot, ChatGPT-User, GPTBot, ClaudeBot, Claude-SearchBot, PerplexityBot, Google-Extended, Bingbot, Applebot and others), plus the sitemap and host.
+- Layout metadata: `max-image-preview:large`, `max-snippet:-1`; optional `GOOGLE_SITE_VERIFICATION` / `BING_SITE_VERIFICATION` build variables add the ownership meta tags.
+- **GEO:** `/llms.txt` (summary, key facts, solutions, brands, pages) and `/llms-full.txt` (plus product specs and every FAQ answer in en/ar/ckb) are built from `src/lib/llms.ts` out of the same content, so they never drift.
+- **FAQ** (`src/content/faq.ts`): 100 questions, each with `q`/`a` in en/ar/ckb, a topic, an optional `href` and the solution pages it also appears on. Answers use only facts already published; contact details are `{mainPhone}`-style placeholders filled from `company.ts`. Arabic and Sorani are Claude's and need the same native review as the rest.
+- **IndexNow:** key `10a24adcefe968996992d893b0bf54d0` (public by design) at `public/<key>.txt`, in `src/lib/indexnow.ts` and `scripts/indexnow.mjs`. `src/instrumentation.ts` submits every sitemap URL 30 s after start when `INDEXNOW_SUBMIT=true` (production only, never the preview). `npm run indexnow` does it by hand.
 - `viewport.themeColor` is `#14284a`.
 
-**Still open:** submit the sitemap in Google Search Console and Bing Webmaster Tools after the domain goes live (this needs the owner's account), and add original photography for richer share images.
+**Still open:** after the domain goes live, verify atlasplast.iq in Google Search Console (DNS TXT in Cloudflare is simplest), submit the sitemap, import the site into Bing Webmaster Tools from Search Console, and set `INDEXNOW_SUBMIT=true` in Coolify (all need the owner's accounts). Add original photography for richer share images.
 
 ### Brand technical documents
 
 - Brand pages show a **Technical documents** section when `documents` is set on the brand in `src/content/brands.ts`.
 - Owner decision 2026-10-04: the files come from the **manufacturers' official websites** and must be **in English**. They are linked, not re-hosted. Each has `source: "manufacturer:2026-10-04"`.
-- 14 brands have documents. None were found for WISA (site timed out), Turan Borfit, Guarri, Asçelik, Polo Egypt, Shield and Alvit (Turkish only).
+- 14 brands have documents. None were found for WISA (site timed out), Turan Borfit, Guarri, Asçelik, Boroug and Shield. Alvit shares QuarterBath's.
 - Unverified: the Bänninger Range of Products PDF (34 MB, not opened). Saudi Ceramics links to its catalogue page; the files themselves are on Google Drive and were not opened.
 - To self-host a file instead, put it under `public/docs/<brand>/` and use `href: "/docs/<brand>/<file>.pdf"`.
 
@@ -636,8 +643,8 @@ Full SEO pass done 2026-10-04 at the owner's request ("make sure SEO is the best
 - [x] Header with desktop nav, language switcher and an accessible mobile menu (focus kept inside, inert page)
 - [x] Footer with YouTube in Follow us
 - [x] Home page, all 9 sections, with a four-slide accessible hero carousel
-- [x] Solutions: index and 10 solution pages (tiles added 2026-10-05), 44 sourced product lines, photo headers
-- [x] Brands: index and 21 brand pages, technical documents for 14 brands
+- [x] Solutions: index and 10 solution pages (tiles added 2026-10-05), 46 sourced product lines, photo headers
+- [x] Brands: index and 22 brand pages, technical documents for 15 brands
 - [x] Projects, Media (YouTube feed), About (vision/mission/values, full history), Locations and Contact
 - [x] Board of Directors page under About: the chairman's message and two board members with portraits
 - [x] Unlisted روابط links page with the old address redirected
@@ -647,8 +654,9 @@ Full SEO pass done 2026-10-04 at the owner's request ("make sure SEO is the best
 - [x] Water-themed motion with reduced-motion fallbacks
 - [x] Animation audit and all ten fix plans, merged
 - [x] SEO: metadata, canonical, hreflang + x-default, OG image, sitemap, robots, JSON-LD on every page
+- [x] SEO/GEO pass (2026-10-05): FAQ page with 100 questions in three languages, Product/Brand/FAQPage schema, AI crawlers named in robots.txt, llms.txt and llms-full.txt, image sitemap, IndexNow, Search Console/Bing verification hooks
 - [x] Board and Contact pages redesigned (2026-10-05)
-- [x] Playwright + axe suite in the repo (174 tests, all passing)
+- [x] Playwright + axe suite in the repo (188 tests, all passing)
 - [x] Dockerfile, security headers and Coolify preview deployment
 - [x] README with Coolify notes, plus `.env.example`
 - [x] HANDOFF.md

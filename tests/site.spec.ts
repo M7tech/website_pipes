@@ -21,6 +21,7 @@ const paths = [
   "/contact",
   "/projects",
   "/media",
+  "/faq",
   "/links",
 ];
 
@@ -366,4 +367,53 @@ test("the header is glass floating over the page, and the page band starts under
   await page.locator('button[aria-controls="mobile-menu"]').click();
   const menu = await page.locator("#mobile-menu").boundingBox();
   expect(menu!.height).toBeGreaterThan(700);
+});
+
+test("FAQ: 100 questions in every language, readable without opening, with FAQPage data", async ({ page }) => {
+  for (const { code } of locales) {
+    await page.goto(`/${code}/faq`);
+    await expect(page.locator("main details")).toHaveCount(100);
+    // Answers are in the HTML while closed, so crawlers that skip scripts still read them.
+    expect(await page.locator("main details").first().locator("p").textContent()).toBeTruthy();
+    const ld = JSON.parse((await page.locator('script[type="application/ld+json"]').first().textContent()) ?? "{}");
+    const faqPage = ld["@graph"].find((n: { "@type": string }) => n["@type"] === "FAQPage");
+    expect(faqPage.mainEntity).toHaveLength(100);
+    expect(JSON.stringify(faqPage)).not.toMatch(/\{(mainPhone|whatsapp|projectsPhone|salesPhone|email|branches)\}/);
+  }
+  // A question opens and closes; the footer links to the page.
+  await page.goto("/en/faq");
+  const first = page.locator("main details").first();
+  await first.locator("summary").click();
+  await expect(first).toHaveAttribute("open", "");
+  await expect(page.locator('footer a[href="/en/faq"]')).toHaveCount(1);
+  // Solution pages carry their own questions and Product data.
+  await page.goto("/ar/solutions/drainage");
+  expect(await page.locator("main details").count()).toBeGreaterThan(0);
+  const graph = JSON.stringify(JSON.parse((await page.locator('script[type="application/ld+json"]').first().textContent()) ?? "{}"));
+  for (const type of ["FAQPage", "Product", "Brand", "BreadcrumbList", "Organization"]) expect(graph).toContain(`"@type":"${type}"`);
+});
+
+test("robots, sitemap, llms.txt and IndexNow are open to search and AI crawlers", async ({ request }) => {
+  const robots = await (await request.get("/robots.txt")).text();
+  for (const bot of ["OAI-SearchBot", "GPTBot", "ClaudeBot", "PerplexityBot", "Bingbot"]) expect(robots).toContain(`User-Agent: ${bot}`);
+  expect(robots).not.toMatch(/Disallow: \/\s/);
+  expect(robots).toContain("Sitemap: https://");
+
+  const sitemap = await (await request.get("/sitemap.xml")).text();
+  for (const path of ["/en/faq", "/ar/faq", "/ckb/faq"]) expect(sitemap).toContain(path);
+  expect(sitemap).toContain('hreflang="ckb"');
+  expect(sitemap).toContain("<image:loc>");
+
+  const llms = await request.get("/llms.txt");
+  expect(llms.status()).toBe(200);
+  const text = await llms.text();
+  expect(text.startsWith("# AtlasPlast")).toBe(true);
+  expect(text).toContain("/en/faq");
+  const full = await (await request.get("/llms-full.txt")).text();
+  expect(full).toContain("الأسئلة الشائعة");
+  expect(full).toContain("پرسیارە باوەکان");
+
+  const key = await request.get("/10a24adcefe968996992d893b0bf54d0.txt");
+  expect(key.status()).toBe(200);
+  expect((await key.text()).trim()).toBe("10a24adcefe968996992d893b0bf54d0");
 });

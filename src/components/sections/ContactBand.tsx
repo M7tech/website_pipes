@@ -8,9 +8,8 @@ export async function ContactBand() {
   const t = await getTranslations("Home.contact");
 
   const lines = [
-    { label: t("whatsapp"), value: company.whatsapp, href: whatsappHref(company.whatsapp), external: true, icon: "whatsapp" as const },
-    { label: t("projects"), value: company.projectsPhone, href: whatsappHref(company.projectsPhone), external: true, icon: "helmet" as const },
     { label: t("sales"), value: company.salesPhone, href: whatsappHref(company.salesPhone), external: true, icon: "tag" as const },
+    { label: t("projects"), value: company.projectsPhone, href: whatsappHref(company.projectsPhone), external: true, icon: "helmet" as const },
     { label: t("email"), value: company.email, href: `mailto:${company.email}`, external: false, icon: "mail" as const },
   ];
 

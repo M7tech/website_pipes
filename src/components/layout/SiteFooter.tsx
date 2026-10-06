@@ -31,7 +31,7 @@ export async function SiteFooter() {
         <nav aria-label={t("explore")} className="md:col-span-2">
           <h2 className="eyebrow mb-4 text-on-dark-muted">{t("explore")}</h2>
           <ul className="grid gap-2.5">
-            {[...primaryNav, { key: "contact", href: contactHref } as const].map((item) => (
+            {[...primaryNav, { key: "contact", href: contactHref } as const, { key: "faq", href: "/faq" } as const].map((item) => (
               <li key={item.key}>
                 <Link href={item.href} className="hover:underline hover:underline-offset-4">
                   {nav(item.key)}
