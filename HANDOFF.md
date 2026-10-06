@@ -63,7 +63,7 @@ Versions from `package.json` / `npm ls --depth=0`:
 ├── .env.example              NEXT_PUBLIC_SITE_URL and the optional YOUTUBE_API_KEY (allowed by .gitignore `!.env.example`)
 ├── next.config.ts            next-intl plugin, standalone output, image formats, security headers, old-site redirects
 ├── playwright.config.ts      site checks; uses BASE_URL when set, otherwise builds and serves on :3100
-├── tests/site.spec.ts        every template × locale × width, axe, and feature tests (173 tests)
+├── tests/site.spec.ts        every template × locale × width, axe, and feature tests (174 tests)
 ├── scripts/og-image.js       renders public/og.png from a running production server
 ├── messages/                 en.json, ar.json, ckb.json — ALL user-facing UI copy
 ├── public/
@@ -386,7 +386,7 @@ Source files are in the shared project folder (not in the repo):
   - "Explore": the nav plus Contact
   - "Offices in Iraq" (6 office names)
   - Contact (main line 6779, email)
-  - Follow (Facebook, Instagram, LinkedIn, YouTube), from `company.social` and `socialNames`
+  - Follow (Facebook, Instagram, LinkedIn, YouTube), from `company.social` and `socialNames`: round 44 px icon buttons (owner, 2026-10-06), brand glyphs from `ui/SocialIcon.tsx` (Simple Icons, CC0), the network name as `sr-only` text. The Contact page's Follow tiles show the same icons
 - **Bottom bar:** © year Ufuq Al-Atlas Ltd.
 - **Mobile:** the columns stack.
 - **Not in the footer:** warehouses, regional offices, office addresses and phones (they are on Locations and Contact), and the روابط page (unlisted on purpose).
@@ -648,7 +648,7 @@ Full SEO pass done 2026-10-04 at the owner's request ("make sure SEO is the best
 - [x] Animation audit and all ten fix plans, merged
 - [x] SEO: metadata, canonical, hreflang + x-default, OG image, sitemap, robots, JSON-LD on every page
 - [x] Board and Contact pages redesigned (2026-10-05)
-- [x] Playwright + axe suite in the repo (173 tests, all passing)
+- [x] Playwright + axe suite in the repo (174 tests, all passing)
 - [x] Dockerfile, security headers and Coolify preview deployment
 - [x] README with Coolify notes, plus `.env.example`
 - [x] HANDOFF.md

@@ -5,6 +5,7 @@ import { company, offices, socialNames } from "@/content/company";
 import { primaryNav, contactHref } from "@/lib/nav";
 import { Logo } from "./Logo";
 import { Ltr } from "@/components/ui/Ltr";
+import { SocialIcon } from "@/components/ui/SocialIcon";
 
 export async function SiteFooter() {
   const locale = (await getLocale()) as Locale;
@@ -14,6 +15,7 @@ export async function SiteFooter() {
   const year = new Date().getFullYear();
 
   const social = (Object.keys(company.social) as (keyof typeof company.social)[]).map((key) => ({
+    key,
     label: socialNames[key],
     href: company.social[key],
   }));
@@ -67,11 +69,20 @@ export async function SiteFooter() {
           </div>
           <div>
             <h2 className="eyebrow mb-4 text-on-dark-muted">{t("follow")}</h2>
-            <ul className="flex flex-wrap gap-x-5 gap-y-2">
+            <ul className="flex flex-wrap gap-2">
               {social.map((s) => (
-                <li key={s.label}>
-                  <a href={s.href} target="_blank" rel="noopener noreferrer" className="hover:underline" lang="en">
-                    {s.label}
+                <li key={s.key}>
+                  <a
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title={s.label}
+                    className="pressable inline-flex size-11 items-center justify-center rounded-full bg-white/8 text-on-dark hover:bg-white hover:text-atlas-navy"
+                  >
+                    <SocialIcon name={s.key} />
+                    <span className="sr-only" lang="en">
+                      {s.label}
+                    </span>
                   </a>
                 </li>
               ))}

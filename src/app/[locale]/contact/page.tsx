@@ -9,6 +9,7 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { SectionHead } from "@/components/ui/SectionHead";
 import { Icon, type IconName } from "@/components/ui/Icon";
 import { Arrow } from "@/components/ui/Arrow";
+import { SocialIcon } from "@/components/ui/SocialIcon";
 import { Ltr } from "@/components/ui/Ltr";
 import { OfficeLines } from "@/components/company/OfficeLines";
 import { IraqMap } from "@/components/sections/IraqMap";
@@ -189,10 +190,13 @@ export default async function ContactPage({ params }: PageProps<"/[locale]/conta
                   target="_blank"
                   rel="noopener noreferrer"
                   lang="en"
-                  className="glass-on-dark group pressable flex min-h-28 items-end justify-between gap-4 rounded-card p-6 font-display-latin text-xl font-semibold hover:bg-white/12 md:text-2xl"
+                  className="glass-on-dark group pressable flex min-h-36 flex-col justify-between gap-6 rounded-card p-6 font-display-latin text-xl font-semibold hover:bg-white/12 md:text-2xl"
                 >
+                  <span className="flex items-start justify-between gap-4">
+                    <SocialIcon name={key} className="size-8" />
+                    <Arrow className="-rotate-45 transition-transform duration-(--duration-base) ease-(--ease-out-expo) group-hover:-translate-y-1" />
+                  </span>
                   {socialNames[key]}
-                  <Arrow className="-rotate-45 transition-transform duration-(--duration-base) ease-(--ease-out-expo) group-hover:-translate-y-1" />
                 </a>
               </li>
             ))}

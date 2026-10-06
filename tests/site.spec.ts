@@ -208,9 +208,26 @@ test("media page lists the channel's videos and YouTube is in Follow us", async 
   await expect(page.locator("main iframe")).toHaveCount(0);
   await page.locator("main figure button").click();
   await expect(page.locator('main iframe[src^="https://www.youtube-nocookie.com/embed/"]')).toHaveCount(1);
-  await expect(page.locator('footer a[href="https://www.youtube.com/@atlasplast"]')).toHaveText("YouTube");
+  await expect(page.locator('footer a[href="https://www.youtube.com/@atlasplast"]')).toHaveAccessibleName("YouTube");
   await page.goto("/ar/contact");
   await expect(page.locator('main a[href="https://www.youtube.com/@atlasplast"]')).toHaveText("YouTube");
+});
+
+test("the footer's Follow links are icons named for screen readers, in every language", async ({ page }) => {
+  for (const locale of ["en", "ar", "ckb"]) {
+    await page.goto(`/${locale}`);
+    const links = page.locator("#site-footer li:has(> a[target=_blank])").locator("a");
+    await expect(links).toHaveCount(4);
+    for (const name of ["Facebook", "Instagram", "LinkedIn", "YouTube"]) {
+      const link = page.locator("#site-footer").getByRole("link", { name, exact: true });
+      await expect(link, `${locale} ${name}`).toBeVisible();
+      await expect(link.locator("svg")).toHaveCount(1);
+      // A round icon button, big enough to tap.
+      const box = await link.boundingBox();
+      expect(box?.width, `${locale} ${name}`).toBeGreaterThanOrEqual(44);
+      expect(box?.height, `${locale} ${name}`).toBeGreaterThanOrEqual(44);
+    }
+  }
 });
 
 test("the old site's addresses land on the matching new pages", async ({ request }) => {
