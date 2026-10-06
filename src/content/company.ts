@@ -1,0 +1,165 @@
+import type { Localized, Source } from "./types";
+import type { CITY_POINTS } from "./iraq-map";
+
+export const company = {
+  name: "AtlasPlast",
+  legalName: "Ufuq Al-Atlas Ltd.",
+  foundingYear: 1975,
+  firstShowroomYear: 1990,
+  email: "info@atlasplast.iq",
+  /** Short-code main line. Source: confirmed:2026-10-04 */
+  mainPhone: "6779",
+  /** Al-Shaab branch WhatsApp, also the site's WhatsApp line (owner 2026-10-05; it was listed under Camp Sara before). */
+  whatsapp: "+964 783 305 6475",
+  /** Projects division. Source: confirmed:2026-10-05 (owner). */
+  projectsPhone: "+964 786 660 4002",
+  /** Sales department. Source: site:/ar/اتصل-بنا/ (departments list). */
+  salesPhone: "+964 780 288 0009",
+  social: {
+    facebook: "https://www.facebook.com/AtlasPlast.llc/",
+    instagram: "https://www.instagram.com/atlasplast.iq/",
+    linkedin: "https://www.linkedin.com/company/atlas-plast",
+    youtube: "https://www.youtube.com/@atlasplast",
+  },
+} as const;
+
+/** Network names as each network writes them, for the Follow us links. */
+export const socialNames = { facebook: "Facebook", instagram: "Instagram", linkedin: "LinkedIn", youtube: "YouTube" } as const;
+
+/**
+ * Craftsmen app, as linked from the old site's روابط page. These are the store pages its
+ * goo.gl and apple.co short links led to on 2026-10-05; both stores now list the app as SAWA.
+ */
+export const craftsmenApp = {
+  googlePlay: "https://play.google.com/store/apps/details?id=com.ufuqatlas.atlasclub",
+  appStore: "https://apps.apple.com/app/id1258596767",
+} as const;
+
+/**
+ * WhatsApp chat link for a mobile number. Every mobile line on the site opens
+ * WhatsApp (owner decision 2026-10-04); only the short main line is a phone call.
+ */
+export function whatsappHref(phone: string) {
+  return `https://wa.me/${phone.replace(/\D/g, "")}`;
+}
+
+/** Headline figures. Only figures confirmed consistent across sources are listed. */
+export const facts = [
+  { key: "agents", value: "600+", source: "profile:p4,p23,p27" },
+  { key: "brands", value: "23", source: "profile:p4" },
+  { key: "trained", value: "6,000+", source: "profile:p20" },
+  { key: "stock", value: "9", source: "confirmed:2026-10-04" },
+] as const satisfies readonly { key: string; value: string; source: Source }[];
+
+type City = keyof typeof CITY_POINTS;
+
+export type Office = {
+  id: string;
+  city: City;
+  name: Localized;
+  hq?: boolean;
+  phone?: string;
+  /** Street address as the owner gave it (2026-10-05). */
+  street?: Localized;
+  /** Place searched in Google Maps when there is no exact pin (`mapUrl`). */
+  mapQuery: string;
+  /** Exact Google Maps place: the old site's روابط page pin, or one the owner sent. */
+  mapUrl?: string;
+  source: Source;
+};
+
+/** Google Maps link: opens the Maps app on phones and maps.google.com elsewhere. */
+export function mapsHref(office: Office) {
+  return office.mapUrl ?? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(office.mapQuery)}`;
+}
+
+export const offices: Office[] = [
+  {
+    id: "camp-sara",
+    mapQuery: "Al-Jamiya Al-Fallahiya Street, Camp Sara, Baghdad, Iraq",
+    mapUrl: "https://maps.google.com/?cid=6097986121788672144",
+    city: "baghdad",
+    hq: true,
+    name: { en: "Camp Sara, Baghdad", ar: "كمب سارة، بغداد", ckb: "کەمپ سارە، بەغدا" },
+    phone: "+964 787 116 6604",
+    street: { en: "Al-Jamiya Al-Fallahiya Street, opposite Al-Shakireen Mosque", ar: "شارع الجمعية الفلاحية، مقابل جامع الشاكرين", ckb: "شەقامی جەمعیەی فەلاحی، بەرامبەر مزگەوتی شاکرین" },
+    source: "confirmed:2026-10-05",
+  },
+  {
+    id: "al-shaab",
+    mapQuery: "Al-Jamiya Street, Al-Shaab, Baghdad, Iraq",
+    mapUrl: "https://maps.google.com/?cid=12315681913268910686",
+    city: "baghdad",
+    name: { en: "Al-Shaab, Baghdad", ar: "الشعب، بغداد", ckb: "شەعب، بەغدا" },
+    phone: "+964 783 305 6475",
+    street: { en: "Al-Jamiya Street", ar: "شارع الجمعية", ckb: "شەقامی جەمعیە" },
+    source: "confirmed:2026-10-05",
+  },
+  {
+    id: "najaf",
+    mapQuery: "Al-Madina Street, Najaf, Iraq",
+    mapUrl: "https://maps.google.com/?cid=14215689635316559878",
+    city: "najaf",
+    name: { en: "Najaf", ar: "النجف", ckb: "نەجەف" },
+    phone: "+964 783 700 6314",
+    street: { en: "Al-Madina Street", ar: "شارع المدينة", ckb: "شەقامی مەدینە" },
+    source: "profile:p29",
+  },
+  {
+    id: "basra",
+    mapQuery: "Al-Watan Street, Basra, Iraq",
+    // Sent by the owner 2026-10-05 (the old روابط page showed the Najaf pin under Basra).
+    mapUrl: "https://maps.google.com/?cid=8292506104591980431",
+    city: "basra",
+    name: { en: "Basra", ar: "البصرة", ckb: "بەسرە" },
+    phone: "+964 787 116 6601",
+    street: { en: "Al-Watan Street", ar: "شارع الوطن", ckb: "شەقامی وەتەن" },
+    source: "confirmed:2026-10-04",
+  },
+  {
+    id: "erbil",
+    mapQuery: "Gulan Street, Shorish, Erbil, Iraq",
+    mapUrl: "https://maps.google.com/?cid=17920249688180889201",
+    city: "erbil",
+    name: { en: "Erbil", ar: "أربيل", ckb: "هەولێر" },
+    phone: "+964 787 803 0001",
+    street: { en: "Gulan Street, opposite Cihan Bank", ar: "شارع كولان، مقابل بنك جيهان", ckb: "شەقامی گوڵان، بەرامبەر بانکی جیهان" },
+    source: "confirmed:2026-10-04",
+  },
+  {
+    id: "duhok",
+    mapQuery: "Qazi Mohammed Street, Duhok, Iraq",
+    // Sent by the owner 2026-10-05: the "شركة اطلس بلاست" place (36.8691, 42.9351).
+    mapUrl: "https://maps.google.com/?cid=12732420289314848059",
+    city: "duhok",
+    name: { en: "Duhok", ar: "دهوك", ckb: "دهۆک" },
+    phone: "+964 750 991 0065",
+    street: { en: "Qazi Mohammed Street", ar: "شارع قاضي محمد", ckb: "شەقامی قازی محەممەد" },
+    source: "profile:p29",
+  },
+];
+
+export const warehouses: { id: City; name: Localized; source: Source }[] = [
+  { id: "baghdad", name: { en: "Baghdad", ar: "بغداد", ckb: "بەغدا" }, source: "confirmed:2026-10-04" },
+  { id: "basra", name: { en: "Basra", ar: "البصرة", ckb: "بەسرە" }, source: "confirmed:2026-10-04" },
+  { id: "erbil", name: { en: "Erbil", ar: "أربيل", ckb: "هەولێر" }, source: "confirmed:2026-10-04" },
+  { id: "duhok", name: { en: "Duhok", ar: "دهوك", ckb: "دهۆک" }, source: "confirmed:2026-10-04" },
+  { id: "zakho", name: { en: "Zakho", ar: "زاخو", ckb: "زاخۆ" }, source: "confirmed:2026-10-04" },
+];
+
+export const regionalOffices: Localized[] = [
+  { en: "Saudi Arabia", ar: "السعودية", ckb: "سعوودیە" },
+  { en: "Turkey", ar: "تركيا", ckb: "تورکیا" },
+  { en: "Syria", ar: "سوريا", ckb: "سووریا" },
+  { en: "Egypt", ar: "مصر", ckb: "میسر" },
+];
+
+/** City names for the Iraq map, keyed like CITY_POINTS in iraq-map.ts. */
+export const cityNames = {
+  baghdad: { en: "Baghdad", ar: "بغداد", ckb: "بەغدا" },
+  basra: { en: "Basra", ar: "البصرة", ckb: "بەسرە" },
+  erbil: { en: "Erbil", ar: "أربيل", ckb: "هەولێر" },
+  duhok: { en: "Duhok", ar: "دهوك", ckb: "دهۆک" },
+  zakho: { en: "Zakho", ar: "زاخو", ckb: "زاخۆ" },
+  najaf: { en: "Najaf", ar: "النجف", ckb: "نەجەف" },
+} satisfies Record<string, Localized>;

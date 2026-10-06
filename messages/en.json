@@ -1,0 +1,649 @@
+{
+  "Meta": {
+    "siteName": "AtlasPlast",
+    "homeTitle": "AtlasPlast | Pipe systems and sanitaryware in Iraq since 1975",
+    "homeDescription": "AtlasPlast supplies pipe systems, drainage, sanitaryware and pumps from international manufacturers to projects across Iraq, since 1975.",
+    "solutionsDescription": "Water supply pipes, drainage, water heaters, infrastructure networks, sanitaryware, tiles, pumps, faucets and installation tools, supplied across Iraq.",
+    "brandsDescription": "Brands AtlasPlast represents in Iraq: pipe systems, drainage, sanitaryware, pumps and tools from Europe, Turkey and the Middle East.",
+    "aboutDescription": "AtlasPlast has supplied construction materials in Iraq since 1975. Our history, services, training and community work.",
+    "locationsDescription": "AtlasPlast offices, showrooms and warehouses across Iraq, with branch phone numbers and regional offices.",
+    "contactDescription": "Contact AtlasPlast in Iraq: main line {phone}, WhatsApp, projects division, email and branch numbers in Baghdad, Najaf, Basra, Erbil and Duhok.",
+    "projectsDescription": "Airports, stadiums, hotels, hospitals and housing across Iraq supplied with AtlasPlast products, and the contractors we work with.",
+    "solutionsTitle": "Pipe, drainage and sanitary solutions in Iraq",
+    "solutionTitle": "{name} in Iraq",
+    "brandsTitle": "International pipe and sanitary brands in Iraq",
+    "brandTitle": "{brand} in Iraq",
+    "aboutTitle": "About AtlasPlast, since 1975",
+    "locationsTitle": "Offices, showrooms and warehouses in Iraq",
+    "contactTitle": "Contact AtlasPlast, main line {phone}",
+    "projectsTitle": "Projects supplied across Iraq",
+    "mediaTitle": "Media and videos",
+    "mediaDescription": "Videos from the AtlasPlast YouTube channel. AtlasPlast supplies pipe systems, sanitaryware and technical support across Iraq.",
+    "solutionDescription": "{text} Supplied across Iraq by AtlasPlast.",
+    "brandDescription": "{brand} in Iraq from AtlasPlast: {lines}.",
+    "brandDescriptionOnRequest": "{brand} products in Iraq from AtlasPlast. Ask our sales team on {phone} for the current range.",
+    "ogImageAlt": "AtlasPlast logo",
+    "linksTitle": "Links",
+    "linksDescription": "AtlasPlast in one place: main line {phone}, WhatsApp, email, social channels, branch maps and the craftsmen app.",
+    "boardTitle": "Message from the Chairman",
+    "boardDescription": "A message from Jaafar Almusawi, Chairman of the Board of Atlas Group, and the AtlasPlast board members.",
+    "faqTitle": "Frequently asked questions about AtlasPlast",
+    "faqDescription": "Answers to 100 questions about AtlasPlast in Iraq: PP-R and PE pipes, drainage, sanitaryware, tiles, pumps, brands, projects, delivery and contact."
+  },
+  "Common": {
+    "skipToContent": "Skip to content",
+    "since": "Since {year}",
+    "brandName": "AtlasPlast",
+    "breadcrumb": "Breadcrumb",
+    "warehousePhoto": "AtlasPlast warehouse"
+  },
+  "Nav": {
+    "label": "Main navigation",
+    "home": "Home",
+    "solutions": "Solutions",
+    "brands": "Brands",
+    "projects": "Projects",
+    "media": "Media",
+    "about": "About",
+    "locations": "Locations",
+    "contact": "Contact",
+    "faq": "FAQ",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "language": "Language"
+  },
+  "Footer": {
+    "tagline": "Pipe systems, sanitaryware and technical support for Iraq’s buildings and infrastructure.",
+    "explore": "Explore",
+    "offices": "Offices in Iraq",
+    "contact": "Contact",
+    "follow": "Follow",
+    "mainLine": "Main line",
+    "rights": "© {year} Ufuq Al-Atlas Ltd. All rights reserved."
+  },
+  "Home": {
+    "hero": {
+      "label": "AtlasPlast highlights",
+      "prev": "Previous slide",
+      "next": "Next slide",
+      "pause": "Pause slideshow",
+      "play": "Play slideshow",
+      "slideOf": "Slide {current} of {total}",
+      "diagramLabel": "Cross-section of a pressure pipe with its dimensions",
+      "slides": {
+        "systems": {
+          "tab": "Solutions",
+          "eyebrow": "AtlasPlast · Ufuq Al-Atlas Ltd.",
+          "title": "Pipe systems and sanitaryware for Iraq’s buildings and infrastructure.",
+          "lead": "Since 1975, AtlasPlast has supplied water supply, drainage and sanitary systems from leading international manufacturers to contractors, installers and national projects in every governorate.",
+          "primary": "Explore solutions",
+          "secondary": "Contact sales"
+        },
+        "history": {
+          "tab": "Our history",
+          "eyebrow": "Since 1975",
+          "title": "Five decades supplying the builders of Iraq.",
+          "lead": "From construction materials in 1975 to the first Atlas showroom in 1990, the first exclusive international agency in 2004 and a regional office in Saudi Arabia in 2025.",
+          "cta": "Our story",
+          "scale": "Milestones"
+        },
+        "brands": {
+          "tab": "Our brands",
+          "eyebrow": "International partners",
+          "title": "The manufacturers behind Iraq’s pipe systems.",
+          "lead": "Exclusive and authorised agencies for manufacturers from Switzerland, Germany, Austria, the Netherlands, Italy, the Czech Republic, Serbia, Turkey, Saudi Arabia and Egypt.",
+          "cta": "All brands"
+        },
+        "reach": {
+          "tab": "Stock and reach",
+          "eyebrow": "Nationwide",
+          "title": "Nine months of national demand, held in stock.",
+          "lead": "Warehouses in Baghdad, Basra, Erbil, Duhok and Zakho supply more than 600 agents and dealers across every governorate.",
+          "cta": "Our locations"
+        }
+      }
+    },
+    "facts": {
+      "label": "AtlasPlast in figures",
+      "agents": "agents and dealers across every governorate",
+      "brands": "international brands represented",
+      "trained": "engineers and plumbers trained",
+      "stock": "months of national demand held in stock"
+    },
+    "statement": {
+      "eyebrow": "Who we are",
+      "title": "A distributor built on stock, reach and technical knowledge.",
+      "body1": "AtlasPlast holds commercial agencies for international manufacturers of piping, drainage, sanitaryware and pumps, many of them exclusive in Iraq. We supply the materials and the technical support behind housing, infrastructure and government developments.",
+      "body2": "Our warehouses in Baghdad, Basra, Erbil, Duhok and Zakho are planned to cover the country’s demand for nine months, so contractors and installers are supplied without interruption.",
+      "projects": "Hundreds of projects completed with AtlasPlast products."
+    },
+    "solutions": {
+      "eyebrow": "Solutions",
+      "title": "Ten solutions, one supplier.",
+      "intro": "Every solution is sourced from manufacturers we represent directly, with stock held in Iraq.",
+      "cta": "All solutions"
+    },
+    "brands": {
+      "eyebrow": "International partners",
+      "title": "Manufacturers from Europe, Turkey and the Middle East.",
+      "intro": "AtlasPlast represents manufacturers with decades of engineering behind their systems. Each brand is shown with its country of origin.",
+      "cta": "All brands"
+    },
+    "projects": {
+      "eyebrow": "Projects",
+      "title": "Supplied to hundreds of projects, from airports to schools.",
+      "intro": "A selection of projects built with AtlasPlast products, and the contractors who trust us.",
+      "clientsTitle": "Contractors we supply",
+      "more": "And many more",
+      "cta": "All projects"
+    },
+    "timeline": {
+      "eyebrow": "Since 1975",
+      "title": "Five decades of building with Iraq.",
+      "cta": "Our story"
+    },
+    "services": {
+      "eyebrow": "How we work",
+      "title": "More than supply.",
+      "intro": "From the first consultation to after-sales support, our teams stay with the project.",
+      "items": {
+        "distribution": {
+          "title": "Product distribution",
+          "text": "Exclusive and authorised distribution of international brands through 600+ agents nationwide, with delivery to every region around the clock."
+        },
+        "projects": {
+          "title": "Project supply",
+          "text": "Scheduled supply for residential, commercial and government projects."
+        },
+        "technical": {
+          "title": "Technical support",
+          "text": "Pre-sale consultation and on-site assistance from our engineering team."
+        },
+        "afterSales": {
+          "title": "After-sales service",
+          "text": "Warranty handling, maintenance guidance and ongoing customer support."
+        },
+        "training": {
+          "title": "Training",
+          "text": "Courses that raise installation standards for engineers, plumbers and craftsmen."
+        },
+        "privateLabel": {
+          "title": "Private label",
+          "text": "Customised private-label products for partners building their own brands."
+        }
+      },
+      "communityTitle": "In the community",
+      "community": {
+        "sponsorship": "Annual education sponsorships for students",
+        "vocational": "Free plumbing classes for young people",
+        "entrepreneurs": "Support for start-ups and small businesses",
+        "schools": "Free materials and installation for public schools and families in need"
+      }
+    },
+    "presence": {
+      "eyebrow": "Presence",
+      "title": "From Zakho to Basra.",
+      "intro": "Showrooms and offices in five cities, warehouses in five, and regional offices in Saudi Arabia, Turkey, Syria and Egypt.",
+      "offices": "Offices and showrooms",
+      "warehouses": "Warehouses",
+      "regional": "Regional offices",
+      "hq": "Headquarters",
+      "mapLabel": "Map of Iraq showing AtlasPlast offices and warehouses",
+      "legendOffice": "Office",
+      "legendWarehouse": "Warehouse",
+      "cta": "All locations",
+      "open247": "Open 24/7"
+    },
+    "contact": {
+      "eyebrow": "Contact",
+      "title": "Talk to our sales and projects teams.",
+      "mainLine": "Main line",
+      "whatsapp": "WhatsApp · Al-Shaab",
+      "projects": "Projects division",
+      "email": "Email",
+      "hours": "Saturday to Thursday, 07:00 to 15:00",
+      "cta": "Send an enquiry",
+      "sales": "Sales department",
+      "friday": "Friday: goods pickup and shipping only.",
+      "warehouses": "Warehouses open 24 hours a day, 7 days a week."
+    }
+  },
+  "Solutions": {
+    "index": {
+      "eyebrow": "Solutions",
+      "title": "Complete systems, from the water main to the tap.",
+      "intro": "Our range is organised by what you are building: drinking water, drainage and grey water, water heating, networks, galvanized fittings, bathrooms, tiles, pumping and installation. Every product line comes from a manufacturer AtlasPlast represents, with stock held in Iraq."
+    },
+    "labels": {
+      "lines": "Product lines",
+      "brands": "Brands",
+      "specs": "Specifications",
+      "count": "{count, plural, one {# product line} other {# product lines}}",
+      "enquireTitle": "Need help choosing?",
+      "enquireText": "Our sales and technical teams advise on selection, quantities and delivery for projects of every size.",
+      "enquireCta": "Talk to sales",
+      "others": "Other solutions",
+      "all": "All solutions",
+      "photos": "{name}: product photos",
+      "photoOf": "Photo {current} of {total}"
+    },
+    "specs": {
+      "diameter": "Diameter",
+      "length": "Length",
+      "pressure": "Pressure class",
+      "rating": "Pressure rating",
+      "sdr": "Wall series",
+      "stiffness": "Ring stiffness",
+      "material": "Material",
+      "acoustic": "Acoustic performance",
+      "fire": "Fire class",
+      "capacity": "Capacities",
+      "flush": "Flush volume",
+      "head": "Maximum head",
+      "temperature": "Temperature",
+      "weldRange": "Welding range",
+      "power": "Power",
+      "sizes": "Sizes",
+      "thickness": "Thickness",
+      "absorption": "Water absorption",
+      "slip": "Slip resistance",
+      "standards": "Standards",
+      "madeIn": "Made in",
+      "cartridge": "Cartridge"
+    },
+    "waterSupply": {
+      "name": "Water supply pipes",
+      "text": "PP-R, PP-RCT and multilayer pipes for hot, cold and drinking water, including UV-resistant lines for exposed runs.",
+      "intro": "Pressure pipe systems for hot and cold water inside buildings. The range covers PP-R and PP-RCT pipes and fittings, five-layer ML5 pipes for added strength, and UV-resistant systems for exposed and outdoor installation."
+    },
+    "drainage": {
+      "name": "Drainage and grey water",
+      "text": "PVC-U, low-noise PP and KG systems for basins, showers and kitchens, soil stacks and buried sewers.",
+      "intro": "Drainage for the water that leaves a building: grey water from basins, showers and kitchens, soil stacks and buried sewer lines. Choose from PVC-U pipes, low-noise PP systems rated by sound level, and KG pipes for underground runs."
+    },
+    "waterHeaters": {
+      "name": "Water heaters",
+      "text": "Aquahot electric water heaters from Saudi Ceramics, from 10 to 300 litres.",
+      "intro": "Electric storage water heaters. Aquahot heaters from Saudi Ceramics come in vertical and horizontal models, with enamelled tanks, a two-valve system rated at 8.5 bar and Italian-made electrical components."
+    },
+    "infrastructure": {
+      "name": "Infrastructure networks",
+      "text": "PE100 and U-PVC pressure pipes with compression, electrofusion and fabricated fittings up to Ø 2000 mm.",
+      "intro": "Pressure pipe systems for water mains, city networks and project infrastructure: PE100 pipes in straight lengths and coils, U-PVC pressure pipes up to Ø 400 mm, compression fittings for drinking water and pressurised waste water, and PE fittings up to Ø 2000 mm."
+    },
+    "galvanizedFittings": {
+      "name": "Galvanized fittings",
+      "text": "Georg Fischer threaded fittings in galvanized malleable iron, made in Austria.",
+      "intro": "Threaded pipe fittings in galvanized malleable cast iron from Georg Fischer, produced in Austria to EN 10242."
+    },
+    "sanitaryware": {
+      "name": "Sanitaryware and cisterns",
+      "text": "Vitreous china, bathroom furniture, concealed cisterns and pre-wall frames.",
+      "intro": "Everything visible in a finished bathroom and the frames behind the wall: vitreous china WCs, basins, urinals and bidets, moisture-resistant bathroom furniture, and concealed cisterns with dual-flush 3/6 litre systems."
+    },
+    "tiles": {
+      "name": "Ceramic and porcelain tiles",
+      "text": "Porcelain and ceramic wall and floor tiles from Saudi Ceramics, for indoor, outdoor and wet areas.",
+      "intro": "Porcelain and ceramic tiles from Saudi Ceramics for walls and floors, indoors and out, in wet areas and commercial spaces. Porcelain comes in sizes up to 120×60 cm, with water absorption of 0.5% or less and anti-slip models rated R9 to R11."
+    },
+    "pumps": {
+      "name": "Pumps and pressure",
+      "text": "DAB circulators, booster sets, self-priming, submersible and drainage pumps.",
+      "intro": "Pumping for buildings and water systems from DAB of Italy: circulators, in-line and centrifugal pumps, multistage and self-priming units, submersible, sewage and drainage pumps, lifting stations, pressure units and controls."
+    },
+    "faucetsValves": {
+      "name": "Faucets and valves",
+      "text": "Basin, kitchen, shower and sensor mixers, built-in valves and shower sets, with brass angle and ball valves.",
+      "intro": "Mixers and valves for bathrooms, kitchens and laundries: basin, kitchen, shower and bidet mixers including sensor series, built-in valves and shower sets, and brass angle valves, ball valves and faucet sets."
+    },
+    "installationTools": {
+      "name": "Installation tools and fixings",
+      "text": "Welding machines for PP-R and PE, pipe clamps, profiles, chemical anchors and sealants.",
+      "intro": "The equipment that completes an installation: welding machines for PE and PP pipes up to Ø 1200 mm, pipe clamps, profiles and consoles, chemical anchors, pipe sealants and adhesives."
+    },
+    "lines": {
+      "poloPolymutan": {
+        "text": "Hot and cold water pipe system in PP-R 80, resistant to high temperatures and mechanical wear."
+      },
+      "poloEcosan": {
+        "text": "PP-R system for healthy, corrosion-free drinking water, for drinking-water and industrial applications."
+      },
+      "poloUv": {
+        "text": "The first UV-resistant pipe system: POLO-UV ML5 fibre pipes with PP-R fittings, for exposed installations and irrigation."
+      },
+      "poloPolymutanMl5": {
+        "text": "Five-layer pipe combining PP-R 80, an HPCE compound and PP-RCT for added strength."
+      },
+      "polymutan": {
+        "text": "PP-R and PP-RCT pipes and fittings for hot and cold water, in pressure classes PN 10 to PN 25."
+      },
+      "polymeltUv": {
+        "text": "Pipe with a black UV-resistant outer layer and fibre layers, for installations exposed to sunlight."
+      },
+      "aquasystem": {
+        "text": "PP-R pipe system for hot and cold water in buildings."
+      },
+      "aquapa": {
+        "text": "PP-R pipes and fittings for hot and cold water."
+      },
+      "baenningerPpr": {
+        "text": "PP-R and PP-RCT pipes for hot and cold water. AtlasPlast is the exclusive Bänninger agent for central and southern Iraq."
+      },
+      "poloEgy": {
+        "text": "PP-R pipes for hot and cold water."
+      },
+      "boroug": {
+        "text": "White PVC-U pipes joined with solvent cement, resistant across a pH range of about 2 to 13."
+      },
+      "silentaPremium": {
+        "text": "Sound-insulated drainage pipes and fittings for buildings, supplied with or without sockets."
+      },
+      "silenta3a": {
+        "text": "Socketed low-noise drainage system for building waste water."
+      },
+      "poloKalNg": {
+        "text": "Low-noise drainage with EPDM seals, chemically resistant from pH 2 to 13."
+      },
+      "poloKal3s": {
+        "text": "Sound-insulated drainage with sockets and built-in EPDM seals."
+      },
+      "aquaSilent": {
+        "text": "Socketed low-noise PP drainage for building waste water."
+      },
+      "skolanSafe": {
+        "text": "Mineral-filled PP drainage with high sound insulation, chemically resistant from pH 2 to 12."
+      },
+      "htSafe": {
+        "text": "Mineral-filled PP drainage pipes for waste water inside buildings."
+      },
+      "kgSystem": {
+        "text": "Co-extruded PVC-U sewer pipes for buried drainage, in stiffness classes SN 4, 8 and 10."
+      },
+      "aquahot": {
+        "text": "Electric water heaters in vertical and horizontal models, with enamelled tanks and Italian-made electrical components."
+      },
+      "pimtasPe100": {
+        "name": "PE100 pipe and fittings",
+        "text": "Polyethylene pressure pipes in straight lengths and 100 m coils, with or without sockets."
+      },
+      "pimtasUpvc": {
+        "name": "U-PVC pressure pipe",
+        "text": "Pressure pipes up to Ø 400 mm, with socket, plain-end or O-ring joints."
+      },
+      "pimtasCompression": {
+        "name": "Compression fittings",
+        "text": "For drinking water and pressurised waste water, above ground and underground."
+      },
+      "turanPeFittings": {
+        "name": "PE fittings",
+        "text": "Injection-moulded, electrofusion and fabricated PE fittings and kits up to Ø 2000 mm."
+      },
+      "turanPe100": {
+        "name": "PE100 pipe",
+        "text": "Polyethylene pressure pipe in lengths and 100 m coils."
+      },
+      "gfPe100": {
+        "text": "Polyethylene pressure pipe up to Ø 355 mm in SDR 9 and SDR 11."
+      },
+      "oryx": {
+        "name": "Oryx sanitaryware",
+        "text": "Fully glazed vitreous WCs, basins, urinals and bidets, with rimless, soft-close, anti-bacterial and water-saving designs."
+      },
+      "saudiPorcelain": {
+        "name": "Porcelain tiles",
+        "text": "Rectified and non-rectified porcelain in glossy, matt, polished and semi-polished finishes, with anti-slip models."
+      },
+      "saudiCeramic": {
+        "name": "Ceramic tiles",
+        "text": "Wall and floor tiles for indoor, outdoor and wet areas and commercial spaces, in glossy, matt, polished, rustic and anti-slip finishes."
+      },
+      "quarterbathSanitary": {
+        "name": "Sanitaryware",
+        "text": "Vitreous WCs, basins, urinals and bidets with matching accessories."
+      },
+      "quarterbathFurniture": {
+        "name": "Bathroom furniture",
+        "text": "Moisture-resistant MDF with fully sealed edges, anti-fungal and anti-bacterial coating and soft-close storage."
+      },
+      "quarterbathCistern": {
+        "name": "Concealed cistern",
+        "text": "Powder-coated steel frame with adjustable height and depth and a sound insulation pad."
+      },
+      "wisaPrewall": {
+        "name": "Pre-wall elements and built-in cisterns",
+        "text": "Pneumatic and mechanical concealed cisterns for wall-hung WCs with quiet fill valves, from WISA, owned by Fluidmaster."
+      },
+      "dab": {
+        "name": "DAB pumps",
+        "text": "Circulators, in-line and centrifugal pumps, multistage and self-priming units, submersible, sewage and drainage pumps, lifting stations and pressure units."
+      },
+      "kas": {
+        "name": "KAS faucets",
+        "text": "Basin, kitchen, wall-mounted, shower, bidet and industrial kitchen mixers, with a sensor series and spare parts available."
+      },
+      "shield": {
+        "name": "Valves and faucets",
+        "text": "Brass angle valves, ball valves, faucet sets and accessories for laundries, bathrooms and kitchens."
+      },
+      "guarriFaucets": {
+        "name": "Guarri faucets",
+        "text": "Brass bathroom and kitchen faucets."
+      },
+      "topsanFaucets": {
+        "name": "Topsan faucets",
+        "text": "Mixers with 35 and 40 mm cartridges, classic, single and industrial faucets, made in Istanbul since 1979."
+      },
+      "topsanShower": {
+        "name": "Built-in valves, shower sets and valves",
+        "text": "Built-in (concealed) valves, robot, sliding and articulated shower sets, shattaf sets, and valves."
+      },
+      "turanWelding": {
+        "name": "Butt welding machines",
+        "text": "Manual and automatic machines for PE and PP pipes from Ø 20 to 1200 mm."
+      },
+      "candan": {
+        "name": "Welding machines",
+        "text": "Pipe welding machines with adjustable temperature, in several power ratings, with spare parts."
+      },
+      "ascelik": {
+        "name": "Clamps and profiles",
+        "text": "Pipe clamps, profiles and consoles in malleable iron, ductile iron and steel for plumbing, HVAC and industrial piping."
+      },
+      "guarriChemicals": {
+        "name": "Chemical anchors and sealants",
+        "text": "Polyester and vinyl ester chemical anchors, pipe sealants and super glue."
+      },
+      "kasPpr": {
+        "text": "PPR pipes and fittings for hot and cold water."
+      },
+      "gfMalleable": {
+        "name": "Galvanized malleable iron fittings",
+        "text": "Threaded fittings in galvanized malleable cast iron to EN 10242."
+      },
+      "baenningerPe": {
+        "text": "PE and PVC-U pipe systems from Ø 8 to 1000 mm. AtlasPlast is the exclusive Bänninger agent for central and southern Iraq."
+      }
+    },
+    "photoAlt": "{name} by {brand}"
+  },
+  "Projects": {
+    "sectors": {
+      "transport": "Transport",
+      "sport": "Sport",
+      "hospitality": "Hospitality",
+      "healthcare": "Healthcare",
+      "government": "Government",
+      "commercial": "Commercial",
+      "residential": "Residential",
+      "education": "Education"
+    }
+  },
+  "Brands": {
+    "notes": {
+      "baenningerTerritory": "Exclusive agent, central and southern Iraq",
+      "directOrder": "Ordered direct from the manufacturer through AtlasPlast",
+      "quarterbathSister": "A QuarterBath brand: same range and support"
+    },
+    "index": {
+      "eyebrow": "Brands",
+      "title": "The brands we represent and supply.",
+      "intro": "Manufacturers from {count} countries in Europe, Turkey and the Middle East. Choose a brand to see the product lines AtlasPlast carries."
+    },
+    "detail": {
+      "intro": "AtlasPlast supplies {brand} products to projects and installers across Iraq."
+    },
+    "labels": {
+      "country": "Country of origin",
+      "solutions": "Solutions",
+      "supplied": "What we supply",
+      "viewSolution": "View solution",
+      "onRequestTitle": "Range on request",
+      "onRequest": "Product details for {brand} are available from our sales team. Call or write to us for current stock and specifications.",
+      "onRequestShort": "Range on request",
+      "enquireTitle": "Planning a project with {brand}?",
+      "others": "Other brands",
+      "all": "All brands"
+    },
+    "documents": {
+      "documents": "Technical documents",
+      "documentsNote": "Files are in English.",
+      "kinds": {
+        "catalogue": "Technical catalogue",
+        "datasheet": "Technical data sheet",
+        "certificate": "Certificate",
+        "downloads": "Manufacturer downloads"
+      },
+      "download": "Download",
+      "opensNewTab": "opens in a new tab"
+    },
+    "photoAlt": "{subject} production site",
+    "photoStrip": "Our manufacturers",
+    "logoAlt": "{brand} logo"
+  },
+  "Countries": {
+    "CH": "Switzerland",
+    "DE": "Germany",
+    "AT": "Austria",
+    "NL": "Netherlands",
+    "IT": "Italy",
+    "TR": "Turkey",
+    "SA": "Saudi Arabia",
+    "EG": "Egypt",
+    "CZ": "Czech Republic",
+    "RS": "Serbia"
+  },
+  "NotFound": {
+    "title": "Page not found",
+    "body": "The page you are looking for does not exist or has moved.",
+    "back": "Back to home"
+  },
+  "About": {
+    "eyebrow": "About",
+    "title": "Since 1975, supplying the systems Iraq builds with.",
+    "intro": "AtlasPlast, trading as Ufuq Al-Atlas Ltd., began supplying construction materials in 1975 and opened its first showroom in Baghdad in 1990. Today it represents international manufacturers of piping, drainage, sanitaryware and pumps across Iraq.",
+    "historyTitle": "Milestones",
+    "purpose": {
+      "eyebrow": "Vision and mission",
+      "visionTitle": "Our vision",
+      "vision": "To make AtlasPlast products the first choice of consumers in Iraq, for water, drainage and sanitaryware.",
+      "missionTitle": "Our mission",
+      "mission": "To supply Iraq with durable, high-quality products for water and sewage networks, and sanitaryware that is functional and well designed.",
+      "valuesTitle": "Our values",
+      "values": {
+        "quality": "Quality without compromise",
+        "integrity": "Integrity",
+        "respect": "Respect for customers, employees and the environment",
+        "innovation": "Innovation",
+        "consistency": "Consistency",
+        "teamwork": "Teamwork"
+      }
+    }
+  },
+  "Locations": {
+    "eyebrow": "Locations",
+    "title": "Offices, showrooms and warehouses across Iraq.",
+    "intro": "Offices and showrooms in five cities, warehouses in five, and regional offices in Saudi Arabia, Turkey, Syria and Egypt.",
+    "whatsapp": "WhatsApp",
+    "openMap": "Open in Google Maps",
+    "openMapFor": "Open {place} in Google Maps"
+  },
+  "Contact": {
+    "eyebrow": "Contact",
+    "title": "Talk to AtlasPlast.",
+    "intro": "Call the main line for sales, or reach the projects division, WhatsApp and email directly.",
+    "channels": "Ways to reach us",
+    "branches": "Branch lines",
+    "follow": "Follow AtlasPlast",
+    "callLabel": "Call the main line",
+    "chat": "Chat on WhatsApp",
+    "write": "Send an email",
+    "channelsTitle": "Every line goes straight to a team.",
+    "hoursTitle": "When we’re open",
+    "branchesTitle": "Six offices across Iraq."
+  },
+  "ProjectsPage": {
+    "eyebrow": "Projects",
+    "title": "Hundreds of projects built with AtlasPlast products.",
+    "intro": "A selection of airports, stadiums, hotels, hospitals and housing supplied by AtlasPlast, and the contractors we work with.",
+    "selected": "Selected projects"
+  },
+  "Media": {
+    "eyebrow": "Media",
+    "title": "AtlasPlast on video.",
+    "intro": "Videos from the AtlasPlast YouTube channel. New videos on the channel appear here automatically.",
+    "channel": "Visit our YouTube channel",
+    "videos": "{count, plural, one {# video} other {# videos}}",
+    "all": "All videos",
+    "play": "Play video: {title}",
+    "untitled": "AtlasPlast video",
+    "more": "Watch every video and subscribe on the channel:"
+  },
+  "Links": {
+    "title": "Links",
+    "intro": "Call or message us, follow AtlasPlast, find a branch on the map, or get the craftsmen app.",
+    "service": "Customer service",
+    "branches": "Branches",
+    "app": "Iraqi Craftsmen App"
+  },
+  "Board": {
+    "eyebrow": "Board of Directors",
+    "title": "A message from our Chairman",
+    "message": {
+      "p1": "Since its founding, AtlasPlast has grown into a leading provider of piping and sanitary solutions in Iraq, driven by excellence, innovation, and trust. Today, we continue to expand across the Middle East and North Africa.",
+      "p2": "At AtlasPlast, we believe that sustainable growth is built on vision, dedication, and trust. From our early beginnings to becoming a key player in Iraq’s infrastructure and sanitary ware sector, our mission has always been to serve communities, empower professionals, and contribute to building a better future.",
+      "p3": "Our continued success is driven by innovation, reliable service, and long-standing partnerships. As we expand across the region, we remain committed to the values that have guided us for over four decades—excellence, integrity, and progress.",
+      "p4": "Our achievements are not just the result of strategy and vision, but of the commitment and trust of the people who make up the AtlasPlast family."
+    },
+    "quote": "At AtlasPlast, we believe that sustainable growth is built on vision, dedication, and trust.",
+    "valuesTitle": "The values that guide us",
+    "values": {
+      "excellence": "Excellence",
+      "integrity": "Integrity",
+      "progress": "Progress"
+    },
+    "membersTitle": "Board members",
+    "read": "Read the Chairman’s message"
+  },
+  "Faq": {
+    "eyebrow": "FAQ",
+    "title": "Questions and answers.",
+    "intro": "Clear answers about AtlasPlast, our products and brands, technical choices, projects, delivery and how to reach us. If your question is not here, call {phone}.",
+    "topicsLabel": "Topics",
+    "count": "{count, plural, one {# question} other {# questions}}",
+    "learnMore": "Read more",
+    "solutionTitle": "Questions about {name}",
+    "all": "All questions",
+    "topics": {
+      "company": "About AtlasPlast",
+      "products": "Products and solutions",
+      "waterSupply": "Water supply pipes",
+      "drainage": "Drainage and grey water",
+      "infrastructure": "Infrastructure networks",
+      "bathrooms": "Sanitaryware, tiles and water heaters",
+      "equipment": "Pumps, faucets and installation tools",
+      "brands": "Brands and agencies",
+      "services": "Projects and services",
+      "contact": "Ordering, delivery and contact"
+    }
+  }
+}
