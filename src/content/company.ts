@@ -46,7 +46,7 @@ export function whatsappHref(phone: string) {
 /** Headline figures. Only figures confirmed consistent across sources are listed. */
 export const facts = [
   { key: "agents", value: "600+", source: "profile:p4,p23,p27" },
-  { key: "brands", value: "23", source: "profile:p4" },
+  { key: "brands", value: "23", source: "confirmed:2026-11-13" }, // profile p4; the 23rd brand page (NASSAR) added 2026-11-13
   { key: "trained", value: "6,000+", source: "profile:p20" },
   { key: "stock", value: "9", source: "confirmed:2026-10-04" },
 ] as const satisfies readonly { key: string; value: string; source: Source }[];

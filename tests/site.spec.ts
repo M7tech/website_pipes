@@ -445,6 +445,18 @@ test("Home leads with the distributor headline and the four main actions", async
   ]) await expect(slide.getByRole("link", { name, exact: true }).first()).toHaveAttribute("href", href);
 });
 
+test("the brand directory has as many brands as the Home figure, NASSAR included", async ({ page }) => {
+  await page.goto("/en");
+  const figure = await page.locator("main dl dd").nth(1).textContent();
+  await page.goto("/en/brands");
+  const links = page.locator('main a[href^="/en/brands/"]');
+  const slugs = new Set(await links.evaluateAll((els) => els.map((e) => e.getAttribute("href"))));
+  expect(slugs.size).toBe(Number(figure?.trim()));
+  expect(slugs).toContain("/en/brands/nassar");
+  await page.goto("/ar/brands/nassar");
+  await expect(page.locator("h1")).toHaveText("NASSAR");
+});
+
 test("quotation form validates, then opens WhatsApp with the request written out", async ({ page, context }) => {
   for (const { code, dir } of locales) {
     await page.goto(`/${code}/quote`);

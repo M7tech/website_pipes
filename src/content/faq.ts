@@ -1222,9 +1222,9 @@ export const faqs: Faq[] = [
       ckb: "بریکارایەتییەکانی کۆمپانیای ئەتلەس پلاست کامانەن؟",
     },
     a: {
-      en: "Georg Fischer, Polymelt, Bänninger, Ostendorf, Poloplast, FV-Plast, Peštan, WISA, DAB Pumps, Saudi Ceramics, Aquapa, Pimtaş, Turan Borfit, KAS, Guarri, Topsan, Asçelik Clamp, Boroug, Shield, QuarterBath, Candan Makina and Alvit.",
-      ar: "Georg Fischer وPolymelt وBänninger وOstendorf وPoloplast وFV-Plast وPeštan وWISA وDAB Pumps والخزف السعودي (Saudi Ceramics) وAquapa وPimtaş وTuran Borfit وKAS وGuarri وTopsan وAsçelik Clamp وBoroug وShield وQuarterBath وCandan Makina وAlvit.",
-      ckb: "Georg Fischer، Polymelt، Bänninger، Ostendorf، Poloplast، FV-Plast، Peštan، WISA، DAB Pumps، سعوودی سێرامیکس (Saudi Ceramics)، Aquapa، Pimtaş، Turan Borfit، KAS، Guarri، Topsan، Asçelik Clamp، Boroug، Shield، QuarterBath، Candan Makina و Alvit.",
+      en: "Georg Fischer, Polymelt, Bänninger, Ostendorf, Poloplast, FV-Plast, Peštan, WISA, DAB Pumps, Saudi Ceramics, Aquapa, Pimtaş, Turan Borfit, KAS, Guarri, Topsan, Asçelik Clamp, Boroug, Shield, NASSAR, QuarterBath, Candan Makina and Alvit.",
+      ar: "Georg Fischer وPolymelt وBänninger وOstendorf وPoloplast وFV-Plast وPeštan وWISA وDAB Pumps والخزف السعودي (Saudi Ceramics) وAquapa وPimtaş وTuran Borfit وKAS وGuarri وTopsan وAsçelik Clamp وBoroug وShield وNASSAR وQuarterBath وCandan Makina وAlvit.",
+      ckb: "Georg Fischer، Polymelt، Bänninger، Ostendorf، Poloplast، FV-Plast، Peštan، WISA، DAB Pumps، سعوودی سێرامیکس (Saudi Ceramics)، Aquapa، Pimtaş، Turan Borfit، KAS، Guarri، Topsan، Asçelik Clamp، Boroug، Shield، NASSAR، QuarterBath، Candan Makina و Alvit.",
     },
   },
   {
@@ -1366,9 +1366,9 @@ export const faqs: Faq[] = [
       ckb: "ئەتلەس پلاست چ براندێکی میسری دابین دەکات؟",
     },
     a: {
-      en: "Boroug, for Boroug UPVC drainage pipes and POLO EGY PP-R water supply pipes, and Shield, for brass valves, faucet sets and accessories.",
-      ar: "Boroug لأنابيب الصرف Boroug UPVC وأنابيب إمدادات المياه POLO EGY PP-R، وShield للمحابس النحاسية وأطقم الحنفيات والملحقات.",
-      ckb: "Boroug بۆ بۆریی ئاوەڕۆی Boroug UPVC و بۆریی دابینکردنی ئاوی POLO EGY PP-R، و Shield بۆ ڤاڵڤی مسی زەرد، کۆمەڵەی حەنەفیە و پێداویستییەکان.",
+      en: "Boroug, for Boroug UPVC drainage pipes and POLO EGY PP-R water supply pipes, Shield, for brass valves, faucet sets and accessories, and NASSAR (Nassar Plastic & Pipe Factories, since 1982), whose range is available on request.",
+      ar: "Boroug لأنابيب الصرف Boroug UPVC وأنابيب إمدادات المياه POLO EGY PP-R، وShield للمحابس النحاسية وأطقم الحنفيات والملحقات، وNASSAR (مصانع نصار للبلاستيك والأنابيب، منذ 1982) وتشكيلتها متوفرة عند الطلب.",
+      ckb: "Boroug بۆ بۆریی ئاوەڕۆی Boroug UPVC و بۆریی دابینکردنی ئاوی POLO EGY PP-R، Shield بۆ ڤاڵڤی مسی زەرد، کۆمەڵەی حەنەفیە و پێداویستییەکان، و NASSAR (کارگەکانی نەسار بۆ پلاستیک و بۆری، لە 1982ەوە) کە بەرهەمەکانی بە داواکاری بەردەستن.",
     },
   },
   // ── Projects and services ─────────────────────────────────────────
