@@ -468,6 +468,12 @@
       },
       "baenningerPe": {
         "text": "PE and PVC-U pipe systems from Ø 8 to 1000 mm. AtlasPlast is the exclusive Bänninger agent for central and southern Iraq."
+      },
+      "nassarPpr": {
+        "text": "PPR pipes and fittings for hot and cold water in buildings."
+      },
+      "nassarUpvc": {
+        "text": "uPVC pipes and fittings for water supply, sewage and cable protection."
       }
     },
     "photoAlt": "{name} by {brand}"
@@ -659,8 +665,8 @@
     "call": "Prefer to talk? Call the main line",
     "how": {
       "title": "How it works",
-      "fill": "Fill in the form. Only your name, phone, governorate and what you need are required.",
-      "send": "Send it on WhatsApp or by email. Your own app opens with the request written out; press send there, and attach files if you like.",
+      "fill": "Fill in the form. Only your name, phone, governorate, branch and what you need are required.",
+      "send": "Send it on WhatsApp to your nearest branch, or by email. Your own app opens with the request written out; press send there, and attach files if you like.",
       "reply": "Our sales team follows up during office hours, Saturday to Thursday, 07:00 to 15:00."
     },
     "form": {
@@ -675,6 +681,8 @@
       "whatsappSame": "Reply on WhatsApp on this number",
       "email": "Email",
       "governorate": "Governorate",
+      "branch": "Nearest branch",
+      "branchHint": "Chosen from your governorate; pick another if it suits you better. Your request goes to this branch's WhatsApp.",
       "brand": "Brand",
       "category": "Product category",
       "product": "Products or sizes",
@@ -688,7 +696,7 @@
       "choose": "Choose…",
       "notSure": "Not sure / any brand",
       "consent": "I agree that AtlasPlast may contact me about this request.",
-      "privacy": "This website does not store or send your details. They go to AtlasPlast only when you press send in your WhatsApp or email app, and are used only to answer this request.",
+      "privacy": "This website does not store or send your details. They go to the AtlasPlast branch you chose only when you press send in your WhatsApp or email app, and are used only to answer this request.",
       "sendWhatsapp": "Send on WhatsApp",
       "sendEmail": "Send by email",
       "errorsTitle": "Please check these fields:",
@@ -698,10 +706,11 @@
         "email": "Enter a valid email address, or leave it empty.",
         "governorate": "Choose your governorate.",
         "request": "Choose a brand or a category, or describe the products.",
-        "consent": "Tick the box so we may contact you."
+        "consent": "Tick the box so we may contact you.",
+        "branch": "Choose the branch that should receive your request."
       },
       "doneTitle": "Your request is ready to send",
-      "doneWhatsapp": "WhatsApp has opened with your request to AtlasPlast. Press send there to deliver it; you can attach files in the same chat.",
+      "doneWhatsapp": "WhatsApp has opened with your request to the AtlasPlast branch you chose. Press send there to deliver it; you can attach files in the same chat.",
       "doneEmail": "Your email app has opened with your request to AtlasPlast. Press send there to deliver it; you can attach files to the email.",
       "again": "Write another request",
       "message": {

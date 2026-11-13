@@ -3,6 +3,8 @@
 import { useId, useRef, useState, type FormEvent } from "react";
 
 type Option = { value: string; label: string; lang?: string };
+type Branch = Option & { whatsapp: string };
+type Governorate = Option & { branch: string };
 
 export type QuoteFormLabels = {
   legend: { you: string; request: string };
@@ -13,6 +15,8 @@ export type QuoteFormLabels = {
   whatsappSame: string;
   email: string;
   governorate: string;
+  branch: string;
+  branchHint: string;
   brand: string;
   category: string;
   product: string;
@@ -30,7 +34,7 @@ export type QuoteFormLabels = {
   sendWhatsapp: string;
   sendEmail: string;
   errorsTitle: string;
-  errors: { name: string; phone: string; email: string; governorate: string; request: string; consent: string };
+  errors: { name: string; phone: string; email: string; governorate: string; branch: string; request: string; consent: string };
   doneTitle: string;
   doneWhatsapp: string;
   doneEmail: string;
@@ -42,13 +46,13 @@ type QuoteFormProps = {
   labels: QuoteFormLabels;
   brands: Option[];
   categories: Option[];
-  governorates: Option[];
-  /** WhatsApp number that receives requests, digits only (international format). */
-  whatsapp: string;
+  governorates: Governorate[];
+  /** Branches whose WhatsApp receives requests (numbers as digits, international format). */
+  branches: Branch[];
   email: string;
 };
 
-type Field = "name" | "phone" | "email" | "governorate" | "request" | "consent";
+type Field = "name" | "phone" | "email" | "governorate" | "branch" | "request" | "consent";
 type Via = "whatsapp" | "email";
 
 const field =
@@ -63,13 +67,16 @@ const errorText = "text-sm font-medium text-[#b42318]";
  * they press send there (where they can also attach a BOQ, drawing or product list).
  * There is no server endpoint, so there is nothing to spam and no lead database to secure.
  */
-export function QuoteForm({ labels: l, brands, categories, governorates, whatsapp, email }: QuoteFormProps) {
+export function QuoteForm({ labels: l, brands, categories, governorates, branches, email }: QuoteFormProps) {
   const id = useId();
   const formRef = useRef<HTMLFormElement>(null);
   const summaryRef = useRef<HTMLDivElement>(null);
   const doneRef = useRef<HTMLDivElement>(null);
   const [errors, setErrors] = useState<Partial<Record<Field, string>>>({});
   const [done, setDone] = useState<Via | null>(null);
+  // The branch follows the governorate (its nearest branch) until the visitor picks one themselves.
+  const [branch, setBranch] = useState("");
+  const [branchPicked, setBranchPicked] = useState(false);
 
   const fid = (name: string) => `${id}-${name}`;
 
@@ -83,6 +90,7 @@ export function QuoteForm({ labels: l, brands, categories, governorates, whatsap
     const mail = value("email");
     if (mail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) next.email = l.errors.email;
     if (!value("governorate")) next.governorate = l.errors.governorate;
+    if (!branches.some((b) => b.value === value("branch"))) next.branch = l.errors.branch;
     if (!value("brand") && !value("category") && !value("product")) next.request = l.errors.request;
     if (!data.get("consent")) next.consent = l.errors.consent;
     return next;
@@ -97,6 +105,7 @@ export function QuoteForm({ labels: l, brands, categories, governorates, whatsap
       [l.phone, value("phone") + (data.get("whatsappSame") ? ` (${l.message.whatsappYes})` : "")],
       [l.email, value("email")],
       [l.governorate, pick(governorates, "governorate")],
+      [l.branch, pick(branches, "branch")],
       [l.brand, value("brand") === "unsure" ? l.notSure : pick(brands, "brand")],
       [l.category, pick(categories, "category")],
       [l.product, value("product")],
@@ -120,7 +129,8 @@ export function QuoteForm({ labels: l, brands, categories, governorates, whatsap
     }
     const text = compose(data);
     if (via === "whatsapp") {
-      const href = `https://wa.me/${whatsapp}?text=${encodeURIComponent(text)}`;
+      const to = branches.find((b) => b.value === String(data.get("branch")))!.whatsapp;
+      const href = `https://wa.me/${to}?text=${encodeURIComponent(text)}`;
       // A new tab keeps the filled form; if the browser blocks it, go there directly.
       // ("noopener" in the features would make open() return null even on success.)
       const tab = window.open(href, "_blank");
@@ -141,6 +151,7 @@ export function QuoteForm({ labels: l, brands, categories, governorates, whatsap
     phone: "phone",
     email: "email",
     governorate: "governorate",
+    branch: "branch",
     request: "brand",
     consent: "consent",
   };
@@ -227,12 +238,16 @@ export function QuoteForm({ labels: l, brands, categories, governorates, whatsap
             className={`${field} text-start`} aria-invalid={Boolean(errors.email)} aria-describedby={describedBy("email")} />
           {errors.email ? <p id={fid("email-error")} className={errorText}>{errors.email}</p> : null}
         </div>
-        <div className="grid content-start gap-2 md:col-span-2 md:max-w-[calc(50%-0.625rem)]">
+        <div className="grid content-start gap-2">
           <label htmlFor={fid("governorate")} className={labelText}>
             {l.governorate}
           </label>
           <select id={fid("governorate")} name="governorate" required defaultValue="" className={field}
-            aria-invalid={Boolean(errors.governorate)} aria-describedby={describedBy("governorate")}>
+            aria-invalid={Boolean(errors.governorate)} aria-describedby={describedBy("governorate")}
+            onChange={(e) => {
+              const nearest = governorates.find((g) => g.value === e.target.value)?.branch;
+              if (nearest && !branchPicked) setBranch(nearest);
+            }}>
             <option value="" disabled>
               {l.choose}
             </option>
@@ -243,6 +258,28 @@ export function QuoteForm({ labels: l, brands, categories, governorates, whatsap
             ))}
           </select>
           {errors.governorate ? <p id={fid("governorate-error")} className={errorText}>{errors.governorate}</p> : null}
+        </div>
+        <div className="grid content-start gap-2">
+          <label htmlFor={fid("branch")} className={labelText}>
+            {l.branch}
+          </label>
+          <select id={fid("branch")} name="branch" required value={branch} className={field}
+            onChange={(e) => {
+              setBranch(e.target.value);
+              setBranchPicked(true);
+            }}
+            aria-invalid={Boolean(errors.branch)} aria-describedby={describedBy("branch", true)}>
+            <option value="" disabled>
+              {l.choose}
+            </option>
+            {branches.map((b) => (
+              <option key={b.value} value={b.value}>
+                {b.label}
+              </option>
+            ))}
+          </select>
+          <p id={fid("branch-hint")} className={hintText}>{l.branchHint}</p>
+          {errors.branch ? <p id={fid("branch-error")} className={errorText}>{errors.branch}</p> : null}
         </div>
       </fieldset>
 

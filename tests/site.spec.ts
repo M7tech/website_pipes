@@ -457,7 +457,7 @@ test("the brand directory has as many brands as the Home figure, NASSAR included
   await expect(page.locator("h1")).toHaveText("NASSAR");
 });
 
-test("quotation form validates, then opens WhatsApp with the request written out", async ({ page, context }) => {
+test("quotation form validates, then opens the nearest branch's WhatsApp with the request written out", async ({ page, context }) => {
   for (const { code, dir } of locales) {
     await page.goto(`/${code}/quote`);
     await expect(page.locator("html")).toHaveAttribute("dir", dir);
@@ -469,12 +469,16 @@ test("quotation form validates, then opens WhatsApp with the request written out
   await form.getByRole("button", { name: "Send on WhatsApp" }).click();
   const summary = form.getByRole("alert");
   await expect(summary).toBeFocused();
-  for (const label of ["Name", "Phone number", "Governorate"]) await expect(form.getByLabel(label, { exact: true })).toHaveAttribute("aria-invalid", "true");
-  await expect(summary.getByRole("link")).toHaveCount(5);
+  for (const label of ["Name", "Phone number", "Governorate", "Nearest branch"]) await expect(form.getByLabel(label, { exact: true })).toHaveAttribute("aria-invalid", "true");
+  await expect(summary.getByRole("link")).toHaveCount(6);
 
   await form.getByLabel("Name", { exact: true }).fill("Test Contractor");
   await form.getByLabel("Phone number", { exact: true }).fill("+964 770 000 0000");
+  // The governorate preselects its nearest branch (owner: quotes go to the nearest branch).
+  await form.getByLabel("Governorate", { exact: true }).selectOption("nineveh");
+  await expect(form.getByLabel("Nearest branch", { exact: true })).toHaveValue("duhok");
   await form.getByLabel("Governorate", { exact: true }).selectOption("basra");
+  await expect(form.getByLabel("Nearest branch", { exact: true })).toHaveValue("basra");
   await form.getByLabel("Brand", { exact: true }).selectOption("polymelt");
   await form.getByLabel(/^Estimated quantity/).fill("2,000 m");
   await form.getByLabel(/AtlasPlast may contact me/).check();
@@ -486,9 +490,9 @@ test("quotation form validates, then opens WhatsApp with the request written out
   await popup.waitForURL(/wa\.me/);
   const url = new URL(popup.url());
   await popup.close();
-  expect(url.href).toContain("wa.me/9647833056475");
+  expect(url.href).toContain("wa.me/9647871166601");
   const text = url.searchParams.get("text") ?? "";
-  for (const line of ["Request for quotation", "Name: Test Contractor", "Governorate: Basra", "Brand: Polymelt", "Estimated quantity: 2,000 m"]) expect(text).toContain(line);
+  for (const line of ["Request for quotation", "Name: Test Contractor", "Governorate: Basra", "Nearest branch: Basra", "Brand: Polymelt", "Estimated quantity: 2,000 m"]) expect(text).toContain(line);
   await expect(page.getByRole("status")).toContainText("Your request is ready to send");
 });
 

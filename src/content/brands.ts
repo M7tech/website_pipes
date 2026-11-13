@@ -158,8 +158,8 @@ const brandList: Brand[] = [
   { slug: "boroug", name: "Boroug", logo: "/brands/boroug.svg", country: "EG", source: "confirmed:2026-10-05" },
   { slug: "shield", name: "Shield", logo: "/brands/shield.svg", country: "EG", source: "profile:p18" },
   // Owner 2026-11-13: NASSAR is the 23rd brand (Nassar Plastic & Pipe Factories, Egypt, since 1982;
-  // plastic.nassarplastic.com). Logo from the 2026 logo pack. The range AtlasPlast stocks is not
-  // listed yet, so its page shows "range on request".
+  // plastic.nassarplastic.com). Logo from the 2026 logo pack. AtlasPlast stocks its PPR and uPVC
+  // (owner 2026-11-13): lines nassarPpr (water supply) and nassarUpvc (infrastructure).
   { slug: "nassar", name: "NASSAR", logo: "/brands/nassar.svg", country: "EG", source: "confirmed:2026-11-13" },
   { slug: "quarterbath", name: "QuarterBath", logo: "/brands/quarterbath.svg",
     source: "profile:p15",

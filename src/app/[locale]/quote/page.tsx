@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
-import { company } from "@/content/company";
+import { company, offices } from "@/content/company";
 import { brands } from "@/content/brands";
 import { solutions, solutionKey } from "@/content/solutions";
 import { governorates } from "@/content/governorates";
@@ -71,9 +71,11 @@ export default async function QuotePage({ params }: PageProps<"/[locale]/quote">
           <div className="lg:col-span-8">
             <QuoteForm
               labels={labels}
-              whatsapp={company.whatsapp.replace(/\D/g, "")}
               email={company.email}
-              governorates={governorates.map((g) => ({ value: g.id, label: g.name[locale] }))}
+              branches={offices
+                .filter((o) => o.phone)
+                .map((o) => ({ value: o.id, label: o.name[locale], whatsapp: o.phone!.replace(/\D/g, "") }))}
+              governorates={governorates.map((g) => ({ value: g.id, label: g.name[locale], branch: g.branch }))}
               brands={brands.map((b) => ({ value: b.slug, label: b.name, lang: locale === "en" ? undefined : "en" }))}
               categories={solutions.map((x) => ({ value: x.slug, label: s(`${solutionKey(x.slug)}.name`) }))}
             />
