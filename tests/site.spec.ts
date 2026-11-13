@@ -300,7 +300,7 @@ test("the unlisted links page keeps the old address, the office pins and stays o
 
 test("About leads to the Chairman's message and the board members", async ({ page }) => {
   await page.goto("/ar/about");
-  await page.locator('main a[href="/ar/about/board"]').click();
+  await page.locator('main a[href="/ar/about/board"]').first().click();
   await expect(page).toHaveURL(/\/ar\/about\/board$/);
   await expect(page.locator("h1")).toHaveText("كلمة رئيس مجلس الإدارة");
   await expect(page.getByLabel("القائمة الرئيسية").getByRole("link", { name: "من نحن" })).toHaveAttribute("aria-current", "page");
