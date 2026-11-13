@@ -192,11 +192,13 @@ export const solutions: Solution[] = [
         id: "silentaPremium",
         name: "Silenta Premium",
         brand: "georg-fischer",
-        // GF brochure "Silenta Premium" (GF brand portal, checked 2026-11-13): replaces profile p7's 7 dB(A) @ 2 l/s.
+        // 4 l/s: GF brochure "Silenta Premium" (GF brand portal, checked 2026-11-13).
         // https://brandportal.uponor.com/m/d28f4f390926b438/original/GF-BFS-Brochure-Silenta-Premium.pdf
+        // 2 l/s: profile p7 (7 dB(A) @ 2 l/s, EN 14366), also the 2 l/s value in GF's Silenta range brochure chart;
+        // owner 2026-11-13: show both flows.
         specs: [
           { key: "diameter", value: "Ø 58–200 mm" },
-          { key: "acoustic", value: "12 dB(A) @ 4 l/s · EN 14366" },
+          { key: "acoustic", value: "7 dB(A) @ 2 l/s · 12 dB(A) @ 4 l/s · EN 14366" },
           { key: "fire", value: "D-s2, d2 · EN 13501-1 · DIN 4102 B2" },
           { key: "standards", value: "EN 14366 · EN 13501-1 · ISO 9969" },
         ],
@@ -221,11 +223,11 @@ export const solutions: Solution[] = [
         name: "POLO-KAL NG",
         brand: "poloplast",
         // Poloplast performance profile POLO-KAL NG (2024-04, poloplast.com, checked 2026-11-13; test report P-BA 297/2017):
-        // replaces profile p13's 18 dB(A) @ 2 l/s and Ø 32–200.
+        // replaces profile p13's Ø 32–200. 2 l/s: profile p13 (18 dB(A) @ 2 l/s, EN 14366); owner 2026-11-13: show both flows.
         // https://www.poloplast.com/fileadmin/downloads/downloads_gesamt/Gebaudeentwasserung_POLO-KAL/Leistungsprofil_POLO-KAL_NG_FR_A4_240409_LAY.pdf
         specs: [
           { key: "diameter", value: "Ø 32–250 mm" },
-          { key: "acoustic", value: "22 dB(A) @ 4 l/s · DIN 4109" },
+          { key: "acoustic", value: "18 dB(A) @ 2 l/s · 22 dB(A) @ 4 l/s · EN 14366 / DIN 4109" },
           { key: "fire", value: "B2 · DIN 4102 · D-s2, d1 · EN 13501-1" },
           { key: "standards", value: "EN 1451-1 · EN ISO 9969 · EN 13501-1" },
         ],
