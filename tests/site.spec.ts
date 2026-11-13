@@ -19,6 +19,7 @@ const paths = [
   "/about/board",
   "/locations",
   "/contact",
+  "/quote",
   "/projects",
   "/media",
   "/faq",
@@ -403,11 +404,80 @@ test("FAQ: 100 questions in every language, readable without opening, with FAQPa
   await first.locator("summary").click();
   await expect(first).toHaveAttribute("open", "");
   await expect(page.locator('footer a[href="/en/faq"]')).toHaveCount(1);
-  // Solution pages carry their own questions and Product data.
+  // Solution pages show their own questions and carry Product data; the FAQPage markup for a
+  // repeated question lives only on /faq (Google: mark up one instance per site).
   await page.goto("/ar/solutions/drainage");
   expect(await page.locator("main details").count()).toBeGreaterThan(0);
   const graph = JSON.stringify(JSON.parse((await page.locator('script[type="application/ld+json"]').first().textContent()) ?? "{}"));
-  for (const type of ["FAQPage", "Product", "Brand", "BreadcrumbList", "Organization"]) expect(graph).toContain(`"@type":"${type}"`);
+  for (const type of ["Product", "Brand", "BreadcrumbList", "Organization"]) expect(graph).toContain(`"@type":"${type}"`);
+  expect(graph).not.toContain('"@type":"FAQPage"');
+});
+
+test("hreflang comes from the page head only, and security headers are set", async ({ request, page }) => {
+  const res = await request.get("/en/brands");
+  // No middleware Link header with a second, conflicting set of alternates.
+  expect(res.headers()["link"] ?? "").not.toContain("hreflang");
+  expect(res.headers()["strict-transport-security"]).toContain("max-age=");
+  expect(res.headers()["content-security-policy"]).toContain("frame-ancestors 'self'");
+  expect(res.headers()["x-content-type-options"]).toBe("nosniff");
+  await page.goto("/ar/brands");
+  const alternates = await page.locator('link[rel="alternate"][hreflang]').evaluateAll((els) =>
+    els.map((e) => [e.getAttribute("hreflang"), e.getAttribute("href")]),
+  );
+  expect(alternates).toEqual([
+    ["en", expect.stringMatching(/\/en\/brands$/)],
+    ["ar", expect.stringMatching(/\/ar\/brands$/)],
+    ["ckb", expect.stringMatching(/\/ckb\/brands$/)],
+    ["x-default", expect.stringMatching(/\/en\/brands$/)],
+  ]);
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", /\/ar\/brands$/);
+});
+
+test("Home leads with the distributor headline and the four main actions", async ({ page }) => {
+  await page.goto("/en");
+  await expect(page.locator("h1")).toHaveAccessibleName("International pipe systems and building materials distributor in Iraq.");
+  const slide = page.locator("main section").first();
+  for (const [name, href] of [
+    ["Request a quotation", "/en/quote"],
+    ["Explore our brands", "/en/brands"],
+    ["Find a branch", "/en/locations"],
+    ["Contact our sales team", "/en/contact"],
+  ]) await expect(slide.getByRole("link", { name, exact: true }).first()).toHaveAttribute("href", href);
+});
+
+test("quotation form validates, then opens WhatsApp with the request written out", async ({ page, context }) => {
+  for (const { code, dir } of locales) {
+    await page.goto(`/${code}/quote`);
+    await expect(page.locator("html")).toHaveAttribute("dir", dir);
+    await expect(page.locator("main form select[name=governorate] option")).toHaveCount(20);
+  }
+  await page.goto("/en/quote");
+  const form = page.locator("main form");
+  // Empty submit: an error summary that takes focus, and the required fields marked invalid.
+  await form.getByRole("button", { name: "Send on WhatsApp" }).click();
+  const summary = form.getByRole("alert");
+  await expect(summary).toBeFocused();
+  for (const label of ["Name", "Phone number", "Governorate"]) await expect(form.getByLabel(label, { exact: true })).toHaveAttribute("aria-invalid", "true");
+  await expect(summary.getByRole("link")).toHaveCount(5);
+
+  await form.getByLabel("Name", { exact: true }).fill("Test Contractor");
+  await form.getByLabel("Phone number", { exact: true }).fill("+964 770 000 0000");
+  await form.getByLabel("Governorate", { exact: true }).selectOption("basra");
+  await form.getByLabel("Brand", { exact: true }).selectOption("polymelt");
+  await form.getByLabel(/^Estimated quantity/).fill("2,000 m");
+  await form.getByLabel(/AtlasPlast may contact me/).check();
+  // WhatsApp itself is outside the test; answer its URL locally and read what was sent to it.
+  await context.route("https://wa.me/**", (route) => route.fulfill({ status: 200, contentType: "text/plain", body: "ok" }));
+  const popupPromise = context.waitForEvent("page");
+  await form.getByRole("button", { name: "Send on WhatsApp" }).click();
+  const popup = await popupPromise;
+  await popup.waitForURL(/wa\.me/);
+  const url = new URL(popup.url());
+  await popup.close();
+  expect(url.href).toContain("wa.me/9647833056475");
+  const text = url.searchParams.get("text") ?? "";
+  for (const line of ["Request for quotation", "Name: Test Contractor", "Governorate: Basra", "Brand: Polymelt", "Estimated quantity: 2,000 m"]) expect(text).toContain(line);
+  await expect(page.getByRole("status")).toContainText("Your request is ready to send");
 });
 
 test("robots, sitemap, llms.txt and IndexNow are open to search and AI crawlers", async ({ request }) => {

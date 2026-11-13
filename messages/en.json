@@ -28,7 +28,9 @@
     "boardTitle": "Message from the Chairman",
     "boardDescription": "A message from Jaafar Almusawi, Chairman of the Board of Atlas Group, and the AtlasPlast board members.",
     "faqTitle": "Frequently asked questions about AtlasPlast",
-    "faqDescription": "Answers to 100 questions about AtlasPlast in Iraq: PP-R and PE pipes, drainage, sanitaryware, tiles, pumps, brands, projects, delivery and contact."
+    "faqDescription": "Answers to 100 questions about AtlasPlast in Iraq: PP-R and PE pipes, drainage, sanitaryware, tiles, pumps, brands, projects, delivery and contact.",
+    "quoteTitle": "Request a quotation for pipes and sanitaryware in Iraq",
+    "quoteDescription": "Request a price from AtlasPlast for pipe systems, drainage, sanitaryware, pumps and tools in any Iraqi governorate. Send it on WhatsApp or by email."
   },
   "Common": {
     "skipToContent": "Skip to content",
@@ -50,7 +52,8 @@
     "faq": "FAQ",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
-    "language": "Language"
+    "language": "Language",
+    "quote": "Request a quotation"
   },
   "Footer": {
     "tagline": "Pipe systems, sanitaryware and technical support for Iraq’s buildings and infrastructure.",
@@ -74,10 +77,13 @@
         "systems": {
           "tab": "Solutions",
           "eyebrow": "AtlasPlast · Ufuq Al-Atlas Ltd.",
-          "title": "Pipe systems and sanitaryware for Iraq’s buildings and infrastructure.",
-          "lead": "Since 1975, AtlasPlast has supplied water supply, drainage and sanitary systems from leading international manufacturers to contractors, installers and national projects in every governorate.",
-          "primary": "Explore solutions",
-          "secondary": "Contact sales"
+          "title": "International pipe systems and building materials distributor in Iraq.",
+          "lead": "Since 1975, AtlasPlast has distributed internationally recognised pipe systems, plumbing solutions, sanitaryware, drainage systems, pumps and building materials through a nationwide network, backed by technical expertise and customer service.",
+          "primary": "Request a quotation",
+          "secondary": "Explore our brands",
+          "branch": "Find a branch",
+          "sales": "Contact our sales team",
+          "quickLabel": "Quick links"
         },
         "history": {
           "tab": "Our history",
@@ -644,6 +650,65 @@
       "brands": "Brands and agencies",
       "services": "Projects and services",
       "contact": "Ordering, delivery and contact"
+    }
+  },
+  "Quote": {
+    "eyebrow": "Request a quotation",
+    "title": "Tell us what you need, and our sales team will price it.",
+    "intro": "For contractors, consultants, dealers and homeowners. Name the brand or the product, the quantity and your governorate; attach a BOQ or drawing if you have one.",
+    "call": "Prefer to talk? Call the main line",
+    "how": {
+      "title": "How it works",
+      "fill": "Fill in the form. Only your name, phone, governorate and what you need are required.",
+      "send": "Send it on WhatsApp or by email. Your own app opens with the request written out; press send there, and attach files if you like.",
+      "reply": "Our sales team follows up during office hours, Saturday to Thursday, 07:00 to 15:00."
+    },
+    "form": {
+      "legend": {
+        "you": "Your details",
+        "request": "Your request"
+      },
+      "name": "Name",
+      "company": "Company",
+      "phone": "Phone number",
+      "phoneHint": "With the country code if outside Iraq, e.g. +964 770 000 0000.",
+      "whatsappSame": "Reply on WhatsApp on this number",
+      "email": "Email",
+      "governorate": "Governorate",
+      "brand": "Brand",
+      "category": "Product category",
+      "product": "Products or sizes",
+      "productHint": "For example: PP-R pipes 20–63 mm with fittings, or a model number.",
+      "quantity": "Estimated quantity",
+      "quantityHint": "Metres, pieces or a lump sum.",
+      "project": "Project name",
+      "notes": "Notes",
+      "attachments": "To share a BOQ, drawing or product list, attach it in the WhatsApp chat or email that opens.",
+      "optional": "(optional)",
+      "choose": "Choose…",
+      "notSure": "Not sure / any brand",
+      "consent": "I agree that AtlasPlast may contact me about this request.",
+      "privacy": "This website does not store or send your details. They go to AtlasPlast only when you press send in your WhatsApp or email app, and are used only to answer this request.",
+      "sendWhatsapp": "Send on WhatsApp",
+      "sendEmail": "Send by email",
+      "errorsTitle": "Please check these fields:",
+      "errors": {
+        "name": "Enter your name.",
+        "phone": "Enter a phone number with at least 7 digits.",
+        "email": "Enter a valid email address, or leave it empty.",
+        "governorate": "Choose your governorate.",
+        "request": "Choose a brand or a category, or describe the products.",
+        "consent": "Tick the box so we may contact you."
+      },
+      "doneTitle": "Your request is ready to send",
+      "doneWhatsapp": "WhatsApp has opened with your request to AtlasPlast. Press send there to deliver it; you can attach files in the same chat.",
+      "doneEmail": "Your email app has opened with your request to AtlasPlast. Press send there to deliver it; you can attach files to the email.",
+      "again": "Write another request",
+      "message": {
+        "title": "Request for quotation",
+        "whatsappYes": "WhatsApp",
+        "source": "Sent from atlasplast.iq"
+      }
     }
   }
 }
