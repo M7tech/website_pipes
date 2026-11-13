@@ -169,6 +169,8 @@ export const solutions: Solution[] = [
         specs: [{ key: "material", value: "PPR" }],
         source: "confirmed:2026-10-04",
       },
+      // Owner 2026-11-13: AtlasPlast stocks NASSAR PPR and uPVC.
+      { id: "nassarPpr", name: "NASSAR PPR", brand: "nassar", specs: [{ key: "material", value: "PPR" }], source: "confirmed:2026-11-13" },
     ],
   },
   {
@@ -190,49 +192,62 @@ export const solutions: Solution[] = [
         id: "silentaPremium",
         name: "Silenta Premium",
         brand: "georg-fischer",
+        // 4 l/s: GF brochure "Silenta Premium" (GF brand portal, checked 2026-11-13).
+        // https://brandportal.uponor.com/m/d28f4f390926b438/original/GF-BFS-Brochure-Silenta-Premium.pdf
+        // 2 l/s: profile p7 (7 dB(A) @ 2 l/s, EN 14366), also the 2 l/s value in GF's Silenta range brochure chart;
+        // owner 2026-11-13: show both flows.
         specs: [
           { key: "diameter", value: "Ø 58–200 mm" },
-          { key: "acoustic", value: "7 dB(A) @ 2 l/s · EN 14366" },
-          { key: "fire", value: "B2 · DIN 4102" },
-          { key: "standards", value: "DIN 4109 · DIN 4102-B2" },
+          { key: "acoustic", value: "7 dB(A) @ 2 l/s · 12 dB(A) @ 4 l/s · EN 14366" },
+          { key: "fire", value: "D-s2, d2 · EN 13501-1 · DIN 4102 B2" },
+          { key: "standards", value: "EN 14366 · EN 13501-1 · ISO 9969" },
         ],
-        source: "profile:p7",
+        source: "manufacturer:2026-11-13",
       },
       {
         id: "silenta3a",
         name: "Silenta 3A",
         brand: "georg-fischer",
+        // GF brochure "Silenta 3A" (GF brand portal, checked 2026-11-13): replaces profile p7's 17 dB(A), Ø 40–200.
+        // https://brandportal.uponor.com/m/b5fb3a47079edd9e/original/GF-BFS-Brochure-Silenta-3A.pdf
+        // Noise: owner confirmed 2026-11-13, 9 dB(A) @ 2 l/s and 16 dB(A) @ 4 l/s (matches GF's range brochure, not the 15 in the 3A brochure).
         specs: [
-          { key: "diameter", value: "Ø 40–200 mm" },
-          { key: "acoustic", value: "17 dB(A) @ 4 l/s · EN 14366" },
-          { key: "fire", value: "B2 · DIN 4102" },
-          { key: "standards", value: "DIN EN 1451-1 · DIN 4109 · DIN 4102-B2" },
+          { key: "diameter", value: "Ø 32–200 mm" },
+          { key: "acoustic", value: "9 dB(A) @ 2 l/s · 16 dB(A) @ 4 l/s · EN 14366" },
+          { key: "fire", value: "D-s2, d2 · EN 13501-1" },
+          { key: "standards", value: "EN 1451 · EN 14366 · ISO 9969" },
         ],
-        source: "profile:p7",
+        source: "manufacturer:2026-11-13",
       },
       {
         id: "poloKalNg",
         name: "POLO-KAL NG",
         brand: "poloplast",
+        // Poloplast performance profile POLO-KAL NG (2024-04, poloplast.com, checked 2026-11-13; test report P-BA 297/2017):
+        // replaces profile p13's Ø 32–200. 2 l/s: profile p13 (18 dB(A) @ 2 l/s, EN 14366); owner 2026-11-13: show both flows.
+        // https://www.poloplast.com/fileadmin/downloads/downloads_gesamt/Gebaudeentwasserung_POLO-KAL/Leistungsprofil_POLO-KAL_NG_FR_A4_240409_LAY.pdf
         specs: [
-          { key: "diameter", value: "Ø 32–200 mm" },
-          { key: "acoustic", value: "18 dB(A) @ 2 l/s · EN 14366" },
-          { key: "fire", value: "B2 · DIN 4102" },
+          { key: "diameter", value: "Ø 32–250 mm" },
+          { key: "acoustic", value: "18 dB(A) @ 2 l/s · 22 dB(A) @ 4 l/s · EN 14366 / DIN 4109" },
+          { key: "fire", value: "B2 · DIN 4102 · D-s2, d1 · EN 13501-1" },
           { key: "standards", value: "EN 1451-1 · EN ISO 9969 · EN 13501-1" },
         ],
-        source: "profile:p13",
+        source: "manufacturer:2026-11-13",
       },
       {
         id: "poloKal3s",
         name: "POLO-KAL 3S",
         brand: "poloplast",
+        // Poloplast performance profile POLO-KAL 3S (2021-02, poloplast.com, checked 2026-11-13; Fraunhofer IBP report
+        // P-BA 248/2009): replaces profile p13's 12 dB(A) @ 4 l/s.
+        // https://www.poloplast.com/fileadmin/downloads/downloads_gesamt/Gebaudeentwasserung_POLO-KAL/Leistungsprofil_POLO-KAL_3S_A4_02_2021.pdf
         specs: [
           { key: "diameter", value: "Ø 75–160 mm" },
-          { key: "acoustic", value: "12 dB(A) @ 4 l/s · DIN 4109" },
-          { key: "fire", value: "D-s2 · B2" },
-          { key: "standards", value: "DIN EN 12056 · EN 14366 · DIN 4109" },
+          { key: "acoustic", value: "18 dB(A) @ 4 l/s · DIN 4109" },
+          { key: "fire", value: "B2 · DIN 4102 · D-s2, d1 · EN 13501-1" },
+          { key: "standards", value: "EN 1451-1 · DIN 4109 · EN 13501-1" },
         ],
-        source: "profile:p13",
+        source: "manufacturer:2026-11-13",
       },
       {
         id: "aquaSilent",
@@ -241,7 +256,9 @@ export const solutions: Solution[] = [
         specs: [
           { key: "diameter", value: "Ø 50–160 mm" },
           { key: "acoustic", value: "22 dB(A) @ 4 l/s" },
-          { key: "standards", value: "EN ISO 15874 · DIN 8077 · DIN 8078 · ASTM F2389" },
+          // Profile p9 listed EN ISO 15874, DIN 8077/8078 and ASTM F2389 here: standards for PP-R pressure pipes,
+          // not drainage. Removed 2026-11-13 (owner asked for the manufacturer's figures); Aquapa's site could
+          // not be reached to confirm the right ones, so none are shown until its datasheet is checked.
         ],
         source: "profile:p9",
       },
@@ -355,6 +372,7 @@ export const solutions: Solution[] = [
         ],
         source: "profile:p11",
       },
+      { id: "nassarUpvc", name: "NASSAR uPVC", brand: "nassar", specs: [{ key: "material", value: "uPVC" }], source: "confirmed:2026-11-13" },
       {
         id: "pimtasCompression",
         name: "Compression fittings",
@@ -493,6 +511,9 @@ export const solutions: Solution[] = [
         ],
         source: "profile:p14",
       },
+      // Owner 2026-11-13: AtlasPlast stocks Fluidmaster concealed cisterns and spare parts.
+      { id: "fluidmasterCistern", name: "Concealed cisterns", brand: "fluidmaster", specs: [], source: "confirmed:2026-11-13" },
+      { id: "fluidmasterParts", name: "Cistern spare parts", brand: "fluidmaster", specs: [], source: "confirmed:2026-11-13" },
     ],
   },
   {

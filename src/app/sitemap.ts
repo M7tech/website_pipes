@@ -21,6 +21,7 @@ const paths: { path: string; priority: number; images?: string[] }[] = [
   { path: "/about/board", priority: 0.6 },
   { path: "/locations", priority: 0.7 },
   { path: "/contact", priority: 0.8 },
+  { path: "/quote", priority: 0.8 },
   { path: "/faq", priority: 0.7 },
 ];
 

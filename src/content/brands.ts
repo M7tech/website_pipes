@@ -1,7 +1,7 @@
 import type { Source } from "./types";
 
 /** Country keys map to localized names in messages (Countries namespace). */
-export type Country = "CH" | "DE" | "AT" | "NL" | "IT" | "TR" | "SA" | "EG" | "CZ" | "RS";
+export type Country = "CH" | "DE" | "AT" | "NL" | "IT" | "TR" | "SA" | "EG" | "CZ" | "RS" | "US";
 
 export type BrandDocument = {
   kind: "catalogue" | "datasheet" | "certificate" | "downloads";
@@ -157,6 +157,20 @@ const brandList: Brand[] = [
   // Owner 2026-10-05: shown as Boroug, with its logo, in place of Polo Egypt (profile p17).
   { slug: "boroug", name: "Boroug", logo: "/brands/boroug.svg", country: "EG", source: "confirmed:2026-10-05" },
   { slug: "shield", name: "Shield", logo: "/brands/shield.svg", country: "EG", source: "profile:p18" },
+  // Owner 2026-11-13: NASSAR is the 23rd brand (Nassar Plastic & Pipe Factories, Egypt, since 1982;
+  // plastic.nassarplastic.com). Logo from the 2026 logo pack. AtlasPlast stocks its PPR and uPVC
+  // (owner 2026-11-13): lines nassarPpr (water supply) and nassarUpvc (infrastructure).
+  { slug: "nassar", name: "NASSAR", logo: "/brands/nassar.svg", country: "EG", source: "confirmed:2026-11-13" },
+  // Owner 2026-11-13: Fluidmaster is the 24th brand (USA); AtlasPlast stocks its concealed cisterns
+  // and spare parts. Facts from fluidmaster.com (our-history, key-teknik), checked 2026-11-13.
+  // No approved logo file yet: the site shows the name until the owner sends the official artwork.
+  { slug: "fluidmaster", name: "Fluidmaster", country: "US",
+    source: "confirmed:2026-11-13",
+    documents: [
+      { kind: "catalogue", title: "Fluidmaster Catalog", href: "https://fluidmaster.com/wp-content/uploads/2023/09/FM91438_Grev5_FM-Retail-Catalog_Expanded.pdf", source: "manufacturer:2026-11-13" },
+      { kind: "certificate", title: "Fluidmaster Quality Statement", href: "https://fluidmaster.com/wp-content/uploads/2017/05/Fluidmaster-Quality-Statement-2.pdf", source: "manufacturer:2026-11-13" },
+    ],
+  },
   { slug: "quarterbath", name: "QuarterBath", logo: "/brands/quarterbath.svg",
     source: "profile:p15",
     documents: [
@@ -182,6 +196,36 @@ export const brands: Brand[] = withPhotos.map((b) => {
     ? { ...b, country: b.country ?? sister.country, documents: b.documents ?? sister.documents, photo: b.photo ?? sister.photo }
     : b;
 });
+
+/**
+ * Owner's order for the Home page (2026-11-13): these brands lead, the rest follow in directory order.
+ * "بروج" is Boroug and "نصار" is NASSAR.
+ */
+const homeLead = [
+  "polymelt",
+  "georg-fischer",
+  "aquapa",
+  "fluidmaster", // owner: "in the second row" (4th card: row 2 at 3 columns and at 2 columns)
+  "poloplast",
+  "saudi-ceramics",
+  "pimtas",
+  "turan-borfit",
+  "wisa",
+  "boroug",
+  "nassar",
+  "topsan",
+];
+
+/** Sorts brands into the owner's Home order; brands outside the lead list keep their relative order. */
+export function inHomeOrder<T extends { slug: string }>(list: T[]): T[] {
+  const rank = (slug: string) => {
+    const i = homeLead.indexOf(slug);
+    return i === -1 ? homeLead.length : i;
+  };
+  return list.map((b, i) => ({ b, i })).sort((x, y) => rank(x.b.slug) - rank(y.b.slug) || x.i - y.i).map(({ b }) => b);
+}
+
+export const homeBrands: Brand[] = inHomeOrder(brands);
 
 export function brandBySlug(slug: string) {
   const brand = brands.find((b) => b.slug === slug);

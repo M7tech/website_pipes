@@ -6,7 +6,7 @@ import { routing, type Locale } from "@/i18n/routing";
 import { brandBySlug } from "@/content/brands";
 import { solutionBySlug, solutionKey, solutions } from "@/content/solutions";
 import { localeUrl, pageLd, pageMetadata } from "@/lib/site";
-import { faqLd, productLinesLd } from "@/lib/structured-data";
+import { productLinesLd } from "@/lib/structured-data";
 import { solutionFaqs } from "@/content/faq";
 import { FaqList } from "@/components/faq/FaqList";
 import { TextLink } from "@/components/ui/TextLink";
@@ -73,10 +73,9 @@ export default async function SolutionPage({ params }: PageProps<"/[locale]/solu
       { name, path },
     ],
     extra: [
+      // The page's questions are shown below, but their FAQPage markup lives only on /faq:
+      // Google asks for one marked-up instance of a repeated question per site.
       ...(await productLinesLd(locale as Locale, `${url}#lines`, [{ solution, lines: solution.lines }])),
-      ...(faqs.length
-        ? [{ "@type": "FAQPage", "@id": `${url}#faq`, isPartOf: { "@id": `${url}#webpage` }, mainEntity: faqLd(locale as Locale, faqs) }]
-        : []),
     ],
   });
 

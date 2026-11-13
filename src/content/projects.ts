@@ -50,8 +50,8 @@ const OWNER_LIST: Source = "confirmed:2026-10-06";
 
 /**
  * Projects supplied with AtlasPlast products. The sources give no year, scope or
- * quantities, so none are shown. NASSAR, listed on three projects in the owner's
- * sheet, is left out of `brands` until it is a brand on the site.
+ * quantities, so none are shown. NASSAR is on three projects in the owner's sheet
+ * (MPC Villas, Rixos, Al-Risala) and became a brand on the site on 2026-11-13.
  */
 export const projects: Project[] = [
   { slug: "erbil-international-airport", sector: "transport", featured: true, source: "profile:p25",
@@ -92,7 +92,7 @@ export const projects: Project[] = [
     name: { en: "Jawahir Dijla Complex", ar: "مجمع جواهر دجلة", ckb: "کۆمەڵگەی جەواهیری دیجلە" } },
   { slug: "al-hadi-towers", sector: "residential", governorate: "baghdad", brands: ["wisa"], source: OWNER_LIST,
     name: { en: "Al-Hadi Towers", ar: "أبراج الهادي", ckb: "تاوەرەکانی هادی" } },
-  { slug: "mpc-villas-complex", sector: "residential", governorate: "anbar", brands: ["georg-fischer", "aquapa", "wisa"], source: OWNER_LIST,
+  { slug: "mpc-villas-complex", sector: "residential", governorate: "anbar", brands: ["georg-fischer", "aquapa", "wisa", "nassar"], source: OWNER_LIST,
     name: { en: "MPC Villas Complex", ar: "مجمع فلل MPC", ckb: "کۆمەڵگەی ڤێلاکانی MPC" } },
   { slug: "anbar-burns-hospital", sector: "healthcare", governorate: "anbar", brands: ["aquapa", "wisa"], source: OWNER_LIST,
     name: { en: "Burns Hospital", ar: "مستشفى الحروق", ckb: "نەخۆشخانەی سووتاوان" } },
@@ -102,11 +102,11 @@ export const projects: Project[] = [
     name: { en: "Prime Village and Prime View", ar: "برايم فيلج وبرايم فيو", ckb: "پرایم ڤیلج و پرایم ڤیو" } },
   { slug: "family-mall-erbil", sector: "commercial", governorate: "erbil", brands: ["wisa"], source: OWNER_LIST,
     name: { en: "Family Mall", ar: "فاميلي مول", ckb: "فامیلی مۆڵ" } },
-  { slug: "rixos-hotels", sector: "hospitality", governorate: "baghdad", brands: ["pimtas", "aquapa", "ascelik", "georg-fischer"], source: OWNER_LIST,
+  { slug: "rixos-hotels", sector: "hospitality", governorate: "baghdad", brands: ["nassar", "pimtas", "aquapa", "ascelik", "georg-fischer"], source: OWNER_LIST,
     name: { en: "Rixos Hotels", ar: "فنادق ريكسوس", ckb: "هوتێلەکانی ریکسۆس" } },
   { slug: "al-jadriya-towers", sector: "residential", governorate: "baghdad", brands: ["pimtas", "georg-fischer"], source: OWNER_LIST,
     name: { en: "Al-Jadriya Towers", ar: "أبراج الجادرية", ckb: "تاوەرەکانی جادریە" } },
-  { slug: "al-risala-complex", sector: "residential", governorate: "baghdad", brands: ["kas"], source: OWNER_LIST,
+  { slug: "al-risala-complex", sector: "residential", governorate: "baghdad", brands: ["kas", "nassar"], source: OWNER_LIST,
     name: { en: "Al-Risala Complex", ar: "مجمع الرسالة", ckb: "کۆمەڵگەی ڕیسالە" } },
   { slug: "millennium-towers", sector: "residential", governorate: "baghdad", brands: ["georg-fischer", "ascelik"], source: OWNER_LIST,
     name: { en: "Millennium Towers", ar: "أبراج ميلينيوم", ckb: "تاوەرەکانی میلێنیۆم" } },

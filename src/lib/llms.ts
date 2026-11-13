@@ -85,6 +85,7 @@ const pages = [
   ["Projects", "/projects", "Airports, stadiums, hotels, hospitals and housing supplied, and the contractors AtlasPlast works with."],
   ["Locations", "/locations", "Offices, showrooms, warehouses and regional offices, with phone numbers and Google Maps places."],
   ["Contact", "/contact", "Main line, WhatsApp, projects division, sales department, email and hours."],
+  ["Request a quotation", "/quote", "Form for a price on brands, products and quantities; it opens WhatsApp or email with the request."],
   ["Media", "/media", "Videos from the AtlasPlast YouTube channel."],
   ["Frequently asked questions", "/faq", "100 questions and answers about the company, products, brands, projects, delivery and contact."],
 ] as const;
