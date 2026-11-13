@@ -21,7 +21,7 @@ export type FaqTopic = (typeof faqTopics)[number];
 export type Faq = {
   id: string;
   topic: FaqTopic;
-  /** Solution pages that also show this question (and carry it in their FAQPage data). */
+  /** Solution pages that also show this question (its FAQPage markup is on /faq only). */
   solutions?: string[];
   /** Locale-relative page with more detail, linked under the answer. */
   href?: string;

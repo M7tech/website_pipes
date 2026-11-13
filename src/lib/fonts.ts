@@ -30,6 +30,10 @@ export const plexArabic = IBM_Plex_Sans_Arabic({
   weight: ["400", "500", "600"],
   variable: "--font-plex-arabic",
   display: "swap",
+  // One layout serves every locale, so a preload here would make English pages download
+  // three Arabic files (~108 KB) before anything else. Arabic and Sorani pages still fetch
+  // them as soon as the CSS is parsed, and text shows in the fallback face until then.
+  preload: false,
 });
 
 export const fontVariables = [inter, plexMono, plexArabic]

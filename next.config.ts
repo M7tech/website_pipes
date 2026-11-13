@@ -3,12 +3,19 @@ import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
-/** Baseline security headers for every response. HTTPS/HSTS is terminated by Coolify's proxy. */
+/**
+ * Baseline security headers for every response. TLS is terminated by Coolify's proxy.
+ * HSTS covers this host only (no includeSubDomains or preload), so other atlasplast.iq
+ * subdomains are unaffected. The CSP sets only directives that never touch the page's own
+ * scripts and styles: no framing by other sites, no <base> hijacking, no plugins.
+ */
 const securityHeaders = [
+  { key: "Strict-Transport-Security", value: "max-age=31536000" },
+  { key: "Content-Security-Policy", value: "frame-ancestors 'self'; base-uri 'self'; object-src 'none'" },
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
   { key: "X-Frame-Options", value: "SAMEORIGIN" },
-  { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), interest-cohort=()" },
+  { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
 ];
 
 /** An old Arabic path, percent-encoded as browsers send it; `:params` stay as patterns. */
