@@ -607,9 +607,9 @@ export const faqs: Faq[] = [
       ckb: "کام سیستەمی ئاوەڕۆ بێدەنگترینە؟",
     },
     a: {
-      en: "At 4 l/s, Georg Fischer Silenta Premium has the lowest published figure: 12 dB(A) to EN 14366, and 7 dB(A) at 2 l/s. Next are Silenta 3A at 15 dB(A), Ostendorf Skolan Safe at 17 dB(A), POLO-KAL 3S at 18 dB(A) and POLO-KAL NG at 22 dB(A) (18 dB(A) at 2 l/s). Lower flows give lower figures, so compare systems at the same flow and test method.",
-      ar: "عند تدفق 4 لتر/ثانية، يحمل Silenta Premium من Georg Fischer أدنى رقم منشور: 12 dB(A) وفق EN 14366، و7 dB(A) عند 2 لتر/ثانية. يليه Silenta 3A بـ15 dB(A)، ثم Skolan Safe من Ostendorf بـ17 dB(A)، وPOLO-KAL 3S بـ18 dB(A)، وPOLO-KAL NG بـ22 dB(A) (و18 dB(A) عند 2 لتر/ثانية). التدفق الأقل يعطي أرقاماً أقل، لذا قارن الأنظمة عند التدفق وطريقة الاختبار نفسيهما.",
-      ckb: "لە ڕێژەی ڕۆیشتنی 4 لیتر/چرکەدا، Silenta Premiumی Georg Fischer نزمترین ژمارەی بڵاوکراوەی هەیە: 12 dB(A) بەپێی EN 14366، و 7 dB(A) لە 2 لیتر/چرکەدا. دواتر Silenta 3A بە 15 dB(A)، Skolan Safeی Ostendorf بە 17 dB(A)، POLO-KAL 3S بە 18 dB(A) و POLO-KAL NG بە 22 dB(A) (و 18 dB(A) لە 2 لیتر/چرکەدا). ڕێژەی ڕۆیشتنی کەمتر ژمارەی کەمتر دەدات، بۆیە سیستەمەکان لە هەمان ڕێژەی ڕۆیشتن و هەمان شێوازی تاقیکردنەوەدا بەراورد بکە.",
+      en: "At 4 l/s, Georg Fischer Silenta Premium has the lowest published figure: 12 dB(A) to EN 14366, and 7 dB(A) at 2 l/s. Next are Silenta 3A at 16 dB(A) (9 dB(A) at 2 l/s), Ostendorf Skolan Safe at 17 dB(A), POLO-KAL 3S at 18 dB(A) and POLO-KAL NG at 22 dB(A) (18 dB(A) at 2 l/s). Lower flows give lower figures, so compare systems at the same flow and test method.",
+      ar: "عند تدفق 4 لتر/ثانية، يحمل Silenta Premium من Georg Fischer أدنى رقم منشور: 12 dB(A) وفق EN 14366، و7 dB(A) عند 2 لتر/ثانية. يليه Silenta 3A بـ16 dB(A) (و9 dB(A) عند 2 لتر/ثانية)، ثم Skolan Safe من Ostendorf بـ17 dB(A)، وPOLO-KAL 3S بـ18 dB(A)، وPOLO-KAL NG بـ22 dB(A) (و18 dB(A) عند 2 لتر/ثانية). التدفق الأقل يعطي أرقاماً أقل، لذا قارن الأنظمة عند التدفق وطريقة الاختبار نفسيهما.",
+      ckb: "لە ڕێژەی ڕۆیشتنی 4 لیتر/چرکەدا، Silenta Premiumی Georg Fischer نزمترین ژمارەی بڵاوکراوەی هەیە: 12 dB(A) بەپێی EN 14366، و 7 dB(A) لە 2 لیتر/چرکەدا. دواتر Silenta 3A بە 16 dB(A) (و 9 dB(A) لە 2 لیتر/چرکەدا)، Skolan Safeی Ostendorf بە 17 dB(A)، POLO-KAL 3S بە 18 dB(A) و POLO-KAL NG بە 22 dB(A) (و 18 dB(A) لە 2 لیتر/چرکەدا). ڕێژەی ڕۆیشتنی کەمتر ژمارەی کەمتر دەدات، بۆیە سیستەمەکان لە هەمان ڕێژەی ڕۆیشتن و هەمان شێوازی تاقیکردنەوەدا بەراورد بکە.",
     },
   },
   {

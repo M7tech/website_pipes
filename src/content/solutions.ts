@@ -210,9 +210,10 @@ export const solutions: Solution[] = [
         brand: "georg-fischer",
         // GF brochure "Silenta 3A" (GF brand portal, checked 2026-11-13): replaces profile p7's 17 dB(A), Ø 40–200.
         // https://brandportal.uponor.com/m/b5fb3a47079edd9e/original/GF-BFS-Brochure-Silenta-3A.pdf
+        // Noise: owner confirmed 2026-11-13, 9 dB(A) @ 2 l/s and 16 dB(A) @ 4 l/s (matches GF's range brochure, not the 15 in the 3A brochure).
         specs: [
           { key: "diameter", value: "Ø 32–200 mm" },
-          { key: "acoustic", value: "15 dB(A) @ 4 l/s · EN 14366" },
+          { key: "acoustic", value: "9 dB(A) @ 2 l/s · 16 dB(A) @ 4 l/s · EN 14366" },
           { key: "fire", value: "D-s2, d2 · EN 13501-1" },
           { key: "standards", value: "EN 1451 · EN 14366 · ISO 9969" },
         ],
