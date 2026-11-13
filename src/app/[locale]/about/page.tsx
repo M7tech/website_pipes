@@ -10,7 +10,7 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { Ltr } from "@/components/ui/Ltr";
 import { Statement } from "@/components/sections/Statement";
 import { Purpose } from "@/components/sections/Purpose";
-import { Timeline } from "@/components/sections/Timeline";
+import { HistoryTimeline } from "@/components/sections/HistoryTimeline";
 import { ServiceModel } from "@/components/sections/ServiceModel";
 import { ContactBand } from "@/components/sections/ContactBand";
 import { ButtonLink } from "@/components/ui/ButtonLink";
@@ -101,7 +101,7 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
           </div>
         </div>
       </section>
-      <Timeline cta={false} full />
+      <HistoryTimeline />
       <ServiceModel />
       <ContactBand />
     </>

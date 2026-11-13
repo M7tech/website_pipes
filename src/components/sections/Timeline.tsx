@@ -1,16 +1,13 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
-import { keyMilestones, milestones } from "@/content/timeline";
+import { keyMilestones } from "@/content/timeline";
 import { Ltr } from "@/components/ui/Ltr";
 import { SectionHead } from "@/components/ui/SectionHead";
 import { TextLink } from "@/components/ui/TextLink";
 import { ScrollRule } from "@/components/motion/ScrollRule";
 
-/**
- * Set `cta` to false on the page the section links to, and `full` to list
- * every milestone rather than the key ones.
- */
-export async function Timeline({ cta = true, full = false }: { cta?: boolean; full?: boolean } = {}) {
+/** The key milestones on Home; About tells the full story in `HistoryTimeline`. */
+export async function Timeline() {
   const locale = (await getLocale()) as Locale;
   const t = await getTranslations("Home.timeline");
 
@@ -21,11 +18,11 @@ export async function Timeline({ cta = true, full = false }: { cta?: boolean; fu
           id="timeline-title"
           eyebrow={t("eyebrow")}
           title={t("title")}
-          action={cta ? <TextLink href="/about">{t("cta")}</TextLink> : undefined}
+          action={<TextLink href="/about">{t("cta")}</TextLink>}
         />
         <ScrollRule>
           <ol className="shelf gap-3 sm:grid sm:grid-cols-2 md:gap-4 lg:grid-cols-4">
-            {(full ? milestones : keyMilestones).map((m) => (
+            {keyMilestones.map((m) => (
               <li key={`${m.year}-${m.text.en}`} className="grid content-start gap-3 rounded-card bg-surface p-6 md:p-7">
                 <span className="font-display-latin text-[clamp(2.25rem,3.6vw,3.25rem)] font-semibold leading-none tabular text-atlas-blue">
                   <Ltr>
