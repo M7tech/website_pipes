@@ -458,16 +458,28 @@ test("the brand directory has as many brands as the Home figure, NASSAR and Flui
   await expect(page.locator("h1")).toHaveText("NASSAR");
 });
 
-test("Home lists the brands in the owner's order", async ({ page }) => {
-  await page.goto("/en");
-  const grid = page.locator('section[aria-labelledby="brands-title"] ul.grid a[href^="/en/brands/"]');
+for (const [label, path] of [["Home", "/en"], ["the brands page", "/ar/brands"]] as const) test(`${label} lists the brands in the owner's order`, async ({ page }) => {
+  await page.goto(path);
+  const prefix = path.slice(0, 3) + "/brands/";
+  const grid = page.locator(`main ul.grid a[href^="${prefix}"]`);
   const order = await grid.evaluateAll((els) => els.map((e) => e.getAttribute("href")!.split("/").pop()));
+  await page.goto("/en");
   expect(order.slice(0, 12)).toEqual([
     "polymelt", "georg-fischer", "aquapa", "fluidmaster", "poloplast", "saudi-ceramics",
     "pimtas", "turan-borfit", "wisa", "boroug", "nassar", "topsan",
   ]);
   const figure = await page.locator("main dl dd").nth(1).textContent();
   expect(new Set(order).size).toBe(Number(figure?.trim()));
+});
+
+test("the brand photo strip has no Alvit card, in any language", async ({ page }) => {
+  for (const locale of ["en", "ar", "ckb"]) {
+    for (const path of [`/${locale}`, `/${locale}/brands`]) {
+      await page.goto(path);
+      await expect(page.locator(`a[href="/${locale}/brands/quarterbath"] img[src*="images"]`).first()).toBeAttached();
+      expect(await page.locator(`a[href="/${locale}/brands/alvit"] img[src*="images"]`).count()).toBe(0);
+    }
+  }
 });
 
 test("quotation form validates, then opens the nearest branch's WhatsApp with the request written out", async ({ page, context }) => {

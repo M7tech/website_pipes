@@ -163,8 +163,8 @@ const brandList: Brand[] = [
   { slug: "nassar", name: "NASSAR", logo: "/brands/nassar.svg", country: "EG", source: "confirmed:2026-11-13" },
   // Owner 2026-11-13: Fluidmaster is the 24th brand (USA); AtlasPlast stocks its concealed cisterns
   // and spare parts. Facts from fluidmaster.com (our-history, key-teknik), checked 2026-11-13.
-  // No approved logo file yet: the site shows the name until the owner sends the official artwork.
-  { slug: "fluidmaster", name: "Fluidmaster", country: "US",
+  // Logo: the owner's file of 2026-11-13 (JPG), only trimmed and its white background made transparent.
+  { slug: "fluidmaster", name: "Fluidmaster", logo: "/brands/fluidmaster.png", country: "US",
     source: "confirmed:2026-11-13",
     documents: [
       { kind: "catalogue", title: "Fluidmaster Catalog", href: "https://fluidmaster.com/wp-content/uploads/2023/09/FM91438_Grev5_FM-Retail-Catalog_Expanded.pdf", source: "manufacturer:2026-11-13" },
@@ -189,16 +189,9 @@ const brandList: Brand[] = [
 
 const withPhotos = brandList.map((b) => (photos[b.slug] ? { ...b, photo: photos[b.slug] } : b));
 
-/** A sister brand takes the country, documents and photo of the brand it shares a range with. */
-export const brands: Brand[] = withPhotos.map((b) => {
-  const sister = b.sisterOf ? withPhotos.find((s) => s.slug === b.sisterOf) : undefined;
-  return sister
-    ? { ...b, country: b.country ?? sister.country, documents: b.documents ?? sister.documents, photo: b.photo ?? sister.photo }
-    : b;
-});
 
 /**
- * Owner's order for the Home page (2026-11-13): these brands lead, the rest follow in directory order.
+ * Owner's brand order (2026-11-13), used on Home and /brands: these brands lead, the rest follow in list order.
  * "بروج" is Boroug and "نصار" is NASSAR.
  */
 const homeLead = [
@@ -225,7 +218,18 @@ export function inHomeOrder<T extends { slug: string }>(list: T[]): T[] {
   return list.map((b, i) => ({ b, i })).sort((x, y) => rank(x.b.slug) - rank(y.b.slug) || x.i - y.i).map(({ b }) => b);
 }
 
-export const homeBrands: Brand[] = inHomeOrder(brands);
+/**
+ * Every brand, in the owner's order (Home and /brands alike, owner 2026-11-13).
+ * A sister brand takes the country, documents and photo of the brand it shares a range with.
+ */
+export const brands: Brand[] = inHomeOrder(
+  withPhotos.map((b) => {
+    const sister = b.sisterOf ? withPhotos.find((s) => s.slug === b.sisterOf) : undefined;
+    return sister
+      ? { ...b, country: b.country ?? sister.country, documents: b.documents ?? sister.documents, photo: b.photo ?? sister.photo }
+      : b;
+  }),
+);
 
 export function brandBySlug(slug: string) {
   const brand = brands.find((b) => b.slug === slug);

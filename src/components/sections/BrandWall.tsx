@@ -3,7 +3,6 @@ import { SectionHead } from "@/components/ui/SectionHead";
 import { TextLink } from "@/components/ui/TextLink";
 import { BrandGrid } from "@/components/brands/BrandGrid";
 import { BrandPhotoStrip } from "@/components/brands/BrandPhotoStrip";
-import { homeBrands } from "@/content/brands";
 
 export async function BrandWall() {
   const t = await getTranslations("Home.brands");
@@ -21,10 +20,10 @@ export async function BrandWall() {
         />
       </div>
       <div className="mt-12 md:mt-16">
-        <BrandPhotoStrip label={b("photoStrip")} list={homeBrands} />
+        <BrandPhotoStrip label={b("photoStrip")} />
       </div>
       <div className="container-page mt-12 md:mt-16">
-        <BrandGrid brands={homeBrands} />
+        <BrandGrid />
       </div>
     </section>
   );
