@@ -319,9 +319,9 @@ export const faqs: Faq[] = [
       ckb: "بەرهەمەکانی ئەتلەس پلاست لە کوێوە دێن؟",
     },
     a: {
-      en: "Every product line comes from a manufacturer AtlasPlast represents directly, in Switzerland, Germany, Austria, the Netherlands, Italy, the Czech Republic, Serbia, Turkey, Saudi Arabia or Egypt. Each brand page shows the manufacturer’s country of origin.",
-      ar: "كل خط منتجات يأتي من شركة مصنّعة تمثّلها أطلس بلاست مباشرة، في سويسرا أو ألمانيا أو النمسا أو هولندا أو إيطاليا أو التشيك أو صربيا أو تركيا أو السعودية أو مصر. وتعرض صفحة كل علامة بلد المنشأ.",
-      ckb: "هەر هێڵێکی بەرهەم لە بەرهەمهێنەرێکەوە دێت کە ئەتلەس پلاست ڕاستەوخۆ نوێنەرایەتیی دەکات، لە سویسرا، ئەڵمانیا، نەمسا، هۆڵەندا، ئیتاڵیا، کۆماری چیک، سڕبیا، تورکیا، سعوودیە یان میسر. پەڕەی هەر براندێک وڵاتی سەرچاوەی پیشان دەدات.",
+      en: "Every product line comes from a manufacturer AtlasPlast represents directly, in Switzerland, Germany, Austria, the Netherlands, Italy, the Czech Republic, Serbia, Turkey, Saudi Arabia, Egypt or the United States. Each brand page shows the manufacturer’s country of origin.",
+      ar: "كل خط منتجات يأتي من شركة مصنّعة تمثّلها أطلس بلاست مباشرة، في سويسرا أو ألمانيا أو النمسا أو هولندا أو إيطاليا أو التشيك أو صربيا أو تركيا أو السعودية أو مصر أو الولايات المتحدة. وتعرض صفحة كل علامة بلد المنشأ.",
+      ckb: "هەر هێڵێکی بەرهەم لە بەرهەمهێنەرێکەوە دێت کە ئەتلەس پلاست ڕاستەوخۆ نوێنەرایەتیی دەکات، لە سویسرا، ئەڵمانیا، نەمسا، هۆڵەندا، ئیتاڵیا، کۆماری چیک، سڕبیا، تورکیا، سعوودیە، میسر یان ئەمریکا. پەڕەی هەر براندێک وڵاتی سەرچاوەی پیشان دەدات.",
     },
   },
   {
@@ -847,9 +847,9 @@ export const faqs: Faq[] = [
       ckb: "ئەتلەس پلاست چ کەلوپەلێکی تەندروستی دابین دەکات؟",
     },
     a: {
-      en: "Vitreous china WCs, basins, urinals and bidets from Saudi Ceramics (Oryx) and QuarterBath, QuarterBath bathroom furniture and concealed cisterns, and WISA pre-wall elements and built-in cisterns for wall-hung WCs.",
-      ar: "مراحيض ومغاسل ومباول وشطافات من البورسلين من الخزف السعودي (Oryx) وQuarterBath، وأثاث حمامات وخزانات دفن من QuarterBath، وهياكل تثبيت وخزانات دفن من WISA للمراحيض المعلّقة.",
-      ckb: "تەوالێت، دەستشۆر، میزدان و بیدێی پۆرسلین لە سعوودی سێرامیکس (Oryx) و QuarterBath، مۆبیلیاتی حەمام و سیفۆنی ناو دیواری QuarterBath، و چوارچێوەی پێش دیوار و سیفۆنی ناو دیواری WISA بۆ تەوالێتی هەڵواسراو.",
+      en: "Vitreous china WCs, basins, urinals and bidets from Saudi Ceramics (Oryx) and QuarterBath, QuarterBath bathroom furniture and concealed cisterns, WISA pre-wall elements and built-in cisterns for wall-hung WCs, and Fluidmaster concealed cisterns and cistern spare parts.",
+      ar: "مراحيض ومغاسل ومباول وشطافات من البورسلين من الخزف السعودي (Oryx) وQuarterBath، وأثاث حمامات وخزانات دفن من QuarterBath، وهياكل تثبيت وخزانات دفن من WISA للمراحيض المعلّقة، وخزانات دفن وقطع غيار الطرادات من Fluidmaster.",
+      ckb: "تەوالێت، دەستشۆر، میزدان و بیدێی پۆرسلین لە سعوودی سێرامیکس (Oryx) و QuarterBath، مۆبیلیاتی حەمام و سیفۆنی ناو دیواری QuarterBath، چوارچێوەی پێش دیوار و سیفۆنی ناو دیواری WISA بۆ تەوالێتی هەڵواسراو، و سیفۆنی ناو دیوار و پارچە یەدەگی سیفۆنی Fluidmaster.",
     },
   },
   {
@@ -1222,9 +1222,9 @@ export const faqs: Faq[] = [
       ckb: "بریکارایەتییەکانی کۆمپانیای ئەتلەس پلاست کامانەن؟",
     },
     a: {
-      en: "Georg Fischer, Polymelt, Bänninger, Ostendorf, Poloplast, FV-Plast, Peštan, WISA, DAB Pumps, Saudi Ceramics, Aquapa, Pimtaş, Turan Borfit, KAS, Guarri, Topsan, Asçelik Clamp, Boroug, Shield, NASSAR, QuarterBath, Candan Makina and Alvit.",
-      ar: "Georg Fischer وPolymelt وBänninger وOstendorf وPoloplast وFV-Plast وPeštan وWISA وDAB Pumps والخزف السعودي (Saudi Ceramics) وAquapa وPimtaş وTuran Borfit وKAS وGuarri وTopsan وAsçelik Clamp وBoroug وShield وNASSAR وQuarterBath وCandan Makina وAlvit.",
-      ckb: "Georg Fischer، Polymelt، Bänninger، Ostendorf، Poloplast، FV-Plast، Peštan، WISA، DAB Pumps، سعوودی سێرامیکس (Saudi Ceramics)، Aquapa، Pimtaş، Turan Borfit، KAS، Guarri، Topsan، Asçelik Clamp، Boroug، Shield، NASSAR، QuarterBath، Candan Makina و Alvit.",
+      en: "Georg Fischer, Polymelt, Bänninger, Ostendorf, Poloplast, FV-Plast, Peštan, WISA, DAB Pumps, Saudi Ceramics, Aquapa, Pimtaş, Turan Borfit, KAS, Guarri, Topsan, Asçelik Clamp, Boroug, Shield, NASSAR, Fluidmaster, QuarterBath, Candan Makina and Alvit.",
+      ar: "Georg Fischer وPolymelt وBänninger وOstendorf وPoloplast وFV-Plast وPeštan وWISA وDAB Pumps والخزف السعودي (Saudi Ceramics) وAquapa وPimtaş وTuran Borfit وKAS وGuarri وTopsan وAsçelik Clamp وBoroug وShield وNASSAR وFluidmaster وQuarterBath وCandan Makina وAlvit.",
+      ckb: "Georg Fischer، Polymelt، Bänninger، Ostendorf، Poloplast، FV-Plast، Peštan، WISA، DAB Pumps، سعوودی سێرامیکس (Saudi Ceramics)، Aquapa، Pimtaş، Turan Borfit، KAS، Guarri، Topsan، Asçelik Clamp، Boroug، Shield، NASSAR، Fluidmaster، QuarterBath، Candan Makina و Alvit.",
     },
   },
   {

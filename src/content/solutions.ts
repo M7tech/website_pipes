@@ -511,6 +511,9 @@ export const solutions: Solution[] = [
         ],
         source: "profile:p14",
       },
+      // Owner 2026-11-13: AtlasPlast stocks Fluidmaster concealed cisterns and spare parts.
+      { id: "fluidmasterCistern", name: "Concealed cisterns", brand: "fluidmaster", specs: [], source: "confirmed:2026-11-13" },
+      { id: "fluidmasterParts", name: "Cistern spare parts", brand: "fluidmaster", specs: [], source: "confirmed:2026-11-13" },
     ],
   },
   {

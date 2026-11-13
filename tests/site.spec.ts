@@ -445,7 +445,7 @@ test("Home leads with the distributor headline and the four main actions", async
   ]) await expect(slide.getByRole("link", { name, exact: true }).first()).toHaveAttribute("href", href);
 });
 
-test("the brand directory has as many brands as the Home figure, NASSAR included", async ({ page }) => {
+test("the brand directory has as many brands as the Home figure, NASSAR and Fluidmaster included", async ({ page }) => {
   await page.goto("/en");
   const figure = await page.locator("main dl dd").nth(1).textContent();
   await page.goto("/en/brands");
@@ -453,6 +453,7 @@ test("the brand directory has as many brands as the Home figure, NASSAR included
   const slugs = new Set(await links.evaluateAll((els) => els.map((e) => e.getAttribute("href"))));
   expect(slugs.size).toBe(Number(figure?.trim()));
   expect(slugs).toContain("/en/brands/nassar");
+  expect(slugs).toContain("/en/brands/fluidmaster");
   await page.goto("/ar/brands/nassar");
   await expect(page.locator("h1")).toHaveText("NASSAR");
 });
@@ -461,11 +462,12 @@ test("Home lists the brands in the owner's order", async ({ page }) => {
   await page.goto("/en");
   const grid = page.locator('section[aria-labelledby="brands-title"] ul.grid a[href^="/en/brands/"]');
   const order = await grid.evaluateAll((els) => els.map((e) => e.getAttribute("href")!.split("/").pop()));
-  expect(order.slice(0, 11)).toEqual([
-    "polymelt", "georg-fischer", "aquapa", "poloplast", "saudi-ceramics", "pimtas",
-    "turan-borfit", "wisa", "boroug", "nassar", "topsan",
+  expect(order.slice(0, 12)).toEqual([
+    "polymelt", "georg-fischer", "aquapa", "fluidmaster", "poloplast", "saudi-ceramics",
+    "pimtas", "turan-borfit", "wisa", "boroug", "nassar", "topsan",
   ]);
-  expect(new Set(order).size).toBe(23);
+  const figure = await page.locator("main dl dd").nth(1).textContent();
+  expect(new Set(order).size).toBe(Number(figure?.trim()));
 });
 
 test("quotation form validates, then opens the nearest branch's WhatsApp with the request written out", async ({ page, context }) => {
