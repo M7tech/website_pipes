@@ -457,6 +457,17 @@ test("the brand directory has as many brands as the Home figure, NASSAR included
   await expect(page.locator("h1")).toHaveText("NASSAR");
 });
 
+test("Home lists the brands in the owner's order", async ({ page }) => {
+  await page.goto("/en");
+  const grid = page.locator('section[aria-labelledby="brands-title"] ul.grid a[href^="/en/brands/"]');
+  const order = await grid.evaluateAll((els) => els.map((e) => e.getAttribute("href")!.split("/").pop()));
+  expect(order.slice(0, 11)).toEqual([
+    "polymelt", "georg-fischer", "aquapa", "poloplast", "saudi-ceramics", "pimtas",
+    "turan-borfit", "wisa", "boroug", "nassar", "topsan",
+  ]);
+  expect(new Set(order).size).toBe(23);
+});
+
 test("quotation form validates, then opens the nearest branch's WhatsApp with the request written out", async ({ page, context }) => {
   for (const { code, dir } of locales) {
     await page.goto(`/${code}/quote`);

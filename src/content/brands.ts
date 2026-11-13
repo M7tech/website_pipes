@@ -187,6 +187,35 @@ export const brands: Brand[] = withPhotos.map((b) => {
     : b;
 });
 
+/**
+ * Owner's order for the Home page (2026-11-13): these brands lead, the rest follow in directory order.
+ * "بروج" is Boroug and "نصار" is NASSAR.
+ */
+const homeLead = [
+  "polymelt",
+  "georg-fischer",
+  "aquapa",
+  "poloplast",
+  "saudi-ceramics",
+  "pimtas",
+  "turan-borfit",
+  "wisa",
+  "boroug",
+  "nassar",
+  "topsan",
+];
+
+/** Sorts brands into the owner's Home order; brands outside the lead list keep their relative order. */
+export function inHomeOrder<T extends { slug: string }>(list: T[]): T[] {
+  const rank = (slug: string) => {
+    const i = homeLead.indexOf(slug);
+    return i === -1 ? homeLead.length : i;
+  };
+  return list.map((b, i) => ({ b, i })).sort((x, y) => rank(x.b.slug) - rank(y.b.slug) || x.i - y.i).map(({ b }) => b);
+}
+
+export const homeBrands: Brand[] = inHomeOrder(brands);
+
 export function brandBySlug(slug: string) {
   const brand = brands.find((b) => b.slug === slug);
   if (!brand) throw new Error(`Unknown brand: ${slug}`);

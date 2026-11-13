@@ -28,10 +28,10 @@ function Card({ brand, alt }: { brand: Brand; alt: string }) {
  * so the loop is seamless; the copy is hidden from assistive tech and keyboard.
  * With reduced motion the strip becomes a plain horizontal scroller.
  */
-export async function BrandPhotoStrip({ label }: { label: string }) {
+export async function BrandPhotoStrip({ label, list = brands }: { label: string; list?: Brand[] }) {
   const t = await getTranslations("Brands");
   const hero = await getTranslations("Home.hero");
-  const pictured = brands.filter((b) => b.photo);
+  const pictured = list.filter((b) => b.photo);
   const alt = (b: Brand) => t("photoAlt", { subject: b.photo!.subject ?? b.name });
 
   return (

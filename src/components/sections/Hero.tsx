@@ -17,16 +17,16 @@ import { Waves } from "@/components/water/Waves";
 
 const factIcons = { agents: "users", brands: "award", trained: "graduation", stock: "warehouse" } as const;
 
-/** Partner marks shown on the brands slide (all with approved artwork). */
+/** Partner marks shown on the brands slide (all with approved artwork), in the owner's Home order. */
 const heroBrands = [
-  "georg-fischer",
   "polymelt",
-  "pimtas",
+  "georg-fischer",
+  "aquapa",
   "poloplast",
+  "saudi-ceramics",
+  "pimtas",
   "turan-borfit",
   "wisa",
-  "aquapa",
-  "saudi-ceramics",
   "quarterbath",
 ];
 
