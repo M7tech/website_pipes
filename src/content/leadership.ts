@@ -19,7 +19,7 @@ export const chairman: Leader = {
     ckb: "سەرۆکی ئەنجومەنی بەڕێوەبەرایەتیی گرووپی ئەتلەس",
   },
   // Sent by the owner 2026-10-05 to replace the profile portrait. A larger original is still wanted.
-  photo: { src: "/images/leadership/jaafar-almusawi-portrait.jpg", width: 286, height: 401 },
+  photo: { src: "/images/leadership/jaafar-almusawi-portrait.jpg", width: 838, height: 1178 },
   source: "confirmed:2026-10-05",
 };
 
@@ -29,14 +29,14 @@ export const boardMembers: Leader[] = [
     id: "omer-ibrahim",
     name: { en: "Omer Ibrahim", ar: "عمر إبراهيم", ckb: "عومەر ئیبراهیم" },
     role: { en: "Board member", ar: "عضو مجلس الإدارة", ckb: "ئەندامی ئەنجومەنی بەڕێوەبەرایەتی" },
-    photo: { src: "/images/leadership/omer-ibrahim.jpg", width: 303, height: 419 },
+    photo: { src: "/images/leadership/omer-ibrahim.jpg", width: 606, height: 838 },
     source: "confirmed:2026-10-05",
   },
   {
     id: "mohammed-bajalan",
     name: { en: "Mohammed Bajalan", ar: "محمد باجلان", ckb: "محەمەد باجەلان" },
     role: { en: "Board member", ar: "عضو مجلس الإدارة", ckb: "ئەندامی ئەنجومەنی بەڕێوەبەرایەتی" },
-    photo: { src: "/images/leadership/mohammed-bajalan.jpg", width: 360, height: 436 },
+    photo: { src: "/images/leadership/mohammed-bajalan.jpg", width: 720, height: 872 },
     source: "confirmed:2026-10-05",
   },
 ];
