@@ -55,7 +55,7 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
       />
       <PageHeader
         image={{
-          src: "/images/hero/brands-exhibition-team.jpg",
+          src: "/images/hero/about-team-dwtc.jpg",
           alt: common("brandsExhibitionTeam"),
           sizes: "(max-width: 640px) 1920px, 100vw",
           position: "50% 70%",

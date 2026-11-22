@@ -193,7 +193,7 @@ test("ceramic and porcelain tiles are the tenth solution, on Home and in Solutio
 test("About carries vision, mission and the full history", async ({ page }) => {
   await page.goto("/en/about");
   const main = page.locator("main");
-  const headerPhoto = main.locator('header img[src*="brands-exhibition-team"]');
+  const headerPhoto = main.locator('header img[src*="about-team-dwtc"]');
   await expect(headerPhoto).toBeVisible();
   await expect(headerPhoto).toHaveAttribute("alt", "AtlasPlast team at the Dubai World Trade Centre");
   await expect(main.getByRole("heading", { name: "Our vision" })).toBeVisible();
@@ -217,7 +217,7 @@ test("Brands uses the origin map in its header", async ({ page }) => {
   const headerMap = page.locator('main > header img[src*="brands-origin-map"]');
   await expect(headerMap).toBeVisible();
   await expect(headerMap).toHaveAttribute("alt", "Map showing the countries of origin of AtlasPlast brands");
-  await expect(page.locator('main > header img[src*="brands-exhibition-team"]')).toHaveCount(0);
+  await expect(page.locator('main > header img[src*="about-team-dwtc"]')).toHaveCount(0);
 });
 
 test("Projects uses the branded construction photo in its header", async ({ page }) => {
