@@ -58,7 +58,7 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
           src: "/images/hero/brands-exhibition-team.jpg",
           alt: common("brandsExhibitionTeam"),
           sizes: "(max-width: 640px) 1920px, 100vw",
-          position: "center 58%",
+          position: "50% 70%",
         }}
         eyebrow={t("eyebrow")}
         title={t("title")}
