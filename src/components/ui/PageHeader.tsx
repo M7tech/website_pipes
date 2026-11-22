@@ -20,7 +20,7 @@ type PageHeaderProps = {
   /** Optional drawing or figure on the end side. */
   aside?: ReactNode;
   /** Backdrop photo under a navy wash. */
-  image?: { src: string; alt: string };
+  image?: { src: string; alt: string; /** CSS object-position, to keep the subject in frame. */ position?: string };
   /** Cross-fading backdrop photos on the end side, like the home hero slides. */
   slides?: { photos: { src: string; alt: string }[]; label: string; photoOf: string[]; pause: string; play: string };
   /** Fill of the wave edge: the background of the section that follows. */
@@ -38,7 +38,7 @@ export function PageHeader({ eyebrow, icon, title, titleLang, intro, crumbs, bre
       <div className="absolute inset-0 -z-10 overflow-hidden">
         {image ? (
           <>
-            <Image src={image.src} alt={image.alt} fill priority sizes="100vw" className="ken-burns object-cover" />
+            <Image src={image.src} alt={image.alt} fill priority sizes="100vw" style={image.position ? { objectPosition: image.position } : undefined} className="ken-burns object-cover" />
             <div aria-hidden="true" className="absolute inset-0 bg-linear-to-r from-atlas-navy/95 via-atlas-navy/75 to-atlas-navy/25 rtl:bg-linear-to-l" />
             <div aria-hidden="true" className="absolute inset-0 bg-linear-to-t from-atlas-navy/80 via-transparent to-atlas-navy/40" />
           </>
