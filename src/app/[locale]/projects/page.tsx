@@ -48,6 +48,12 @@ export default async function ProjectsPage({ params }: PageProps<"/[locale]/proj
         })}
       />
       <PageHeader
+        image={{
+          src: "/images/hero/projects-construction-site.jpg",
+          alt: common("projectsConstructionSite"),
+          sizes: "(max-width: 640px) 1920px, 100vw",
+          position: "32% 52%",
+        }}
         eyebrow={t("eyebrow")}
         title={t("title")}
         intro={t("intro")}

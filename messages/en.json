@@ -37,7 +37,11 @@
     "since": "Since {year}",
     "brandName": "AtlasPlast",
     "breadcrumb": "Breadcrumb",
-    "warehousePhoto": "AtlasPlast warehouse"
+    "warehousePhoto": "AtlasPlast warehouse",
+    "regionalOfficesMap": "Map of AtlasPlast regional offices",
+    "brandsExhibitionTeam": "AtlasPlast team at the Dubai World Trade Centre",
+    "projectsConstructionSite": "AtlasPlast engineer at a major construction project",
+    "brandsOriginMap": "Map showing the countries of origin of AtlasPlast brands"
   },
   "Nav": {
     "label": "Main navigation",
@@ -118,10 +122,10 @@
     },
     "statement": {
       "eyebrow": "Who we are",
-      "title": "A distributor built on stock, reach and technical knowledge.",
-      "body1": "AtlasPlast holds commercial agencies for international manufacturers of piping, drainage, sanitaryware and pumps, many of them exclusive in Iraq. We supply the materials and the technical support behind housing, infrastructure and government developments.",
-      "body2": "Our warehouses in Baghdad, Basra, Erbil, Duhok and Zakho are planned to cover the country’s demand for nine months, so contractors and installers are supplied without interruption.",
-      "projects": "Hundreds of projects completed with AtlasPlast products."
+      "title": "A trusted distributor combining stock depth, nationwide reach and technical expertise.",
+      "body1": "AtlasPlast represents leading international manufacturers of piping systems, drainage, sanitaryware and pumps, with exclusive distribution rights for a number of them in Iraq. We provide integrated product and technical-support solutions for housing, infrastructure and government projects.",
+      "body2": "Our warehouse network in Baghdad, Basra, Erbil, Duhok and Zakho maintains stock covering up to nine months of Iraq’s market demand, helping ensure uninterrupted supply to contractors and installers across the country.",
+      "projects": "Explore hundreds of projects delivered with AtlasPlast products."
     },
     "solutions": {
       "eyebrow": "Solutions",

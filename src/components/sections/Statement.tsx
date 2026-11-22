@@ -1,4 +1,6 @@
 import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
+import { Arrow } from "@/components/ui/Arrow";
 import { Icon } from "@/components/ui/Icon";
 
 export async function Statement() {
@@ -19,12 +21,16 @@ export async function Statement() {
           <p>{t("body1")}</p>
           <p>{t("body2")}</p>
         </div>
-        <p className="flex max-w-5xl items-center gap-4 rounded-card bg-surface p-5 text-lg font-semibold text-atlas-blue md:p-6 md:text-xl">
+        <Link
+          href="/projects"
+          className="group pressable flex max-w-5xl items-center gap-4 rounded-card bg-surface p-5 text-lg font-semibold text-atlas-blue transition-colors hover:bg-paper md:p-6 md:text-xl"
+        >
           <span className="inline-flex size-12 shrink-0 items-center justify-center rounded-full bg-atlas-blue text-white">
             <Icon name="award" />
           </span>
-          {t("projects")}
-        </p>
+          <span className="flex-1">{t("projects")}</span>
+          <Arrow className="shrink-0 transition-[translate] duration-(--duration-base) group-hover:translate-x-1 rtl:group-hover:-translate-x-1" />
+        </Link>
       </div>
     </section>
   );

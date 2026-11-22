@@ -193,14 +193,76 @@ test("ceramic and porcelain tiles are the tenth solution, on Home and in Solutio
 test("About carries vision, mission and the full history", async ({ page }) => {
   await page.goto("/en/about");
   const main = page.locator("main");
+  const headerPhoto = main.locator('header img[src*="brands-exhibition-team"]');
+  await expect(headerPhoto).toBeVisible();
+  await expect(headerPhoto).toHaveAttribute("alt", "AtlasPlast team at the Dubai World Trade Centre");
   await expect(main.getByRole("heading", { name: "Our vision" })).toBeVisible();
   await expect(main.getByRole("heading", { name: "Our mission" })).toBeVisible();
   for (const text of ["1990–2003", "Sulaymaniyah", "ARBAK", "FABCO", "Management returns to Baghdad"]) {
     await expect(main, text).toContainText(text);
   }
+  const founder = main.locator('img[src*="abdulameer-al-moussawi"]');
+  await expect(founder).toBeVisible();
+  await expect(founder.locator("xpath=../..")).toContainText("Eng. Abdulameer Al-Moussawi");
+  await expect(founder.locator("xpath=../..")).toContainText("Founder, Atlas Group");
+  const projects = main.locator('section[aria-labelledby="statement-title"] a[href="/en/projects"]');
+  await expect(projects).toContainText("Explore hundreds of projects delivered with AtlasPlast products.");
   // Home keeps the short list.
   await page.goto("/en");
   expect(await page.locator("main").innerText()).not.toContain("ARBAK");
+});
+
+test("Brands uses the origin map in its header", async ({ page }) => {
+  await page.goto("/en/brands");
+  const headerMap = page.locator('main > header img[src*="brands-origin-map"]');
+  await expect(headerMap).toBeVisible();
+  await expect(headerMap).toHaveAttribute("alt", "Map showing the countries of origin of AtlasPlast brands");
+  await expect(page.locator('main > header img[src*="brands-exhibition-team"]')).toHaveCount(0);
+});
+
+test("Projects uses the branded construction photo in its header", async ({ page }) => {
+  await page.goto("/ar/projects");
+  const headerPhoto = page.locator('main > header img[src*="projects-construction-site"]');
+  await expect(headerPhoto).toBeVisible();
+  await expect(headerPhoto).toHaveAttribute("alt", "مهندس أطلس بلاست في أحد مشاريع البناء الكبرى");
+});
+
+test("About statement is localized and Arabic copy has no tashkeel", async ({ page }) => {
+  for (const locale of ["en", "ar", "ckb"]) {
+    await page.goto(`/${locale}/about`);
+    await expect(page.locator(`section[aria-labelledby="statement-title"] a[href="/${locale}/projects"]`)).toBeVisible();
+  }
+  await page.goto("/ar/about");
+  const statement = await page.locator('section[aria-labelledby="statement-title"]').innerText();
+  expect(statement).not.toMatch(/[\u064B-\u065F\u0670]/);
+});
+
+test("Purpose motion preserves RTL order and renders immediately with reduced motion", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 800 });
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/ar/about", { waitUntil: "networkidle" });
+  const purpose = page.locator('section[aria-labelledby="purpose-title"]');
+  const cards = purpose.locator("[data-purpose-card]");
+  const values = purpose.locator("[data-purpose-value]");
+  await expect(cards).toHaveCount(2);
+  await expect(values).toHaveCount(6);
+
+  const cardStyles = await cards.evaluateAll((nodes) =>
+    nodes.map((node) => {
+      const style = getComputedStyle(node);
+      return { opacity: style.opacity, transform: style.transform, x: node.getBoundingClientRect().x };
+    }),
+  );
+  expect(cardStyles.every(({ opacity, transform }) => opacity === "1" && transform === "none")).toBe(true);
+  expect(cardStyles[0].x).toBeGreaterThan(cardStyles[1].x);
+  expect(
+    await values.evaluateAll((nodes) =>
+      nodes.every((node) => {
+        const style = getComputedStyle(node);
+        return style.opacity === "1" && style.transform === "none";
+      }),
+    ),
+  ).toBe(true);
 });
 
 test("media page lists the channel's videos and YouTube is in Follow us", async ({ page }) => {

@@ -9,6 +9,23 @@ export type Leader = {
   source: Source;
 };
 
+/** Founder shown with the 1975 milestone in the company history. */
+export const founder: Leader = {
+  id: "abdulameer-al-moussawi",
+  name: {
+    en: "Eng. Abdulameer Al-Moussawi",
+    ar: "المهندس عبد الأمير الموسوي",
+    ckb: "ئەندازیار عەبدولئەمیر مووسەوی",
+  },
+  role: {
+    en: "Founder, Atlas Group",
+    ar: "مؤسس مجموعة أطلس",
+    ckb: "دامەزرێنەری گرووپی ئەتلەس",
+  },
+  photo: { src: "/images/leadership/abdulameer-al-moussawi.jpg", width: 1143, height: 1376 },
+  source: "confirmed:2026-11-22",
+};
+
 /** Chairman of the board. His message is in the messages under Board.message. */
 export const chairman: Leader = {
   id: "jaafar-almusawi",
