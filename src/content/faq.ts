@@ -21,7 +21,7 @@ export type FaqTopic = (typeof faqTopics)[number];
 export type Faq = {
   id: string;
   topic: FaqTopic;
-  /** Solution pages that also show this question (and carry it in their FAQPage data). */
+  /** Solution pages that also show this question (its FAQPage markup is on /faq only). */
   solutions?: string[];
   /** Locale-relative page with more detail, linked under the answer. */
   href?: string;
@@ -319,9 +319,9 @@ export const faqs: Faq[] = [
       ckb: "بەرهەمەکانی ئەتلەس پلاست لە کوێوە دێن؟",
     },
     a: {
-      en: "Every product line comes from a manufacturer AtlasPlast represents directly, in Switzerland, Germany, Austria, the Netherlands, Italy, the Czech Republic, Serbia, Turkey, Saudi Arabia or Egypt. Each brand page shows the manufacturer’s country of origin.",
-      ar: "كل خط منتجات يأتي من شركة مصنّعة تمثّلها أطلس بلاست مباشرة، في سويسرا أو ألمانيا أو النمسا أو هولندا أو إيطاليا أو التشيك أو صربيا أو تركيا أو السعودية أو مصر. وتعرض صفحة كل علامة بلد المنشأ.",
-      ckb: "هەر هێڵێکی بەرهەم لە بەرهەمهێنەرێکەوە دێت کە ئەتلەس پلاست ڕاستەوخۆ نوێنەرایەتیی دەکات، لە سویسرا، ئەڵمانیا، نەمسا، هۆڵەندا، ئیتاڵیا، کۆماری چیک، سڕبیا، تورکیا، سعوودیە یان میسر. پەڕەی هەر براندێک وڵاتی سەرچاوەی پیشان دەدات.",
+      en: "Every product line comes from a manufacturer AtlasPlast represents directly, in Switzerland, Germany, Austria, the Netherlands, Italy, the Czech Republic, Serbia, Turkey, Saudi Arabia, Egypt or the United States. Each brand page shows the manufacturer’s country of origin.",
+      ar: "كل خط منتجات يأتي من شركة مصنّعة تمثّلها أطلس بلاست مباشرة، في سويسرا أو ألمانيا أو النمسا أو هولندا أو إيطاليا أو التشيك أو صربيا أو تركيا أو السعودية أو مصر أو الولايات المتحدة. وتعرض صفحة كل علامة بلد المنشأ.",
+      ckb: "هەر هێڵێکی بەرهەم لە بەرهەمهێنەرێکەوە دێت کە ئەتلەس پلاست ڕاستەوخۆ نوێنەرایەتیی دەکات، لە سویسرا، ئەڵمانیا، نەمسا، هۆڵەندا، ئیتاڵیا، کۆماری چیک، سڕبیا، تورکیا، سعوودیە، میسر یان ئەمریکا. پەڕەی هەر براندێک وڵاتی سەرچاوەی پیشان دەدات.",
     },
   },
   {
@@ -600,16 +600,16 @@ export const faqs: Faq[] = [
     topic: "drainage",
     solutions: ["drainage"],
     href: "/solutions/drainage",
-    source: "profile:p7",
+    source: "manufacturer:2026-11-13",
     q: {
       en: "Which drainage system is the quietest?",
       ar: "ما أكثر أنظمة الصرف هدوءاً؟",
       ckb: "کام سیستەمی ئاوەڕۆ بێدەنگترینە؟",
     },
     a: {
-      en: "Georg Fischer Silenta Premium has the lowest published figure in the range: 7 dB(A) at 2 l/s to EN 14366. Next are POLO-KAL 3S at 12 dB(A) at 4 l/s (DIN 4109), Silenta 3A and Skolan Safe at 17 dB(A) at 4 l/s, and POLO-KAL NG at 18 dB(A) at 2 l/s. Compare figures at the same flow and test method.",
-      ar: "يحمل Silenta Premium من Georg Fischer أدنى رقم منشور في التشكيلة: 7 dB(A) عند 2 لتر/ثانية وفق EN 14366. يليه POLO-KAL 3S بـ12 dB(A) عند 4 لتر/ثانية (DIN 4109)، ثم Silenta 3A وSkolan Safe بـ17 dB(A) عند 4 لتر/ثانية، وPOLO-KAL NG بـ18 dB(A) عند 2 لتر/ثانية. قارن الأرقام عند التدفق وطريقة الاختبار نفسيهما.",
-      ckb: "Silenta Premiumی Georg Fischer نزمترین ژمارەی بڵاوکراوەی هەیە لە کۆمەڵەکەدا: 7 dB(A) لە 2 لیتر/چرکە بەپێی EN 14366. دواتر POLO-KAL 3S بە 12 dB(A) لە 4 لیتر/چرکە (DIN 4109)، Silenta 3A و Skolan Safe بە 17 dB(A) لە 4 لیتر/چرکە، و POLO-KAL NG بە 18 dB(A) لە 2 لیتر/چرکە. ژمارەکان لە هەمان ڕێژەی ڕۆیشتن و هەمان شێوازی تاقیکردنەوەدا بەراورد بکە.",
+      en: "At 4 l/s, Georg Fischer Silenta Premium has the lowest published figure: 12 dB(A) to EN 14366, and 7 dB(A) at 2 l/s. Next are Silenta 3A at 16 dB(A) (9 dB(A) at 2 l/s), Ostendorf Skolan Safe at 17 dB(A), POLO-KAL 3S at 18 dB(A) and POLO-KAL NG at 22 dB(A) (18 dB(A) at 2 l/s). Lower flows give lower figures, so compare systems at the same flow and test method.",
+      ar: "عند تدفق 4 لتر/ثانية، يحمل Silenta Premium من Georg Fischer أدنى رقم منشور: 12 dB(A) وفق EN 14366، و7 dB(A) عند 2 لتر/ثانية. يليه Silenta 3A بـ16 dB(A) (و9 dB(A) عند 2 لتر/ثانية)، ثم Skolan Safe من Ostendorf بـ17 dB(A)، وPOLO-KAL 3S بـ18 dB(A)، وPOLO-KAL NG بـ22 dB(A) (و18 dB(A) عند 2 لتر/ثانية). التدفق الأقل يعطي أرقاماً أقل، لذا قارن الأنظمة عند التدفق وطريقة الاختبار نفسيهما.",
+      ckb: "لە ڕێژەی ڕۆیشتنی 4 لیتر/چرکەدا، Silenta Premiumی Georg Fischer نزمترین ژمارەی بڵاوکراوەی هەیە: 12 dB(A) بەپێی EN 14366، و 7 dB(A) لە 2 لیتر/چرکەدا. دواتر Silenta 3A بە 16 dB(A) (و 9 dB(A) لە 2 لیتر/چرکەدا)، Skolan Safeی Ostendorf بە 17 dB(A)، POLO-KAL 3S بە 18 dB(A) و POLO-KAL NG بە 22 dB(A) (و 18 dB(A) لە 2 لیتر/چرکەدا). ڕێژەی ڕۆیشتنی کەمتر ژمارەی کەمتر دەدات، بۆیە سیستەمەکان لە هەمان ڕێژەی ڕۆیشتن و هەمان شێوازی تاقیکردنەوەدا بەراورد بکە.",
     },
   },
   {
@@ -685,16 +685,16 @@ export const faqs: Faq[] = [
     topic: "drainage",
     solutions: ["drainage"],
     href: "/solutions/drainage",
-    source: "profile:p16",
+    source: "manufacturer:2026-11-13",
     q: {
       en: "What fire classes do the drainage systems have?",
       ar: "ما تصنيفات الحريق لأنظمة الصرف؟",
       ckb: "سیستەمەکانی ئاوەڕۆ چ پۆلێکی ئاگریان هەیە؟",
     },
     a: {
-      en: "Georg Fischer Silenta Premium and Silenta 3A, Poloplast POLO-KAL NG and Ostendorf Skolan Safe are class B2 to DIN 4102. Ostendorf HT Safe is B1, and POLO-KAL 3S is D-s2 and B2.",
-      ar: "Silenta Premium وSilenta 3A من Georg Fischer وPOLO-KAL NG من Poloplast وSkolan Safe من Ostendorf من الفئة B2 وفق DIN 4102. وHT Safe من Ostendorf من الفئة B1، وPOLO-KAL 3S من الفئتين D-s2 وB2.",
-      ckb: "Silenta Premium و Silenta 3Aی Georg Fischer، POLO-KAL NGی Poloplast و Skolan Safeی Ostendorf پۆلی B2ن بەپێی DIN 4102. HT Safeی Ostendorf پۆلی B1ە، و POLO-KAL 3S پۆلی D-s2 و B2یە.",
+      en: "Under EN 13501-1, Georg Fischer Silenta Premium and Silenta 3A are D-s2, d2, and Poloplast POLO-KAL NG and POLO-KAL 3S are D-s2, d1. Under DIN 4102, Silenta Premium, POLO-KAL NG, POLO-KAL 3S and Ostendorf Skolan Safe are B2, and Ostendorf HT Safe is B1.",
+      ar: "وفق EN 13501-1، يحمل Silenta Premium وSilenta 3A من Georg Fischer التصنيف D-s2, d2، ويحمل POLO-KAL NG وPOLO-KAL 3S من Poloplast التصنيف D-s2, d1. ووفق DIN 4102، فإن Silenta Premium وPOLO-KAL NG وPOLO-KAL 3S وSkolan Safe من Ostendorf من الفئة B2، وHT Safe من Ostendorf من الفئة B1.",
+      ckb: "بەپێی EN 13501-1، Silenta Premium و Silenta 3Aی Georg Fischer پۆلی D-s2, d2ن، و POLO-KAL NG و POLO-KAL 3Sی Poloplast پۆلی D-s2, d1ن. بەپێی DIN 4102، Silenta Premium، POLO-KAL NG، POLO-KAL 3S و Skolan Safeی Ostendorf پۆلی B2ن، و HT Safeی Ostendorf پۆلی B1ە.",
     },
   },
   {
@@ -847,9 +847,9 @@ export const faqs: Faq[] = [
       ckb: "ئەتلەس پلاست چ کەلوپەلێکی تەندروستی دابین دەکات؟",
     },
     a: {
-      en: "Vitreous china WCs, basins, urinals and bidets from Saudi Ceramics (Oryx) and QuarterBath, QuarterBath bathroom furniture and concealed cisterns, and WISA pre-wall elements and built-in cisterns for wall-hung WCs.",
-      ar: "مراحيض ومغاسل ومباول وشطافات من البورسلين من الخزف السعودي (Oryx) وQuarterBath، وأثاث حمامات وخزانات دفن من QuarterBath، وهياكل تثبيت وخزانات دفن من WISA للمراحيض المعلّقة.",
-      ckb: "تەوالێت، دەستشۆر، میزدان و بیدێی پۆرسلین لە سعوودی سێرامیکس (Oryx) و QuarterBath، مۆبیلیاتی حەمام و سیفۆنی ناو دیواری QuarterBath، و چوارچێوەی پێش دیوار و سیفۆنی ناو دیواری WISA بۆ تەوالێتی هەڵواسراو.",
+      en: "Vitreous china WCs, basins, urinals and bidets from Saudi Ceramics (Oryx) and QuarterBath, QuarterBath bathroom furniture and concealed cisterns, WISA pre-wall elements and built-in cisterns for wall-hung WCs, and Fluidmaster concealed cisterns and cistern spare parts.",
+      ar: "مراحيض ومغاسل ومباول وشطافات من البورسلين من الخزف السعودي (Oryx) وQuarterBath، وأثاث حمامات وخزانات دفن من QuarterBath، وهياكل تثبيت وخزانات دفن من WISA للمراحيض المعلّقة، وخزانات دفن وقطع غيار الطرادات من Fluidmaster.",
+      ckb: "تەوالێت، دەستشۆر، میزدان و بیدێی پۆرسلین لە سعوودی سێرامیکس (Oryx) و QuarterBath، مۆبیلیاتی حەمام و سیفۆنی ناو دیواری QuarterBath، چوارچێوەی پێش دیوار و سیفۆنی ناو دیواری WISA بۆ تەوالێتی هەڵواسراو، و سیفۆنی ناو دیوار و پارچە یەدەگی سیفۆنی Fluidmaster.",
     },
   },
   {
@@ -1222,9 +1222,9 @@ export const faqs: Faq[] = [
       ckb: "بریکارایەتییەکانی کۆمپانیای ئەتلەس پلاست کامانەن؟",
     },
     a: {
-      en: "Georg Fischer, Polymelt, Bänninger, Ostendorf, Poloplast, FV-Plast, Peštan, WISA, DAB Pumps, Saudi Ceramics, Aquapa, Pimtaş, Turan Borfit, KAS, Guarri, Topsan, Asçelik Clamp, Boroug, Shield, QuarterBath, Candan Makina and Alvit.",
-      ar: "Georg Fischer وPolymelt وBänninger وOstendorf وPoloplast وFV-Plast وPeštan وWISA وDAB Pumps والخزف السعودي (Saudi Ceramics) وAquapa وPimtaş وTuran Borfit وKAS وGuarri وTopsan وAsçelik Clamp وBoroug وShield وQuarterBath وCandan Makina وAlvit.",
-      ckb: "Georg Fischer، Polymelt، Bänninger، Ostendorf، Poloplast، FV-Plast، Peštan، WISA، DAB Pumps، سعوودی سێرامیکس (Saudi Ceramics)، Aquapa، Pimtaş، Turan Borfit، KAS، Guarri، Topsan، Asçelik Clamp، Boroug، Shield، QuarterBath، Candan Makina و Alvit.",
+      en: "Georg Fischer, Polymelt, Bänninger, Ostendorf, Poloplast, FV-Plast, Peštan, WISA, DAB Pumps, Saudi Ceramics, Aquapa, Pimtaş, Turan Borfit, KAS, Guarri, Topsan, Asçelik Clamp, Boroug, Shield, NASSAR, Fluidmaster, QuarterBath, Candan Makina and Alvit.",
+      ar: "Georg Fischer وPolymelt وBänninger وOstendorf وPoloplast وFV-Plast وPeštan وWISA وDAB Pumps والخزف السعودي (Saudi Ceramics) وAquapa وPimtaş وTuran Borfit وKAS وGuarri وTopsan وAsçelik Clamp وBoroug وShield وNASSAR وFluidmaster وQuarterBath وCandan Makina وAlvit.",
+      ckb: "Georg Fischer، Polymelt، Bänninger، Ostendorf، Poloplast، FV-Plast، Peštan، WISA، DAB Pumps، سعوودی سێرامیکس (Saudi Ceramics)، Aquapa، Pimtaş، Turan Borfit، KAS، Guarri، Topsan، Asçelik Clamp، Boroug، Shield، NASSAR، Fluidmaster، QuarterBath، Candan Makina و Alvit.",
     },
   },
   {
@@ -1366,9 +1366,9 @@ export const faqs: Faq[] = [
       ckb: "ئەتلەس پلاست چ براندێکی میسری دابین دەکات؟",
     },
     a: {
-      en: "Boroug, for Boroug UPVC drainage pipes and POLO EGY PP-R water supply pipes, and Shield, for brass valves, faucet sets and accessories.",
-      ar: "Boroug لأنابيب الصرف Boroug UPVC وأنابيب إمدادات المياه POLO EGY PP-R، وShield للمحابس النحاسية وأطقم الحنفيات والملحقات.",
-      ckb: "Boroug بۆ بۆریی ئاوەڕۆی Boroug UPVC و بۆریی دابینکردنی ئاوی POLO EGY PP-R، و Shield بۆ ڤاڵڤی مسی زەرد، کۆمەڵەی حەنەفیە و پێداویستییەکان.",
+      en: "Boroug, for Boroug UPVC drainage pipes and POLO EGY PP-R water supply pipes, Shield, for brass valves, faucet sets and accessories, and NASSAR (Nassar Plastic & Pipe Factories, since 1982), for PPR and uPVC pipes and fittings.",
+      ar: "Boroug لأنابيب الصرف Boroug UPVC وأنابيب إمدادات المياه POLO EGY PP-R، وShield للمحابس النحاسية وأطقم الحنفيات والملحقات، وNASSAR (مصانع نصار للبلاستيك والأنابيب، منذ 1982) لأنابيب وملحقات PPR وuPVC.",
+      ckb: "Boroug بۆ بۆریی ئاوەڕۆی Boroug UPVC و بۆریی دابینکردنی ئاوی POLO EGY PP-R، Shield بۆ ڤاڵڤی مسی زەرد، کۆمەڵەی حەنەفیە و پێداویستییەکان، و NASSAR (کارگەکانی نەسار بۆ پلاستیک و بۆری، لە 1982ەوە) بۆ بۆری و پێکهاتەی PPR و uPVC.",
     },
   },
   // ── Projects and services ─────────────────────────────────────────

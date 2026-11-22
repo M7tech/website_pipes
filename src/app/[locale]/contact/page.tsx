@@ -9,6 +9,7 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { SectionHead } from "@/components/ui/SectionHead";
 import { Icon, type IconName } from "@/components/ui/Icon";
 import { Arrow } from "@/components/ui/Arrow";
+import { ButtonLink } from "@/components/ui/ButtonLink";
 import { SocialIcon } from "@/components/ui/SocialIcon";
 import { Ltr } from "@/components/ui/Ltr";
 import { OfficeLines } from "@/components/company/OfficeLines";
@@ -105,6 +106,9 @@ export default async function ContactPage({ params }: PageProps<"/[locale]/conta
             <span>{t("chat")}</span>
             <Arrow className="transition-transform duration-(--duration-base) ease-(--ease-out-expo) group-hover:translate-x-1 rtl:group-hover:-translate-x-1" />
           </a>
+          <ButtonLink href="/quote" variant="inverseOutline" className="mb-2">
+            {nav("quote")}
+          </ButtonLink>
         </div>
       </PageHeader>
 

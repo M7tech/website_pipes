@@ -28,10 +28,11 @@ function Card({ brand, alt }: { brand: Brand; alt: string }) {
  * so the loop is seamless; the copy is hidden from assistive tech and keyboard.
  * With reduced motion the strip becomes a plain horizontal scroller.
  */
-export async function BrandPhotoStrip({ label }: { label: string }) {
+export async function BrandPhotoStrip({ label, list = brands }: { label: string; list?: Brand[] }) {
   const t = await getTranslations("Brands");
   const hero = await getTranslations("Home.hero");
-  const pictured = brands.filter((b) => b.photo);
+  // A sister brand (Alvit) borrows its photo, so it is left out to avoid a duplicate card (owner 2026-11-13).
+  const pictured = list.filter((b) => b.photo && !b.sisterOf);
   const alt = (b: Brand) => t("photoAlt", { subject: b.photo!.subject ?? b.name });
 
   return (

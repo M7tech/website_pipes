@@ -19,6 +19,7 @@ const paths = [
   "/about/board",
   "/locations",
   "/contact",
+  "/quote",
   "/projects",
   "/media",
   "/faq",
@@ -192,14 +193,76 @@ test("ceramic and porcelain tiles are the tenth solution, on Home and in Solutio
 test("About carries vision, mission and the full history", async ({ page }) => {
   await page.goto("/en/about");
   const main = page.locator("main");
+  const headerPhoto = main.locator('header img[src*="brands-exhibition-team"]');
+  await expect(headerPhoto).toBeVisible();
+  await expect(headerPhoto).toHaveAttribute("alt", "AtlasPlast team at the Dubai World Trade Centre");
   await expect(main.getByRole("heading", { name: "Our vision" })).toBeVisible();
   await expect(main.getByRole("heading", { name: "Our mission" })).toBeVisible();
   for (const text of ["1990–2003", "Sulaymaniyah", "ARBAK", "FABCO", "Management returns to Baghdad"]) {
     await expect(main, text).toContainText(text);
   }
+  const founder = main.locator('img[src*="abdulameer-al-moussawi"]');
+  await expect(founder).toBeVisible();
+  await expect(founder.locator("xpath=../..")).toContainText("Eng. Abdulameer Al-Moussawi");
+  await expect(founder.locator("xpath=../..")).toContainText("Founder, Atlas Group");
+  const projects = main.locator('section[aria-labelledby="statement-title"] a[href="/en/projects"]');
+  await expect(projects).toContainText("Explore hundreds of projects delivered with AtlasPlast products.");
   // Home keeps the short list.
   await page.goto("/en");
   expect(await page.locator("main").innerText()).not.toContain("ARBAK");
+});
+
+test("Brands uses the origin map in its header", async ({ page }) => {
+  await page.goto("/en/brands");
+  const headerMap = page.locator('main > header img[src*="brands-origin-map"]');
+  await expect(headerMap).toBeVisible();
+  await expect(headerMap).toHaveAttribute("alt", "Map showing the countries of origin of AtlasPlast brands");
+  await expect(page.locator('main > header img[src*="brands-exhibition-team"]')).toHaveCount(0);
+});
+
+test("Projects uses the branded construction photo in its header", async ({ page }) => {
+  await page.goto("/ar/projects");
+  const headerPhoto = page.locator('main > header img[src*="projects-construction-site"]');
+  await expect(headerPhoto).toBeVisible();
+  await expect(headerPhoto).toHaveAttribute("alt", "مهندس أطلس بلاست في أحد مشاريع البناء الكبرى");
+});
+
+test("About statement is localized and Arabic copy has no tashkeel", async ({ page }) => {
+  for (const locale of ["en", "ar", "ckb"]) {
+    await page.goto(`/${locale}/about`);
+    await expect(page.locator(`section[aria-labelledby="statement-title"] a[href="/${locale}/projects"]`)).toBeVisible();
+  }
+  await page.goto("/ar/about");
+  const statement = await page.locator('section[aria-labelledby="statement-title"]').innerText();
+  expect(statement).not.toMatch(/[\u064B-\u065F\u0670]/);
+});
+
+test("Purpose motion preserves RTL order and renders immediately with reduced motion", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 800 });
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/ar/about", { waitUntil: "networkidle" });
+  const purpose = page.locator('section[aria-labelledby="purpose-title"]');
+  const cards = purpose.locator("[data-purpose-card]");
+  const values = purpose.locator("[data-purpose-value]");
+  await expect(cards).toHaveCount(2);
+  await expect(values).toHaveCount(6);
+
+  const cardStyles = await cards.evaluateAll((nodes) =>
+    nodes.map((node) => {
+      const style = getComputedStyle(node);
+      return { opacity: style.opacity, transform: style.transform, x: node.getBoundingClientRect().x };
+    }),
+  );
+  expect(cardStyles.every(({ opacity, transform }) => opacity === "1" && transform === "none")).toBe(true);
+  expect(cardStyles[0].x).toBeGreaterThan(cardStyles[1].x);
+  expect(
+    await values.evaluateAll((nodes) =>
+      nodes.every((node) => {
+        const style = getComputedStyle(node);
+        return style.opacity === "1" && style.transform === "none";
+      }),
+    ),
+  ).toBe(true);
 });
 
 test("media page lists the channel's videos and YouTube is in Follow us", async ({ page }) => {
@@ -299,7 +362,7 @@ test("the unlisted links page keeps the old address, the office pins and stays o
 
 test("About leads to the Chairman's message and the board members", async ({ page }) => {
   await page.goto("/ar/about");
-  await page.locator('main a[href="/ar/about/board"]').click();
+  await page.locator('main a[href="/ar/about/board"]').first().click();
   await expect(page).toHaveURL(/\/ar\/about\/board$/);
   await expect(page.locator("h1")).toHaveText("كلمة رئيس مجلس الإدارة");
   await expect(page.getByLabel("القائمة الرئيسية").getByRole("link", { name: "من نحن" })).toHaveAttribute("aria-current", "page");
@@ -403,11 +466,121 @@ test("FAQ: 100 questions in every language, readable without opening, with FAQPa
   await first.locator("summary").click();
   await expect(first).toHaveAttribute("open", "");
   await expect(page.locator('footer a[href="/en/faq"]')).toHaveCount(1);
-  // Solution pages carry their own questions and Product data.
+  // Solution pages show their own questions and carry Product data; the FAQPage markup for a
+  // repeated question lives only on /faq (Google: mark up one instance per site).
   await page.goto("/ar/solutions/drainage");
   expect(await page.locator("main details").count()).toBeGreaterThan(0);
   const graph = JSON.stringify(JSON.parse((await page.locator('script[type="application/ld+json"]').first().textContent()) ?? "{}"));
-  for (const type of ["FAQPage", "Product", "Brand", "BreadcrumbList", "Organization"]) expect(graph).toContain(`"@type":"${type}"`);
+  for (const type of ["Product", "Brand", "BreadcrumbList", "Organization"]) expect(graph).toContain(`"@type":"${type}"`);
+  expect(graph).not.toContain('"@type":"FAQPage"');
+});
+
+test("hreflang comes from the page head only, and security headers are set", async ({ request, page }) => {
+  const res = await request.get("/en/brands");
+  // No middleware Link header with a second, conflicting set of alternates.
+  expect(res.headers()["link"] ?? "").not.toContain("hreflang");
+  expect(res.headers()["strict-transport-security"]).toContain("max-age=");
+  expect(res.headers()["content-security-policy"]).toContain("frame-ancestors 'self'");
+  expect(res.headers()["x-content-type-options"]).toBe("nosniff");
+  await page.goto("/ar/brands");
+  const alternates = await page.locator('link[rel="alternate"][hreflang]').evaluateAll((els) =>
+    els.map((e) => [e.getAttribute("hreflang"), e.getAttribute("href")]),
+  );
+  expect(alternates).toEqual([
+    ["en", expect.stringMatching(/\/en\/brands$/)],
+    ["ar", expect.stringMatching(/\/ar\/brands$/)],
+    ["ckb", expect.stringMatching(/\/ckb\/brands$/)],
+    ["x-default", expect.stringMatching(/\/en\/brands$/)],
+  ]);
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", /\/ar\/brands$/);
+});
+
+test("Home leads with the distributor headline and the four main actions", async ({ page }) => {
+  await page.goto("/en");
+  await expect(page.locator("h1")).toHaveAccessibleName("International pipe systems and building materials distributor in Iraq.");
+  const slide = page.locator("main section").first();
+  for (const [name, href] of [
+    ["Request a quotation", "/en/quote"],
+    ["Explore our brands", "/en/brands"],
+    ["Find a branch", "/en/locations"],
+    ["Contact our sales team", "/en/contact"],
+  ]) await expect(slide.getByRole("link", { name, exact: true }).first()).toHaveAttribute("href", href);
+});
+
+test("the brand directory has as many brands as the Home figure, NASSAR and Fluidmaster included", async ({ page }) => {
+  await page.goto("/en");
+  const figure = await page.locator("main dl dd").nth(1).textContent();
+  await page.goto("/en/brands");
+  const links = page.locator('main a[href^="/en/brands/"]');
+  const slugs = new Set(await links.evaluateAll((els) => els.map((e) => e.getAttribute("href"))));
+  expect(slugs.size).toBe(Number(figure?.trim()));
+  expect(slugs).toContain("/en/brands/nassar");
+  expect(slugs).toContain("/en/brands/fluidmaster");
+  await page.goto("/ar/brands/nassar");
+  await expect(page.locator("h1")).toHaveText("NASSAR");
+});
+
+for (const [label, path] of [["Home", "/en"], ["the brands page", "/ar/brands"]] as const) test(`${label} lists the brands in the owner's order`, async ({ page }) => {
+  await page.goto(path);
+  const prefix = path.slice(0, 3) + "/brands/";
+  const grid = page.locator(`main ul.grid a[href^="${prefix}"]`);
+  const order = await grid.evaluateAll((els) => els.map((e) => e.getAttribute("href")!.split("/").pop()));
+  await page.goto("/en");
+  expect(order.slice(0, 12)).toEqual([
+    "polymelt", "georg-fischer", "aquapa", "fluidmaster", "poloplast", "saudi-ceramics",
+    "pimtas", "turan-borfit", "wisa", "boroug", "nassar", "topsan",
+  ]);
+  const figure = await page.locator("main dl dd").nth(1).textContent();
+  expect(new Set(order).size).toBe(Number(figure?.trim()));
+});
+
+test("the brand photo strip has no Alvit card, in any language", async ({ page }) => {
+  for (const locale of ["en", "ar", "ckb"]) {
+    for (const path of [`/${locale}`, `/${locale}/brands`]) {
+      await page.goto(path);
+      await expect(page.locator(`a[href="/${locale}/brands/quarterbath"] img[src*="images"]`).first()).toBeAttached();
+      expect(await page.locator(`a[href="/${locale}/brands/alvit"] img[src*="images"]`).count()).toBe(0);
+    }
+  }
+});
+
+test("quotation form validates, then opens the nearest branch's WhatsApp with the request written out", async ({ page, context }) => {
+  for (const { code, dir } of locales) {
+    await page.goto(`/${code}/quote`);
+    await expect(page.locator("html")).toHaveAttribute("dir", dir);
+    await expect(page.locator("main form select[name=governorate] option")).toHaveCount(20);
+  }
+  await page.goto("/en/quote");
+  const form = page.locator("main form");
+  // Empty submit: an error summary that takes focus, and the required fields marked invalid.
+  await form.getByRole("button", { name: "Send on WhatsApp" }).click();
+  const summary = form.getByRole("alert");
+  await expect(summary).toBeFocused();
+  for (const label of ["Name", "Phone number", "Governorate", "Nearest branch"]) await expect(form.getByLabel(label, { exact: true })).toHaveAttribute("aria-invalid", "true");
+  await expect(summary.getByRole("link")).toHaveCount(6);
+
+  await form.getByLabel("Name", { exact: true }).fill("Test Contractor");
+  await form.getByLabel("Phone number", { exact: true }).fill("+964 770 000 0000");
+  // The governorate preselects its nearest branch (owner: quotes go to the nearest branch).
+  await form.getByLabel("Governorate", { exact: true }).selectOption("nineveh");
+  await expect(form.getByLabel("Nearest branch", { exact: true })).toHaveValue("duhok");
+  await form.getByLabel("Governorate", { exact: true }).selectOption("basra");
+  await expect(form.getByLabel("Nearest branch", { exact: true })).toHaveValue("basra");
+  await form.getByLabel("Brand", { exact: true }).selectOption("polymelt");
+  await form.getByLabel(/^Estimated quantity/).fill("2,000 m");
+  await form.getByLabel(/AtlasPlast may contact me/).check();
+  // WhatsApp itself is outside the test; answer its URL locally and read what was sent to it.
+  await context.route("https://wa.me/**", (route) => route.fulfill({ status: 200, contentType: "text/plain", body: "ok" }));
+  const popupPromise = context.waitForEvent("page");
+  await form.getByRole("button", { name: "Send on WhatsApp" }).click();
+  const popup = await popupPromise;
+  await popup.waitForURL(/wa\.me/);
+  const url = new URL(popup.url());
+  await popup.close();
+  expect(url.href).toContain("wa.me/9647871166601");
+  const text = url.searchParams.get("text") ?? "";
+  for (const line of ["Request for quotation", "Name: Test Contractor", "Governorate: Basra", "Nearest branch: Basra", "Brand: Polymelt", "Estimated quantity: 2,000 m"]) expect(text).toContain(line);
+  await expect(page.getByRole("status")).toContainText("Your request is ready to send");
 });
 
 test("robots, sitemap, llms.txt and IndexNow are open to search and AI crawlers", async ({ request }) => {

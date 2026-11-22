@@ -37,7 +37,7 @@ export async function ContactBand() {
             </p>
           </div>
           <div>
-            <ButtonLink href="/contact" variant="inverse">
+            <ButtonLink href="/quote" variant="inverse">
               {t("cta")}
             </ButtonLink>
           </div>

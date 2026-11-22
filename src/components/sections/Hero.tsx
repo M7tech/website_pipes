@@ -5,6 +5,7 @@ import { getLocale, getTranslations } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import { LineRise } from "@/components/motion/LineRise";
 import { ButtonLink } from "@/components/ui/ButtonLink";
+import { Link } from "@/i18n/navigation";
 import { Ltr } from "@/components/ui/Ltr";
 import { brandBySlug } from "@/content/brands";
 import { cityNames, facts, offices, warehouses } from "@/content/company";
@@ -16,16 +17,16 @@ import { Waves } from "@/components/water/Waves";
 
 const factIcons = { agents: "users", brands: "award", trained: "graduation", stock: "warehouse" } as const;
 
-/** Partner marks shown on the brands slide (all with approved artwork). */
+/** Partner marks shown on the brands slide (all with approved artwork), in the owner's Home order. */
 const heroBrands = [
-  "georg-fischer",
   "polymelt",
-  "pimtas",
+  "georg-fischer",
+  "aquapa",
   "poloplast",
+  "saudi-ceramics",
+  "pimtas",
   "turan-borfit",
   "wisa",
-  "aquapa",
-  "saudi-ceramics",
   "quarterbath",
 ];
 
@@ -99,13 +100,31 @@ export async function Hero() {
               <p className="eyebrow text-on-dark-muted">{s("systems.eyebrow")}</p>
               <LineRise text={s("systems.title")} className={slideTitle} />
               <p className="max-w-[46ch] text-lg text-on-dark-muted md:text-xl">{s("systems.lead")}</p>
-              <div className="flex flex-wrap gap-3">
-                <ButtonLink href="/solutions" variant="inverse">
-                  {s("systems.primary")}
-                </ButtonLink>
-                <ButtonLink href="/contact" variant="inverseOutline">
-                  {s("systems.secondary")}
-                </ButtonLink>
+              <div className="grid gap-5">
+                <div className="flex flex-wrap gap-3">
+                  <ButtonLink href="/quote" variant="inverse">
+                    {s("systems.primary")}
+                  </ButtonLink>
+                  <ButtonLink href="/brands" variant="inverseOutline">
+                    {s("systems.secondary")}
+                  </ButtonLink>
+                </div>
+                <ul aria-label={s("systems.quickLabel")} className="flex flex-wrap gap-x-6 gap-y-2">
+                  {[
+                    { href: "/locations", icon: "pin", label: s("systems.branch") },
+                    { href: "/contact", icon: "headset", label: s("systems.sales") },
+                  ].map((link) => (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        className="inline-flex min-h-11 items-center gap-2 font-medium text-on-dark underline-offset-[5px] hover:underline"
+                      >
+                        <Icon name={link.icon as "pin" | "headset"} className="size-5 text-atlas-mist" />
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </>
           }

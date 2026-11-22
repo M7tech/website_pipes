@@ -10,7 +10,7 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { Ltr } from "@/components/ui/Ltr";
 import { Statement } from "@/components/sections/Statement";
 import { Purpose } from "@/components/sections/Purpose";
-import { Timeline } from "@/components/sections/Timeline";
+import { HistoryTimeline } from "@/components/sections/HistoryTimeline";
 import { ServiceModel } from "@/components/sections/ServiceModel";
 import { ContactBand } from "@/components/sections/ContactBand";
 import { ButtonLink } from "@/components/ui/ButtonLink";
@@ -54,7 +54,12 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
         })}
       />
       <PageHeader
-        image={{ src: "/images/hero/about-header.jpg", alt: common("teamPhoto"), position: "50% 70%" }}
+        image={{
+          src: "/images/hero/brands-exhibition-team.jpg",
+          alt: common("brandsExhibitionTeam"),
+          sizes: "(max-width: 640px) 1920px, 100vw",
+          position: "50% 70%",
+        }}
         eyebrow={t("eyebrow")}
         title={t("title")}
         intro={t("intro")}
@@ -101,7 +106,7 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
           </div>
         </div>
       </section>
-      <Timeline cta={false} full />
+      <HistoryTimeline />
       <ServiceModel />
       <ContactBand />
     </>
