@@ -1,8 +1,8 @@
 import type { IconName } from "@/components/ui/Icon";
 import type { Localized, Source } from "./types";
 
-/** What the About history shows beside a milestone: a partner's logo or a board portrait. */
-export type MilestoneMedia = { kind: "brand"; slug: string } | { kind: "chairman" };
+/** What the About history shows beside a milestone: a partner's logo or a leadership portrait. */
+export type MilestoneMedia = { kind: "brand"; slug: string } | { kind: "founder" } | { kind: "chairman" };
 
 export type Milestone = {
   year: number;
@@ -18,7 +18,7 @@ export type Milestone = {
 };
 
 export const milestones: Milestone[] = [
-  { year: 1975, source: "site:/ar/من-نحن/", icon: "helmet", text: {
+  { year: 1975, source: "site:/ar/من-نحن/", icon: "helmet", media: { kind: "founder" }, text: {
     en: "Eng. Abdulameer Al-Moussawi starts supplying construction materials to companies building in Iraq.",
     ar: "يبدأ المهندس عبد الأمير الموسوي بتجهيز الشركات العاملة في إعمار العراق بالمواد الإنشائية.",
     ckb: "ئەندازیار عەبدولئەمیر مووسەوی دەست دەکات بە دابینکردنی کەرەستەی بیناسازی بۆ ئەو کۆمپانیایانەی لە عێراق بینا دروست دەکەن." } },

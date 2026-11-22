@@ -4,7 +4,7 @@ import type { Locale } from "@/i18n/routing";
 import { Link } from "@/i18n/navigation";
 import { milestones, type Milestone } from "@/content/timeline";
 import { brandBySlug } from "@/content/brands";
-import { chairman } from "@/content/leadership";
+import { chairman, founder } from "@/content/leadership";
 import { Arrow } from "@/components/ui/Arrow";
 import { Icon } from "@/components/ui/Icon";
 import { SectionHead } from "@/components/ui/SectionHead";
@@ -52,6 +52,22 @@ function MilestoneCard({ milestone: m, locale }: { milestone: Milestone; locale:
           {m.text[locale]}
         </p>
         {m.media?.kind === "brand" ? <BrandChip slug={m.media.slug} /> : null}
+        {m.media?.kind === "founder" ? (
+          <div className="flex items-center gap-4 justify-self-start rounded-tile bg-paper p-2.5 pe-5">
+            <Image
+              src={founder.photo.src}
+              width={founder.photo.width}
+              height={founder.photo.height}
+              alt=""
+              sizes="4rem"
+              className="size-16 rounded-[0.75rem] object-cover object-top"
+            />
+            <span className="grid gap-0.5">
+              <span className="font-semibold">{founder.name[locale]}</span>
+              <span className="text-sm text-steel">{founder.role[locale]}</span>
+            </span>
+          </div>
+        ) : null}
         {m.media?.kind === "chairman" ? (
           <Link
             href="/about/board"

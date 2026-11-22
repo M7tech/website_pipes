@@ -49,6 +49,12 @@ export default async function BrandsPage({ params }: PageProps<"/[locale]/brands
         })}
       />
       <PageHeader
+        image={{
+          src: "/images/hero/brands-origin-map.jpg",
+          alt: common("brandsOriginMap"),
+          sizes: "(max-width: 640px) 1920px, 100vw",
+          position: "center 50%",
+        }}
         eyebrow={t("eyebrow")}
         title={t("title")}
         intro={t("intro", { count: countryCount })}
