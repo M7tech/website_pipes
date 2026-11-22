@@ -54,7 +54,7 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
         })}
       />
       <PageHeader
-        image={{ src: "/images/hero/warehouse-racks.jpg", alt: common("warehousePhoto") }}
+        image={{ src: "/images/hero/about-header.jpg", alt: common("teamPhoto"), position: "50% 70%" }}
         eyebrow={t("eyebrow")}
         title={t("title")}
         intro={t("intro")}
